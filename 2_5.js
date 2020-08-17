@@ -16,9 +16,11 @@ var aTotal = [];
 var newTotal = [];
 var docB1 = '';
 var docB2 = '';
-// var docB3 = '';
-var uCA = '';
+var alerta = false;
+var uCA = [];
 var userID = '';
+const coll = 'users2';
+
 
 // Init components
 const refresher = document.getElementById('refresher');
@@ -154,7 +156,7 @@ const showCardAll = (account, user, pass, notes) => {
 
 // ------------------ START ------------------ //
 
-//db.collection('users').onSnapshot(querySnapshot => {querySnapshot.forEach(() => {})});
+//db.collection(coll).onSnapshot(querySnapshot => {querySnapshot.forEach(() => {})});
 
 localStorage.setItem('L1', 'GDGDGDGD');
 
@@ -172,7 +174,7 @@ if (localStorage.getItem('L2')) {
 
     // OP2 comprobación de local con base de datos
     var compare = false;
-    db.collection('users').onSnapshot(querySnapshot => {
+    db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
             if (!compare) {
 
@@ -231,7 +233,7 @@ if (localStorage.getItem('L2')) {
                         },
                     },
                     {
-                        text: 'Configurar',
+                        text: 'Mas..',
                         handler: () => {
                             console.log('aTotal:' + aTotal);
 
@@ -394,7 +396,7 @@ buttonLogin.addEventListener('click', () => {
                     enableItem = true;
                     localStorage.setItem('accessTempData', code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD');
 
-                    db.collection('users').onSnapshot(querySnapshot => {
+                    db.collection(coll).onSnapshot(querySnapshot => {
                         querySnapshot.forEach(doc => {
                             if (!coincidencia) {
                                 docB1 = doc.data().B1;
@@ -448,7 +450,7 @@ buttonLogin.addEventListener('click', () => {
                                                     disableItem(false);
 
                                                     // Remove the field from the document
-                                                    return db.collection('users').doc(userID).update({
+                                                    return db.collection(coll).doc(userID).update({
                                                         B3: firebase.firestore.FieldValue.delete()
                                                     });
 
@@ -483,11 +485,8 @@ buttonLogin.addEventListener('click', () => {
 });
 
 buttonCreate.addEventListener('click', () => {
-    //docB1 = '';
-    //docB2 = '';
-    //userID = '';
+
     function presentAlertCreate() {
-        //var accessTempData = [];
         const alert = document.createElement('ion-alert');
         alert.header = 'Registrarse';
         alert.inputs = [
@@ -504,68 +503,152 @@ buttonCreate.addEventListener('click', () => {
                         alertMsg('Error', 'Datos incorrectos o vacíos.');
                         return;
                     }
-                    //accessTempData[0] = code(usCData.userEditName);
-                    //accessTempData[1] = code(usCData.userEditUser);
-                    //accessTempData[2] = code(usCData.userEditPass);
-                    //localStorage.setItem( 'accessTempData',accessTempData[0] + 'GD' + accessTempData[1] + 'GD' + accessTempData[2] + 'GD');
 
                     localStorage.setItem('accessTempData', code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD');
                     console.log('Datos ingresados: ' + localStorage.getItem('accessTempData'));
 
-                    db.collection('users').onSnapshot(querySnapshot => {
-                        querySnapshot.forEach(doc => {
-                            // console.log(uCA);
-                            if (!coincidencia) {
+
+                    db.collection(coll).onSnapshot(querySnapshot => {
+                        
+                        // querySnapshot.forEach(doc => {
+                        //     console.log('check #3');
+                        //     console.log('coincidencia: '+coincidencia);
+                        //     if (!coincidencia) {
+                        //         console.log('check #4');
+                        //         uCA = doc.data().B1.split('GD');
+                        //         if (doc.data().B1.includes(localStorage.getItem('accessTempData')) || uCA[1] == code(usCData.userEditUser)) {
+                        //             console.log('check #5');
+                        //             docB1 = doc.data().B1;
+                        //             docB2 = doc.data().B2;
+                        //             userID = doc.id;
+                        //             console.log('Una coincidencia en: ' + userID);
+                        //             coincidencia = true;
+                        //             // window.location.reload();
+                        //             // localStorage.removeItem('accessTempData');
+                        //             alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
+                        //             return;
+                        //         };
+
+                        //     };
+                        // });
+                        // db.collection(coll).onSnapshot(querySnapshot.forEach(doc => {
+                        console.log('INICINDO');
+
+
+                        // });
+                        if (!coincidencia) {
+                            querySnapshot.forEach(doc => {
+                                // console.log('check #1');
+
                                 uCA = doc.data().B1.split('GD');
-                                if (doc.data().B1.includes(localStorage.getItem('accessTempData')) || uCA[1] == code(usCData.userEditUser)) {
+
+                                if (!coincidencia && uCA[1] == code(usCData.userEditUser)) {
+                                    coincidencia = true;
+                                    alerta = true
+
                                     docB1 = doc.data().B1;
                                     docB2 = doc.data().B2;
                                     userID = doc.id;
-                                    // console.log('Una coincidencia en: ' + userID);
-                                    coincidencia = true;
-                                    // window.location.reload();
-                                    // localStorage.removeItem('accessTempData');
-                                    // alertMsg('Error', 'Ya hay una cuenta registrada con este email. ( ' + userID + ' )');
-                                    return;
+                                    console.log('Una coincidencia en: ' + userID);
+                                    console.log('coincidencia: ' + coincidencia);
+                                    return
                                 };
+                                if (!coincidencia) {
+                                    console.log('Check #1 : NO');
+                                    // break;
+                                }
+                            });
+                        };
 
-                            };
-                        });
+                        console.log('check END');
+                        console.log('coincidencia: ' + coincidencia);
 
-                        if (!coincidencia) {
-                            db.collection('users').add({
-                                //B1:accessTempData[0] +'GD' +accessTempData[1] +'GD' +accessTempData[2] +'GD',
-                                B1: localStorage.getItem('accessTempData'),
-                                B2: '',
-                            })
-                                .then(function () {
-                                    // .then(function(docRef){
-                                    console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
-                                    updateDB('B1', 'L1');
-                                    showLogin.innerHTML = '';
-                                    splitInit();
-                                    aTotalTOnewTotal();
-                                    document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    updateDB('L1', 'L2');
-                                    disableItem(false);
-                                    //window.location.reload();
-                                })
-                                .catch(function (error) {
-                                    console.error('Error adding document: ', error);
-                                    return;
-                                });
-                            }
-                        });
-                    },
-                },
-            ];
-            document.body.appendChild(alert);
-            return alert.present();
-            
+                        if (coincidencia == true && alerta == true) {
+                            // alerta = false
+                            console.log('alerta');
+                            // console.log('Una coincidencia en: ' + userID);
+                            // alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
+                            return
+
+                        } else {
+                            // alerta = false
+                            console.log('crear');
+                            // db.collection(coll).add({
+                            //     B1: localStorage.getItem('accessTempData'),
+                            //     B2: '',
+                            // })
+                            //     .then(function () {
+
+                            //         console.log('check #8');
+                            //         // .then(function(docRef){
+                            //         console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
+                            //         updateDB('B1', 'L1');
+                            //         showLogin.innerHTML = '';
+                            //         splitInit();
+                            //         aTotalTOnewTotal();
+                            //         document.getElementById('userName').innerHTML = deco(txt[0]);
+                            //         updateDB('L1', 'L2');
+                            //         disableItem(false);
+                                    
+                            //         //window.location.reload();
+                            //         return;
+                            //     })
+                            //     .catch(function (error) {
+                            //         console.log('check #6');
+                            //         console.error('Error adding document: ', error);
+                            //         return;
+                            //     });
+
+                            return
+                        };
+
+                        // if (!coincidencia) {
+                        //     console.log('check #5');
+                        //     console.log('coincidencia: ' + coincidencia);
+                        //     db.collection(coll).add({
+                        //         B1: localStorage.getItem('accessTempData'),
+                        //         B2: '',
+                        //     })
+                        //         .then(function () {
+
+                        //             console.log('check #8');
+                        //             // .then(function(docRef){
+                        //             console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
+                        //             updateDB('B1', 'L1');
+                        //             showLogin.innerHTML = '';
+                        //             splitInit();
+                        //             aTotalTOnewTotal();
+                        //             document.getElementById('userName').innerHTML = deco(txt[0]);
+                        //             updateDB('L1', 'L2');
+                        //             disableItem(false);
+                        //             //window.location.reload();
+                        //             return;
+                        //         })
+                        //         .catch(function (error) {
+                        //             console.log('check #6');
+                        //             console.error('Error adding document: ', error);
+                        //             return;
+                        //         });
+                        // } else {
+                        //     console.log('Una coincidencia en: ' + userID);
+                        //     console.log(size1);
+                        //     alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
+                        // };
+
+                    });
+
+                }
+            },
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+
     }
+
     presentAlertCreate();
     return;
 });
+
 
 showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DELETE) // OK OK
 
@@ -1063,6 +1146,21 @@ function alertMsg(msg1, msg2) {
     return alert.present();
 }
 
+function alertMsgReset(msg1, msg2) {
+    // OK
+    alerta = false
+    const alert = document.createElement('ion-alert');
+    alert.subHeader = msg1;
+    alert.message = msg2;
+    alert.buttons = [
+        {// text: 'cancel',
+            role: 'cancel', handler: () => { window.location.reload() }
+        }
+    ]
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 async function presentToast(msg, time) {
     // OK
     const toast = document.createElement('ion-toast');
@@ -1164,7 +1262,7 @@ function updateDB(send, receive) { //REVISAR B3
 
     // ('L -> B1');
     if (receive == 'B1') {
-        return db.collection('users').doc(userID).update({
+        return db.collection(coll).doc(userID).update({
             B1: localStorage.getItem(send),
             //si se agrega nueva source se agrega nueva en firebase
             // }).then(function () {
@@ -1179,7 +1277,7 @@ function updateDB(send, receive) { //REVISAR B3
 
     // ('L -> B2');
     if (receive == 'B2') {
-        return db.collection('users').doc(userID).update({
+        return db.collection(coll).doc(userID).update({
             B2: localStorage.getItem(send),
         })
             .catch(function (error) {
@@ -1217,7 +1315,7 @@ function sendEmail() { //helenapc2018@gmail.com
                     return;
                 }
 
-                db.collection('users').onSnapshot(querySnapshot => {
+                db.collection(coll).onSnapshot(querySnapshot => {
                     querySnapshot.forEach(doc => {
                         if (!coincidencia) {
                             userID = doc.id;
@@ -1227,7 +1325,7 @@ function sendEmail() { //helenapc2018@gmail.com
 
                                 // console.log('ID: ' + userID);
                                 // console.log(restoreKey);
-                                db.collection('users').doc(userID).update({
+                                db.collection(coll).doc(userID).update({
                                     B3: restoreKey,
                                 })
                                     .then(function () {
