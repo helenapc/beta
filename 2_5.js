@@ -16,11 +16,9 @@ var aTotal = [];
 var newTotal = [];
 var docB1 = '';
 var docB2 = '';
-var alerta = false;
 var uCA = [];
 var userID = '';
 const coll = 'users2';
-
 
 // Init components
 const refresher = document.getElementById('refresher');
@@ -55,13 +53,6 @@ const barLabel = document.createElement('ion-title');
 barLabel.textContent = 'Configuración';
 
 const barContent = document.createElement('ion-content');
-
-/*
-const aa = document.createElement('ion-label');
-aa.textContent = 'test'
-barMenuPrincipal.appendChild(aa);
-*/
-
 barMenuPrincipal.appendChild(barContent);
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
@@ -114,7 +105,7 @@ veri.setAttribute('lines', 'none');
 veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
-ver.innerHTML = 'Versión: 2.5.20816.beta';
+ver.innerHTML = 'Versión: 2.5.20817.beta';
 veri.appendChild(ver);
 
 
@@ -162,7 +153,7 @@ localStorage.setItem('L1', 'GDGDGDGD');
 
 localStorage.getItem('L2') ? localStorage.setItem('L1', localStorage.getItem('L2')) : localStorage.setItem('L2', '');
 
-
+localStorage.removeItem('alrt');
 //existen datos locales
 if (localStorage.getItem('L2')) {
     showLogin.innerHTML = '';
@@ -366,6 +357,7 @@ if (localStorage.getItem('L2')) {
 
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
+
 refresher.addEventListener('ionRefresh', () => {
     setTimeout(() => {
         window.location.reload();
@@ -505,136 +497,61 @@ buttonCreate.addEventListener('click', () => {
                     }
 
                     localStorage.setItem('accessTempData', code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD');
+                    
                     console.log('Datos ingresados: ' + localStorage.getItem('accessTempData'));
 
 
                     db.collection(coll).onSnapshot(querySnapshot => {
                         
-                        // querySnapshot.forEach(doc => {
-                        //     console.log('check #3');
-                        //     console.log('coincidencia: '+coincidencia);
-                        //     if (!coincidencia) {
-                        //         console.log('check #4');
-                        //         uCA = doc.data().B1.split('GD');
-                        //         if (doc.data().B1.includes(localStorage.getItem('accessTempData')) || uCA[1] == code(usCData.userEditUser)) {
-                        //             console.log('check #5');
-                        //             docB1 = doc.data().B1;
-                        //             docB2 = doc.data().B2;
-                        //             userID = doc.id;
-                        //             console.log('Una coincidencia en: ' + userID);
-                        //             coincidencia = true;
-                        //             // window.location.reload();
-                        //             // localStorage.removeItem('accessTempData');
-                        //             alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
-                        //             return;
-                        //         };
-
-                        //     };
-                        // });
-                        // db.collection(coll).onSnapshot(querySnapshot.forEach(doc => {
-                        console.log('INICINDO');
-
-
-                        // });
                         if (!coincidencia) {
                             querySnapshot.forEach(doc => {
-                                // console.log('check #1');
 
                                 uCA = doc.data().B1.split('GD');
 
                                 if (!coincidencia && uCA[1] == code(usCData.userEditUser)) {
                                     coincidencia = true;
-                                    alerta = true
-
                                     docB1 = doc.data().B1;
                                     docB2 = doc.data().B2;
                                     userID = doc.id;
-                                    console.log('Una coincidencia en: ' + userID);
-                                    console.log('coincidencia: ' + coincidencia);
                                     return
                                 };
-                                if (!coincidencia) {
-                                    console.log('Check #1 : NO');
-                                    // break;
-                                }
                             });
                         };
 
-                        console.log('check END');
-                        console.log('coincidencia: ' + coincidencia);
-
-                        if (coincidencia == true && alerta == true) {
-                            // alerta = false
-                            console.log('alerta');
-                            // console.log('Una coincidencia en: ' + userID);
-                            // alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
+                        if (coincidencia) {
+                            localStorage.removeItem('accessTempData');
+                            if (localStorage.getItem('alrt')){
+                                localStorage.removeItem('alrt');
+                            }else{
+                                alertMsgReset('Error', 'Ya hay una cuenta registrada con este email.');
+                            }
                             return
 
                         } else {
-                            // alerta = false
-                            console.log('crear');
-                            // db.collection(coll).add({
-                            //     B1: localStorage.getItem('accessTempData'),
-                            //     B2: '',
-                            // })
-                            //     .then(function () {
-
-                            //         console.log('check #8');
-                            //         // .then(function(docRef){
-                            //         console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
-                            //         updateDB('B1', 'L1');
-                            //         showLogin.innerHTML = '';
-                            //         splitInit();
-                            //         aTotalTOnewTotal();
-                            //         document.getElementById('userName').innerHTML = deco(txt[0]);
-                            //         updateDB('L1', 'L2');
-                            //         disableItem(false);
-                                    
-                            //         //window.location.reload();
-                            //         return;
-                            //     })
-                            //     .catch(function (error) {
-                            //         console.log('check #6');
-                            //         console.error('Error adding document: ', error);
-                            //         return;
-                            //     });
+                            localStorage.setItem('alrt', code(usCData.userEditUser))
+                            db.collection(coll).add({
+                                B1: localStorage.getItem('accessTempData'),
+                                B2: '',
+                            })
+                                .then(function () {
+                                    // .then(function(docRef){
+                                    console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
+                                    updateDB('B1', 'L1');
+                                    showLogin.innerHTML = '';
+                                    splitInit();
+                                    aTotalTOnewTotal();
+                                    document.getElementById('userName').innerHTML = deco(txt[0]);
+                                    updateDB('L1', 'L2');
+                                    disableItem(false);
+                                    return;
+                                })
+                                .catch(function (error) {
+                                    console.error('Error adding document: ', error);
+                                    return;
+                                });
 
                             return
                         };
-
-                        // if (!coincidencia) {
-                        //     console.log('check #5');
-                        //     console.log('coincidencia: ' + coincidencia);
-                        //     db.collection(coll).add({
-                        //         B1: localStorage.getItem('accessTempData'),
-                        //         B2: '',
-                        //     })
-                        //         .then(function () {
-
-                        //             console.log('check #8');
-                        //             // .then(function(docRef){
-                        //             console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
-                        //             updateDB('B1', 'L1');
-                        //             showLogin.innerHTML = '';
-                        //             splitInit();
-                        //             aTotalTOnewTotal();
-                        //             document.getElementById('userName').innerHTML = deco(txt[0]);
-                        //             updateDB('L1', 'L2');
-                        //             disableItem(false);
-                        //             //window.location.reload();
-                        //             return;
-                        //         })
-                        //         .catch(function (error) {
-                        //             console.log('check #6');
-                        //             console.error('Error adding document: ', error);
-                        //             return;
-                        //         });
-                        // } else {
-                        //     console.log('Una coincidencia en: ' + userID);
-                        //     console.log(size1);
-                        //     alertMsgReset('Error', 'Ya hay una cuenta registrada con este email. (error.' + userID + ')');
-                        // };
-
                     });
 
                 }
@@ -648,7 +565,6 @@ buttonCreate.addEventListener('click', () => {
     presentAlertCreate();
     return;
 });
-
 
 showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DELETE) // OK OK
 
