@@ -31,8 +31,6 @@ const buttonAdd2 = document.getElementById('buttonAdd2');
 const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
 
-// buttonAdd2.setAttribute('disabled', true);
-
 titleName.setAttribute('disabled', true);
 newSearch.setAttribute('disabled', true);
 buttonAdd.setAttribute('disabled', true);
