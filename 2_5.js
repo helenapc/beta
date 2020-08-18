@@ -14,11 +14,13 @@ var coincidencia = false;
 var txt = [];
 var aTotal = [];
 var newTotal = [];
+var compare = false;
 var docB1 = '';
 var docB2 = '';
 var uCA = [];
 var userID = '';
 const coll = 'users2';
+var alertcompare = true;
 
 // Init components
 const refresher = document.getElementById('refresher');
@@ -31,6 +33,7 @@ const buttonAdd2 = document.getElementById('buttonAdd2');
 const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
 
+
 titleName.setAttribute('disabled', true);
 newSearch.setAttribute('disabled', true);
 buttonAdd.setAttribute('disabled', true);
@@ -40,6 +43,22 @@ refresher.setAttribute('disabled', true);
 const showLogin = document.getElementById('showLogin');
 const buttonLogin = document.getElementById('buttonLogin');
 const buttonCreate = document.getElementById('buttonCreate');
+
+// PROGRESS BAR
+const barProgress = document.getElementById('barProgress');
+const barProgress01 = document.createElement('ion-progress-bar');
+// const barProgress02 = document.createElement('ion-progress-bar');
+barProgress01.setAttribute('color', 'light');
+// barProgress02.setAttribute('color', 'light');
+barProgress.appendChild(barProgress01);
+// barProgress.appendChild(barProgress02);
+
+function barProgressF(color, state) {
+    barProgress01.setAttribute('color', color);
+    // barProgress02.setAttribute('color', color);
+    barProgress01.setAttribute('type', state);
+    // barProgress02.setAttribute('type', state);
+};
 
 // NAV BAR
 const barMenuPrincipal = document.getElementById('barMenuPrincipal');
@@ -103,16 +122,17 @@ veri.setAttribute('lines', 'none');
 veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
-ver.innerHTML = 'Versión: 2.5.20817.beta';
+ver.setAttribute('style', 'margin-right:10px');
+ver.innerHTML = 'Versión 2.5.20818-beta';
 veri.appendChild(ver);
 
 
 //BLOCK02
-//barContent.appendChild(ver);
-barContent.appendChild(barItem01);
 barContent.appendChild(barItem02);
+barContent.appendChild(barItem01);
 barContent.appendChild(barItem03);
 barContent.appendChild(veri);
+
 
 //BUTTONS NAV BAR
 const barEdit = document.getElementById('barEdit');
@@ -145,15 +165,12 @@ const showCardAll = (account, user, pass, notes) => {
 
 // ------------------ START ------------------ //
 
-//db.collection(coll).onSnapshot(querySnapshot => {querySnapshot.forEach(() => {})});
-
-localStorage.setItem('L1', 'GDGDGDGD');
-
-localStorage.getItem('L2') ? localStorage.setItem('L1', localStorage.getItem('L2')) : localStorage.setItem('L2', '');
 
 localStorage.removeItem('alrt');
+
+
 //existen datos locales
-if (localStorage.getItem('L2')) {
+if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     showLogin.innerHTML = '';
     disableItem(false);
     splitInit();
@@ -162,31 +179,35 @@ if (localStorage.getItem('L2')) {
 
 
     // OP2 comprobación de local con base de datos
-    var compare = false;
+    compare = false;
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
-            if (!compare) {
-
-                if (doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
-
-                    docB1 = doc.data().B1;
-                    docB2 = doc.data().B2;
-                    userID = doc.id;
-                    compare = true;
-                    return;
-                }
-            };
+            // if (!compare) {
+            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
+                docB1 = doc.data().B1;
+                docB2 = doc.data().B2;
+                userID = doc.id;
+                compare = true;
+                return;
+            }
+            // };
         });
 
         if (!compare) {
             localStorage.clear();
+            localStorage.setItem('L1', 'GDGDGDGD'); //TEST BETA  
             window.location.reload();
+
         }
         compare = false;
-
-        if (docB1 != localStorage.getItem('L2')) {
+        alertcompare = true;
+        // if (docB1 != localStorage.getItem('L2')) { // TO OPTIMIZE
+        if (docB1 != localStorage.getItem('L1') && alertcompare) {
+            showSearch.innerHTML = '';
             function alertCompareData() {
+                alertcompare = false
                 const alert = document.createElement('ion-alert');
+                // alert.setAttribute('backdrop-dismiss', 'false');
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                 alert.buttons = [
@@ -200,7 +221,7 @@ if (localStorage.getItem('L2')) {
                             document.getElementById('userName').innerHTML = deco(txt[0]);
                             showLogin.innerHTML = '';
                             disableItem(false);
-                            updateDB('L1', 'L2');
+                            // updateDB('L1', 'L2');
                             newSearch.value = '';
                             refreshData();
                             presentToast('Base de datos sincronizada', '1000');
@@ -215,7 +236,8 @@ if (localStorage.getItem('L2')) {
                             document.getElementById('userName').innerHTML = deco(txt[0]);
                             showLogin.innerHTML = '';
                             disableItem(false);
-                            updateDB('L2', 'B1');
+                            // updateDB('L2', 'B1'); TO OPTIMIZE
+                            updateDB('L1', 'B1')
                             newSearch.value = '';
                             refreshData();
                             presentToast('Usando memoria local', '1000');
@@ -256,12 +278,12 @@ if (localStorage.getItem('L2')) {
                                     alert.message = 'Seleccionar para agregar';
                                     alert.inputs = metaObjAdd;
                                     alert.buttons = [
-                                        { text: 'Cancel', role: 'cancel' },
+                                        { text: 'Cancelar', role: 'cancel' },
                                         {
                                             text: 'Terminar',
                                             handler: (data) => {
                                                 aTotal = aTotal.concat(data);
-
+                                                alertcompare = true;
                                                 if (metaObjDel.length != '') {
                                                     function presentAlertCheckboxDel() {
                                                         const alert = document.createElement('ion-alert');
@@ -269,7 +291,7 @@ if (localStorage.getItem('L2')) {
                                                         alert.message = 'Seleccionar para eliminar';
                                                         alert.inputs = metaObjDel;
                                                         alert.buttons = [
-                                                            { text: 'Cancel', role: 'cancel' },
+                                                            { text: 'Cancelar', role: 'cancel' },
                                                             {
                                                                 text: 'Terminar',
                                                                 handler: (data2) => {
@@ -283,7 +305,8 @@ if (localStorage.getItem('L2')) {
                                                                     aTotalTOnewTotal();
                                                                     save();
                                                                     updateDB('L1', 'B1');
-                                                                    updateDB('L1', 'L2');
+                                                                    // updateDB('L1', 'L2');
+                                                                    alertcompare = false;
                                                                 },
                                                             },
                                                         ];
@@ -291,12 +314,15 @@ if (localStorage.getItem('L2')) {
                                                         return alert.present();
                                                     }
                                                     presentAlertCheckboxDel();
+
+
                                                 } else {
                                                     console.log('No hay datos borrados');
                                                     aTotalTOnewTotal();
                                                     save();
                                                     updateDB('L1', 'B1');
-                                                    updateDB('L1', 'L2');
+                                                    // updateDB('L1', 'L2');
+                                                    alertcompare = false;
                                                 };
 
                                             },
@@ -314,7 +340,7 @@ if (localStorage.getItem('L2')) {
                                     alert.message = 'Seleccionar para eliminar';
                                     alert.inputs = metaObjDel;
                                     alert.buttons = [
-                                        { text: 'Cancel', role: 'cancel' },
+                                        { text: 'Cancelar', role: 'cancel' },
                                         {
                                             text: 'Terminar',
                                             handler: (data2) => {
@@ -328,7 +354,8 @@ if (localStorage.getItem('L2')) {
                                                 aTotalTOnewTotal();
                                                 save();
                                                 updateDB('L1', 'B1');
-                                                updateDB('L1', 'L2');
+                                                // updateDB('L1', 'L2');
+                                                alertcompare = false;
                                             },
                                         },
                                     ];
@@ -344,10 +371,10 @@ if (localStorage.getItem('L2')) {
                 return alert.present();
             }
             alertCompareData();
-        } else {
-            // console.log('Son iguales');
         }
     });
+} else {
+    localStorage.setItem('L1', 'GDGDGDGD'); //TEST BETA 
 }
 // ------------------ START ------------------ //
 
@@ -365,7 +392,6 @@ refresher.addEventListener('ionRefresh', () => {
 
 buttonLogin.addEventListener('click', () => {
     function presentAlertLogin() {
-        //var accessTempData = [];
         const alert = document.createElement('ion-alert');
         alert.header = 'Iniciar sesión';
         alert.inputs = [
@@ -383,9 +409,13 @@ buttonLogin.addEventListener('click', () => {
                     }
 
 
+                    barProgressF('success', 'indeterminate');
+
+
                     enableItem = true;
                     localStorage.setItem('accessTempData', code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD');
-
+                    // accessTempData = code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD';
+                    // console.log(accessTempData + ' asignar');
                     db.collection(coll).onSnapshot(querySnapshot => {
                         querySnapshot.forEach(doc => {
                             if (!coincidencia) {
@@ -396,20 +426,23 @@ buttonLogin.addEventListener('click', () => {
                                 uRA = doc.data().B1.split('GD'); //userRestoreAccess
 
                                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
-
+                                    // if (docB1.includes(accessTempData)) {
+                                    // console.log(accessTempData + ' post includes');
                                     coincidencia = true;
                                     updateDB('B1', 'L1');
-                                    updateDB('L1', 'L2');
+                                    // updateDB('L1', 'L2');
                                     splitInit();
                                     aTotalTOnewTotal();
 
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                     disableItem(false);
+                                    // barProgressF('light', 'determinate');
                                     return;
                                 };
 
                                 // restablecer contraseña
                                 if (code(usData.userEditUser) == uRA[1] && usData.userEditPass == doc.data().B3) {
+                                    barProgressF('light', 'determinate');
                                     function presentRestorePass() {
                                         const alert = document.createElement('ion-alert');
                                         alert.subHeader = 'Restablecer contraseña';
@@ -430,8 +463,8 @@ buttonLogin.addEventListener('click', () => {
                                                     localStorage.setItem('L1', uRA[0] + 'GD' + uRA[1] + 'GD' + code(usRData.pass01) + 'GD' + uRA[3]);
                                                     // save();
                                                     updateDB('L1', 'B1');
-                                                    updateDB('L1', 'L2');
-                                                    // updateDB('L1', 'B2');
+                                                    // updateDB('L1', 'L2');
+                                                    updateDB('L1', 'B2');
 
                                                     splitInit();
                                                     aTotalTOnewTotal();
@@ -445,6 +478,7 @@ buttonLogin.addEventListener('click', () => {
                                                     });
 
                                                     // return;
+
                                                 },
                                             },
                                         ];
@@ -464,10 +498,13 @@ buttonLogin.addEventListener('click', () => {
                         } else {
                             alertMsg('Error', 'Datos incorrectos o vacíos.');
                         };
+                        barProgressF('light', 'determinate');
+
                     });
                 },
             },
         ];
+
         document.body.appendChild(alert);
         return alert.present();
     }
@@ -492,20 +529,21 @@ buttonCreate.addEventListener('click', () => {
                     if (usCData.userEditName == '' || usCData.userEditUser == '' || usCData.userEditPass == '') {
                         alertMsg('Error', 'Datos incorrectos o vacíos.');
                         return;
-                    }
+                    };
+
+                    barProgressF('success', 'indeterminate');
 
                     localStorage.setItem('accessTempData', code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD');
-                    
-                    console.log('Datos ingresados: ' + localStorage.getItem('accessTempData'));
+                    // accessTempData = code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD';
+
+                    // console.log('Datos ingresados: ' + localStorage.getItem('accessTempData'));
 
 
                     db.collection(coll).onSnapshot(querySnapshot => {
-                        
+
                         if (!coincidencia) {
                             querySnapshot.forEach(doc => {
-
                                 uCA = doc.data().B1.split('GD');
-
                                 if (!coincidencia && uCA[1] == code(usCData.userEditUser)) {
                                     coincidencia = true;
                                     docB1 = doc.data().B1;
@@ -517,10 +555,10 @@ buttonCreate.addEventListener('click', () => {
                         };
 
                         if (coincidencia) {
-                            localStorage.removeItem('accessTempData');
-                            if (localStorage.getItem('alrt')){
+                            if (localStorage.getItem('alrt')) {
                                 localStorage.removeItem('alrt');
-                            }else{
+                            } else {
+                                barProgressF('light', 'determinate');
                                 alertMsgReset('Error', 'Ya hay una cuenta registrada con este email.');
                             }
                             return
@@ -533,14 +571,16 @@ buttonCreate.addEventListener('click', () => {
                             })
                                 .then(function () {
                                     // .then(function(docRef){
-                                    console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
+                                    // console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
                                     updateDB('B1', 'L1');
                                     showLogin.innerHTML = '';
                                     splitInit();
                                     aTotalTOnewTotal();
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    updateDB('L1', 'L2');
+                                    // updateDB('L1', 'L2');
                                     disableItem(false);
+                                    barProgressF('light', 'determinate');
+
                                     return;
                                 })
                                 .catch(function (error) {
@@ -548,8 +588,9 @@ buttonCreate.addEventListener('click', () => {
                                     return;
                                 });
 
-                            return
+                            // return
                         };
+
                     });
 
                 }
@@ -594,7 +635,6 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
             async function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
                 toast.message = msg;
-                //toast.animated = true;
                 toast.duration = 1250;
                 toast.buttons = [
                     {
@@ -605,7 +645,6 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                 const alert = document.createElement('ion-alert');
                                 alert.header = 'Editar cuenta';
                                 alert.inputs = [
-                                    //id: 'name1-id'
                                     { name: 'name1', placeholder: 'Cuenta', value: newTotal[i] },
                                     { name: 'name2', placeholder: 'Usuario', value: newTotal[i + 1] },
                                     { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
@@ -648,7 +687,7 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                             presentToast(`Editado ${msg}`, 500);
                                             save();
                                             updateDB('L1', 'B1');
-                                            updateDB('L1', 'L2');
+                                            // updateDB('L1', 'L2');
                                         },
                                     },
                                 ];
@@ -675,7 +714,7 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                             presentToast(`Borrando ${msg}`, 500);
                                             save();
                                             updateDB('L1', 'B1');
-                                            updateDB('L1', 'L2');
+                                            // updateDB('L1', 'L2');
                                             if (showSearch.value == '') newSearch.value = '';
                                         },
                                     },
@@ -741,7 +780,7 @@ buttonAdd.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
-                    updateDB('L1', 'L2');
+                    // updateDB('L1', 'L2');
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
                     showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
@@ -803,7 +842,7 @@ buttonAdd2.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
-                    updateDB('L1', 'L2');
+                    // updateDB('L1', 'L2');
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
                     showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
@@ -864,13 +903,12 @@ barEdit.addEventListener('click', () => {
                                                         txt[0] = code(usNData.userEditName);
                                                         txt[1] = code(usNData.userEditUser);
                                                         txt[2] = code(usNData.userEditPass);
-                                                        document.getElementById(
-                                                            'userName'
-                                                        ).innerHTML = deco(txt[0]);
+                                                        document.getElementById('userName').innerHTML = deco(txt[0]);
                                                         localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                                                        // accessTempData = txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD';
                                                         save();
                                                         updateDB('L1', 'B1');
-                                                        updateDB('L1', 'L2');
+                                                        // updateDB('L1', 'L2');
                                                     },
                                                 },
                                             ];
@@ -888,7 +926,7 @@ barEdit.addEventListener('click', () => {
                     } else {
                         presentToast('Incorrecto', '500');
                     }
-                    // localStorage.setItem('accessTempData', '');
+                    // localStorage.setItem('accessTempData', '');   REVISAR    
                 },
             },
         ];
@@ -912,10 +950,11 @@ barImport.addEventListener('click', () => {
                     newSearch.value = '';
                     updateDB('B2', 'L1');
                     presentToast('Copia de seguridad cargada.', 800);
-                    updateDB('L1', 'L2');
+                    // updateDB('L1', 'L2');
                     splitInit();
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
+                    updateDB('L1', 'B1');
                 },
             },
             /*{
@@ -969,7 +1008,8 @@ barExport.addEventListener('click', () => {
             {
                 text: 'Confirmar',
                 handler: () => {
-                    updateDB('L2', 'B2');
+                    // updateDB('L2', 'B2'); TO OPTIMIZE
+                    updateDB('L1', 'B2')
                     presentToast('Copia creada.', 500);
                 },
             },
@@ -989,6 +1029,7 @@ barExport.addEventListener('click', () => {
 barLogout.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     localStorage.clear();
+    // accessTempData = '';
     window.location.reload();
 });
 
@@ -1170,9 +1211,9 @@ function updateDB(send, receive) { //REVISAR B3
     if (send == 'B2') localStorage.setItem(receive, docB2);
 
     //('L -> L')
-    if (send.includes('L') && receive.includes('L')) {
-        localStorage.setItem(receive, localStorage.getItem(send));
-    }
+    // if (send.includes('L') && receive.includes('L')) {
+    //     localStorage.setItem(receive, localStorage.getItem(send));
+    // }
 
     // ('L -> B1');
     if (receive == 'B1') {
