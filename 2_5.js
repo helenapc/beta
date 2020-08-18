@@ -47,17 +47,17 @@ const buttonCreate = document.getElementById('buttonCreate');
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
-const barProgress02 = document.createElement('ion-progress-bar');
+// const barProgress02 = document.createElement('ion-progress-bar');
 barProgress01.setAttribute('color', 'light');
-barProgress02.setAttribute('color', 'light');
+// barProgress02.setAttribute('color', 'light');
 barProgress.appendChild(barProgress01);
-barProgress.appendChild(barProgress02);
+// barProgress.appendChild(barProgress02);
 
 function barProgressF(color, state) {
     barProgress01.setAttribute('color', color);
-    barProgress02.setAttribute('color', color);
+    // barProgress02.setAttribute('color', color);
     barProgress01.setAttribute('type', state);
-    barProgress02.setAttribute('type', state);
+    // barProgress02.setAttribute('type', state);
 };
 
 // NAV BAR
@@ -168,16 +168,16 @@ const showCardAll = (account, user, pass, notes) => {
 
 localStorage.removeItem('alrt');
 
-
 //existen datos locales
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
+
     showLogin.innerHTML = '';
     disableItem(false);
     splitInit();
     aTotalTOnewTotal();
     document.getElementById('userName').innerHTML = deco(txt[0]);
 
-
+    
     // OP2 comprobación de local con base de datos
     compare = false;
     db.collection(coll).onSnapshot(querySnapshot => {
@@ -201,9 +201,17 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
         compare = false;
         alertcompare = true;
+
+        // cambio datos
+        
+
+
         // if (docB1 != localStorage.getItem('L2')) { // TO OPTIMIZE
         if (docB1 != localStorage.getItem('L1') && alertcompare) {
             showSearch.innerHTML = '';
+            // if (localStorage.getItem('accessTempData') ){
+
+            // };
             function alertCompareData() {
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
@@ -221,7 +229,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             document.getElementById('userName').innerHTML = deco(txt[0]);
                             showLogin.innerHTML = '';
                             disableItem(false);
-                            // updateDB('L1', 'L2');
                             newSearch.value = '';
                             refreshData();
                             presentToast('Base de datos sincronizada', '1000');
@@ -236,7 +243,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             document.getElementById('userName').innerHTML = deco(txt[0]);
                             showLogin.innerHTML = '';
                             disableItem(false);
-                            // updateDB('L2', 'B1'); TO OPTIMIZE
                             updateDB('L1', 'B1')
                             newSearch.value = '';
                             refreshData();
@@ -499,6 +505,7 @@ buttonLogin.addEventListener('click', () => {
                             alertMsg('Error', 'Datos incorrectos o vacíos.');
                         };
                         barProgressF('light', 'determinate');
+                        window.location.reload();
 
                     });
                 },
