@@ -47,17 +47,17 @@ const buttonCreate = document.getElementById('buttonCreate');
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
-// const barProgress02 = document.createElement('ion-progress-bar');
+const barProgress02 = document.createElement('ion-progress-bar');
 barProgress01.setAttribute('color', 'light');
-// barProgress02.setAttribute('color', 'light');
+barProgress02.setAttribute('color', 'light');
 barProgress.appendChild(barProgress01);
-// barProgress.appendChild(barProgress02);
+barProgress.appendChild(barProgress02);
 
 function barProgressF(color, state) {
     barProgress01.setAttribute('color', color);
-    // barProgress02.setAttribute('color', color);
+    barProgress02.setAttribute('color', color);
     barProgress01.setAttribute('type', state);
-    // barProgress02.setAttribute('type', state);
+    barProgress02.setAttribute('type', state);
 };
 
 // NAV BAR
