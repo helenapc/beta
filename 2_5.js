@@ -19,8 +19,9 @@ var docB1 = '';
 var docB2 = '';
 var uCA = [];
 var userID = '';
-const coll = 'users2';
+const coll = 'usersb';
 var alertcompare = true;
+var resetLogin = false;
 
 // Init components
 const refresher = document.getElementById('refresher');
@@ -177,7 +178,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     aTotalTOnewTotal();
     document.getElementById('userName').innerHTML = deco(txt[0]);
 
-    
+
     // OP2 comprobación de local con base de datos
     compare = false;
     db.collection(coll).onSnapshot(querySnapshot => {
@@ -200,10 +201,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         }
         compare = false;
-        alertcompare = true;
+
 
         // cambio datos
-        
+
 
 
         // if (docB1 != localStorage.getItem('L2')) { // TO OPTIMIZE
@@ -397,6 +398,7 @@ refresher.addEventListener('ionRefresh', () => {
 });
 
 buttonLogin.addEventListener('click', () => {
+    console.log('login');
     function presentAlertLogin() {
         const alert = document.createElement('ion-alert');
         alert.header = 'Iniciar sesión';
@@ -414,41 +416,35 @@ buttonLogin.addEventListener('click', () => {
                         return;
                     }
 
-
                     barProgressF('success', 'indeterminate');
 
-
                     enableItem = true;
+
                     localStorage.setItem('accessTempData', code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD');
-                    // accessTempData = code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD';
-                    // console.log(accessTempData + ' asignar');
+
                     db.collection(coll).onSnapshot(querySnapshot => {
                         querySnapshot.forEach(doc => {
                             if (!coincidencia) {
                                 docB1 = doc.data().B1;
                                 docB2 = doc.data().B2;
-
                                 userID = doc.id;
                                 uRA = doc.data().B1.split('GD'); //userRestoreAccess
 
                                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
-                                    // if (docB1.includes(accessTempData)) {
-                                    // console.log(accessTempData + ' post includes');
+
                                     coincidencia = true;
                                     updateDB('B1', 'L1');
-                                    // updateDB('L1', 'L2');
                                     splitInit();
                                     aTotalTOnewTotal();
-
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                     disableItem(false);
-                                    // barProgressF('light', 'determinate');
-                                    return;
-                                };
+                                    window.location.reload();
+                                    
+                                }
 
                                 // restablecer contraseña
                                 if (code(usData.userEditUser) == uRA[1] && usData.userEditPass == doc.data().B3) {
-                                    barProgressF('light', 'determinate');
+                                    console.log(doc.data().B3);
                                     function presentRestorePass() {
                                         const alert = document.createElement('ion-alert');
                                         alert.subHeader = 'Restablecer contraseña';
@@ -467,9 +463,9 @@ buttonLogin.addEventListener('click', () => {
                                                     }
 
                                                     localStorage.setItem('L1', uRA[0] + 'GD' + uRA[1] + 'GD' + code(usRData.pass01) + 'GD' + uRA[3]);
+                                                    localStorage.setItem('accessTempData', uRA[1] + 'GD' + code(usRData.pass01) + 'GD')
                                                     // save();
                                                     updateDB('L1', 'B1');
-                                                    // updateDB('L1', 'L2');
                                                     updateDB('L1', 'B2');
 
                                                     splitInit();
@@ -478,10 +474,19 @@ buttonLogin.addEventListener('click', () => {
                                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                                     disableItem(false);
 
+
+                                                    
+                                                    
                                                     // Remove the field from the document
-                                                    return db.collection(coll).doc(userID).update({
+                                                    db.collection(coll).doc(userID).update({
                                                         B3: firebase.firestore.FieldValue.delete()
+                                                    })
+                                                    .then(function () {
+                                                        // console.log("Document B4 successfully deleted!");
+                                                        window.location.reload();
+                                                        // console.log('borrando');
                                                     });
+
 
                                                     // return;
 
@@ -495,17 +500,24 @@ buttonLogin.addEventListener('click', () => {
 
                                     // LOGIN RESTORE
                                     coincidencia = true;
+                                    // return
                                 }
-
                             };
+
                         });
+                        barProgressF('light', 'determinate');
+
                         if (coincidencia) {
                             showLogin.innerHTML = ''
+                            // window.location.reload();
                         } else {
                             alertMsg('Error', 'Datos incorrectos o vacíos.');
                         };
-                        barProgressF('light', 'determinate');
-                        window.location.reload();
+
+                        // if (resetLogin) {
+                        //     window.location.reload();
+
+                        // }
 
                     });
                 },
@@ -1277,6 +1289,8 @@ function sendEmail() { //helenapc2018@gmail.com
                     return;
                 }
 
+                barProgressF('success', 'indeterminate');
+
                 db.collection(coll).onSnapshot(querySnapshot => {
                     querySnapshot.forEach(doc => {
                         if (!coincidencia) {
@@ -1292,14 +1306,13 @@ function sendEmail() { //helenapc2018@gmail.com
                                 })
                                     .then(function () {
                                         presentToast('Mail enviado', 1000);
+                                        barProgressF('light', 'determinate');
                                         // console.log('present toast');
                                         window.location.reload();
                                         return;
                                     });
 
 
-                                // console.log('ENVIAR MAIL');
-                                // console.log('recién');
                                 Email.send({
                                     Host: "smtp.gmail.com",
                                     Username: "restore.pass.helena@gmail.com",
@@ -1311,7 +1324,6 @@ function sendEmail() { //helenapc2018@gmail.com
                                         `
                                 <h2>Nueva contraseña temporal:</h2>
                                 <h1>${restoreKey}</h1>
-                                <a href="https://helenapc.github.io/"><h3>Click para volver a la aplicación.</h3></a>
                                 `,
                                 })
 
