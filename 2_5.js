@@ -48,17 +48,12 @@ const buttonCreate = document.getElementById('buttonCreate');
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
-// const barProgress02 = document.createElement('ion-progress-bar');
 barProgress01.setAttribute('color', 'light');
-// barProgress02.setAttribute('color', 'light');
 barProgress.appendChild(barProgress01);
-// barProgress.appendChild(barProgress02);
 
 function barProgressF(color, state) {
     barProgress01.setAttribute('color', color);
-    // barProgress02.setAttribute('color', color);
     barProgress01.setAttribute('type', state);
-    // barProgress02.setAttribute('type', state);
 };
 
 // NAV BAR
@@ -142,7 +137,6 @@ const barExport = document.getElementById('barExport');
 const barLogout = document.getElementById('barLogout');
 
 const showCardAll = (account, user, pass, notes) => {
-    // OK
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
     const newHeader = document.createElement('ion-card-header');
@@ -169,21 +163,16 @@ const showCardAll = (account, user, pass, notes) => {
 
 localStorage.removeItem('alrt');
 
-//existen datos locales
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
-
     showLogin.innerHTML = '';
     disableItem(false);
     splitInit();
     aTotalTOnewTotal();
     document.getElementById('userName').innerHTML = deco(txt[0]);
-
-
-    // OP2 comprobación de local con base de datos
     compare = false;
+
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
-            // if (!compare) {
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
@@ -191,28 +180,18 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 compare = true;
                 return;
             }
-            // };
         });
 
         if (!compare) {
             localStorage.clear();
-            localStorage.setItem('L1', 'GDGDGDGD'); //TEST BETA  
+            localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
-
         }
+
         compare = false;
 
-
-        // cambio datos
-
-
-
-        // if (docB1 != localStorage.getItem('L2')) { // TO OPTIMIZE
         if (docB1 != localStorage.getItem('L1') && alertcompare) {
             showSearch.innerHTML = '';
-            // if (localStorage.getItem('accessTempData') ){
-
-            // };
             function alertCompareData() {
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
@@ -253,8 +232,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                     {
                         text: 'Mas..',
                         handler: () => {
-                            console.log('aTotal:' + aTotal);
-
                             var txtTemp = [];
                             var aTotalTemp = [];
                             var newa = [];
@@ -266,7 +243,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             aTotalTemp.splice(-1, 1);
                             aTotalTemp = aTotalTemp.concat(aTotal);
                             aTotalTemp.sort();
-
 
                             for (i = 0; i < aTotalTemp.length; i++) {
                                 (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
@@ -312,7 +288,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                                     aTotalTOnewTotal();
                                                                     save();
                                                                     updateDB('L1', 'B1');
-                                                                    // updateDB('L1', 'L2');
                                                                     alertcompare = false;
                                                                 },
                                                             },
@@ -321,21 +296,16 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                         return alert.present();
                                                     }
                                                     presentAlertCheckboxDel();
-
-
                                                 } else {
                                                     console.log('No hay datos borrados');
                                                     aTotalTOnewTotal();
                                                     save();
                                                     updateDB('L1', 'B1');
-                                                    // updateDB('L1', 'L2');
                                                     alertcompare = false;
                                                 };
-
                                             },
                                         },
                                     ];
-
                                     document.body.appendChild(alert);
                                     return alert.present();
                                 }
@@ -361,7 +331,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                 aTotalTOnewTotal();
                                                 save();
                                                 updateDB('L1', 'B1');
-                                                // updateDB('L1', 'L2');
                                                 alertcompare = false;
                                             },
                                         },
@@ -381,9 +350,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
     });
 } else {
-    localStorage.setItem('L1', 'GDGDGDGD'); //TEST BETA 
+    localStorage.setItem('L1', 'GDGDGDGD');
 }
-// ------------------ START ------------------ //
+
+
 
 //######################## BOTONES ########################
 
@@ -428,10 +398,8 @@ buttonLogin.addEventListener('click', () => {
                                 docB1 = doc.data().B1;
                                 docB2 = doc.data().B2;
                                 userID = doc.id;
-                                uRA = doc.data().B1.split('GD'); //userRestoreAccess
-
+                                uRA = doc.data().B1.split('GD');
                                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
-
                                     coincidencia = true;
                                     updateDB('B1', 'L1');
                                     splitInit();
@@ -439,10 +407,8 @@ buttonLogin.addEventListener('click', () => {
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                     disableItem(false);
                                     window.location.reload();
-                                    
                                 }
-
-                                // restablecer contraseña
+                                // res
                                 if (code(usData.userEditUser) == uRA[1] && usData.userEditPass == doc.data().B3) {
                                     console.log(doc.data().B3);
                                     function presentRestorePass() {
@@ -464,32 +430,16 @@ buttonLogin.addEventListener('click', () => {
 
                                                     localStorage.setItem('L1', uRA[0] + 'GD' + uRA[1] + 'GD' + code(usRData.pass01) + 'GD' + uRA[3]);
                                                     localStorage.setItem('accessTempData', uRA[1] + 'GD' + code(usRData.pass01) + 'GD')
-                                                    // save();
                                                     updateDB('L1', 'B1');
                                                     updateDB('L1', 'B2');
-
                                                     splitInit();
                                                     aTotalTOnewTotal();
-                                                    console.log('txt: ' + txt);
                                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                                     disableItem(false);
 
-
-                                                    
-                                                    
-                                                    // Remove the field from the document
                                                     db.collection(coll).doc(userID).update({
                                                         B3: firebase.firestore.FieldValue.delete()
-                                                    })
-                                                    .then(function () {
-                                                        // console.log("Document B4 successfully deleted!");
-                                                        window.location.reload();
-                                                        // console.log('borrando');
-                                                    });
-
-
-                                                    // return;
-
+                                                    }).then(function () { window.location.reload() });
                                                 },
                                             },
                                         ];
@@ -497,28 +447,13 @@ buttonLogin.addEventListener('click', () => {
                                         return alert.present();
                                     }
                                     presentRestorePass();
-
-                                    // LOGIN RESTORE
                                     coincidencia = true;
-                                    // return
                                 }
                             };
 
                         });
                         barProgressF('light', 'determinate');
-
-                        if (coincidencia) {
-                            showLogin.innerHTML = ''
-                            // window.location.reload();
-                        } else {
-                            alertMsg('Error', 'Datos incorrectos o vacíos.');
-                        };
-
-                        // if (resetLogin) {
-                        //     window.location.reload();
-
-                        // }
-
+                        (coincidencia) ? showLogin.innerHTML = '' : alertMsg('Error', 'Datos incorrectos o vacíos.');
                     });
                 },
             },
@@ -553,13 +488,8 @@ buttonCreate.addEventListener('click', () => {
                     barProgressF('success', 'indeterminate');
 
                     localStorage.setItem('accessTempData', code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD');
-                    // accessTempData = code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD';
-
-                    // console.log('Datos ingresados: ' + localStorage.getItem('accessTempData'));
-
 
                     db.collection(coll).onSnapshot(querySnapshot => {
-
                         if (!coincidencia) {
                             querySnapshot.forEach(doc => {
                                 uCA = doc.data().B1.split('GD');
@@ -568,7 +498,7 @@ buttonCreate.addEventListener('click', () => {
                                     docB1 = doc.data().B1;
                                     docB2 = doc.data().B2;
                                     userID = doc.id;
-                                    return
+                                    // return
                                 };
                             });
                         };
@@ -589,47 +519,36 @@ buttonCreate.addEventListener('click', () => {
                                 B2: '',
                             })
                                 .then(function () {
-                                    // .then(function(docRef){
-                                    // console.log('Datos Agregados: ' + localStorage.getItem('accessTempData'));
                                     updateDB('B1', 'L1');
                                     showLogin.innerHTML = '';
                                     splitInit();
                                     aTotalTOnewTotal();
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    // updateDB('L1', 'L2');
                                     disableItem(false);
                                     barProgressF('light', 'determinate');
-
-                                    return;
+                                    // return;
                                 })
                                 .catch(function (error) {
                                     console.error('Error adding document: ', error);
-                                    return;
+                                    // return;
                                 });
-
                             // return
                         };
-
                     });
-
                 }
             },
         ];
         document.body.appendChild(alert);
         return alert.present();
-
     }
-
     presentAlertCreate();
     return;
 });
 
-showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DELETE) // OK OK
+showSearch.addEventListener('long-press', e => { // TAP
 
     e.preventDefault();
-
     // console.log(e.path);
-
     var xPath = 3;
     var cuPath = [];
 
@@ -651,7 +570,8 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
             cuPath[2] == newTotal[i + 2] &&
             cuPath[3] == newTotal[i + 3]
         ) {
-            async function presentToastC(msg) {
+            // async function presentToastC(msg) {
+            function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
                 toast.message = msg;
                 toast.duration = 1250;
@@ -680,7 +600,6 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                             }
 
                                             for (i = 0; i < newTotal.length; i += 5) {
-                                                // console.log(newTotal);
                                                 if (
                                                     newData.name1 == newTotal[i] &&
                                                     newData.name2 == newTotal[i + 1] &&
@@ -692,21 +611,13 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                                 }
                                             }
 
-                                            aTotal.splice(toRemplace, 1,
-                                                code(newData.name1) +
-                                                'OG' +
-                                                code(newData.name2) +
-                                                'OG' +
-                                                code(newData.name3) +
-                                                'OG' +
-                                                code(newData.name4)
-                                            );
+                                            // aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
+                                            aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
                                             aTotalTOnewTotal();
                                             refreshData();
                                             presentToast(`Editado ${msg}`, 500);
                                             save();
                                             updateDB('L1', 'B1');
-                                            // updateDB('L1', 'L2');
                                         },
                                     },
                                 ];
@@ -733,7 +644,6 @@ showSearch.addEventListener('long-press', e => { // MANIPULATE CARDS (EDIT - DEL
                                             presentToast(`Borrando ${msg}`, 500);
                                             save();
                                             updateDB('L1', 'B1');
-                                            // updateDB('L1', 'L2');
                                             if (showSearch.value == '') newSearch.value = '';
                                         },
                                     },
@@ -759,7 +669,6 @@ buttonAdd.addEventListener('click', () => {
         const alert = document.createElement('ion-alert');
         alert.header = 'Agregar cuenta';
         alert.inputs = [
-            // id: 'name1a-id'
             { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '', type: 'email' },
             { name: 'name2a', placeholder: 'Usuario', value: '' },
             { name: 'name3a', placeholder: 'Contraseña', value: '' },
@@ -799,7 +708,6 @@ buttonAdd.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
-                    // updateDB('L1', 'L2');
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
                     showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
@@ -817,7 +725,6 @@ buttonAdd2.addEventListener('click', () => {
         const alert = document.createElement('ion-alert');
         alert.header = 'Agregar cuenta';
         alert.inputs = [
-            // id: 'name1a-id'
             { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
             { name: 'name2a', placeholder: 'Usuario', value: '' },
             { name: 'name3a', placeholder: 'Contraseña', value: '' },
@@ -861,7 +768,6 @@ buttonAdd2.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
-                    // updateDB('L1', 'L2');
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
                     showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
@@ -924,10 +830,8 @@ barEdit.addEventListener('click', () => {
                                                         txt[2] = code(usNData.userEditPass);
                                                         document.getElementById('userName').innerHTML = deco(txt[0]);
                                                         localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                                                        // accessTempData = txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD';
                                                         save();
                                                         updateDB('L1', 'B1');
-                                                        // updateDB('L1', 'L2');
                                                     },
                                                 },
                                             ];
@@ -943,9 +847,8 @@ barEdit.addEventListener('click', () => {
                         }
                         presentAlertEditUserData();
                     } else {
-                        presentToast('Incorrecto', '500');
+                        presentToast('Incorrecto', '800');
                     }
-                    // localStorage.setItem('accessTempData', '');   REVISAR    
                 },
             },
         ];
@@ -963,52 +866,51 @@ barImport.addEventListener('click', () => {
         alert.buttons = [
             { text: 'cancelar', role: 'cancel' },
             {
-                text: 'Confirmar', // Base de datos
+                text: 'Confirmar',
                 handler: () => {
                     showSearch.innerHTML = '';
                     newSearch.value = '';
                     updateDB('B2', 'L1');
                     presentToast('Copia de seguridad cargada.', 800);
-                    // updateDB('L1', 'L2');
                     splitInit();
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     updateDB('L1', 'B1');
                 },
             },
-            /*{
-              text: 'Manual',
-              handler: () => {
-                function alertImpManual() {
-                  const alert = document.createElement('ion-alert');
-                  alert.subHeader = 'Importación manual';
-                  alert.inputs = [{ name: 'input1', placeholder: 'Inserte datos' }];
-                  alert.buttons = [
-                    { text: 'cancelar', role: 'cancel' },
-                    {
-                      text: 'ok',
-                      handler: dataImp => {
-                        if (dataImp.input1 == '' || dataImp.input1.length < 16) {
-                          alertMsg('Error', 'Datos incorrectos o vacíos.');
-                          return;
-                        }
-                        showSearch.innerHTML = '';
-                        newSearch.value = '';
-                        presentToast('Datos importados.', 500);
-                        localStorage.setItem('L1', dataImp.input1);
-                        updateDB('L1', 'L2');
-                        splitInit();
-                        aTotalTOnewTotal();
-                        document.getElementById('userName').innerHTML = deco(txt[0]);
-                      },
-                    },
-                  ];
-                  document.body.appendChild(alert);
-                  return alert.present();
-                }
-                alertImpManual();
-              },
-            },*/
+            // {
+            //   text: 'Manual',
+            //   handler: () => {
+            //     function alertImpManual() {
+            //       const alert = document.createElement('ion-alert');
+            //       alert.subHeader = 'Importación manual';
+            //       alert.inputs = [{ name: 'input1', placeholder: 'Inserte datos' }];
+            //       alert.buttons = [
+            //         { text: 'cancelar', role: 'cancel' },
+            //         {
+            //           text: 'ok',
+            //           handler: dataImp => {
+            //             if (dataImp.input1 == '' || dataImp.input1.length < 16) {
+            //               alertMsg('Error', 'Datos incorrectos o vacíos.');
+            //               return;
+            //             }
+            //             showSearch.innerHTML = '';
+            //             newSearch.value = '';
+            //             presentToast('Datos importados.', 500);
+            //             localStorage.setItem('L1', dataImp.input1);
+            //             updateDB('L1', 'L2');
+            //             splitInit();
+            //             aTotalTOnewTotal();
+            //             document.getElementById('userName').innerHTML = deco(txt[0]);
+            //           },
+            //         },
+            //       ];
+            //       document.body.appendChild(alert);
+            //       return alert.present();
+            //     }
+            //     alertImpManual();
+            //   },
+            // },
 
         ];
         document.body.appendChild(alert);
@@ -1027,17 +929,16 @@ barExport.addEventListener('click', () => {
             {
                 text: 'Confirmar',
                 handler: () => {
-                    // updateDB('L2', 'B2'); TO OPTIMIZE
                     updateDB('L1', 'B2')
-                    presentToast('Copia creada.', 500);
+                    presentToast('Copia creada.', 800);
                 },
             },
-            /*{
-              text: 'Descargar',
-              handler: () => {
-                downloadFile(localStorage.getItem('L2'), 'bk-' + fecha());
-              },
-            },*/
+            // {
+            //   text: 'Descargar',
+            //   handler: () => {
+            //     downloadFile(localStorage.getItem('L2'), 'bk-' + fecha());
+            //   },
+            // },
         ];
         document.body.appendChild(alert);
         return alert.present();
@@ -1048,19 +949,14 @@ barExport.addEventListener('click', () => {
 barLogout.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     localStorage.clear();
-    // accessTempData = '';
     window.location.reload();
 });
 
 buttonEye.addEventListener('click', () => {
-    if (iconEye.getAttribute('name') == 'eye-outline') {
-        newSearch.value = '*'
-    } else {
-        newSearch.value = ''
-    }
+    (iconEye.getAttribute('name') == 'eye-outline') ? newSearch.value = '*' : newSearch.value = '';
     refreshData();
-    newSearch.value = ''
 });
+
 //######################## FUNCIONES ########################
 
 function disableItem(boolean) {
@@ -1073,7 +969,6 @@ function disableItem(boolean) {
 }
 
 function refreshData() {
-    // OK
     if (newSearch.value) {
         iconEye.setAttribute('name', 'eye-off-outline')
         buttonAdd2.setAttribute('style', 'margin-right: 0px');
@@ -1112,7 +1007,6 @@ function refreshData() {
 }
 
 function alertMsg(msg1, msg2) {
-    // OK
     const alert = document.createElement('ion-alert');
     alert.subHeader = msg1;
     alert.message = msg2;
@@ -1121,22 +1015,17 @@ function alertMsg(msg1, msg2) {
 }
 
 function alertMsgReset(msg1, msg2) {
-    // OK
     alerta = false
     const alert = document.createElement('ion-alert');
     alert.subHeader = msg1;
     alert.message = msg2;
-    alert.buttons = [
-        {// text: 'cancel',
-            role: 'cancel', handler: () => { window.location.reload() }
-        }
-    ]
+    alert.buttons = [{ role: 'cancel', handler: () => { window.location.reload() } }];
     document.body.appendChild(alert);
     return alert.present();
 }
 
-async function presentToast(msg, time) {
-    // OK
+// async function presentToast(msg, time) {
+function presentToast(msg, time) {
     const toast = document.createElement('ion-toast');
     toast.message = msg;
     toast.duration = time;
@@ -1145,7 +1034,6 @@ async function presentToast(msg, time) {
 }
 
 function downloadFile(data, fileName, type = 'text/plain') {
-    // OK
     var data2 = new Blob([data], { type: 'text/plain' });
     const a = document.createElement('a');
     a.style.display = 'none';
@@ -1179,7 +1067,6 @@ function code(cod) {
 }
 
 function fecha() {
-    // OK
     var today = new Date();
     var DD = String(today.getDate()).padStart(2, '0');
     var MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -1206,39 +1093,22 @@ function aTotalTOnewTotal() {
     for (b = 0; b < aTotal.length; b++) {
         const final = aTotal[b].split('OG');
         for (n = 0; n < final.length; n++) {
-            if (n % 4 == 0) {
-                newTotal.push(deco(final[n]).toLowerCase());
-            } else {
-                newTotal.push(deco(final[n]));
-            }
+            (n % 4 == 0) ? newTotal.push(deco(final[n]).toLowerCase()) : newTotal.push(deco(final[n]));
             if (n == 3) newTotal.push('oo');
         }
     }
 }
 
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
-
-function updateDB(send, receive) { //REVISAR B3
+function updateDB(send, receive) {
     // ('B -> L');
     if (send == 'B1') localStorage.setItem(receive, docB1);
     if (send == 'B2') localStorage.setItem(receive, docB2);
 
-    //('L -> L')
-    // if (send.includes('L') && receive.includes('L')) {
-    //     localStorage.setItem(receive, localStorage.getItem(send));
-    // }
-
     // ('L -> B1');
+    //si se agrega nueva source se agrega nueva en firebase
     if (receive == 'B1') {
         return db.collection(coll).doc(userID).update({
             B1: localStorage.getItem(send),
-            //si se agrega nueva source se agrega nueva en firebase
             // }).then(function () {
             // console.log("Document B2 successfully updated!");
         })
@@ -1270,7 +1140,7 @@ function save() {
     }
 }
 
-function sendEmail() { //helenapc2018@gmail.com
+function sendEmail() {
     coincidencia = false
     restoreKey = Math.floor(Math.random() * 999999) + 10000;
 
@@ -1298,18 +1168,13 @@ function sendEmail() { //helenapc2018@gmail.com
                             userEmail = doc.data().B1.split('GD');
                             if (userEmail[1] == code(usData.restorePass)) {
                                 coincidencia = true;
-
-                                // console.log('ID: ' + userID);
-                                // console.log(restoreKey);
                                 db.collection(coll).doc(userID).update({
                                     B3: restoreKey,
                                 })
                                     .then(function () {
                                         presentToast('Mail enviado', 1000);
                                         barProgressF('light', 'determinate');
-                                        // console.log('present toast');
-                                        window.location.reload();
-                                        return;
+                                        setTimeout(() => { window.location.reload(); }, 1000);
                                     });
 
 
@@ -1322,15 +1187,14 @@ function sendEmail() { //helenapc2018@gmail.com
                                     Subject: "Restaurar contraseña",
                                     Body:
                                         `
-                                <h2>Nueva contraseña temporal:</h2>
-                                <h1>${restoreKey}</h1>
-                                `,
+                                        <h2>Nueva contraseña temporal:</h2>
+                                        <h1>${restoreKey}</h1><h4>(Válida por única vez)</h1>
+                                    `,
                                 })
 
                             };
                         };
                     });
-                    // (coincidencia) ? showLogin.innerHTML = '' : alertMsg('Error', 'Datos incorrectos o vacíos.');
                     if (!coincidencia) alertMsg('Error', 'Esta cuenta no existe o no está registrada');
                 });
             },
@@ -1338,12 +1202,7 @@ function sendEmail() { //helenapc2018@gmail.com
     ];
     document.body.appendChild(alert);
     return alert.present();
-
-
-
-
 }
-
 
 //************************ END ************************
 // EXTRA (long tap)
