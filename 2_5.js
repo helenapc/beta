@@ -119,7 +119,7 @@ veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20818-beta';
+ver.innerHTML = 'Versión 2.5.208181-beta';
 veri.appendChild(ver);
 
 
