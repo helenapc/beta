@@ -54,6 +54,7 @@ barProgress.appendChild(barProgress01);
 function barProgressF(color, state) {
     barProgress01.setAttribute('color', color);
     barProgress01.setAttribute('type', state);
+
 };
 
 // NAV BAR
@@ -112,14 +113,24 @@ barIcon03.setAttribute('name', 'log-out-outline');
 barIcon03.setAttribute('slot', 'start');
 barItem03.appendChild(barIcon03);
 
+//ITEM TEST **************************************
+const barTest = document.createElement('ion-item');
+barTest.textContent = 'Test';
+barTest.setAttribute('button', 'click-btn');
+barTest.setAttribute('id', 'barTest');
+const barTestI = document.createElement('ion-icon');
+barTestI.setAttribute('name', 'code-slash-outline');
+barTestI.setAttribute('slot', 'start');
+barTest.appendChild(barTestI);
 
+//ITEM
 const veri = document.createElement('ion-item-divider');
 veri.setAttribute('lines', 'none');
 veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.208181-beta';
+ver.innerHTML = 'Versión 2.5.20820-beta';
 veri.appendChild(ver);
 
 
@@ -127,8 +138,10 @@ veri.appendChild(ver);
 barContent.appendChild(barItem02);
 barContent.appendChild(barItem01);
 barContent.appendChild(barItem03);
+if (localStorage.getItem('accessTempData') == '756E6B6B7E717A767A6A456C72666E7133687472GD6666GD') {
+    barContent.appendChild(barTest);
+}
 barContent.appendChild(veri);
-
 
 //BUTTONS NAV BAR
 const barEdit = document.getElementById('barEdit');
@@ -140,11 +153,11 @@ const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
     const newHeader = document.createElement('ion-card-header');
-
     const newSub1 = document.createElement('ion-card-subtitle');
     const newSub2 = document.createElement('ion-card-subtitle');
     const newSub3 = document.createElement('ion-card-subtitle');
     const newSub4 = document.createElement('ion-card-subtitle');
+
     newSub1.textContent = account.toUpperCase();
     newSub2.textContent = 'Usuario: ' + user;
     newSub3.textContent = 'Contraseña: ' + pass;
@@ -211,7 +224,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             disableItem(false);
                             newSearch.value = '';
                             refreshData();
-                            presentToast('Base de datos sincronizada', '1000');
+                            presentToast('Base de datos sincronizada.', '1000', 'dark');
                         },
                     },
                     {
@@ -226,7 +239,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             updateDB('L1', 'B1')
                             newSearch.value = '';
                             refreshData();
-                            presentToast('Usando memoria local', '1000');
+                            presentToast('Usando memoria local.', '1000', 'dark');
                         },
                     },
                     {
@@ -354,8 +367,12 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 }
 
 
-
 //######################## BOTONES ########################
+
+barTest.addEventListener('click', () => {
+    document.getElementById('barMenuPrincipal').close();
+    console.log('test');
+});
 
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
@@ -368,7 +385,6 @@ refresher.addEventListener('ionRefresh', () => {
 });
 
 buttonLogin.addEventListener('click', () => {
-    console.log('login');
     function presentAlertLogin() {
         const alert = document.createElement('ion-alert');
         alert.header = 'Iniciar sesión';
@@ -570,6 +586,7 @@ showSearch.addEventListener('long-press', e => { // TAP
             cuPath[2] == newTotal[i + 2] &&
             cuPath[3] == newTotal[i + 3]
         ) {
+
             // async function presentToastC(msg) {
             function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
@@ -582,6 +599,7 @@ showSearch.addEventListener('long-press', e => { // TAP
                             function alertEdit() {
                                 const toRemplace = i / 5;
                                 const alert = document.createElement('ion-alert');
+                                alert.setAttribute('backdrop-dismiss', 'false');
                                 alert.header = 'Editar cuenta';
                                 alert.inputs = [
                                     { name: 'name1', placeholder: 'Cuenta', value: newTotal[i] },
@@ -599,6 +617,11 @@ showSearch.addEventListener('long-press', e => { // TAP
                                                 return;
                                             }
 
+                                            newData.name1 = delete_spaces(newData.name1);
+                                            newData.name2 = delete_spaces(newData.name2);
+                                            newData.name3 = delete_spaces(newData.name3);
+                                            newData.name4 = delete_spaces(newData.name4);
+
                                             for (i = 0; i < newTotal.length; i += 5) {
                                                 if (
                                                     newData.name1 == newTotal[i] &&
@@ -611,11 +634,12 @@ showSearch.addEventListener('long-press', e => { // TAP
                                                 }
                                             }
 
+
                                             // aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
                                             aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
                                             aTotalTOnewTotal();
                                             refreshData();
-                                            presentToast(`Editado ${msg}`, 500);
+                                            presentToast(`"${msg}" editado.` , 500, 'primary');
                                             save();
                                             updateDB('L1', 'B1');
                                         },
@@ -640,9 +664,9 @@ showSearch.addEventListener('long-press', e => { // TAP
                                         handler: () => {
                                             aTotal.splice(i / 5, 1);
                                             aTotalTOnewTotal();
-                                            refreshData();
-                                            presentToast(`Borrando ${msg}`, 500);
                                             save();
+                                            refreshData();
+                                            presentToast(`"${msg}" eliminado.`, 500, 'danger');
                                             updateDB('L1', 'B1');
                                             if (showSearch.value == '') newSearch.value = '';
                                         },
@@ -664,121 +688,65 @@ showSearch.addEventListener('long-press', e => { // TAP
     }
 });
 
-buttonAdd.addEventListener('click', () => {
-    function presentAlertAdd() {
-        const alert = document.createElement('ion-alert');
-        alert.header = 'Agregar cuenta';
-        alert.inputs = [
-            { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '', type: 'email' },
-            { name: 'name2a', placeholder: 'Usuario', value: '' },
-            { name: 'name3a', placeholder: 'Contraseña', value: '' },
-            { name: 'name4a', placeholder: 'Notas(Opcional)', value: '', type: 'url' },
-        ];
-        alert.buttons = [
-            { text: 'Cancel', role: 'cancel' },
-            {
-                text: 'Ok',
-                handler: newData2 => {
-                    if (newData2.name1a == '' || newData2.name2a == '' || newData2.name3a == '') {
-                        refreshData();
-                        alertMsg('Error', 'Datos incorrectos o vacíos.');
-                        return;
-                    }
-                    for (i = 0; i < newTotal.length; i += 5) {
-                        if (
-                            newData2.name1a == newTotal[i] &&
-                            newData2.name2a == newTotal[i + 1] &&
-                            newData2.name3a == newTotal[i + 2]
-                        ) {
-                            refreshData();
-                            alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                            return;
-                        }
-                    }
-                    aTotal.push(
-                        code(newData2.name1a.toLowerCase()) +
-                        'OG' +
-                        code(newData2.name2a) +
-                        'OG' +
-                        code(newData2.name3a) +
-                        'OG' +
-                        code(newData2.name4a)
-                    );
 
-                    aTotalTOnewTotal();
-                    save();
-                    updateDB('L1', 'B1');
-                    showSearch.innerHTML = '';
-                    newSearch.value = newData2.name1a;
-                    showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
-                },
-            },
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    presentAlertAdd();
-});
+buttonAdd.addEventListener('click', () => { presentAlertAdd(); });
+buttonAdd2.addEventListener('click', () => { presentAlertAdd(); });
+function presentAlertAdd() {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Agregar cuenta';
+    alert.inputs = [
+        { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
+        { name: 'name2a', placeholder: 'Usuario', value: '' },
+        { name: 'name3a', placeholder: 'Contraseña', value: '' },
+        { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
+    ];
+    alert.buttons = [
+        { text: 'Cancel', role: 'cancel' },
+        {
+            text: 'Ok',
+            handler: newData2 => {
+                if (
+                    newData2.name1a == '' ||
+                    newData2.name2a == '' ||
+                    newData2.name3a == ''
+                ) {
+                    alertMsg('Error', 'Datos incorrectos o vacíos.');
+                    return;
+                }
 
-buttonAdd2.addEventListener('click', () => {
-    function presentAlertAdd() {
-        const alert = document.createElement('ion-alert');
-        alert.header = 'Agregar cuenta';
-        alert.inputs = [
-            { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
-            { name: 'name2a', placeholder: 'Usuario', value: '' },
-            { name: 'name3a', placeholder: 'Contraseña', value: '' },
-            { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
-        ];
-        alert.buttons = [
-            { text: 'Cancel', role: 'cancel' },
-            {
-                text: 'Ok',
-                handler: newData2 => {
+                newData2.name1a = delete_spaces(newData2.name1a);
+                newData2.name2a = delete_spaces(newData2.name2a);
+                newData2.name3a = delete_spaces(newData2.name3a);
+                newData2.name4a = delete_spaces(newData2.name4a);
+
+                for (let i = 0; i < newTotal.length; i += 5) {
                     if (
-                        newData2.name1a == '' ||
-                        newData2.name2a == '' ||
-                        newData2.name3a == ''
+                        newData2.name1a == newTotal[i] &&
+                        newData2.name2a == newTotal[i + 1] &&
+                        newData2.name3a == newTotal[i + 2]
                     ) {
-                        refreshData();
-                        alertMsg('Error', 'Datos incorrectos o vacíos.');
+                        alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
                         return;
                     }
-                    for (let i = 0; i < newTotal.length; i += 5) {
-                        if (
-                            newData2.name1a == newTotal[i] &&
-                            newData2.name2a == newTotal[i + 1] &&
-                            newData2.name3a == newTotal[i + 2]
-                        ) {
-                            refreshData();
-                            alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                            return;
-                        }
-                    }
-                    aTotal.push(
-                        code(newData2.name1a.toLowerCase()) +
-                        'OG' +
-                        code(newData2.name2a) +
-                        'OG' +
-                        code(newData2.name3a) +
-                        'OG' +
-                        code(newData2.name4a)
-                    );
+                }
 
-                    aTotalTOnewTotal();
-                    save();
-                    updateDB('L1', 'B1');
-                    showSearch.innerHTML = '';
-                    newSearch.value = newData2.name1a;
-                    showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
-                },
+                // aTotal.push(code(newData2.name1a.toLowerCase()) + 'OG' + code(newData2.name2a) + 'OG' + code(newData2.name3a) + 'OG' + code(newData2.name4a));
+                aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
+
+                aTotalTOnewTotal();
+                save();
+                updateDB('L1', 'B1');
+                showSearch.innerHTML = '';
+                newSearch.value = newData2.name1a;
+                presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
+                showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
             },
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    presentAlertAdd();
-});
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 
 barEdit.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
@@ -847,7 +815,7 @@ barEdit.addEventListener('click', () => {
                         }
                         presentAlertEditUserData();
                     } else {
-                        presentToast('Incorrecto', '800');
+                        presentToast('Incorrecto.', '800', 'warning');
                     }
                 },
             },
@@ -871,11 +839,12 @@ barImport.addEventListener('click', () => {
                     showSearch.innerHTML = '';
                     newSearch.value = '';
                     updateDB('B2', 'L1');
-                    presentToast('Copia de seguridad cargada.', 800);
+                    presentToast('Copia de seguridad cargada.', 800, 'success');
                     splitInit();
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     updateDB('L1', 'B1');
+                    refreshData();
                 },
             },
             // {
@@ -930,7 +899,7 @@ barExport.addEventListener('click', () => {
                 text: 'Confirmar',
                 handler: () => {
                     updateDB('L1', 'B2')
-                    presentToast('Copia creada.', 800);
+                    presentToast('Copia creada.', 800, 'success');
                 },
             },
             // {
@@ -958,6 +927,28 @@ buttonEye.addEventListener('click', () => {
 });
 
 //######################## FUNCIONES ########################
+function delete_spaces(v1) {
+    v1 = v1.split("");
+    for (let i = 0; i < v1.length; i++) {
+        if (v1[i] == " ") {
+            v1.shift();
+            i--
+        } else {
+            while (true) {
+                if (v1[v1.length - 1] == " ") {
+                    v1.pop();
+                } else { break; }
+            }
+            v1 = v1.join("");
+            while (v1.includes("  ")) {
+                v1 = v1.split("  ");
+                v1 = v1.join(" ");
+            }
+            break;
+        }
+    }
+    return v1;
+};
 
 function disableItem(boolean) {
     buttonAdd.setAttribute('disabled', boolean);
@@ -972,7 +963,7 @@ function refreshData() {
     if (newSearch.value) {
         iconEye.setAttribute('name', 'eye-off-outline')
         buttonAdd2.setAttribute('style', 'margin-right: 0px');
-        buttonAdd.setAttribute('style', 'margin-bottom: -1000px');
+        buttonAdd.setAttribute('style', 'margin-top: -1000px');
     } else {
         iconEye.setAttribute('name', 'eye-outline')
         buttonAdd2.setAttribute('style', 'margin-right: -80px');
@@ -1003,7 +994,7 @@ function refreshData() {
     }
     newSearch.value === '' ? (showSearch.innerHTML = '') : contador == 1 ? (s = '') : (s = 's');
     if (newSearch.value != '')
-        presentToast(`${contador} resultado${s} encontrado${s}`, '500');
+        presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
 }
 
 function alertMsg(msg1, msg2) {
@@ -1025,8 +1016,9 @@ function alertMsgReset(msg1, msg2) {
 }
 
 // async function presentToast(msg, time) {
-function presentToast(msg, time) {
+function presentToast(msg, time, color) {
     const toast = document.createElement('ion-toast');
+    toast.setAttribute('color', color);
     toast.message = msg;
     toast.duration = time;
     document.body.appendChild(toast);
@@ -1113,7 +1105,7 @@ function updateDB(send, receive) {
             // console.log("Document B2 successfully updated!");
         })
             .catch(function (error) {
-                presentToast('Error updating document.', 1000);
+                presentToast('Error updating document.', 1000, 'danger');
                 console.error('Error updating document: ', error);
                 return;
             });
@@ -1125,7 +1117,7 @@ function updateDB(send, receive) {
             B2: localStorage.getItem(send),
         })
             .catch(function (error) {
-                presentToast('Error updating document.', 1000);
+                presentToast('Error updating document.', 1000, 'danger');
                 console.error('Error updating document: ', error);
                 return;
             });
@@ -1172,7 +1164,7 @@ function sendEmail() {
                                     B3: restoreKey,
                                 })
                                     .then(function () {
-                                        presentToast('Mail enviado', 1000);
+                                        presentToast('Mail enviado', 1000, 'success');
                                         barProgressF('light', 'determinate');
                                         setTimeout(() => { window.location.reload(); }, 1000);
                                     });
@@ -1195,7 +1187,10 @@ function sendEmail() {
                             };
                         };
                     });
-                    if (!coincidencia) alertMsg('Error', 'Esta cuenta no existe o no está registrada');
+                    if (!coincidencia) {
+                        barProgressF('light', 'determinated');
+                        alertMsg('Error', 'Esta cuenta no está registrada');
+                    };
                 });
             },
         },
