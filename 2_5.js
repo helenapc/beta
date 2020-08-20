@@ -692,6 +692,7 @@ buttonAdd.addEventListener('click', () => { presentAlertAdd(); });
 buttonAdd2.addEventListener('click', () => { presentAlertAdd(); });
 function presentAlertAdd() {
     const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
     alert.header = 'Agregar cuenta';
     alert.inputs = [
         { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
@@ -712,11 +713,6 @@ function presentAlertAdd() {
                     alertMsg('Error', 'Datos incorrectos o vacíos.');
                     return;
                 }
-
-                newData2.name1a = delete_spaces(newData2.name1a);
-                newData2.name2a = delete_spaces(newData2.name2a);
-                newData2.name3a = delete_spaces(newData2.name3a);
-                newData2.name4a = delete_spaces(newData2.name4a);
 
                 for (let i = 0; i < newTotal.length; i += 5) {
                     if (
@@ -829,6 +825,7 @@ barImport.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function alertImp() {
         const alert = document.createElement('ion-alert');
+        alert.setAttribute('backdrop-dismiss', 'false');
         alert.subHeader = '¿Cargar copia de seguridad?';
         alert.buttons = [
             { text: 'cancelar', role: 'cancel' },
@@ -891,6 +888,7 @@ barExport.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function alertExp() {
         const alert = document.createElement('ion-alert');
+        alert.setAttribute('backdrop-dismiss', 'false');
         alert.subHeader = '¿Crear copia de seguridad?';
         alert.buttons = [
             { text: 'cancelar', role: 'cancel' },
