@@ -28,7 +28,6 @@ const refresher = document.getElementById('refresher');
 const titleName = document.getElementById('titleName');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
-const sizeSearch = document.getElementById('sizeSearch'); // NUEVO
 const buttonAdd = document.getElementById('buttonAdd');
 const buttonAdd2 = document.getElementById('buttonAdd2');
 const buttonEye = document.getElementById('buttonEye');
