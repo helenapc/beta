@@ -139,7 +139,7 @@ veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.208221-beta';
+ver.innerHTML = 'Versión 2.5.20822-beta';
 veri.appendChild(ver);
 
 
@@ -185,6 +185,15 @@ const showCardAll = (account, user, pass, notes) => {
 
 // showSearch.innerHTML = 'Aquí no hay datos.';
 
+// function alertMsgReset(msg1, msg2) {
+//     alerta = false
+//     const alert = document.createElement('ion-alert');
+//     alert.subHeader = msg1;
+//     alert.message = msg2;
+//     alert.buttons = [{ role: 'cancel', handler: () => { window.location.reload() } }];
+//     document.body.appendChild(alert);
+//     return alert.present();
+// }
 // ------------------ START ------------------ //
 
 
@@ -386,9 +395,24 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     });
 } else {
     localStorage.setItem('L1', 'GDGDGDGD');
-}
+};
 
-console.clear();
+
+// console.clear();
+
+if (!txt[3]) {
+
+    showSearch.innerHTML = `
+    
+    <div style="text-align:center"><br>Hola! No hay datos guardados. </div>
+    <div style="text-align:center"><br> Aquí hay unos ejemplos de lo que se puede hacer. </div>
+    <div style="text-align:center">⬇</div>
+    `;
+    showCardAll('facebook', 'prueba@hotmail.com', '1234abcd', 'Las notas son opcionales 😎')
+    showCardAll('google 👍', deco(txt[0]) + '@gmail.com', 'prueba1234', '')
+
+};
+
 
 //######################## BOTONES ########################
 
@@ -407,10 +431,33 @@ barTestDev.addEventListener('click', () => {
             {
                 text: 'Clear_data();',
                 handler: () => {
-                    localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                    updateDB('L1', 'B1');
-                    updateDB('L1', 'B2');
-                    window.location.reload();
+                    function clearData() {
+                        const alert = document.createElement('ion-alert');
+                        alert.inputs = [{ name: 'avoid', placeholder: 'avoid();', type: 'password' }],
+                            alert.buttons = [
+                                {
+                                    text: 'Ok',
+                                    handler: (x) => {
+                                        if (txt[2] == code(x.avoid)) {
+                                            barProgressF('danger', 'indeterminate')
+                                            localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                                            updateDB('L1', 'B1');
+                                            setTimeout(() => { window.location.reload(); }, 1000); //probar
+                                        }else{
+                                            presentToast('Incorrecto.', '500', 'warning');
+                                        };
+                                    }
+                                }
+                            ];
+                        document.body.appendChild(alert);
+                        return alert.present();
+                    }
+                    clearData();
+
+
+
+
+
                 }
             },
             {
@@ -811,6 +858,7 @@ buttonAdd.addEventListener('click', () => { presentAlertAdd(); });
 buttonAdd2.addEventListener('click', () => { presentAlertAdd(); });
 
 function presentAlertAdd() {
+
     console.clear();
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
