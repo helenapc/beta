@@ -400,7 +400,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 // console.clear();
 
-if (!txt[3]) {
+if (!txt[3] && showLogin.innerHTML == '') {
 
     showSearch.innerHTML = `
     
