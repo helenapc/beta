@@ -985,6 +985,7 @@ barEdit.addEventListener('click', () => {
                                                         localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
                                                         save();
                                                         updateDB('L1', 'B1');
+                                                        updateDB('L1', 'B2');
                                                         // window.location.reload();
                                                     },
                                                 },
