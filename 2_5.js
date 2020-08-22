@@ -415,7 +415,7 @@ barTestDev.addEventListener('click', () => {
         barProgressF('danger', 'determinate');
         const alert = document.createElement('ion-alert');
         alert.header = '¡Advertencia!';
-        alert.subHeader = '¿Está seguro que desea eliminar todos sus datos permanetemente?';
+        alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
         alert.buttons = [
             { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
             // {
