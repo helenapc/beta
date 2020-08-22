@@ -92,7 +92,7 @@ barMenuPrincipal.appendChild(barHeader);
 
 // ITEM
 const barItem01 = document.createElement('ion-item');
-barItem01.textContent = 'Cargar copia de seguridad'; //IMPORTAR
+barItem01.textContent = 'Cargar copia de Seguridad'; //IMPORTAR
 barItem01.setAttribute('button', 'click-btn');
 barItem01.setAttribute('id', 'barImport');
 const barIcon01 = document.createElement('ion-icon');
@@ -102,7 +102,7 @@ barItem01.appendChild(barIcon01);
 
 // ITEM
 const barItem02 = document.createElement('ion-item');
-barItem02.textContent = 'Crear copia de seguridad'; //EXPORTAR
+barItem02.textContent = 'Crear copia de Seguridad'; //EXPORTAR
 barItem02.setAttribute('button', 'click-btn');
 barItem02.setAttribute('id', 'barExport');
 const barIcon02 = document.createElement('ion-icon');
@@ -122,7 +122,7 @@ barItem03.appendChild(barIcon03);
 
 //ITEM EXTRA **************************************
 const barExtra = document.createElement('ion-item');
-barExtra.textContent = 'Nuevas funciones';
+barExtra.textContent = 'Nuevas Funciones';
 barExtra.setAttribute('button', 'click-btn');
 barExtra.setAttribute('id', 'barExtra');
 const barExtraI = document.createElement('ion-icon');
@@ -133,11 +133,11 @@ barExtra.appendChild(barExtraI);
 //ITEM TEST **************************************
 const barTestDev = document.createElement('ion-item');
 barTestDev.setAttribute('color', 'danger');
-barTestDev.textContent = 'Eliminar cuenta';
+barTestDev.textContent = 'Eliminar Cuenta';
 barTestDev.setAttribute('button', 'click-btn');
 barTestDev.setAttribute('id', 'barTest');
 const barTestI = document.createElement('ion-icon');
-barTestI.setAttribute('name', 'code-slash-outline');
+barTestI.setAttribute('name', 'close-outline');
 barTestI.setAttribute('slot', 'start');
 barTestDev.appendChild(barTestI);
 
