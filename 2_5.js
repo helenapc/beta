@@ -442,7 +442,7 @@ barTestDev.addEventListener('click', () => {
                                             barProgressF('danger', 'indeterminate')
                                             localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
                                             updateDB('L1', 'B1');
-                                            setTimeout(() => { window.location.reload(); }, 1000); //probar
+                                            setTimeout(() => { window.location.reload(); }, 2500); //probar
                                         }else{
                                             presentToast('Incorrecto.', '500', 'warning');
                                         };
@@ -483,7 +483,7 @@ barTestDev.addEventListener('click', () => {
                                             db.collection(coll).doc(userID).delete()
                                                 .then(function () {
                                                     console.log("Document successfully deleted!");
-                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 500); //probar
+                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
                                                 }).catch(function (error) {
                                                     console.error("Error removing document: ", error);
                                                 });
