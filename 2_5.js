@@ -50,9 +50,17 @@ const barProgress01 = document.createElement('ion-progress-bar');
 barProgress01.setAttribute('color', 'light');
 barProgress.appendChild(barProgress01);
 
+const barProgress02 = document.createElement('ion-progress-bar');
+barProgress02.setAttribute('color', 'light');
+barProgress.appendChild(barProgress02);
+
 function barProgressF(color, state) {
     barProgress01.setAttribute('color', color);
     barProgress01.setAttribute('type', state);
+    barProgress01.setAttribute('value', '100');
+    barProgress02.setAttribute('color', color);
+    barProgress02.setAttribute('type', state);
+    barProgress02.setAttribute('value', '100');
 
 };
 
@@ -124,7 +132,8 @@ barExtra.appendChild(barExtraI);
 
 //ITEM TEST **************************************
 const barTestDev = document.createElement('ion-item');
-barTestDev.textContent = 'Test-Development();';
+barTestDev.setAttribute('color', 'danger');
+barTestDev.textContent = 'Eliminar cuenta';
 barTestDev.setAttribute('button', 'click-btn');
 barTestDev.setAttribute('id', 'barTest');
 const barTestI = document.createElement('ion-icon');
@@ -135,11 +144,10 @@ barTestDev.appendChild(barTestI);
 //ITEM
 const veri = document.createElement('ion-item-divider');
 veri.setAttribute('lines', 'none');
-veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20822-beta';
+ver.innerHTML = 'Versión 2.5.20822b-beta';
 veri.appendChild(ver);
 
 
@@ -148,10 +156,8 @@ barContent.appendChild(barItem02);
 barContent.appendChild(barItem01);
 barContent.appendChild(barItem03);
 barContent.appendChild(barExtra);
-// if (localStorage.getItem('accessTempData') == '756E6B6B7E717A767A6A456C72666E7133687472GD6666GD') {
-barContent.appendChild(barTestDev);
-// }
 barContent.appendChild(veri);
+barContent.appendChild(barTestDev);
 
 //BUTTONS NAV BAR
 const barEdit = document.getElementById('barEdit');
@@ -387,70 +393,91 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 };
 
 
-// console.clear();
-
+// welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
     showSearch.innerHTML = `
     <div style="text-align:center"><br>Hola! No hay datos guardados. </div>
     <div style="text-align:center"><br> Aquí hay unos ejemplos de lo que se puede hacer. </div>
     <div style="text-align:center">⬇</div>
     `;
-    showCardAll('facebook', 'prueba@hotmail.com', '1234abcd', 'Las notas son opcionales 😎')
-    showCardAll('google 👍', deco(txt[0]) + '@gmail.com', 'prueba1234', '')
-
+    showCardAll('facebook', 'prueba@hotmail.com', '1234abcd', 'Las notas son opcionales 😎');
+    showCardAll('google 👍', 'tucuenta@gmail.com', 'prueba1234', '');
 };
 
 
 //######################## BOTONES ########################
 
 
-
 barTestDev.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
-    console.log(userID);
 
     function clearData() {
-        console.log('entrando');
+        barProgressF('danger', 'determinate');
         const alert = document.createElement('ion-alert');
-        alert.header = 'NO TOCAR!';
-        alert.subHeader = 'TestDev';
+        alert.header = 'Advertencia!';
+        alert.subHeader = '¿Está seguro que desea eliminar todos sus datos permanetemente?';
         alert.buttons = [
+            { text: 'cancelar', role: 'cancel', handler:() => {barProgressF('light', 'determinate')}},
+            // {
+            //     text: 'db.Clear_data();',
+            //     handler: () => {
+            //         function clearData() {
+            //             const alert = document.createElement('ion-alert');
+            //             alert.inputs = [{ name: 'avoid', placeholder: 'avoid();', type: 'password' }],
+            //                 alert.buttons = [
+            //                     {
+            //                         text: 'Ok',
+            //                         handler: (x) => {
+            //                             if (txt[2] == code(x.avoid)) {
+            //                                 barProgressF('danger', 'indeterminate')
+            //                                 localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+            //                                 updateDB('L1', 'B1');
+            //                                 setTimeout(() => { window.location.reload(); }, 2500); //probar
+            //                             } else {
+            //                                 presentToast('Incorrecto.', '500', 'warning');
+            //                             };
+            //                         }
+            //                     }
+            //                 ];
+            //             document.body.appendChild(alert);
+            //             return alert.present();
+            //         }
+            //         clearData();
+            //     }
+            // },
             {
-                text: 'db.Clear_data();',
+                text: 'confirmar',
                 handler: () => {
-                    function clearData() {
-                        const alert = document.createElement('ion-alert');
-                        alert.inputs = [{ name: 'avoid', placeholder: 'avoid();', type: 'password' }],
-                            alert.buttons = [
-                                {
-                                    text: 'Ok',
-                                    handler: (x) => {
-                                        if (txt[2] == code(x.avoid)) {
-                                            barProgressF('danger', 'indeterminate')
-                                            localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                                            updateDB('L1', 'B1');
-                                            setTimeout(() => { window.location.reload(); }, 2500); //probar
-                                        }else{
-                                            presentToast('Incorrecto.', '500', 'warning');
-                                        };
-                                    }
-                                }
-                            ];
-                        document.body.appendChild(alert);
-                        return alert.present();
-                    }
-                    clearData();
-                }
-            },
-            {
-                text: 'db.Delete_db_data();',
-                handler: () => {
+                    console.log(userID);
+                    Email.send({
+                        Host: "smtp.gmail.com",
+                        Username: "restore.pass.helena@gmail.com",
+                        Password: "restaurar1234",
+                        To: deco(txt[1]),
+                        From: "restore.pass.helena@gmail.com",
+                        Subject: "Eliminar cuenta.",
+                        Body:
+                            `
+                            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
+                            <h1>${userID}</h1>
+                        `,
+                    }).then(function () {
+                        console.log("correo enviado");
+                        // setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+
                     function confirmVoid() {
                         const alert = document.createElement('ion-alert');
+                        alert.setAttribute('backdrop-dismiss', 'false');
+                        alert.subHeader = 'Complete los datos para terminar el proceso.'
+                        alert.message = '(Se envió por correo la clave para confirmar el proceso).'
+
                         alert.inputs = [
-                            { name: 'avoid', placeholder: 'avoid();', type: 'password' },
-                            { name: 'bvoid', placeholder: 'bvoid();', type: 'password' },
-                            { name: 'cvoid', placeholder: 'bvoid();', type: 'password' },
+                            { name: 'avoid', placeholder: 'Usuario'},
+                            { name: 'bvoid', placeholder: 'Contraseña'},
+                            { name: 'cvoid', placeholder: 'Clave de confirmación'},
                         ];
                         alert.buttons = [
                             {
@@ -474,7 +501,9 @@ barTestDev.addEventListener('click', () => {
                                         presentToast('Incorrecto.', '800', 'warning');
                                     }
                                 }
-                            }
+                            },
+                            { text: 'cancelar', role: 'cancel', handler:() => {barProgressF('light', 'determinate')}},
+
                         ]
                         document.body.appendChild(alert);
                         return alert.present();
@@ -484,8 +513,7 @@ barTestDev.addEventListener('click', () => {
                     confirmVoid();
 
                 }
-            },
-            { text: 'cancelar', role: 'cancel' }
+            }
         ];
         document.body.appendChild(alert);
         return alert.present();
@@ -545,7 +573,9 @@ buttonLogin.addEventListener('click', () => {
                 text: 'Ok',
                 handler: usData => {
                     if (usData.userEditUser == '' || usData.userEditPass == '') {
+                        barProgressF('warning', 'determinate');
                         alertMsg('Error', 'Datos incorrectos o vacíos.');
+                        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                         return;
                     }
 
@@ -567,6 +597,7 @@ buttonLogin.addEventListener('click', () => {
                                     updateDB('B1', 'L1');
                                     splitInit();
                                     aTotalTOnewTotal();
+                                    localStorage.setItem('accessTempData', txt[0] + 'GD' + code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD'); //TEST
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                     disableItem(false);
                                     window.location.reload();
@@ -633,8 +664,9 @@ buttonCreate.addEventListener('click', () => {
     function presentAlertCreate() {
         const alert = document.createElement('ion-alert');
         alert.header = 'Registrarse';
+        // alert.message = '(Email es necesario para restablecer contraseña)';
         alert.inputs = [
-            { name: 'userEditName', placeholder: 'Nombre' },
+            { name: 'userEditName', placeholder: 'Nombre (Opcional)' },
             { name: 'userEditUser', placeholder: 'Email' },
             { name: 'userEditPass', placeholder: 'Contraseña', type: 'password' },
         ];
@@ -643,12 +675,15 @@ buttonCreate.addEventListener('click', () => {
             {
                 text: 'Ok',
                 handler: usCData => {
-                    if (usCData.userEditName == '' || usCData.userEditUser == '' || usCData.userEditPass == '') {
-                        alertMsg('Error', 'Datos incorrectos o vacíos.');
+                    if (usCData.userEditUser == '' || usCData.userEditPass == '') {
+                        barProgressF('warning', 'determinate');
+                        alertMsg('Error', 'Datos obligatorios vacíos.');
+                        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                         return;
                     };
 
                     barProgressF('success', 'indeterminate');
+                    (code(usCData.userEditName) == '') ? txt[0] = '25' : txt[0] = code(usCData.userEditName);
 
                     localStorage.setItem('accessTempData', code(usCData.userEditName) + 'GD' + code(usCData.userEditUser) + 'GD' + code(usCData.userEditPass) + 'GD');
 
@@ -689,6 +724,7 @@ buttonCreate.addEventListener('click', () => {
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
                                     disableItem(false);
                                     barProgressF('light', 'determinate');
+                                    window.location.reload();
                                     // return;
                                 })
                                 .catch(function (error) {
@@ -701,6 +737,7 @@ buttonCreate.addEventListener('click', () => {
                 }
             },
         ];
+        
         document.body.appendChild(alert);
         return alert.present();
     }
@@ -861,7 +898,9 @@ function presentAlertAdd() {
                     newData2.name2a == '' ||
                     newData2.name3a == ''
                 ) {
-                    alertMsg('Error', 'Datos incorrectos o vacíos.');
+                    barProgressF('warning', 'determinate');
+                    alertMsg('Error', 'Datos obligroios vacíos.');
+                    setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                     return;
                 }
 
@@ -895,7 +934,6 @@ function presentAlertAdd() {
     return alert.present();
 }
 
-
 barEdit.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function alertPass() {
@@ -909,11 +947,12 @@ barEdit.addEventListener('click', () => {
                 text: 'Ok',
                 handler: u => {
                     if (u.uEPass == deco(txt[2])) {
+                        if (txt[0] == '25') txt[0] = '';
                         function presentAlertEditUserData() {
                             const alert = document.createElement('ion-alert');
                             alert.header = 'Editar cuenta';
                             alert.inputs = [
-                                { name: 'userEditName', placeholder: 'Nombre', value: deco(txt[0]) },
+                                { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
                                 { name: 'userEditUser', placeholder: 'Usuario', value: deco(txt[1]) },
                                 { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
                             ];
@@ -922,12 +961,10 @@ barEdit.addEventListener('click', () => {
                                 {
                                     text: 'Ok',
                                     handler: usNData => {
-                                        if (
-                                            usNData.userEditName == '' ||
-                                            usNData.userEditUser == '' ||
-                                            usNData.userEditPass == ''
-                                        ) {
-                                            alertMsg('Error', 'Datos incorrectos o vacíos.');
+                                        if (usNData.userEditUser == '' || usNData.userEditPass == '') {
+                                            barProgressF('danger', 'determinate');
+                                            alertMsg('Error', 'Datos vacíos.');
+                                            setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                                             return;
                                         }
 
@@ -941,13 +978,14 @@ barEdit.addEventListener('click', () => {
                                                 {
                                                     text: 'Ok',
                                                     handler: () => {
-                                                        txt[0] = code(usNData.userEditName);
+                                                        (code(usNData.userEditName) == '') ? txt[0] = '25' : txt[0] = code(usNData.userEditName);
                                                         txt[1] = code(usNData.userEditUser);
                                                         txt[2] = code(usNData.userEditPass);
                                                         document.getElementById('userName').innerHTML = deco(txt[0]);
                                                         localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
                                                         save();
                                                         updateDB('L1', 'B1');
+                                                        // window.location.reload();
                                                     },
                                                 },
                                             ];
