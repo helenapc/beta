@@ -122,7 +122,7 @@ barItem03.appendChild(barIcon03);
 
 //ITEM EXTRA **************************************
 const barExtra = document.createElement('ion-item');
-barExtra.textContent = 'Nuevas';
+barExtra.textContent = 'Nuevas funciones';
 barExtra.setAttribute('button', 'click-btn');
 barExtra.setAttribute('id', 'barExtra');
 const barExtraI = document.createElement('ion-icon');
@@ -417,7 +417,7 @@ barTestDev.addEventListener('click', () => {
         alert.header = 'Advertencia!';
         alert.subHeader = '¿Está seguro que desea eliminar todos sus datos permanetemente?';
         alert.buttons = [
-            { text: 'cancelar', role: 'cancel', handler:() => {barProgressF('light', 'determinate')}},
+            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
             // {
             //     text: 'db.Clear_data();',
             //     handler: () => {
@@ -475,9 +475,9 @@ barTestDev.addEventListener('click', () => {
                         alert.message = '(Se envió por correo la clave para confirmar el proceso).'
 
                         alert.inputs = [
-                            { name: 'avoid', placeholder: 'Usuario'},
-                            { name: 'bvoid', placeholder: 'Contraseña'},
-                            { name: 'cvoid', placeholder: 'Clave de confirmación'},
+                            { name: 'avoid', placeholder: 'Usuario' },
+                            { name: 'bvoid', placeholder: 'Contraseña' },
+                            { name: 'cvoid', placeholder: 'Clave de confirmación' },
                         ];
                         alert.buttons = [
                             {
@@ -502,7 +502,7 @@ barTestDev.addEventListener('click', () => {
                                     }
                                 }
                             },
-                            { text: 'cancelar', role: 'cancel', handler:() => {barProgressF('light', 'determinate')}},
+                            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
 
                         ]
                         document.body.appendChild(alert);
@@ -526,7 +526,7 @@ barExtra.addEventListener('click', () => {
     function construct() {
         const alert = document.createElement('ion-alert');
         // alert.setAttribute('backdrop-dismiss', 'true');
-        alert.header = 'En proceso..';
+        alert.header = 'Agregadas:';
         alert.message = `
         <ion-list>
             <ion-item>
@@ -536,10 +536,10 @@ barExtra.addEventListener('click', () => {
                 <ion-label>( ✔ ) 'no hay datos'.</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>( + ) Vaciar cuenta(DEV).</ion-label>
+                <ion-label>( ✔ ) Eliminar cuenta.</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>( + ) Eliminar cuenta(DEV).</ion-label>
+                <ion-label>( ✔ ) Vaciar cuenta(DEV).</ion-label>
             </ion-item>
         </ion-list>
         `;
@@ -647,7 +647,13 @@ buttonLogin.addEventListener('click', () => {
 
                         });
                         barProgressF('light', 'determinate');
-                        (coincidencia) ? showLogin.innerHTML = '' : alertMsg('Error', 'Datos incorrectos o vacíos.');
+                        if (coincidencia) {
+                            showLogin.innerHTML = '';
+                        } else {
+                            barProgressF('warning', 'determinate');
+                            alertMsg('Error', 'Datos incorrectos o vacíos.');
+                            setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+                        }
                     });
                 },
             },
@@ -737,7 +743,7 @@ buttonCreate.addEventListener('click', () => {
                 }
             },
         ];
-        
+
         document.body.appendChild(alert);
         return alert.present();
     }
@@ -986,7 +992,6 @@ barEdit.addEventListener('click', () => {
                                                         save();
                                                         updateDB('L1', 'B1');
                                                         updateDB('L1', 'B2');
-                                                        // window.location.reload();
                                                     },
                                                 },
                                             ];
