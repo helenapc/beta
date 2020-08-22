@@ -114,7 +114,7 @@ barItem03.appendChild(barIcon03);
 
 //ITEM EXTRA **************************************
 const barExtra = document.createElement('ion-item');
-barExtra.textContent = 'Extras';
+barExtra.textContent = 'Nuevas';
 barExtra.setAttribute('button', 'click-btn');
 barExtra.setAttribute('id', 'barExtra');
 const barExtraI = document.createElement('ion-icon');
@@ -183,17 +183,6 @@ const showCardAll = (account, user, pass, notes) => {
 
 
 
-// showSearch.innerHTML = 'Aquí no hay datos.';
-
-// function alertMsgReset(msg1, msg2) {
-//     alerta = false
-//     const alert = document.createElement('ion-alert');
-//     alert.subHeader = msg1;
-//     alert.message = msg2;
-//     alert.buttons = [{ role: 'cancel', handler: () => { window.location.reload() } }];
-//     document.body.appendChild(alert);
-//     return alert.present();
-// }
 // ------------------ START ------------------ //
 
 
@@ -401,9 +390,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 // console.clear();
 
 if (!txt[3] && showLogin.innerHTML == '') {
-
     showSearch.innerHTML = `
-    
     <div style="text-align:center"><br>Hola! No hay datos guardados. </div>
     <div style="text-align:center"><br> Aquí hay unos ejemplos de lo que se puede hacer. </div>
     <div style="text-align:center">⬇</div>
@@ -429,7 +416,7 @@ barTestDev.addEventListener('click', () => {
         alert.subHeader = 'TestDev';
         alert.buttons = [
             {
-                text: 'Clear_data();',
+                text: 'db.Clear_data();',
                 handler: () => {
                     function clearData() {
                         const alert = document.createElement('ion-alert');
@@ -453,15 +440,10 @@ barTestDev.addEventListener('click', () => {
                         return alert.present();
                     }
                     clearData();
-
-
-
-
-
                 }
             },
             {
-                text: 'Delete_db_data();',
+                text: 'db.Delete_db_data();',
                 handler: () => {
                     function confirmVoid() {
                         const alert = document.createElement('ion-alert');
@@ -515,21 +497,21 @@ barExtra.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function construct() {
         const alert = document.createElement('ion-alert');
-        // alert.setAttribute('backdrop-dismiss', 'false');
+        // alert.setAttribute('backdrop-dismiss', 'true');
         alert.header = 'En proceso..';
         alert.message = `
         <ion-list>
             <ion-item>
+                <ion-label>( ✔ ) 😎👌</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>( ✔ ) 'no hay datos'.</ion-label>
+            </ion-item>
+            <ion-item>
                 <ion-label>( + ) Vaciar cuenta(DEV).</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>( + ) Eliminar cuenta.</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>( + ) 😊</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>( - ) 'no hay datos guardados'.</ion-label>
+                <ion-label>( + ) Eliminar cuenta(DEV).</ion-label>
             </ion-item>
         </ion-list>
         `;
