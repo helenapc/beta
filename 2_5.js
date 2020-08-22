@@ -414,7 +414,7 @@ barTestDev.addEventListener('click', () => {
     function clearData() {
         barProgressF('danger', 'determinate');
         const alert = document.createElement('ion-alert');
-        alert.header = 'Advertencia!';
+        alert.header = '¡Advertencia!';
         alert.subHeader = '¿Está seguro que desea eliminar todos sus datos permanetemente?';
         alert.buttons = [
             { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
