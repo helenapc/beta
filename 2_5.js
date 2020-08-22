@@ -139,7 +139,7 @@ veri.setAttribute('style', 'padding-bottom:1000px');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20820-beta-emoji';
+ver.innerHTML = 'Versión 2.5.20822-beta';
 veri.appendChild(ver);
 
 
@@ -235,6 +235,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             newSearch.value = '';
                             refreshData();
                             presentToast('Base de datos sincronizada.', '1000', 'dark');
+                            setTimeout(() => {window.location.reload()}, 1000);
                         },
                     },
                     {
@@ -250,6 +251,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             newSearch.value = '';
                             refreshData();
                             presentToast('Usando memoria local.', '1000', 'dark');
+                            setTimeout(() => {window.location.reload()}, 1000);
                         },
                     },
                     {
@@ -312,6 +314,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                                     save();
                                                                     updateDB('L1', 'B1');
                                                                     alertcompare = false;
+
+                                                                    window.location.reload();
                                                                 },
                                                             },
                                                         ];
@@ -325,6 +329,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                     save();
                                                     updateDB('L1', 'B1');
                                                     alertcompare = false;
+
+                                                    window.location.reload();
                                                 };
                                             },
                                         },
@@ -355,6 +361,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                                 save();
                                                 updateDB('L1', 'B1');
                                                 alertcompare = false;
+
+                                                window.location.reload();
                                             },
                                         },
                                     ];
@@ -791,8 +799,7 @@ barTest.addEventListener('click', () => {
                         }
                     }
 
-                    // console.log('code: ' + code2(newData2.name1a)); //borrrar (prueba de emoji)
-                    console.log('deco return: ' + deco(code(newData2.name1a)));
+                    console.log('deco return: ' + deco(code(newData2.name1a))); //borrrar (prueba de emoji)
 
                     // aTotal.push(code(newData2.name1a.toLowerCase()) + 'OG' + code(newData2.name2a) + 'OG' + code(newData2.name3a) + 'OG' + code(newData2.name4a));
                     aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
@@ -1127,9 +1134,9 @@ barTest.addEventListener('click', () => {
 
     function code(cod) {
 
-        // console.log('cod: ' + cod);
-        // console.log(cod.split(''));
-        // console.log('cod.length: ' + cod.length);
+        console.log('cod: ' + cod);
+        console.log(cod.split(''));
+        console.log('cod.length: ' + cod.length);
 
 
         let hexCod = '';
@@ -1141,13 +1148,13 @@ barTest.addEventListener('click', () => {
         for (let i = 0; i < cod.length; i++) {
             hexCod = '' + cod.codePointAt(i).toString(16); //codifica
 
-            // console.log('hexCod: ' + hexCod);
-            // console.log('hexCod.length: ' + hexCod.length);
+            console.log('hexCod.length: ' + hexCod.length);
 
             if (hexCod.length == 2) {
+                console.log(hexCod.split(''));
                 // console.log('hexCod == 2');
                 hexCod = (parseInt(hexCod, 16) + parseInt('05', 16)).toString(16).toUpperCase();
-                // console.log('hexCod => '+hexCod);
+                console.log('hexCod => '+hexCod);
                 hexF += '' + hexCod;
                 // console.log('hexF => ' + hexF);
             } else {
@@ -1155,14 +1162,17 @@ barTest.addEventListener('click', () => {
                 // console.log('hexCod != 2');
                 // hexF += '' + String.fromCodePoint("0x" + hexCod);;
                 // hexF += '' + ("0x" + hexCod);
+                console.log(hexCod.split(''));
                 if (hexCod.length == 5) {
+                    console.log('hexCod => '+hexCod);
                     hexF += '' + ("0x" + hexCod);
                     i++
                     // return;
                 }
                 if (hexCod.length == 4) {
+                    console.log('hexCod => '+hexCod);
                     hexF += '' + ("0x" + hexCod + 'Z');
-                    i++
+                    // i++
                     // return;
                 }
                 // console.log('hexF == ' + hexF);
@@ -1171,22 +1181,18 @@ barTest.addEventListener('click', () => {
 
 
 
-            // console.log('-----------');
+            console.log('-----------');
 
         }
+        console.log('final: '+hexF);
         return hexF;
     }
 
     function deco(dec) {
 
-        console.log('INICT DECO');
-        console.log('deco: ' + dec);
+        // console.log('INICT DECO');
+        // console.log('deco: ' + dec);
 
-        // let dec2 = dec + '';
-
-        // console.log('deco2: '+ dec2);
-
-        // let hexDec = dec2.toString();
         let hexDec = dec;
 
         // console.log('deco2.ToString: '+ hexDec);
@@ -1203,14 +1209,16 @@ barTest.addEventListener('click', () => {
 
 
                 let strCut = hexDec.substr(n, 5).split('');
+                // console.log(strCut);
 
                 if (strCut[strCut.length - 1] == 'Z') {
-                    console.log('str(Z) => ' + String.fromCodePoint(parseInt(hexDec.substr(n, 4), 16)));
+
+                    // console.log('str(Z) => ' + String.fromCodePoint(parseInt(hexDec.substr(n, 4), 16)));
                     str += String.fromCodePoint(parseInt(hexDec.substr(n, 4), 16));
 
                 } else {
 
-                    console.log('str => ' + String.fromCodePoint(parseInt(hexDec.substr(n, 5), 16)));
+                    // console.log('str => ' + String.fromCodePoint(parseInt(hexDec.substr(n, 5), 16)));
                     str += String.fromCodePoint(parseInt(hexDec.substr(n, 5), 16));
 
                 }
@@ -1218,8 +1226,9 @@ barTest.addEventListener('click', () => {
 
 
             } else {
+                // console.log(String.fromCharCode(parseInt(hexDec.substr(n, 2), 16) - 5));
                 str += String.fromCharCode(parseInt(hexDec.substr(n, 2), 16) - 5);
-            }
+            };
 
         }
         return str;
