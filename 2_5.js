@@ -1202,7 +1202,7 @@ function refreshData() {
     if (newSearch.value) {
         iconEye.setAttribute('name', 'eye-off-outline')
         buttonAdd2.setAttribute('style', 'margin-right: 0px');
-        buttonAdd.setAttribute('style', 'margin-top: -1000px');
+        buttonAdd.setAttribute('style', 'margin-top: -2000px');
     } else {
         iconEye.setAttribute('name', 'eye-outline')
         buttonAdd2.setAttribute('style', 'margin-right: -80px');
