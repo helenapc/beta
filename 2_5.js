@@ -59,6 +59,7 @@ function barProgressF(color, state) {
     barProgress02.setAttribute('color', color);
     barProgress02.setAttribute('type', state);
     barProgress02.setAttribute('value', '100');
+
 };
 
 // NAV BAR
@@ -109,7 +110,7 @@ const showCardAll = (account, user, pass, notes) => {
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 };
-const item = (id, ico, text, color = '') =>{
+const item = (id, ico, text, color = '', show = true) => {
     const ionItem = document.createElement('ion-item');
     ionItem.textContent = text;
     ionItem.setAttribute('color', color);
@@ -119,25 +120,33 @@ const item = (id, ico, text, color = '') =>{
     ionIco.setAttribute('name', ico);
     ionIco.setAttribute('slot', 'start');
     ionItem.appendChild(ionIco);
-    barContent.appendChild(ionItem);
+    if (show) {
+        barContent.appendChild(ionItem);
+    } else {
+        if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DGD') {
+            barContent.appendChild(ionItem);
+        };
+    };
     id = document.getElementById(id);
 }
 
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
-item('barNew', 'construct-outline','Nuevas Funciones');
-item('barThemes','color-palette-outline', 'Temas');
+item('barNew', 'construct-outline', 'Nuevas Funciones');
+item('barThemes', 'color-palette-outline', 'Temas');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
-//ITEM
+/////////////////////////////////////////////////////////
 const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20823-beta';
+ver.innerHTML = 'Versión 2.6';
 veri.appendChild(ver);
 barContent.appendChild(veri);
-//ITEM
+/////////////////////////////////////////////////////////
+item('barClear', 'trash-bin-outline', 'Vaciar Cuenta(DEV)', 'medium', false);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
+
 
 
 //DARK THEME
@@ -381,8 +390,6 @@ if (!txt[3] && showLogin.innerHTML == '') {
 };
 
 
-//######################## BOTONES ########################
-
 barThemes.addEventListener('click', () => { // ACTIVAR OP 1
     document.getElementById('barMenuPrincipal').close();
     function alertThemes() {
@@ -422,43 +429,65 @@ barThemes.addEventListener('click', () => { // ACTIVAR OP 1
     alertThemes();
 })
 
+// ********************************* DEV *********************************
+if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DGD') {
+
+    barClear.addEventListener('click', () => {
+        document.getElementById('barMenuPrincipal').close();
+        function clearData() {
+            // barProgressF('danger', 'determinate');
+            const alert = document.createElement('ion-alert');
+            // alert.header = '¡Advertencia!';
+            // alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
+            alert.buttons = [
+                { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
+                {
+                    text: 'db.clearData();',
+                    handler: () => {
+                        // function clearData2() {
+                        //     const alert = document.createElement('ion-alert');
+                        //     alert.inputs = [{ name: 'avoid', placeholder: 'avoid();', type: 'password' }],
+                        //         alert.buttons = [
+                        //             {
+                        //                 text: 'Ok',
+                        //                 handler: (x) => {
+                                            // if (txt[2] == code(x.avoid)) {
+                                                barProgressF('danger', 'indeterminate')
+                                                localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                                                updateDB('L1', 'B1');
+                                                setTimeout(() => { window.location.reload(); }, 2500); //probar
+                                            // } else {
+                                                // presentToast('Incorrecto.', '500', 'warning');
+                                            // };
+                        //                 }
+                        //             }
+                        //         ];
+                        //     document.body.appendChild(alert);
+                        //     return alert.present();
+                        // }
+                        // clearData2();
+                    }
+                },
+            ];
+            document.body.appendChild(alert);
+            return alert.present();
+        }
+        clearData()
+    });
+
+
+};
+
 barDelAcc.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
 
-    function clearData() {
+    function deleteData() {
         barProgressF('danger', 'determinate');
         const alert = document.createElement('ion-alert');
         alert.header = '¡Advertencia!';
         alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
         alert.buttons = [
             { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
-            // {
-            //     text: 'db.Clear_data();',
-            //     handler: () => {
-            //         function clearData() {
-            //             const alert = document.createElement('ion-alert');
-            //             alert.inputs = [{ name: 'avoid', placeholder: 'avoid();', type: 'password' }],
-            //                 alert.buttons = [
-            //                     {
-            //                         text: 'Ok',
-            //                         handler: (x) => {
-            //                             if (txt[2] == code(x.avoid)) {
-            //                                 barProgressF('danger', 'indeterminate')
-            //                                 localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-            //                                 updateDB('L1', 'B1');
-            //                                 setTimeout(() => { window.location.reload(); }, 2500); //probar
-            //                             } else {
-            //                                 presentToast('Incorrecto.', '500', 'warning');
-            //                             };
-            //                         }
-            //                     }
-            //                 ];
-            //             document.body.appendChild(alert);
-            //             return alert.present();
-            //         }
-            //         clearData();
-            //     }
-            // },
             {
                 text: 'confirmar',
                 handler: () => {
@@ -512,6 +541,7 @@ barDelAcc.addEventListener('click', () => {
                                                 });
                                         }, 2000);
                                     } else {
+                                        barProgressF('light', 'determinate');
                                         presentToast('Incorrecto.', '800', 'warning');
                                     }
                                 }
@@ -532,7 +562,7 @@ barDelAcc.addEventListener('click', () => {
         document.body.appendChild(alert);
         return alert.present();
     }
-    clearData();
+    deleteData();
 });
 
 barNew.addEventListener('click', () => {
@@ -971,7 +1001,7 @@ barEdit.addEventListener('click', () => {
                             alert.header = 'Editar cuenta';
                             alert.inputs = [
                                 { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
-                                { name: 'userEditUser', placeholder: 'Usuario', value: deco(txt[1]) },
+                                { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
                                 { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
                             ];
                             alert.buttons = [
@@ -1450,6 +1480,8 @@ function sendEmail() {
     document.body.appendChild(alert);
     return alert.present();
 }
+
+
 
 //************************ END ************************
 // EXTRA (long tap)
