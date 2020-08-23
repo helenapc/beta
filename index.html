@@ -13,6 +13,7 @@
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
 
   <script src="https://smtpjs.com/v3/smtp.js"></script> <!-- mail -->
+  <link rel="stylesheet" href="variables.css">
 
 </head>
 
@@ -24,7 +25,9 @@
       <ion-header>
         <ion-toolbar>
           <ion-title id="userName" slot="start"></ion-title>
-          <ion-buttons slot="end">beta
+          <ion-icon slot="end" name="bulb-outline"></ion-icon>
+          <ion-toggle slot="end" color="dark" id ="toggle" onclick="toggleTheme()"></ion-toggle>
+          <ion-buttons slot="end">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
         </ion-toolbar>
