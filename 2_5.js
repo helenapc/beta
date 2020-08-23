@@ -23,9 +23,6 @@ const coll = 'usersb';
 var alertcompare = true;
 var resetLogin = false;
 
-
-
-
 // Init components
 const refresher = document.getElementById('refresher');
 const titleName = document.getElementById('titleName');
@@ -35,7 +32,6 @@ const buttonAdd = document.getElementById('buttonAdd');
 const buttonAdd2 = document.getElementById('buttonAdd2');
 const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
-
 
 titleName.setAttribute('disabled', true);
 newSearch.setAttribute('disabled', true);
@@ -50,11 +46,10 @@ const buttonCreate = document.getElementById('buttonCreate');
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
-barProgress01.setAttribute('color', 'light');
-barProgress.appendChild(barProgress01);
-
 const barProgress02 = document.createElement('ion-progress-bar');
+barProgress01.setAttribute('color', 'light');
 barProgress02.setAttribute('color', 'light');
+barProgress.appendChild(barProgress01);
 barProgress.appendChild(barProgress02);
 
 function barProgressF(color, state) {
@@ -64,7 +59,6 @@ function barProgressF(color, state) {
     barProgress02.setAttribute('color', color);
     barProgress02.setAttribute('type', state);
     barProgress02.setAttribute('value', '100');
-
 };
 
 // NAV BAR
@@ -76,14 +70,8 @@ const barTitle = document.createElement('ion-item');
 const barLabel = document.createElement('ion-title');
 barLabel.textContent = 'Configuración';
 
-
-
-
-
 const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
-
-
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 barIcon00.setAttribute('button', 'click-btn');
@@ -94,102 +82,11 @@ barIcon00.setAttribute('size', 'large');
 
 //BLOCK 01
 barTitle.appendChild(barLabel);
-
-// barTitle.appendChild(toggleTheme);
-
-
 barTitle.appendChild(barIcon00);
 barToolbar.appendChild(barTitle);
 barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
-// ITEM
-const barItem01 = document.createElement('ion-item');
-barItem01.textContent = 'Cargar copia de Seguridad'; //IMPORTAR
-barItem01.setAttribute('button', 'click-btn');
-barItem01.setAttribute('id', 'barImport');
-const barIcon01 = document.createElement('ion-icon');
-barIcon01.setAttribute('name', 'arrow-down-circle-outline');
-barIcon01.setAttribute('slot', 'start');
-barItem01.appendChild(barIcon01);
-
-// ITEM
-const barItem02 = document.createElement('ion-item');
-barItem02.textContent = 'Crear copia de Seguridad'; //EXPORTAR
-barItem02.setAttribute('button', 'click-btn');
-barItem02.setAttribute('id', 'barExport');
-const barIcon02 = document.createElement('ion-icon');
-barIcon02.setAttribute('name', 'arrow-up-circle-outline');
-barIcon02.setAttribute('slot', 'start');
-barItem02.appendChild(barIcon02);
-
-// ITEM
-const barItem03 = document.createElement('ion-item');
-barItem03.textContent = 'Cerrar Sesión';
-barItem03.setAttribute('button', 'click-btn');
-barItem03.setAttribute('id', 'barLogout');
-const barIcon03 = document.createElement('ion-icon');
-barIcon03.setAttribute('name', 'log-out-outline');
-barIcon03.setAttribute('slot', 'start');
-barItem03.appendChild(barIcon03);
-
-//ITEM EXTRA **************************************
-const barNew = document.createElement('ion-item');
-barNew.textContent = 'Nuevas Funciones';
-barNew.setAttribute('button', 'click-btn');
-barNew.setAttribute('id', 'barNew');
-const barNewI = document.createElement('ion-icon');
-barNewI.setAttribute('name', 'construct-outline');
-barNewI.setAttribute('slot', 'start');
-barNew.appendChild(barNewI);
-
-//ITEM THEMES **************************************
-const barThemes = document.createElement('ion-item');
-barThemes.textContent = 'Temas';
-barThemes.setAttribute('button', 'click-btn');
-barThemes.setAttribute('id', 'barThemes');
-const barThemesI = document.createElement('ion-icon');
-barThemesI.setAttribute('name', 'color-palette-outline');
-barThemesI.setAttribute('slot', 'start');
-barThemes.appendChild(barThemesI);
-
-
-//ITEM
-const veri = document.createElement('ion-item-divider');
-veri.setAttribute('lines', 'none');
-const ver = document.createElement('ion-label');
-ver.setAttribute('slot', 'end');
-ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20822c-beta';
-veri.appendChild(ver);
-
-
-//ITEM TEST **************************************
-const barDelAcc = document.createElement('ion-item');
-barDelAcc.setAttribute('color', 'danger');
-barDelAcc.textContent = 'Eliminar Cuenta';
-barDelAcc.setAttribute('button', 'click-btn');
-barDelAcc.setAttribute('id', 'barTest');
-const barDelAccI = document.createElement('ion-icon');
-barDelAccI.setAttribute('name', 'close-outline');
-barDelAccI.setAttribute('slot', 'start');
-barDelAcc.appendChild(barDelAccI);
-
-
-//BLOCK02
-barContent.appendChild(barItem02);
-barContent.appendChild(barItem01);
-barContent.appendChild(barNew);
-barContent.appendChild(barThemes);
-barContent.appendChild(barItem03);
-barContent.appendChild(veri);
-barContent.appendChild(barDelAcc);
-
-//BUTTONS NAV BAR
-const barEdit = document.getElementById('barEdit');
-const barImport = document.getElementById('barImport');
-const barExport = document.getElementById('barExport');
-const barLogout = document.getElementById('barLogout');
 
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
@@ -212,24 +109,51 @@ const showCardAll = (account, user, pass, notes) => {
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 };
+const item = (id, ico, text, color = '') =>{
+    const ionItem = document.createElement('ion-item');
+    ionItem.textContent = text;
+    ionItem.setAttribute('color', color);
+    ionItem.setAttribute('button', 'click-btn');
+    ionItem.setAttribute('id', id);
+    const ionIco = document.createElement('ion-icon');
+    ionIco.setAttribute('name', ico);
+    ionIco.setAttribute('slot', 'start');
+    ionItem.appendChild(ionIco);
+    barContent.appendChild(ionItem);
+    id = document.getElementById(id);
+}
+
+item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
+item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
+item('barNew', 'construct-outline','Nuevas Funciones');
+item('barThemes','color-palette-outline', 'Temas');
+item('barLogout', 'log-out-outline', 'Cerrar Sesión');
+//ITEM
+const veri = document.createElement('ion-item-divider');
+const ver = document.createElement('ion-label');
+ver.setAttribute('slot', 'end');
+ver.setAttribute('style', 'margin-right:10px');
+ver.innerHTML = 'Versión 2.5.20823-beta';
+veri.appendChild(ver);
+barContent.appendChild(veri);
+//ITEM
+item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
 
-
+//DARK THEME
 const toggle = document.getElementById('toggle');
-if (localStorage.getItem('theme') == 'dark') toggle.checked = true;
-// Use matchMedia to check the user preference
-var prefersDark = window.matchMedia(`(prefers-color-scheme: ${localStorage.getItem('theme')})`);
-// var prefersDark = window.matchMedia(`(prefers-color-scheme: 'light)`);
+// // Use matchMedia to check the user preference
+let prefersDark = window.matchMedia(`(prefers-color-scheme: ${localStorage.getItem('theme')})`);
 toggleDarkTheme(prefersDark.matches);
-// Listen for changes to the prefers-color-scheme media query
+// // Listen for changes to the prefers-color-scheme media query
 prefersDark.addListener((mediaQuery) => toggleDarkTheme(mediaQuery.matches));
-// Add or remove the "dark" class based on if the media query matches
+// // Add or remove the "dark" class based on if the media query matches
 function toggleDarkTheme(shouldAdd) {
     document.body.classList.toggle('dark', shouldAdd);
 }
 
 function toggleTheme() {
-    
+    (localStorage.getItem('theme') == 'dark') ? toggle.checked = true : toggle.checked = false;
     if (toggle.checked) {
         prefersDark = window.matchMedia(`(prefers-color-scheme: link)`);
         localStorage.setItem('theme', 'light');
@@ -238,14 +162,6 @@ function toggleTheme() {
         localStorage.setItem('theme', 'dark');
     }
     toggleDarkTheme(prefersDark.matches);
-    // Listen for changes to the prefers-color-scheme media query
-    prefersDark.addListener((mediaQuery) => toggleDarkTheme(mediaQuery.matches));
-    // Add or remove the "dark" class based on if the media query matches
-    function toggleDarkTheme(shouldAdd) {
-        document.body.classList.toggle('dark', shouldAdd);
-    }
-
-
 };
 
 // ------------------ START ------------------ //
@@ -976,10 +892,8 @@ showSearch.addEventListener('long-press', e => { // TAP
     }
 });
 
-
 buttonAdd.addEventListener('click', () => { presentAlertAdd(); });
 buttonAdd2.addEventListener('click', () => { presentAlertAdd(); });
-
 function presentAlertAdd() {
 
     console.clear();
@@ -1346,8 +1260,8 @@ function code_bk(cod) {
     let hexCod = '';
     let hexF = '';
     for (let i = 0; i < cod.length; i++) {
-        // hexCod = '' + cod.charCodeAt(i).toString(16); //codifica
-        hexCod = '' + cod.codePointAt(i).toString(16); //codifica
+        // hexCod = '' + cod.charCodeAt(i).toString(16);
+        hexCod = '' + cod.codePointAt(i).toString(16);
         hexCod = (parseInt(hexCod, 16) + parseInt('05', 16)).toString(16).toUpperCase();
         hexF += '' + hexCod;
     }
@@ -1396,14 +1310,14 @@ function deco(dec) {
     return str;
 }
 
-function fecha() {
-    var today = new Date();
-    var DD = String(today.getDate()).padStart(2, '0');
-    var MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var YYYY = today.getFullYear();
-    var hh = today.getHours();
+function fecha() { //var/let
+    let today = new Date();
+    let DD = String(today.getDate()).padStart(2, '0');
+    let MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let YYYY = today.getFullYear();
+    let hh = today.getHours();
     if (hh < 10) hh = '0' + hh;
-    var mm = today.getMinutes();
+    let mm = today.getMinutes();
     if (mm < 10) mm = '0' + mm;
     today = DD + '-' + MM + '-' + (YYYY - 2000) + '-' + hh + mm;
     return today;
