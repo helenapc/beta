@@ -23,6 +23,9 @@ const coll = 'usersb';
 var alertcompare = true;
 var resetLogin = false;
 
+
+
+
 // Init components
 const refresher = document.getElementById('refresher');
 const titleName = document.getElementById('titleName');
@@ -73,8 +76,14 @@ const barTitle = document.createElement('ion-item');
 const barLabel = document.createElement('ion-title');
 barLabel.textContent = 'Configuración';
 
+
+
+
+
 const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
+
+
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 barIcon00.setAttribute('button', 'click-btn');
@@ -85,6 +94,10 @@ barIcon00.setAttribute('size', 'large');
 
 //BLOCK 01
 barTitle.appendChild(barLabel);
+
+// barTitle.appendChild(toggleTheme);
+
+
 barTitle.appendChild(barIcon00);
 barToolbar.appendChild(barTitle);
 barHeader.appendChild(barToolbar);
@@ -121,25 +134,25 @@ barIcon03.setAttribute('slot', 'start');
 barItem03.appendChild(barIcon03);
 
 //ITEM EXTRA **************************************
-const barExtra = document.createElement('ion-item');
-barExtra.textContent = 'Nuevas Funciones';
-barExtra.setAttribute('button', 'click-btn');
-barExtra.setAttribute('id', 'barExtra');
-const barExtraI = document.createElement('ion-icon');
-barExtraI.setAttribute('name', 'construct-outline');
-barExtraI.setAttribute('slot', 'start');
-barExtra.appendChild(barExtraI);
+const barNew = document.createElement('ion-item');
+barNew.textContent = 'Nuevas Funciones';
+barNew.setAttribute('button', 'click-btn');
+barNew.setAttribute('id', 'barNew');
+const barNewI = document.createElement('ion-icon');
+barNewI.setAttribute('name', 'construct-outline');
+barNewI.setAttribute('slot', 'start');
+barNew.appendChild(barNewI);
 
-//ITEM TEST **************************************
-const barTestDev = document.createElement('ion-item');
-barTestDev.setAttribute('color', 'danger');
-barTestDev.textContent = 'Eliminar Cuenta';
-barTestDev.setAttribute('button', 'click-btn');
-barTestDev.setAttribute('id', 'barTest');
-const barTestI = document.createElement('ion-icon');
-barTestI.setAttribute('name', 'close-outline');
-barTestI.setAttribute('slot', 'start');
-barTestDev.appendChild(barTestI);
+//ITEM THEMES **************************************
+const barThemes = document.createElement('ion-item');
+barThemes.textContent = 'Temas';
+barThemes.setAttribute('button', 'click-btn');
+barThemes.setAttribute('id', 'barThemes');
+const barThemesI = document.createElement('ion-icon');
+barThemesI.setAttribute('name', 'color-palette-outline');
+barThemesI.setAttribute('slot', 'start');
+barThemes.appendChild(barThemesI);
+
 
 //ITEM
 const veri = document.createElement('ion-item-divider');
@@ -147,17 +160,30 @@ veri.setAttribute('lines', 'none');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.5.20822b-beta';
+ver.innerHTML = 'Versión 2.5.20822c-beta';
 veri.appendChild(ver);
+
+
+//ITEM TEST **************************************
+const barDelAcc = document.createElement('ion-item');
+barDelAcc.setAttribute('color', 'danger');
+barDelAcc.textContent = 'Eliminar Cuenta';
+barDelAcc.setAttribute('button', 'click-btn');
+barDelAcc.setAttribute('id', 'barTest');
+const barDelAccI = document.createElement('ion-icon');
+barDelAccI.setAttribute('name', 'close-outline');
+barDelAccI.setAttribute('slot', 'start');
+barDelAcc.appendChild(barDelAccI);
 
 
 //BLOCK02
 barContent.appendChild(barItem02);
 barContent.appendChild(barItem01);
+barContent.appendChild(barNew);
+barContent.appendChild(barThemes);
 barContent.appendChild(barItem03);
-barContent.appendChild(barExtra);
 barContent.appendChild(veri);
-barContent.appendChild(barTestDev);
+barContent.appendChild(barDelAcc);
 
 //BUTTONS NAV BAR
 const barEdit = document.getElementById('barEdit');
@@ -189,6 +215,39 @@ const showCardAll = (account, user, pass, notes) => {
 
 
 
+const toggle = document.getElementById('toggle');
+if (localStorage.getItem('theme') == 'dark') toggle.checked = true;
+// Use matchMedia to check the user preference
+var prefersDark = window.matchMedia(`(prefers-color-scheme: ${localStorage.getItem('theme')})`);
+// var prefersDark = window.matchMedia(`(prefers-color-scheme: 'light)`);
+toggleDarkTheme(prefersDark.matches);
+// Listen for changes to the prefers-color-scheme media query
+prefersDark.addListener((mediaQuery) => toggleDarkTheme(mediaQuery.matches));
+// Add or remove the "dark" class based on if the media query matches
+function toggleDarkTheme(shouldAdd) {
+    document.body.classList.toggle('dark', shouldAdd);
+}
+
+function toggleTheme() {
+    
+    if (toggle.checked) {
+        prefersDark = window.matchMedia(`(prefers-color-scheme: link)`);
+        localStorage.setItem('theme', 'light');
+    } else {
+        prefersDark = window.matchMedia(`(prefers-color-scheme: dark)`);
+        localStorage.setItem('theme', 'dark');
+    }
+    toggleDarkTheme(prefersDark.matches);
+    // Listen for changes to the prefers-color-scheme media query
+    prefersDark.addListener((mediaQuery) => toggleDarkTheme(mediaQuery.matches));
+    // Add or remove the "dark" class based on if the media query matches
+    function toggleDarkTheme(shouldAdd) {
+        document.body.classList.toggle('dark', shouldAdd);
+    }
+
+
+};
+
 // ------------------ START ------------------ //
 
 
@@ -214,7 +273,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         });
 
         if (!compare) {
-            localStorage.clear();
+            // localStorage.clear();
+            localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
@@ -407,8 +467,46 @@ if (!txt[3] && showLogin.innerHTML == '') {
 
 //######################## BOTONES ########################
 
+barThemes.addEventListener('click', () => { // ACTIVAR OP 1
+    document.getElementById('barMenuPrincipal').close();
+    function alertThemes() {
+        const alert = document.createElement('ion-alert');
+        alert.header = 'Radio';
+        alert.inputs = [
+            {
+                type: 'radio',
+                label: 'Claro',
+                value: 'light',
+            },
+            {
+                type: 'radio',
+                label: 'Oscuro',
+                value: 'dark',
+            },
+        ];
+        alert.buttons = [
+            { role: 'cancel', },
+            {
+                text: 'Ok',
+                handler: dataTheme => {
+                    if (dataTheme == undefined) {
+                        prefersDark = window.matchMedia(`(prefers-color-scheme: ${localStorage.getItem('theme')})`);
 
-barTestDev.addEventListener('click', () => {
+                    } else {
+                        prefersDark = window.matchMedia(`(prefers-color-scheme: ${dataTheme})`);
+                        localStorage.setItem('theme', dataTheme)
+                    }
+                    toggleDarkTheme(prefersDark.matches);
+                },
+            }
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    alertThemes();
+})
+
+barDelAcc.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
 
     function clearData() {
@@ -521,7 +619,7 @@ barTestDev.addEventListener('click', () => {
     clearData();
 });
 
-barExtra.addEventListener('click', () => {
+barNew.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function construct() {
         const alert = document.createElement('ion-alert');
@@ -1111,7 +1209,9 @@ barExport.addEventListener('click', () => {
 
 barLogout.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('L1');
+    localStorage.removeItem('accessTempData');
     window.location.reload();
 });
 
