@@ -140,7 +140,7 @@ const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.62-beta';
+ver.innerHTML = 'Versión 2.621-beta';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
@@ -899,7 +899,7 @@ showSearch.addEventListener('long-press', e => { // TAP
                                     { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
                                 ];
                                 alert.buttons = [
-                                    { text: 'Cancel', role: 'cancel' },
+                                    { text: 'Cancelar', role: 'cancel' },
                                     {
                                         text: 'Ok',
                                         handler: newData => {
@@ -1201,6 +1201,11 @@ function presentAlertAdd() {
         {
             text: 'Ok',
             handler: newData2 => {
+                console.log(code(newData2.name1a));
+                console.log(code(newData2.name2a));
+                console.log(code(newData2.name3a));
+                console.log(code(newData2.name4a));
+
                 if (
                     newData2.name1a == '' ||
                     newData2.name2a == '' ||
