@@ -26,6 +26,7 @@ var alertcompare = true;
 var resetLogin = false;
 
 // Init components
+const hide = document.getElementById('hide');
 const refresher = document.getElementById('refresher');
 const titleName = document.getElementById('titleName');
 const showSearch = document.getElementById('show-accounts1');
@@ -35,13 +36,16 @@ const buttonAdd2 = document.getElementById('buttonAdd2');
 const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
 
-titleName.setAttribute('disabled', true);
-titleName.setAttribute('style', 'margin-top: 15px'); //progress
-newSearch.setAttribute('disabled', true);
-buttonAdd.setAttribute('disabled', true);
-// buttonAdd.setAttribute('style', 'transition:0px linear');
-buttonEye.setAttribute('disabled', true);
-refresher.setAttribute('disabled', true);
+// titleName.setAttribute('disabled', true);
+// titleName.setAttribute('style', 'margin-top: 15px');
+setAttributes(titleName, { style: 'opacity:0', disabled: true });
+setAttributes(newSearch, { style: 'opacity:0', disabled: true });
+setAttributes(buttonAdd, { style: 'opacity:0', disabled: true });
+setAttributes(buttonEye, { style: 'opacity:0', disabled: true });
+setAttributes(refresher, { style: 'opacity:0', disabled: true });
+
+hide.setAttribute('style', 'opacity:0');
+document.body.style.backgroundColor = "var(--ion-color-light)";
 
 const showLogin = document.getElementById('showLogin');
 const buttonLogin = document.getElementById('buttonLogin');
@@ -52,20 +56,10 @@ const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
 barProgress01.setAttribute('color', 'light');
 barProgress01.setAttribute('style', 'height:8px');
+// barProgress.setAttribute('style', 'margin-top:-10px'); //hide progress
+barProgress.setAttribute('style', 'opacity:0');
 barProgress.appendChild(barProgress01);
-barProgress.setAttribute('style', 'margin-top:-10px'); //hide progress
-function barProgressF(color, state) {
-    barProgress01.setAttribute('color', color);
-    barProgress01.setAttribute('type', state);
-    barProgress01.setAttribute('value', '100');
-    if (color=='light' && state=='determinate'){
-        barProgress.setAttribute('style', 'margin-top:-10px');
-        titleName.setAttribute('style', 'margin-top: 15px');
-    }else{
-        barProgress.setAttribute('style', 'margin-top:0px');
-        titleName.setAttribute('style', 'margin-top: 5px');
-    }
-};
+
 
 // NAV BAR
 const barMenuPrincipal = document.getElementById('barMenuPrincipal');
@@ -135,17 +129,18 @@ const item = (id, ico, text, color = '', show = true) => {
     id = document.getElementById(id);
 }
 
+item('barNew', 'construct-outline', 'Nuevas Funciones');
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
-item('barNew', 'construct-outline', 'Nuevas Funciones');
 item('barThemes', 'color-palette-outline', 'Temas');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
+// item('barTest', 'pencil', 'test');
 /////////////////////////////////////////////////////////
 const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.61-beta';
+ver.innerHTML = 'Versión 2.62-beta';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
@@ -154,21 +149,43 @@ item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
 
 
+
+
 //DARK THEME
 const checkbox = document.getElementById('checkbox');
-if (localStorage.getItem('theme') == null) localStorage.setItem('theme', 'light');
-var activeTheme = localStorage.getItem('theme');
-document.body.classList.toggle(activeTheme);
-
-
+if (localStorage.getItem('theme') == null ||
+    localStorage.getItem('theme') == 'dark' ||
+    localStorage.getItem('theme') == 'light' ||
+    localStorage.getItem('theme') == ''
+) localStorage.setItem('theme', ['light', '']);
+var activeTheme = localStorage.getItem('theme').split(',');
+if (activeTheme[1] == 'dark') {
+    document.body.classList.toggle(activeTheme[1]);
+    checkbox.checked = true;
+} else {
+    document.body.classList.toggle(activeTheme[0]);
+};
 
 //CHECK/TOGGLE
-checkbox.addEventListener('change', () => {
-    document.body.classList.toggle(activeTheme);
-    document.body.classList.toggle('dark');
-    // (activeTheme == 'dark') ? activeTheme = 'light' : activeTheme = 'dark'
-    // localStorage.setItem('theme', activeTheme);
+checkbox.addEventListener('click', () => {
+    if (activeTheme[1] == 'dark') {
+        document.body.classList.toggle('dark');
+        document.body.classList.toggle(activeTheme[0]);
+        activeTheme[1] = '';
+    } else {
+        document.body.classList.toggle(activeTheme[0]);
+        document.body.classList.toggle('dark');
+        activeTheme[1] = 'dark';
+    }
+    localStorage.setItem('theme', activeTheme);
 });
+
+
+
+
+
+
+
 
 // ------------------ START ------------------ //
 
@@ -386,41 +403,6 @@ if (!txt[3] && showLogin.innerHTML == '') {
 };
 
 
-barThemes.addEventListener('click', () => { // ACTIVAR OP 1
-    document.getElementById('barMenuPrincipal').close();
-    if (checkbox.checked) {
-        document.body.classList.toggle('dark');
-        document.body.classList.toggle(activeTheme);
-        checkbox.checked = false;
-    };
-    function alertThemes() {
-        const alert = document.createElement('ion-alert');
-        alert.subHeader = 'próximamente..';
-        alert.inputs = [
-            { type: 'radio', label: 'Claro', value: 'light', checked: true },
-            { type: 'radio', label: 'Rosa', value: 'pink' },
-            { type: 'radio', label: 'Rosa 2', value: 'pink2', },
-            { type: 'radio', label: 'Azul', value: 'blue', }
-        ];
-        alert.buttons = [
-            { role: 'cancel', },
-            {
-                text: 'Ok',
-                handler: dataTheme => {
-                    if (dataTheme != activeTheme) {
-                        document.body.classList.toggle(activeTheme);
-                        document.body.classList.toggle(dataTheme);
-                        activeTheme = dataTheme;
-                        localStorage.setItem('theme', dataTheme)
-                    }
-                },
-            }
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    alertThemes();
-});
 
 // ********************************* DEV *********************************
 if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DGD') {
@@ -469,6 +451,93 @@ if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DG
 
 
 };
+
+// barTest.addEventListener('click', () => { // ACTIVAR OP 1
+//     barMenuPrincipal.close();
+// });
+
+barThemes.addEventListener('click', () => {
+    barMenuPrincipal.close();
+    
+    if (checkbox.checked) {
+        document.body.classList.toggle('dark');
+        document.body.classList.toggle(activeTheme[0]);
+        activeTheme[1] = '';
+        checkbox.checked = false;
+        localStorage.setItem('theme', activeTheme);
+    };
+
+    function alertThemes() {
+        let changeTheme = activeTheme[0];
+
+
+        const alert = document.createElement('ion-alert');
+        alert.subHeader = 'Temas';
+        alert.inputs = [
+            {
+                type: 'radio', label: 'Claro', value: 'light', checked: false,
+                handler: (input) => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(input.value);
+                    changeTheme = input.value;
+                },
+            },
+            {
+                type: 'radio', label: 'Rosa', value: 'pink', checked: false,
+                handler: (input) => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(input.value);
+                    changeTheme = input.value;
+                },
+            },
+            {
+                type: 'radio', label: 'Rosa 2', value: 'pink2', checked: false,
+                handler: (input) => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(input.value);
+                    changeTheme = input.value;
+                },
+            },
+            {
+                type: 'radio', label: 'Azul', value: 'blue', checked: false,
+                handler: (input) => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(input.value);
+                    changeTheme = input.value;
+                },
+            },
+        ];
+
+        for (let i = 0; i < alert.inputs.length; i++) {
+            if (alert.inputs[i].value == activeTheme[0]) {
+                alert.inputs[i].checked = true;
+            };
+        };
+
+        alert.buttons = [
+            {
+                text: 'cancelar', role: 'cancel',
+                handler: () => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(activeTheme[0]);
+                    presentToast('Cancelando..', 500, 'dark');
+                }
+            },
+            {
+                text: 'Ok',
+                handler: dataTheme => {
+                    activeTheme[0] = dataTheme;
+                    localStorage.setItem('theme', activeTheme)
+                    presentToast('Aplicando..', 500, 'dark');
+                },
+            }
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    alertThemes();
+
+})
 
 barDelAcc.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
@@ -566,16 +635,10 @@ barNew.addEventListener('click', () => {
         alert.message = `
         <ion-list>
             <ion-item>
-                <ion-label>( ✔ ) 😎👌</ion-label>
+                <ion-label>( ✔ ) Temas 🎨 (4)</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>( ✔ ) 'no hay datos'.</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>( ✔ ) Eliminar cuenta.</ion-label>
-            </ion-item>
-            <ion-item>
-                <ion-label>( ✔ ) Vaciar cuenta(DEV).</ion-label>
+                <ion-label>( - ) 👁‍🗨 Mostrar contraseña.</ion-label>
             </ion-item>
         </ion-list>
         `;
@@ -816,6 +879,8 @@ showSearch.addEventListener('long-press', e => { // TAP
             // async function presentToastC(msg) {
             function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
+                toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
+                toast.style.color = 'var(--ion-text-toastC)';
                 toast.message = msg;
                 toast.duration = 1250;
                 toast.buttons = [
@@ -915,64 +980,9 @@ showSearch.addEventListener('long-press', e => { // TAP
 });
 
 buttonAdd.addEventListener('click', () => { presentAlertAdd(); });
+
 buttonAdd2.addEventListener('click', () => { presentAlertAdd(); });
-function presentAlertAdd() {
 
-    console.clear();
-    const alert = document.createElement('ion-alert');
-    alert.setAttribute('backdrop-dismiss', 'false');
-    alert.header = 'Agregar cuenta';
-    alert.inputs = [
-        { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
-        { name: 'name2a', placeholder: 'Usuario', value: '' },
-        { name: 'name3a', placeholder: 'Contraseña', value: '' },
-        { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
-    ];
-    alert.buttons = [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-            text: 'Ok',
-            handler: newData2 => {
-                if (
-                    newData2.name1a == '' ||
-                    newData2.name2a == '' ||
-                    newData2.name3a == ''
-                ) {
-                    barProgressF('warning', 'determinate');
-                    alertMsg('Error', 'Datos obligroios vacíos.');
-                    setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-                    return;
-                }
-
-                for (let i = 0; i < newTotal.length; i += 5) {
-                    if (
-                        newData2.name1a == newTotal[i] &&
-                        newData2.name2a == newTotal[i + 1] &&
-                        newData2.name3a == newTotal[i + 2]
-                    ) {
-                        alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                        return;
-                    }
-                }
-
-                console.log('deco return: ' + deco(code(newData2.name1a))); //borrrar (prueba de emoji)
-
-                // aTotal.push(code(newData2.name1a.toLowerCase()) + 'OG' + code(newData2.name2a) + 'OG' + code(newData2.name3a) + 'OG' + code(newData2.name4a));
-                aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
-
-                aTotalTOnewTotal();
-                save();
-                updateDB('L1', 'B1');
-                showSearch.innerHTML = '';
-                newSearch.value = newData2.name1a;
-                presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
-                showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
-            },
-        },
-    ];
-    document.body.appendChild(alert);
-    return alert.present();
-}
 
 barEdit.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
@@ -1063,15 +1073,20 @@ barImport.addEventListener('click', () => {
             {
                 text: 'Confirmar',
                 handler: () => {
+                    barProgressF('success', 'indeterminate');
                     showSearch.innerHTML = '';
                     newSearch.value = '';
                     updateDB('B2', 'L1');
-                    presentToast('Copia de seguridad cargada.', 800, 'success');
+                    // presentToast('Copia de seguridad cargada.', 800, 'success');
                     splitInit();
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     updateDB('L1', 'B1');
                     refreshData();
+                    setTimeout(() => {
+                        presentToast('Copia de seguridad cargada.', 800, 'success');
+                        barProgressF('light', 'determinate');
+                    }, 800);
                 },
             },
             // {
@@ -1126,8 +1141,12 @@ barExport.addEventListener('click', () => {
             {
                 text: 'Confirmar',
                 handler: () => {
+                    barProgressF('success', 'indeterminate');
                     updateDB('L1', 'B2')
-                    presentToast('Copia creada.', 800, 'success');
+                    setTimeout(() => {
+                        presentToast('Copia de seguridad cargada.', 800, 'success');
+                        barProgressF('light', 'determinate');
+                    }, 800);
                 },
             },
             // {
@@ -1145,8 +1164,8 @@ barExport.addEventListener('click', () => {
 
 barLogout.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
-    // localStorage.clear();
     localStorage.removeItem('L1');
+    localStorage.removeItem('theme');
     localStorage.removeItem('accessTempData');
     window.location.reload();
 });
@@ -1158,6 +1177,67 @@ buttonEye.addEventListener('click', () => {
 });
 
 //######################## FUNCIONES ########################
+
+function setAttributes(elem, obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            elem[prop] = obj[prop];
+        }
+    }
+}
+
+function presentAlertAdd() {
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Agregar cuenta';
+    alert.inputs = [
+        { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
+        { name: 'name2a', placeholder: 'Usuario', value: '' },
+        { name: 'name3a', placeholder: 'Contraseña', value: '' },
+        { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
+    ];
+    alert.buttons = [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+            text: 'Ok',
+            handler: newData2 => {
+                if (
+                    newData2.name1a == '' ||
+                    newData2.name2a == '' ||
+                    newData2.name3a == ''
+                ) {
+                    barProgressF('warning', 'determinate');
+                    alertMsg('Error', 'Datos obligroios vacíos.');
+                    setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+                    return;
+                }
+
+                for (let i = 0; i < newTotal.length; i += 5) {
+                    if (
+                        newData2.name1a == newTotal[i] &&
+                        newData2.name2a == newTotal[i + 1] &&
+                        newData2.name3a == newTotal[i + 2]
+                    ) {
+                        alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
+                        return;
+                    }
+                }
+
+                aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
+                aTotalTOnewTotal();
+                save();
+                updateDB('L1', 'B1');
+                showSearch.innerHTML = '';
+                newSearch.value = newData2.name1a;
+                presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
+                showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 function delete_spaces(v1) {
     v1 = v1.split("");
     for (let i = 0; i < v1.length; i++) {
@@ -1182,13 +1262,28 @@ function delete_spaces(v1) {
 };
 
 function disableItem(boolean) {
-    buttonAdd.setAttribute('disabled', boolean);
-    buttonEye.setAttribute('disabled', boolean);
-    newSearch.setAttribute('disabled', boolean);
     barMenuPrincipal.setAttribute('disabled', boolean);
-    titleName.setAttribute('disabled', boolean);
-    refresher.setAttribute('disabled', boolean);
+    setAttributes(buttonAdd, { style: 'opacity:1', disabled: boolean });
+    setAttributes(buttonEye, { style: 'opacity:1', disabled: boolean });
+    setAttributes(newSearch, { style: 'opacity:1', disabled: boolean });
+    setAttributes(titleName, { style: 'opacity:1', disabled: boolean });
+    setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
+    
+    if (boolean == false) {
+        hide.setAttribute('style', 'opacity:1;')
+        document.body.style.backgroundColor = "var(--ion-background-color)";
+    }
 }
+
+function barProgressF(color, state) {
+    setAttributes(barProgress01, { color: color, type: state, value: '100' });
+    if (color == 'light' && state == 'determinate') {
+
+        barProgress.setAttribute('style', 'opacity:0');
+    } else {
+        barProgress.setAttribute('style', 'opacity:1');
+    }
+};
 
 function refreshData() {
     if (newSearch.value) {
