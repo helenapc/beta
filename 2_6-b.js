@@ -868,6 +868,8 @@ showSearch.addEventListener('long-press', e => { // TAP
 
     if (cuPath[3] == 'Notas:') cuPath[3] = '';
 
+    // console.log(cuPath);
+
     for (i = 0; i < newTotal.length; i += 5) {
         if (
             cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
