@@ -399,7 +399,7 @@ barThemes.addEventListener('click', () => { // ACTIVAR OP 1
         alert.inputs = [
             { type: 'radio', label: 'Claro', value: 'light', checked: true },
             { type: 'radio', label: 'Rosa', value: 'pink' },
-            // { type: 'radio', label: 'tema3', value: 'pink2', },
+            { type: 'radio', label: 'Rosa 2', value: 'pink2', },
             { type: 'radio', label: 'Azul', value: 'blue', }
         ];
         alert.buttons = [
