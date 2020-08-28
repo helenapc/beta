@@ -11,6 +11,12 @@ firebase.initializeApp({
 
 
 
+
+
+
+
+
+
 var db = firebase.firestore();
 var coincidencia = false;
 var txt = [];
@@ -24,6 +30,8 @@ var userID = '';
 const coll = 'users2';
 var alertcompare = true;
 var resetLogin = false;
+
+
 
 // Init components
 const hide = document.getElementById('hide');
@@ -135,13 +143,13 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barThemes', 'color-palette-outline', 'Temas');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
-// item('barTest', 'pencil', 'test');
+item('barTest', 'pencil', 'test');
 /////////////////////////////////////////////////////////
 const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.621';
+ver.innerHTML = 'Versión 2.622-b';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
@@ -149,7 +157,59 @@ item('barClear', 'trash-bin-outline', 'Vaciar Cuenta(DEV)', 'medium', false);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
 
+let currentPopover = null;
 
+// const buttons = document.querySelectorAll('ion-button');
+// const buttons = document.getElementById('buttonAdd')
+// for (var i = 0; i < buttons.length; i++) {
+//   buttons[i].addEventListener('click', handleButtonClick);
+// }
+
+// async function handleButtonClick(ev) {
+//   popover = await popoverController.create({
+//     component: 'popover-example-page',
+//     event: ev,
+//     translucent: true
+//   });
+//   currentPopover = popover;
+//   return popover.present();
+// }
+
+function dismissPopover() {
+  if (currentPopover) {
+    currentPopover.dismiss().then(() => { currentPopover = null; });
+  }
+}
+
+customElements.define('popover-example-page', class ModalContent extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <ion-list>
+        <ion-list-header>Ionic</ion-list-header>
+        <ion-item button>Learn Ionic</ion-item>
+        <ion-item button>Documentation</ion-item>
+        <ion-item button>Showcase</ion-item>
+        <ion-item button>GitHub Repo</ion-item>
+        <ion-item><ion-toggle></ion-toggle></ion-item>
+        <ion-item><ion-checkbox>123</ion-checkbox></ion-item>
+        <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item>
+      </ion-list>
+    `;
+  }
+});
+
+barTest.addEventListener('click', () => { // ACTIVAR OP 1
+    // barMenuPrincipal.close();
+    async function handleButtonClick() {
+        popover = await popoverController.create({
+          component: 'popover-example-page',
+        });
+        currentPopover = popover;
+        return popover.present();
+      }
+
+    handleButtonClick();
+});
 
 
 //DARK THEME
@@ -169,6 +229,7 @@ if (activeTheme[1] == 'dark') {
 
 //CHECK/TOGGLE
 checkbox.addEventListener('click', () => {
+
     if (activeTheme[1] == 'dark') {
         document.body.classList.toggle('dark');
         document.body.classList.toggle(activeTheme[0]);
@@ -180,12 +241,6 @@ checkbox.addEventListener('click', () => {
     }
     localStorage.setItem('theme', activeTheme);
 });
-
-
-
-
-
-
 
 
 // ------------------ START ------------------ //
@@ -453,13 +508,10 @@ if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DG
 
 };
 
-// barTest.addEventListener('click', () => { // ACTIVAR OP 1
-//     barMenuPrincipal.close();
-// });
 
 barThemes.addEventListener('click', () => {
     barMenuPrincipal.close();
-    
+
     if (checkbox.checked) {
         document.body.classList.toggle('dark');
         document.body.classList.toggle(activeTheme[0]);
@@ -494,6 +546,7 @@ barThemes.addEventListener('click', () => {
             {
                 type: 'radio', label: 'Rosa 2', value: 'pink2', checked: false,
                 handler: (input) => {
+                    console.log(input);
                     document.body.classList.toggle(changeTheme);
                     document.body.classList.toggle(input.value);
                     changeTheme = input.value;
@@ -501,6 +554,14 @@ barThemes.addEventListener('click', () => {
             },
             {
                 type: 'radio', label: 'Azul', value: 'blue', checked: false,
+                handler: (input) => {
+                    document.body.classList.toggle(changeTheme);
+                    document.body.classList.toggle(input.value);
+                    changeTheme = input.value;
+                },
+            },
+            {
+                type: 'radio', label: 'Verde', value: 'green', checked: false,
                 handler: (input) => {
                     document.body.classList.toggle(changeTheme);
                     document.body.classList.toggle(input.value);
@@ -631,7 +692,6 @@ barNew.addEventListener('click', () => {
     document.getElementById('barMenuPrincipal').close();
     function construct() {
         const alert = document.createElement('ion-alert');
-        // alert.setAttribute('backdrop-dismiss', 'true');
         alert.header = 'Agregadas:';
         alert.message = `
         <ion-list>
@@ -1196,14 +1256,16 @@ function presentAlertAdd() {
     alert.inputs = [
         { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
         { name: 'name2a', placeholder: 'Usuario', value: '' },
-        { name: 'name3a', placeholder: 'Contraseña', value: '' },
+        { name: 'name3a', placeholder: 'Contraseña', value: '', cssClass: 'hola'},
         { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
     ];
+
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
         {
             text: 'Ok',
             handler: newData2 => {
+                console.log(newData2.pp);
                 console.log(code(newData2.name1a));
                 console.log(code(newData2.name2a));
                 console.log(code(newData2.name3a));
@@ -1242,6 +1304,7 @@ function presentAlertAdd() {
             },
         },
     ];
+    // alert.appendChild(aa);
     document.body.appendChild(alert);
     return alert.present();
 }
@@ -1276,7 +1339,7 @@ function disableItem(boolean) {
     setAttributes(newSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(titleName, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
-    
+
     if (boolean == false) {
         hide.setAttribute('style', 'opacity:1;')
         document.body.style.backgroundColor = "var(--ion-background-color)";
@@ -1575,8 +1638,6 @@ function sendEmail() {
     document.body.appendChild(alert);
     return alert.present();
 }
-
-
 
 //************************ END ************************
 // EXTRA (long tap)
