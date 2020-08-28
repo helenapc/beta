@@ -18,7 +18,6 @@
 .checkbox {
   opacity: 0;
   position: absolute;
-
 }
 
 .checkbox:checked + .label .ball{
@@ -49,6 +48,27 @@
 
 
 
+/* .chk{
+  transform: translate(21px);
+}
+
+.chk:checked{
+  transform: translate(100px);
+} */
+
+/* .chk:checked + .hola {
+  -webkit-text-security: disc;
+} */
+
+/* .chk:checked + .hola{
+  -webkit-text-security: disc;
+} */
+
+
+/* .hola{
+  -webkit-text-security: text;
+} */
+
 
 /*ITEMS*/
 
@@ -58,7 +78,7 @@
   --icon-color:(--ion-text-color);
 }
 
-
+.alert-input.sc-ion-alert-md
 
 [aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
   color:var(--ion-text-color);
@@ -85,10 +105,6 @@ ion-icon, .alert-input.sc-ion-alert-md, .item .sc-ion-label-md-h{ /*icon, inputb
   color:var(--ion-color-medium);;
 }
 
-/* esto no se que es
-.alert-message.sc-ion-alert-md{
-  color:green;
-} */
 
 
 /*THEMES*/
@@ -235,6 +251,39 @@ body.blue {
   --ion-border-color: #cccccc; /*LÍNEA ITEMS*/
   --ion-item-background: #162847;  /*fondo 'CARDs e ITEM*/
   --ion-toolbar-background: #012C6B;  /*NOMBRE*/
+  
+  --ion-item-background-activated: #ff0000;
+  --color-toolbar-background:#ff0000;
+  --color-toolbar-text: #ff0000;
+  --color-item-text: #ff0000;
+
+}
+
+body.green {
+  --ion-color-primary: #444444;
+  --ion-color-secondary: #50c8ff;
+  --ion-color-tertiary: #6a64ff;
+  --ion-color-success: #2fdf75;
+  --ion-color-warning: #ffd534;
+  --ion-color-danger: #ff4961;
+  --ion-color-dark: #1d7e4d;
+  --ion-color-medium: #94caa9;
+  --ion-color-light: #aed6b8;
+
+  --ion-color-toastC: #323d36;
+  --ion-text-toastC: #ffffff;
+
+  --ion-color-light-tint: #313131; /*text button alert*/
+
+  /* --ion-color-step-150: #363636; */
+  --ion-color-step-550: #353434; /*text card*/
+  --ion-color-step-850: #4a5546; /*text radio NO select*/
+
+  --ion-background-color: #a7cfac; /*FONDO 'GESTOR DE DESCARGA*/
+  --ion-text-color: #ffffff; /*TEXTO UI (NO CARDs)*/
+  --ion-border-color: #cccccc; /*LÍNEA ITEMS*/
+  --ion-item-background: #8fce97;  /*fondo 'CARDs e ITEM*/
+  --ion-toolbar-background: #016b01;  /*NOMBRE*/
   
   --ion-item-background-activated: #ff0000;
   --color-toolbar-background:#ff0000;
