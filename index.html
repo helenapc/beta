@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestor de Contraseñas</title>
+  <link rel="shortcut icon" href="icopass-beta.png" type="image/png">
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+
+  <script src="https://smtpjs.com/v3/smtp.js"></script> <!-- mail -->
+  <link rel="stylesheet" href="variables.css">
+
+</head>
+
+<body>
+  <ion-app class="fondo">
+    
+    <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
+    <div class="ion-page" id="main-content">
+
+      <ion-header>
+        <ion-row id="barProgress"></ion-row>
+        <ion-toolbar>
+
+          <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+
+          <ion-title slot="start">Gestor de Contraseñas</ion-title>
+  
+          <div slot="end" style="margin-right:20px;">
+            <input type="checkbox" class="checkbox" id="checkbox">
+            <label for="checkbox" class="label">
+              <ion-icon class="fa-color" name="bulb"></ion-icon>
+              <ion-icon class="fa-moon" name="moon"></ion-icon>
+              <div class="ball"></div>
+            </label>
+          </div>
+          
+        </ion-toolbar>
+      </ion-header>
+      
+      
+      <ion-searchbar size-md="5" offset-md="3.5" id="new-s" debounce="3" placeholder="Buscar.."></ion-searchbar>
+
+      <ion-content id='content'>
+        <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
+          <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
+          </ion-refresher-content>
+        </ion-refresher>
+
+
+        <ion-row>
+          <ion-col id="show-accounts1" size="9" offset="1.35" size-md="5" offset-md="3.5"></ion-col>
+        </ion-row>
+
+
+        <ion-row id="showLogin" style="margin-top: 50px;">
+          <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
+
+            <ion-item class="bordeSup">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input  id="nameLog"></ion-input>
+            </ion-item>
+            <ion-item class="bordeInf">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input  id="passLog"></ion-input>
+            </ion-item>
+            
+            <ion-button fill="outline" expand="block" id="buttonLogin">Iniciar sesión</ion-button>
+            <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
+            <!-- <ion-col> -->
+              <ion-button id="restorePass" style="text-transform: none";
+                fill="clear" expand="block" button onclick="sendEmail()">
+                <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
+              </ion-button>
+            <!-- </ion-col> -->
+          </ion-col>
+        </ion-row>
+
+
+      </ion-content>
+
+
+      <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
+        <ion-fab-button id="buttonSearch" color="light" size="small">
+          <ion-icon name="search"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button id="buttonEye" color="light" size="small">
+          <ion-icon id="iconEye" name="eye-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed" id="buttonAdd">
+        <ion-fab-button class="add"  color="success" size="small">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
+    
+  </ion-app>
+  <script src="2_6.js"></script>
+  <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.esm.js"></script> -->
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
