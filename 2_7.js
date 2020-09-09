@@ -23,8 +23,8 @@ var userID = '';
 const coll = 'users2';
 var alertcompare = true;
 var resetLogin = false;
+var offline = true;
 
-// var fromOffline = '(Sin conexión)';
 
 // Init components
 const refresher = document.getElementById('refresher');
@@ -191,7 +191,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     document.getElementById('userName').innerHTML = deco(txt[0]);
     compare = false;
 
-    var offline = true;
+
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
@@ -210,8 +210,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             window.location.reload();
         }
 
-        if (offline){
-            localStorage.setItem('offline', '(Sin conexión)')
+        if (offline) {
+            localStorage.setItem('offline', '(Sin conexión)');
+            document.getElementById('offline').setAttribute('style', 'opacity:1');
+        } else {
+            document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
         };
 
         compare = false;
@@ -410,6 +413,7 @@ var statSearchBar = false;
 setAttributes(newSearch, { style: 'opacity:1', style: 'margin-top:-60px', disabled: false });
 buttonSearch.addEventListener('click', () => {
     if (!statSearchBar) {
+        newSearch.value = '';
         newSearch.setAttribute('style', 'margin-top:0px');
         statSearchBar = true;
     } else {
@@ -866,11 +870,11 @@ buttonAdd.addEventListener('click', () => {
                     aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
                     aTotalTOnewTotal();
                     save();
-                    updateDB('L1', 'B1');
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
                     presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
                     showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
+                    updateDB('L1', 'B1');
                 },
             },
         ];
@@ -1027,9 +1031,14 @@ barLogout.addEventListener('click', () => {
 });
 
 buttonEye.addEventListener('click', () => {
-    (iconEye.getAttribute('name') == 'eye-outline') ? newSearch.value = '*' : newSearch.value = '';
+    if (iconEye.getAttribute('name') == 'eye-outline') { 
+        newSearch.value = '*';
+        newSearch.setAttribute('style', 'margin-top:-60px');
+    } else { 
+        newSearch.value = '';
+    };
     refreshData();
-    newSearch.value = ''
+    // newSearch.value = '';
 });
 
 //######################## FUNCIONES ########################
