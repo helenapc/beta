@@ -518,6 +518,17 @@ refresher.addEventListener('ionRefresh', () => {
 
 const nameLog = document.getElementById('nameLog');
 const passLog = document.getElementById('passLog');
+const eyePass = document.getElementById('eyePass');
+
+eyePass.addEventListener('click', () => {
+    if (eyePass.name == 'eye-off') {
+        eyePass.name = 'eye';
+        passLog.setAttribute('type', 'text');
+    } else {
+        eyePass.name = 'eye-off';
+        passLog.setAttribute('type', 'password');
+    }
+})
 
 buttonLogin.addEventListener('click', () => {
     // console.log(nameLog.value);
@@ -600,113 +611,6 @@ buttonLogin.addEventListener('click', () => {
 
 });
 
-// buttonLogin.addEventListener('click', () => {
-//     console.log(nameLog.value);
-//     console.log(passLog.value);
-//     function presentAlertLogin() {
-//         const alert = document.createElement('ion-alert');
-//         alert.header = 'Iniciar sesión';
-//         alert.inputs = [
-//             { name: 'userEditUser', placeholder: 'Email' },
-//             { name: 'userEditPass', placeholder: 'Contraseña', type: 'password' },
-//         ];
-//         alert.buttons = [
-//             { text: 'Cancelar', role: 'cancel' },
-//             {
-//                 text: 'Ok',
-//                 handler: usData => {
-//                     if (usData.userEditUser == '' || usData.userEditPass == '') {
-//                         barProgressF('warning', 'determinate');
-//                         alertMsg('Error', 'Datos incorrectos o vacíos.');
-//                         setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-//                         return;
-//                     }
-
-//                     barProgressF('success', 'indeterminate');
-
-//                     enableItem = true;
-
-//                     localStorage.setItem('accessTempData', code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD');
-
-//                     db.collection(coll).onSnapshot(querySnapshot => {
-//                         querySnapshot.forEach(doc => {
-//                             if (!coincidencia) {
-//                                 docB1 = doc.data().B1;
-//                                 docB2 = doc.data().B2;
-//                                 userID = doc.id;
-//                                 uRA = doc.data().B1.split('GD');
-//                                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
-//                                     coincidencia = true;
-//                                     updateDB('B1', 'L1');
-//                                     splitInit();
-//                                     aTotalTOnewTotal();
-//                                     localStorage.setItem('accessTempData', txt[0] + 'GD' + code(usData.userEditUser) + 'GD' + code(usData.userEditPass) + 'GD'); //TEST
-//                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-//                                     disableItem(false);
-//                                     window.location.reload();
-//                                 }
-//                                 // res
-//                                 if (code(usData.userEditUser) == uRA[1] && usData.userEditPass == doc.data().B3) {
-//                                     console.log(doc.data().B3);
-//                                     function presentRestorePass() {
-//                                         const alert = document.createElement('ion-alert');
-//                                         alert.subHeader = 'Restablecer contraseña';
-//                                         alert.inputs = [
-//                                             { name: 'pass01', placeholder: 'Nueva contraseña...', value: '' },
-//                                             { name: 'pass02', placeholder: 'Confirmar contraseña...', value: '' }
-//                                         ];
-//                                         alert.buttons = [
-//                                             { text: 'Cancelar', role: 'cancel' },
-//                                             {
-//                                                 text: 'Ok',
-//                                                 handler: usRData => {
-//                                                     if (usRData.pass01 == '' || usRData.pass02 == '' || usRData.pass01 != usRData.pass02) {
-//                                                         alertMsg('Error', 'Datos incorrectos o vacíos.');
-//                                                         return;
-//                                                     }
-
-//                                                     localStorage.setItem('L1', uRA[0] + 'GD' + uRA[1] + 'GD' + code(usRData.pass01) + 'GD' + uRA[3]);
-//                                                     localStorage.setItem('accessTempData', uRA[1] + 'GD' + code(usRData.pass01) + 'GD')
-//                                                     updateDB('L1', 'B1');
-//                                                     updateDB('L1', 'B2');
-//                                                     splitInit();
-//                                                     aTotalTOnewTotal();
-//                                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-//                                                     disableItem(false);
-
-//                                                     db.collection(coll).doc(userID).update({
-//                                                         B3: firebase.firestore.FieldValue.delete()
-//                                                     }).then(function () { window.location.reload() });
-//                                                 },
-//                                             },
-//                                         ];
-//                                         document.body.appendChild(alert);
-//                                         return alert.present();
-//                                     }
-//                                     presentRestorePass();
-//                                     coincidencia = true;
-//                                 }
-//                             };
-
-//                         });
-//                         barProgressF('light', 'determinate');
-//                         if (coincidencia) {
-//                             showLogin.innerHTML = '';
-//                         } else {
-//                             barProgressF('warning', 'determinate');
-//                             alertMsg('Error', 'Datos incorrectos o vacíos.');
-//                             setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-//                         }
-//                     });
-//                 },
-//             },
-//         ];
-
-//         document.body.appendChild(alert);
-//         return alert.present();
-//     }
-//     presentAlertLogin();
-// });
 
 buttonCreate.addEventListener('click', () => {
 
