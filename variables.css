@@ -54,9 +54,8 @@
 
 /*ITEMS*/
 
-.checkboxPass{
-  align-self: end;
-}
+
+
 
 #eyePass{
   margin-top: 18px;
@@ -113,6 +112,11 @@ ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
   border-bottom-left-radius: 4px;
 }
 
+
+#offline{
+  transform: scale(1.5,1.5) translate(-5px, 45px);
+}
+
 /*THEMES*/
 
 body.light {
@@ -128,7 +132,7 @@ body.light {
   --ion-color-medium: #92949c;
   --ion-color-light: #ececec;
 
-  --ion-color-toastC: #125ae9;
+  --ion-color-toastC: #434446;
   --ion-text-toastC: #ffffff;
 
   --ion-color-light-tint: #3880ff; /*text button alert*/
