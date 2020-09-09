@@ -520,15 +520,17 @@ const nameLog = document.getElementById('nameLog');
 const passLog = document.getElementById('passLog');
 const eyePass = document.getElementById('eyePass');
 
-eyePass.addEventListener('click', () => {
-    if (eyePass.name == 'eye-off') {
-        eyePass.name = 'eye';
-        passLog.setAttribute('type', 'text');
-    } else {
-        eyePass.name = 'eye-off';
-        passLog.setAttribute('type', 'password');
-    }
-})
+if(eyePass){
+    eyePass.addEventListener( 'click', () => {
+        if (eyePass.name == 'eye-off') {
+            eyePass.name = 'eye';
+            passLog.setAttribute('type', 'text');
+        } else {
+            eyePass.name = 'eye-off';
+            passLog.setAttribute('type', 'password');
+        }
+    })
+}
 
 buttonLogin.addEventListener('click', () => {
     // console.log(nameLog.value);
