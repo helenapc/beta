@@ -136,7 +136,7 @@ const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.7-beta';
+ver.innerHTML = 'Versión 2.71-beta';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
