@@ -20,6 +20,7 @@
   position: absolute;
 }
 
+
 .checkbox:checked + .label .ball{
   transform: translate(21px); 
   
@@ -53,6 +54,14 @@
 
 /*ITEMS*/
 
+.checkboxPass{
+  align-self: end;
+}
+
+#eyePass{
+  margin-top: 18px;
+}
+
 .fondo{
   background: var(background);
 }
@@ -60,11 +69,6 @@
 #content{
   --background:var(--val);
 }
-
-/* ion-content{ */
-  /* --background: #57555500; */
-  /* --background = color+alpha */
-/* } */
 
 .sc-ion-searchbar-md-h {
   color: var(--ion-text-color);
