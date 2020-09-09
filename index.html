@@ -61,24 +61,25 @@
 
         <ion-row id="showLogin" style="margin-top: 50px;">
           <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
-
+                        
             <ion-item class="bordeSup">
               <ion-label position="floating">Email</ion-label>
               <ion-input id="nameLog"></ion-input>
             </ion-item>
-            <ion-item class="bordeInf">
+            
+            <ion-item class="bordeInf">  
+              <ion-icon id="eyePass" name="eye-off" slot="end"></ion-icon>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input type="password" id="passLog"></ion-input>
             </ion-item>
             
+            
             <ion-button fill="outline" expand="block" id="buttonLogin">Iniciar sesión</ion-button>
             <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
-            <!-- <ion-col> -->
-              <ion-button id="restorePass" style="text-transform: none";
-                fill="clear" expand="block" button onclick="sendEmail()">
-                <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
-              </ion-button>
-            <!-- </ion-col> -->
+            <ion-button id="restorePass" style="text-transform: none";
+              fill="clear" expand="block" button onclick="sendEmail()">
+              <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
+            </ion-button>
           </ion-col>
         </ion-row>
 
