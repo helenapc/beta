@@ -61,9 +61,6 @@
   margin-top: 18px;
 }
 
-.fondo{
-  background: var(background);
-}
 
 #content{
   --background:var(--val);
