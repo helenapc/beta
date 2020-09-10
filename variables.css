@@ -164,7 +164,7 @@ body.light {
 
 body.dark {
   --val: #000000d5;
-  background: url('bg3.jpg') no-repeat 52% center/cover;
+  background: url('bg2.jpg') no-repeat 52% center/cover;
   --ion-color-primary: #428cff;
   --ion-color-secondary: #50c8ff;
   --ion-color-tertiary: #6a64ff;
