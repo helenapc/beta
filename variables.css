@@ -124,7 +124,7 @@ p{
   /* versio */
   color: var(--ion-color-dark);
   position: absolute;
-  margin-top: 97vh;
+  margin-top: 93vh;
   /* justify-self: end; */
   align-self: flex-end;
 }
