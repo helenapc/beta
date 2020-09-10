@@ -23,15 +23,18 @@
 
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
 
-    
+
     <div class="ion-page" id="main-content">
-      
-      
-      <ion-header>
+
+
+      <ion-header >
         <ion-row id="barProgress"></ion-row>
         <ion-toolbar>
+
           <ion-buttons style="margin-right: -30px;" slot="start">
-            <ion-menu-button style="margin-left: -10px;"><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-menu-button>
+            <ion-menu-button style="margin-left: -10px;">
+              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-menu-button>
           </ion-buttons>
 
           <ion-title id="title" slot="start">Gestor de Contraseñas</ion-title>
@@ -48,8 +51,12 @@
         </ion-toolbar>
       </ion-header>
 
+      <ion-row>
+        <ion-col  size-md="5" offset-md="3.5">
+          <ion-searchbar size-md="5" offset-md="3.5" id="new-s" debounce="3" placeholder="Buscar.."></ion-searchbar>
+        </ion-col>
+      </ion-row>
 
-      <ion-searchbar size-md="5" offset-md="3.5" id="new-s" debounce="3" placeholder="Buscar.."></ion-searchbar>
       <ion-content id='content'>
         <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
           <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
@@ -87,11 +94,11 @@
           </ion-col>
         </ion-row>
       </ion-content>
-      
+
       <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
-        <ion-icon  name="cloud-offline-outline" size="large"></ion-icon>
+        <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
       </ion-fab>
-    
+
 
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
         <ion-fab-button id="buttonSearch" color="light" size="small">
@@ -107,9 +114,9 @@
           <ion-icon name="add" class="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-      
+
     </div>
-    
+
   </ion-app>
   <script src="2_7.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
