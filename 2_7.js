@@ -27,6 +27,8 @@ var offline = true;
 
 
 // Init components
+const title = document.getElementById('title');
+
 const refresher = document.getElementById('refresher');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
@@ -39,14 +41,12 @@ const content = document.getElementById('content');
 
 
 
-// content.setAttribute('style', '--background: #ffffff70');
 setAttributes(newSearch, { style: 'opacity:0', disabled: true });
-setAttributes(buttonAdd, { style: 'opacity:0', disabled: true });
+setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
 setAttributes(buttonEye, { style: 'opacity:0', disabled: true });
 setAttributes(buttonSearch, { style: 'opacity:0', disabled: true });
 setAttributes(refresher, { style: 'opacity:0', disabled: true });
-
-// document.body.style.backgroundColor = "var(--ion-color-light)";
+title.setAttribute('style', 'margin-left:38px');
 
 const showLogin = document.getElementById('showLogin');
 const buttonLogin = document.getElementById('buttonLogin');
@@ -55,8 +55,7 @@ const buttonCreate = document.getElementById('buttonCreate');
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
-barProgress01.setAttribute('color', 'light');
-barProgress01.setAttribute('style', 'height:8px');
+setAttributes(barProgress01, {color: 'light', style: 'height:8px'});
 barProgress.setAttribute('style', 'opacity:0');
 barProgress.appendChild(barProgress01);
 
@@ -136,7 +135,7 @@ const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.71-beta';
+ver.innerHTML = 'Versión 2.72-beta';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
@@ -1076,14 +1075,12 @@ function delete_spaces(v1) {
 
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
-    setAttributes(buttonAdd, { style: 'opacity:1', disabled: boolean });
+    title.setAttribute('style', 'margin-left:0px');
+    setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
     setAttributes(buttonEye, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
     content.setAttribute('style', '--background: #ffffff00');
-    // if (boolean == false) {
-    //     document.body.style.backgroundColor = "var(--ion-background-color)";
-    // }
     if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
 }
 
