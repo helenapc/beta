@@ -38,6 +38,7 @@ const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
 const buttonSearch = document.getElementById('buttonSearch');
 const content = document.getElementById('content');
+const verB = document.getElementById('verB');
 
 
 
@@ -1074,6 +1075,7 @@ function delete_spaces(v1) {
 };
 
 function disableItem(boolean) {
+    verB.setAttribute('style', 'margin-top: 100vh;')
     barMenuPrincipal.setAttribute('disabled', boolean);
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });

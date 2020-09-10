@@ -120,6 +120,14 @@ ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
   transform: scale(1.5,1.5) translate(-5px, 45px);
 }
 
+p{
+  /* versio */
+  color: var(--ion-color-dark);
+  position: absolute;
+  margin-top: 97vh;
+  /* justify-self: end; */
+  align-self: flex-end;
+}
 
 /*THEMES*/
 
