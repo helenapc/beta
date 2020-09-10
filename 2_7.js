@@ -38,7 +38,6 @@ const buttonEye = document.getElementById('buttonEye');
 const iconEye = document.getElementById('iconEye');
 const buttonSearch = document.getElementById('buttonSearch');
 const content = document.getElementById('content');
-const verB = document.getElementById('verB');
 
 
 
@@ -136,13 +135,11 @@ const veri = document.createElement('ion-item-divider');
 const ver = document.createElement('ion-label');
 ver.setAttribute('slot', 'end');
 ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.72-beta';
+ver.innerHTML = 'Versión 2.73';
 veri.appendChild(ver);
 barContent.appendChild(veri);
 /////////////////////////////////////////////////////////
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-
-
 
 
 
@@ -1075,7 +1072,6 @@ function delete_spaces(v1) {
 };
 
 function disableItem(boolean) {
-    verB.setAttribute('style', 'margin-top: 100vh;')
     barMenuPrincipal.setAttribute('disabled', boolean);
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
