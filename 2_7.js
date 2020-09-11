@@ -30,7 +30,7 @@ var resetLogin = false;
 var offline = true;
 
 
-// Init components
+// // Init components
 const title = document.getElementById('title');
 
 const showLogin = document.getElementById('showLogin');
@@ -84,14 +84,17 @@ const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
-barIcon00.setAttribute('button', 'click-btn');
-barIcon00.setAttribute('name', 'build-outline');
-barIcon00.setAttribute('slot', 'end');
-barIcon00.setAttribute('id', 'barEdit');
+setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
+
+const barIcon01 = document.createElement('ion-icon'); // ICON
+setAttributes(barIcon01, {button: 'click-btn', name: 'build-outline', slot: 'end', id: 'barEdit'})
+
+{/* <ion-icon name="arrow-back-outline"></ion-icon> */}
 
 //BLOCK 01
-barTitle.appendChild(barLabel);
 barTitle.appendChild(barIcon00);
+barTitle.appendChild(barLabel);
+barTitle.appendChild(barIcon01);
 barToolbar.appendChild(barTitle);
 barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
@@ -101,17 +104,11 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 /////////////////////////////////////////////////////////
-const veri = document.createElement('ion-item-divider');
-const ver = document.createElement('ion-label');
-ver.setAttribute('slot', 'end');
-ver.setAttribute('style', 'margin-right:10px');
-ver.innerHTML = 'Versión 2.73';
-veri.appendChild(ver);
-barContent.appendChild(veri);
+const ver = document.createElement('ion-item-divider');
+setAttributes(ver, {innerHTML: 'Versión 2.74'});
+barContent.appendChild(ver);
 /////////////////////////////////////////////////////////
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-
-
 
 //DARK THEME
 const checkbox = document.getElementById('checkbox');
@@ -129,6 +126,21 @@ if (activeTheme[1] == 'dark') {
 };
 
 
+//LOGIN (eye)
+const nameLog = document.getElementById('nameLog');
+const passLog = document.getElementById('passLog');
+const eyePass = document.getElementById('eyePass');
+if (eyePass) {
+    eyePass.addEventListener('click', () => {
+        if (eyePass.name == 'eye-off') {
+            eyePass.name = 'eye';
+            passLog.setAttribute('type', 'text');
+        } else {
+            eyePass.name = 'eye-off';
+            passLog.setAttribute('type', 'password');
+        }
+    })
+}
 
 // ------------------ START ------------------ //
 

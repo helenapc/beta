@@ -29,6 +29,7 @@
 
       <ion-header >
         <ion-row id="barProgress"></ion-row>
+
         <ion-toolbar>
           <ion-buttons style="margin-right: -30px;" slot="start">
             <ion-menu-button style="margin-left: -10px;">
@@ -36,11 +37,8 @@
             </ion-menu-button>
           </ion-buttons>
 
-          <!-- <ion-title id="title" slot="start">Gestor de Contraseñas</ion-title> -->
           <ion-title id="title">
-            <ion-label class="ion-text-wrap">
-              Gestor de Contraseñas
-            </ion-label>
+            <ion-label class="ion-text-wrap">Gestor de Contraseñas</ion-label>
           </ion-title>
 
           <div slot="end" style="margin-right:20px;">
@@ -103,11 +101,12 @@
         <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
       </ion-fab>
 
-
+      <!-- NAV -->
+      <!-- <ion-fab vertical="top" horizontal="start" class="nav" id="buttonFocus">
+        <ion-fab-button id="buttonFocus" color="light" size="small"><h2>H</h2></ion-fab-button>
+      </ion-fab> -->
+      
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
-        <ion-fab-button id="buttonFocus" color="light" size="small">
-          <ion-icon name="close"></ion-icon>
-        </ion-fab-button>
         <ion-fab-button id="buttonSearch" color="light" size="small">
           <ion-icon name="search"></ion-icon>
         </ion-fab-button>

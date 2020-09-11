@@ -97,6 +97,7 @@ ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
 
 .restoreText{
   color:var(--ion-text-color);
+  /* text-align-last: right; */
 }
 
 .bordeSup{
@@ -120,6 +121,11 @@ ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
 .ion-text-wrap .title{
   margin-right: -100px;
   padding: -100px;
+}
+
+.nav{
+  /* margin-left:-8px; */
+  transform: scale(0.8,0.8) translate(-20px, 60px);
 }
 
 /*THEMES*/

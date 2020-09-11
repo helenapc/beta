@@ -1,103 +1,4 @@
 
-buttonSearch.addEventListener('click', () => {
-    if (!statSearchBar) {
-        newSearch.value = '';
-        newSearch.setAttribute('style', 'margin-top:0px');
-        newSearch.setFocus();
-        statSearchBar = true;
-    } else {
-        newSearch.setAttribute('style', 'margin-top:-60px');
-        statSearchBar = false;
-    }
-
-})
-
-barDelAcc.addEventListener('click', () => {
-    document.getElementById('barMenuPrincipal').close();
-
-    function deleteData() {
-        barProgressF('danger', 'determinate');
-        const alert = document.createElement('ion-alert');
-        alert.header = '¡Advertencia!';
-        alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
-        alert.buttons = [
-            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
-            {
-                text: 'confirmar',
-                handler: () => {
-                    console.log(userID);
-                    Email.send({
-                        Host: "smtp.gmail.com",
-                        Username: "restore.pass.helena@gmail.com",
-                        Password: "restaurar1234",
-                        To: deco(txt[1]),
-                        From: "restore.pass.helena@gmail.com",
-                        Subject: "Eliminar cuenta.",
-                        Body:
-                            `
-                            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
-                            <h1>${userID}</h1>
-                        `,
-                    }).then(function () {
-                        console.log("correo enviado");
-                    }).catch(function (error) {
-                        console.error("Error removing document: ", error);
-                    });
-
-                    function confirmVoid() {
-                        const alert = document.createElement('ion-alert');
-                        alert.setAttribute('backdrop-dismiss', 'false');
-                        alert.subHeader = 'Complete los datos para terminar el proceso.'
-                        alert.message = '(Se envió por correo la clave para confirmar el proceso).'
-
-                        alert.inputs = [
-                            { name: 'avoid', placeholder: 'Usuario' },
-                            { name: 'bvoid', placeholder: 'Contraseña' },
-                            { name: 'cvoid', placeholder: 'Clave de confirmación' },
-                        ];
-                        alert.buttons = [
-                            {
-                                text: 'Ok',
-                                handler: (x) => {
-                                    if (txt[1] == code(x.avoid) && txt[2] == code(x.bvoid) && userID == x.cvoid) {
-                                        barProgressF('danger', 'indeterminate');
-                                        localStorage.setItem('L1', localStorage.getItem('L1') + 'aa');
-                                        updateDB('L1', 'B1');
-
-                                        setTimeout(() => {
-                                            db.collection(coll).doc(userID).delete()
-                                                .then(function () {
-                                                    console.log("Document successfully deleted!");
-                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
-                                                }).catch(function (error) {
-                                                    console.error("Error removing document: ", error);
-                                                });
-                                        }, 2000);
-                                    } else {
-                                        barProgressF('light', 'determinate');
-                                        presentToast('Incorrecto.', '800', 'warning');
-                                    }
-                                }
-                            },
-                            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
-
-                        ]
-                        document.body.appendChild(alert);
-                        return alert.present();
-
-
-                    };
-                    confirmVoid();
-
-                }
-            }
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    deleteData();
-});
-
 
 refresher.addEventListener('ionRefresh', () => {
     setTimeout(() => {
@@ -184,25 +85,9 @@ buttonLogin.addEventListener('click', () => {
     });
 
 });
-const nameLog = document.getElementById('nameLog');
-const passLog = document.getElementById('passLog');
-const eyePass = document.getElementById('eyePass');
-if (eyePass) {
-    eyePass.addEventListener('click', () => {
-        if (eyePass.name == 'eye-off') {
-            eyePass.name = 'eye';
-            passLog.setAttribute('type', 'text');
-        } else {
-            eyePass.name = 'eye-off';
-            passLog.setAttribute('type', 'password');
-        }
-    })
-}
-
 
 
 buttonCreate.addEventListener('click', () => {
-
     function presentAlertCreate() {
         const alert = document.createElement('ion-alert');
         alert.header = 'Registrarse';
@@ -285,6 +170,10 @@ buttonCreate.addEventListener('click', () => {
     presentAlertCreate();
     return;
 });
+
+
+
+newSearch.addEventListener('ionInput', () => { refreshData() });
 
 showSearch.addEventListener('long-press', e => { // TAP
 
@@ -416,63 +305,12 @@ showSearch.addEventListener('long-press', e => { // TAP
     }
 });
 
-buttonAdd.addEventListener('click', () => {
-    function presentAlertAdd() {
-        const alert = document.createElement('ion-alert');
-        alert.setAttribute('backdrop-dismiss', 'false');
-        alert.header = 'Agregar cuenta';
-        alert.inputs = [
-            { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
-            { name: 'name2a', placeholder: 'Usuario', value: '' },
-            { name: 'name3a', placeholder: 'Contraseña', value: '' },
-            { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
-        ];
-        alert.buttons = [
-            { text: 'Cancelar', role: 'cancel' },
-            {
-                text: 'Ok',
-                handler: newData2 => {
-                    if (
-                        newData2.name1a == '' ||
-                        newData2.name2a == '' ||
-                        newData2.name3a == ''
-                    ) {
-                        barProgressF('warning', 'determinate');
-                        alertMsg('Error', 'Datos obligroios vacíos.');
-                        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-                        return;
-                    }
 
-                    for (let i = 0; i < newTotal.length; i += 5) {
-                        if (
-                            newData2.name1a == newTotal[i] &&
-                            newData2.name2a == newTotal[i + 1] &&
-                            newData2.name3a == newTotal[i + 2]
-                        ) {
-                            alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                            return;
-                        }
-                    }
 
-                    aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
-                    aTotalTOnewTotal();
-                    save();
-                    showSearch.innerHTML = '';
-                    newSearch.value = newData2.name1a;
-                    presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
-                    showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
-                    updateDB('L1', 'B1');
-                },
-            },
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    presentAlertAdd();
-});
+barClose.addEventListener('click', ()=>{barMenuPrincipal.close()});
 
 barEdit.addEventListener('click', () => {
-    document.getElementById('barMenuPrincipal').close();
+    barMenuPrincipal.close();
     function alertPass() {
         const alertPassItem = document.createElement('ion-alert');
         alertPassItem.message = 'Inserte contraseña para continuar..';
@@ -550,7 +388,7 @@ barEdit.addEventListener('click', () => {
 });
 
 barImport.addEventListener('click', () => {
-    document.getElementById('barMenuPrincipal').close();
+    barMenuPrincipal.close();
     function alertImp() {
         const alert = document.createElement('ion-alert');
         alert.setAttribute('backdrop-dismiss', 'false');
@@ -584,7 +422,8 @@ barImport.addEventListener('click', () => {
 });
 
 barExport.addEventListener('click', () => {
-    document.getElementById('barMenuPrincipal').close();
+    // document.getElementById('barMenuPrincipal').close();
+    barMenuPrincipal.close();
     function alertExp() {
         const alert = document.createElement('ion-alert');
         alert.setAttribute('backdrop-dismiss', 'false');
@@ -610,12 +449,112 @@ barExport.addEventListener('click', () => {
 });
 
 barLogout.addEventListener('click', () => {
-    document.getElementById('barMenuPrincipal').close();
+    barMenuPrincipal.close();
     localStorage.removeItem('L1');
     localStorage.removeItem('theme');
     localStorage.removeItem('accessTempData');
     window.location.reload();
 });
+
+barDelAcc.addEventListener('click', () => {
+    // document.getElementById('barMenuPrincipal').close();
+    barMenuPrincipal.close();
+    function deleteData() {
+        barProgressF('danger', 'determinate');
+        const alert = document.createElement('ion-alert');
+        alert.header = '¡Advertencia!';
+        alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
+        alert.buttons = [
+            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
+            {
+                text: 'confirmar',
+                handler: () => {
+                    console.log(userID);
+                    Email.send({
+                        Host: "smtp.gmail.com",
+                        Username: "restore.pass.helena@gmail.com",
+                        Password: "restaurar1234",
+                        To: deco(txt[1]),
+                        From: "restore.pass.helena@gmail.com",
+                        Subject: "Eliminar cuenta.",
+                        Body:
+                            `
+                            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
+                            <h1>${userID}</h1>
+                        `,
+                    }).then(function () {
+                        console.log("correo enviado");
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+
+                    function confirmVoid() {
+                        const alert = document.createElement('ion-alert');
+                        alert.setAttribute('backdrop-dismiss', 'false');
+                        alert.subHeader = 'Complete los datos para terminar el proceso.'
+                        alert.message = '(Se envió por correo la clave para confirmar el proceso).'
+
+                        alert.inputs = [
+                            { name: 'avoid', placeholder: 'Usuario' },
+                            { name: 'bvoid', placeholder: 'Contraseña' },
+                            { name: 'cvoid', placeholder: 'Clave de confirmación' },
+                        ];
+                        alert.buttons = [
+                            {
+                                text: 'Ok',
+                                handler: (x) => {
+                                    if (txt[1] == code(x.avoid) && txt[2] == code(x.bvoid) && userID == x.cvoid) {
+                                        barProgressF('danger', 'indeterminate');
+                                        localStorage.setItem('L1', localStorage.getItem('L1') + 'aa');
+                                        updateDB('L1', 'B1');
+
+                                        setTimeout(() => {
+                                            db.collection(coll).doc(userID).delete()
+                                                .then(function () {
+                                                    console.log("Document successfully deleted!");
+                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
+                                                }).catch(function (error) {
+                                                    console.error("Error removing document: ", error);
+                                                });
+                                        }, 2000);
+                                    } else {
+                                        barProgressF('light', 'determinate');
+                                        presentToast('Incorrecto.', '800', 'warning');
+                                    }
+                                }
+                            },
+                            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
+
+                        ]
+                        document.body.appendChild(alert);
+                        return alert.present();
+
+
+                    };
+                    confirmVoid();
+
+                }
+            }
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    deleteData();
+});
+
+
+buttonSearch.addEventListener('click', () => {
+    if (!statSearchBar) {
+        newSearch.value = '';
+        newSearch.setAttribute('style', 'margin-top:0px');
+        newSearch.setFocus();
+        statSearchBar = true;
+    } else {
+        newSearch.setAttribute('style', 'margin-top:-60px');
+        statSearchBar = false;
+    }
+
+})
 
 buttonEye.addEventListener('click', () => {
     if (iconEye.getAttribute('name') == 'eye-outline') {
@@ -627,9 +566,63 @@ buttonEye.addEventListener('click', () => {
     refreshData();
 });
 
-buttonFocus.addEventListener('click', () => { hola()});
+buttonAdd.addEventListener('click', () => {
+    function presentAlertAdd() {
+        const alert = document.createElement('ion-alert');
+        alert.setAttribute('backdrop-dismiss', 'false');
+        alert.header = 'Agregar cuenta';
+        alert.inputs = [
+            { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
+            { name: 'name2a', placeholder: 'Usuario', value: '' },
+            { name: 'name3a', placeholder: 'Contraseña', value: '' },
+            { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
+        ];
+        alert.buttons = [
+            { text: 'Cancelar', role: 'cancel' },
+            {
+                text: 'Ok',
+                handler: newData2 => {
+                    if (
+                        newData2.name1a == '' ||
+                        newData2.name2a == '' ||
+                        newData2.name3a == ''
+                    ) {
+                        barProgressF('warning', 'determinate');
+                        alertMsg('Error', 'Datos obligroios vacíos.');
+                        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+                        return;
+                    }
 
-newSearch.addEventListener('ionInput', () => { refreshData() });
+                    for (let i = 0; i < newTotal.length; i += 5) {
+                        if (
+                            newData2.name1a == newTotal[i] &&
+                            newData2.name2a == newTotal[i + 1] &&
+                            newData2.name3a == newTotal[i + 2]
+                        ) {
+                            alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
+                            return;
+                        }
+                    }
+
+                    aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
+                    aTotalTOnewTotal();
+                    save();
+                    showSearch.innerHTML = '';
+                    newSearch.value = newData2.name1a;
+                    presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
+                    showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
+                    updateDB('L1', 'B1');
+                },
+            },
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    presentAlertAdd();
+});
+
+
+
 
 
 

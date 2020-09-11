@@ -1,7 +1,3 @@
-function hola(){
-    
-}
-
 
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
@@ -47,9 +43,6 @@ const item = (id, ico, text, color = '', show = true) => {
 //######################## FUNCIONES ########################
 
 function presentAlertCheckboxAdd(metaObjAdd, metaObjDel) {
-    // console.log(metaObjAdd);
-    // console.log(metaObjDel);
-
     const alert = document.createElement('ion-alert');
     alert.subHeader = 'Cuentas agregadas';
     alert.message = 'Seleccione para confirmar';
@@ -110,7 +103,6 @@ function presentAlertCheckboxDel(metaObjDel) {
         return alert.present();
     }
 };
-
 
 
 function setAttributes(elem, obj) {
@@ -410,7 +402,3 @@ function sendEmail() {
     document.body.appendChild(alert);
     return alert.present();
 }
-
-
-
-//************************ END ************************
