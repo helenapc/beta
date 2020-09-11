@@ -1,13 +1,7 @@
 
 
-refresher.addEventListener('ionRefresh', () => {
-    setTimeout(() => {
-        window.location.reload();
-        refresher.complete();
-    }, 150);
-});
 
-
+//home
 buttonLogin.addEventListener('click', () => {
     barProgressF('success', 'indeterminate');
 
@@ -85,7 +79,6 @@ buttonLogin.addEventListener('click', () => {
     });
 
 });
-
 
 buttonCreate.addEventListener('click', () => {
     function presentAlertCreate() {
@@ -172,7 +165,7 @@ buttonCreate.addEventListener('click', () => {
 });
 
 
-
+//CONTENT
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
 showSearch.addEventListener('long-press', e => { // TAP
@@ -305,8 +298,16 @@ showSearch.addEventListener('long-press', e => { // TAP
     }
 });
 
+refresher.addEventListener('ionRefresh', () => {
+    setTimeout(() => {
+        window.location.reload();
+        refresher.complete();
+    }, 150);
+});
 
 
+
+//NAV BAR
 barClose.addEventListener('click', ()=>{barMenuPrincipal.close()});
 
 barEdit.addEventListener('click', () => {
@@ -543,6 +544,8 @@ barDelAcc.addEventListener('click', () => {
 });
 
 
+
+//FAB
 buttonSearch.addEventListener('click', () => {
     if (!statSearchBar) {
         newSearch.value = '';
@@ -623,10 +626,6 @@ buttonAdd.addEventListener('click', () => {
 
 
 
-
-
-
-//*********************************** */
 //CHECK/TOGGLE
 checkbox.addEventListener('click', () => {
     if (activeTheme[1] == 'dark') {

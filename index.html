@@ -20,16 +20,10 @@
 
 <body>
   <ion-app class="fondo">
-
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
-
-
     <div class="ion-page" id="main-content">
-
-
       <ion-header >
         <ion-row id="barProgress"></ion-row>
-
         <ion-toolbar>
           <ion-buttons style="margin-right: -30px;" slot="start">
             <ion-menu-button style="margin-left: -10px;">
@@ -60,17 +54,15 @@
       </ion-row>
 
       <ion-content id='content'>
+
         <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
           <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
           </ion-refresher-content>
         </ion-refresher>
 
-
-
         <ion-row>
           <ion-col id="show-accounts1" size="9" offset="1.35" size-md="5" offset-md="3.5"></ion-col>
         </ion-row>
-
 
         <ion-row id="showLogin" style="margin-top: 50px;">
           <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
@@ -86,7 +78,6 @@
               <ion-input type="password" id="passLog"></ion-input>
             </ion-item>
 
-
             <ion-button fill="outline" expand="block" id="buttonLogin">Iniciar sesión</ion-button>
             <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
             <ion-button id="restorePass" style="text-transform: none" ; fill="clear" expand="block" button
@@ -95,16 +86,12 @@
             </ion-button>
           </ion-col>
         </ion-row>
+
       </ion-content>
 
       <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
         <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
       </ion-fab>
-
-      <!-- NAV -->
-      <!-- <ion-fab vertical="top" horizontal="start" class="nav" id="buttonFocus">
-        <ion-fab-button id="buttonFocus" color="light" size="small"><h2>H</h2></ion-fab-button>
-      </ion-fab> -->
       
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
         <ion-fab-button id="buttonSearch" color="light" size="small">
