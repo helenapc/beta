@@ -104,7 +104,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.74'});
+setAttributes(ver, {innerHTML: 'Versión 2.74-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -122,9 +122,6 @@ if (activeTheme[1] == 'dark') {
 
 
 //LOGIN (eye)
-// const nameLog = document.getElementById('nameLog');
-// const passLog = document.getElementById('passLog');
-// const eyePass = document.getElementById('eyePass');
 if (eyePass) {
     eyePass.addEventListener('click', () => {
         if (eyePass.name == 'eye-off') {
