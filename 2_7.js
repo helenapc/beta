@@ -55,7 +55,7 @@ const content = document.getElementById('content');
 //******************************************* */
 
 
-setAttributes(newSearch, { style: 'opacity:0', disabled: true });
+// setAttributes(newSearch, { style: 'opacity:0', disabled: true });
 setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
 setAttributes(buttonEye, { style: 'opacity:0', disabled: true });
 setAttributes(buttonSearch, { style: 'opacity:0', disabled: true });
