@@ -30,7 +30,6 @@
       <ion-header >
         <ion-row id="barProgress"></ion-row>
         <ion-toolbar>
-
           <ion-buttons style="margin-right: -30px;" slot="start">
             <ion-menu-button style="margin-left: -10px;">
               <ion-icon name="ellipsis-vertical-outline"></ion-icon>
@@ -101,6 +100,9 @@
 
 
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
+        <ion-fab-button id="buttonFocus" color="light" size="small">
+          <ion-icon name="close"></ion-icon>
+        </ion-fab-button>
         <ion-fab-button id="buttonSearch" color="light" size="small">
           <ion-icon name="search"></ion-icon>
         </ion-fab-button>
@@ -118,7 +120,10 @@
     </div>
 
   </ion-app>
+  <script src="fun.js"></script>
+  <script src="extra.js"></script>
   <script src="2_7.js"></script>
+  <script src="btn.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
 </body>
 
