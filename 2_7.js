@@ -31,6 +31,10 @@ var offline = true;
 
 
 // // Init components
+const nameLog = document.getElementById('nameLog');
+const passLog = document.getElementById('passLog');
+const eyePass = document.getElementById('eyePass');
+
 const title = document.getElementById('title');
 
 const showLogin = document.getElementById('showLogin');
@@ -73,23 +77,19 @@ barProgress.appendChild(barProgress01);
 
 // NAV BAR
 const barMenuPrincipal = document.getElementById('barMenuPrincipal');
-barMenuPrincipal.setAttribute('disabled', true);
 const barHeader = document.createElement('ion-header');
 const barToolbar = document.createElement('ion-toolbar');
 const barTitle = document.createElement('ion-item');
 const barLabel = document.createElement('ion-title');
-barLabel.setAttribute('id', 'userName');
-
 const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
+barMenuPrincipal.setAttribute('disabled', true);
+barLabel.setAttribute('id', 'userName');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
-setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
-
 const barIcon01 = document.createElement('ion-icon'); // ICON
+setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
 setAttributes(barIcon01, {button: 'click-btn', name: 'build-outline', slot: 'end', id: 'barEdit'})
-
-{/* <ion-icon name="arrow-back-outline"></ion-icon> */}
 
 //BLOCK 01
 barTitle.appendChild(barIcon00);
@@ -103,20 +103,15 @@ barMenuPrincipal.appendChild(barHeader);
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
-/////////////////////////////////////////////////////////
 const ver = document.createElement('ion-item-divider');
 setAttributes(ver, {innerHTML: 'Versión 2.74'});
 barContent.appendChild(ver);
-/////////////////////////////////////////////////////////
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
 //DARK THEME
+const lTheme = localStorage.getItem('theme');
 const checkbox = document.getElementById('checkbox');
-if (localStorage.getItem('theme') == null ||
-    localStorage.getItem('theme') == 'dark' ||
-    localStorage.getItem('theme') == 'light' ||
-    localStorage.getItem('theme') == ''
-) localStorage.setItem('theme', ['light', '']);
+if (lTheme == null || lTheme == 'dark' || lTheme == 'light' || lTheme == '' ) localStorage.setItem('theme', ['light', '']);
 var activeTheme = localStorage.getItem('theme').split(',');
 if (activeTheme[1] == 'dark') {
     document.body.classList.toggle(activeTheme[1]);
@@ -127,9 +122,9 @@ if (activeTheme[1] == 'dark') {
 
 
 //LOGIN (eye)
-const nameLog = document.getElementById('nameLog');
-const passLog = document.getElementById('passLog');
-const eyePass = document.getElementById('eyePass');
+// const nameLog = document.getElementById('nameLog');
+// const passLog = document.getElementById('passLog');
+// const eyePass = document.getElementById('eyePass');
 if (eyePass) {
     eyePass.addEventListener('click', () => {
         if (eyePass.name == 'eye-off') {
