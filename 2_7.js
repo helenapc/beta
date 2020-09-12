@@ -85,6 +85,7 @@ const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
 barMenuPrincipal.setAttribute('disabled', true);
 barLabel.setAttribute('id', 'userName');
+barTitle.setAttribute('lines', 'none');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON

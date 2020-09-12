@@ -195,7 +195,6 @@ showSearch.addEventListener('long-press', e => { // TAP
             cuPath[3] == newTotal[i + 3]
         ) {
 
-            // async function presentToastC(msg) {
             function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
                 toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
@@ -212,8 +211,8 @@ showSearch.addEventListener('long-press', e => { // TAP
                                 alert.setAttribute('backdrop-dismiss', 'false');
                                 alert.header = 'Editar cuenta';
                                 alert.inputs = [
-                                    { name: 'name1', placeholder: 'Cuenta', value: newTotal[i] },
-                                    { name: 'name2', placeholder: 'Usuario', value: newTotal[i + 1] },
+                                    { name: 'name1', placeholder: 'Cuenta(Nombre)', value: newTotal[i] },
+                                    { name: 'name2', placeholder: 'Usuario/email', value: newTotal[i + 1] },
                                     { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
                                     { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
                                 ];
@@ -576,7 +575,7 @@ buttonAdd.addEventListener('click', () => {
         alert.header = 'Agregar cuenta';
         alert.inputs = [
             { name: 'name1a', placeholder: 'Cuenta(Nombre)', value: '' },
-            { name: 'name2a', placeholder: 'Usuario', value: '' },
+            { name: 'name2a', placeholder: 'Usuario/email', value: '' },
             { name: 'name3a', placeholder: 'Contraseña', value: '' },
             { name: 'name4a', placeholder: 'Notas(Opcional)', value: '' },
         ];

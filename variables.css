@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;700&display=swap'); */
 
 
 *{
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   /* transition: 0.1s linear; */
 }
 
-/* body{
-  font-family: 'Roboto', sans-serif;
-} */
 
 /*ITEMS*/
 
@@ -27,18 +24,6 @@
   --icon-color:var(--ion-text-color);
   transition: 0.05s cubic-bezier(1, 0, 0, 1);
 }
-
-/* [aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
-  color:var(--ion-text-color);
-}
-
-[aria-checked=true].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md{
-  border-color:var(--ion-color-dark);
-}
-
-.alert-radio-inner.sc-ion-alert-md {
-  background-color:var(--ion-color-dark);
-} */
 
 
 ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, version*/
@@ -71,7 +56,7 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, versi
 }
 
 
-/* alerts */
+/* ALERTS */
 .alert-head.sc-ion-alert-md{
   padding-top: 10px;
   padding-bottom: 10px;
