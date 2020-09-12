@@ -58,14 +58,11 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, versi
 
 /* ALERTS */
 .alert-head.sc-ion-alert-md{
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 10px;
 }
 
-.alert-button-group.sc-ion-alert-md{
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+
 .alert-message.sc-ion-alert-md,
 .alert-input-group.sc-ion-alert-md
 {
@@ -78,6 +75,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, versi
   margin: 0px;
 }
 
+.alert-button-group.sc-ion-alert-md{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 /*TOGGLE*/
 .label{
