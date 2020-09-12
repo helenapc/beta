@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;700&display=swap');
+
+
 *{
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
   /* transition: 0.1s linear; */
 }
 
+/* body{
+  font-family: 'Roboto', sans-serif;
+} */
 
 /*ITEMS*/
 
@@ -21,7 +28,7 @@
   transition: 0.05s cubic-bezier(1, 0, 0, 1);
 }
 
-[aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+/* [aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
   color:var(--ion-text-color);
 }
 
@@ -31,27 +38,20 @@
 
 .alert-radio-inner.sc-ion-alert-md {
   background-color:var(--ion-color-dark);
-}
+} */
 
-.alert-input.sc-ion-alert-md{
-  color:var(--ion-text-color2);
-}
 
-ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
+ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, version*/
   color:var(--ion-text-color);
 }
 
-.restoreText{
-  color:var(--ion-text-color);
-}
-
-.bordeSup{
+.bordeSup{ /*login*/
   --background: #ffffff50;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
 
-.bordeInf{
+.bordeInf{ /*login*/
   --background: #ffffff50;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -70,6 +70,71 @@ ion-icon, .item .sc-ion-label-md-h { /*icon, inputbox.alert, version*/
   padding: -100px;
 }
 
+
+/* alerts */
+.alert-head.sc-ion-alert-md{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.alert-button-group.sc-ion-alert-md,
+.alert-message.sc-ion-alert-md,
+.alert-input-group.sc-ion-alert-md
+{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.alert-input.sc-ion-alert-md{
+  color:var(--ion-text-color2);
+  margin: 0px;
+}
+
+
+/*TOGGLE*/
+.label{
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 50px;
+  padding: 5px;
+  height: 26px;
+  width: 50px;
+}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox:checked + .label .ball{
+  transform: translate(21px); 
+  
+}
+
+.checkbox + .label{
+  background-color:var(--ion-color-medium);
+  margin-left: -10px;
+}
+
+.ball{
+  background-color:var(--ion-color-light);
+  transform: translate(-2px);
+  border-radius: 50px;
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  transition: transform 0.1s linear;;
+}
+
+.fa-moon{
+  color: #414141;
+}
+
+.fa-color{
+  color: #ffffff;
+}
 
 /*THEMES*/
 body.light {
@@ -132,49 +197,4 @@ body.dark {
   --ion-item-background-activated: #00ffea;
   --color-toolbar-background:#00ffea;
   --color-toolbar-text: #00ffea;
-}
-
-/*TOGGLE*/
-.label{
-  background-color: #111;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 50px;
-  padding: 5px;
-  height: 26px;
-  width: 50px;
-}
-
-.checkbox {
-  opacity: 0;
-  position: absolute;
-}
-
-.checkbox:checked + .label .ball{
-  transform: translate(21px); 
-  
-}
-
-.checkbox + .label{
-  background-color:var(--ion-color-medium);
-  margin-left: -10px;
-}
-
-.ball{
-  background-color:var(--ion-color-light);
-  transform: translate(-2px);
-  border-radius: 50px;
-  position: absolute;
-  height: 22px;
-  width: 22px;
-  transition: transform 0.1s linear;;
-}
-
-.fa-moon{
-  color: #414141;
-}
-
-.fa-color{
-  color: #ffffff;
 }
