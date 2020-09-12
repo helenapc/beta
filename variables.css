@@ -77,7 +77,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, versi
   padding-bottom: 10px;
 }
 
-.alert-button-group.sc-ion-alert-md,
+.alert-button-group.sc-ion-alert-md{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .alert-message.sc-ion-alert-md,
 .alert-input-group.sc-ion-alert-md
 {
