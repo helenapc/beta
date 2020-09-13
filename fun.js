@@ -26,10 +26,10 @@ const item = (id, ico, text, color = '', show = true) => {
     ionItem.setAttribute('color', color);
     ionItem.setAttribute('button', 'click-btn');
     ionItem.setAttribute('id', id);
-    // const ionIco = document.createElement('ion-icon');
-    // ionIco.setAttribute('name', ico);
-    // ionIco.setAttribute('slot', 'start');
-    // ionItem.appendChild(ionIco);
+    const ionIco = document.createElement('ion-icon');
+    ionIco.setAttribute('name', ico);
+    ionIco.setAttribute('slot', 'start');
+    ionItem.appendChild(ionIco);
     if (show) {
         barContent.appendChild(ionItem);
     } else {
