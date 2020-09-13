@@ -24,7 +24,9 @@
   --icon-color:var(--ion-text-color);
   transition: 0.05s cubic-bezier(1, 0, 0, 1);
 }
-
+#barMenuPrincipal{
+  --width: 250px;
+}
 
 ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, version*/
   color:var(--ion-text-color);
