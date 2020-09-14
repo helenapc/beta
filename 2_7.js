@@ -242,6 +242,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                 (txtTemp[3].includes(newa[i])) ? metaObjAdd.push(myObj) : metaObjDel.push(myObj);
                             }
 
+                            console.log(metaObjAdd);
+
                             if (metaObjAdd.length != '') {
                                 presentAlertCheckboxAdd(metaObjAdd, metaObjDel);
                             } else {

@@ -168,6 +168,48 @@ buttonCreate.addEventListener('click', () => {
 //CONTENT
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
+
+
+
+showSearch.addEventListener('click', e => {
+    e.preventDefault();
+
+    var xPath = 3;
+    var cuPath = [];
+
+    if (e.path[xPath].localName == 'ion-row') return;
+    if (e.path[xPath].innerText == undefined) xPath = 0;
+    if (e.path[xPath].innerText == '') xPath = 5;
+
+    cuPath[0] = e.path[xPath].children[0].innerText;
+    cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
+    cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
+    cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
+
+
+    function alertView() {
+        const alert = document.createElement('ion-alert');
+        alert.subHeader = cuPath[0];
+        alert.message = `
+        <ul>
+        <li>Usuario/email:</br>${cuPath[1]}</li>
+        <li>Contraseña:</br>${cuPath[2]}</li>
+        <li>Notas:</br>${cuPath[3]}</li>
+        </ul>
+        `;
+        // alert.buttons = [
+        //     {
+        //         text: 'Editar',
+        //         handler: () => {
+        //             console.log('hola');
+        //         }
+        //     }];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    alertView();
+})
+
 showSearch.addEventListener('long-press', e => { // TAP
 
     e.preventDefault();
@@ -307,7 +349,7 @@ refresher.addEventListener('ionRefresh', () => {
 
 
 //NAV BAR
-barClose.addEventListener('click', ()=>{barMenuPrincipal.close()});
+barClose.addEventListener('click', () => { barMenuPrincipal.close() });
 
 barEdit.addEventListener('click', () => {
     barMenuPrincipal.close();

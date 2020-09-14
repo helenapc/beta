@@ -7,6 +7,39 @@
   /* transition: 0.1s linear; */
 }
 
+ion-card-header{
+  /* height: 45px; */
+}
+
+.card-sub-account{
+  margin-left: 20px;
+}
+
+#see{
+  position: absolute;
+  display: flexbox;
+  justify-content: flex-end;
+  align-self: flex-end;
+  transform: translate( 0px , -15px);
+  
+}
+
+ul{
+  list-style-type: disc;
+  padding-left: 10px;
+}
+
+li{
+  padding-bottom: 10px;
+}
+
+
+.hide{
+  display: none;
+}
+/* .show{
+  display: block;
+} */
 
 /*ITEMS*/
 

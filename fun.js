@@ -13,10 +13,15 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.textContent = 'Contraseña: ' + pass;
     newSub4.textContent = 'Notas: ' + notes;
 
+    newSub2.setAttribute('class', 'hide');
+    newSub3.setAttribute('class', 'hide');
+    newSub4.setAttribute('class', 'hide');
+
     newHeader.appendChild(newSub1);
     newHeader.appendChild(newSub2);
     newHeader.appendChild(newSub3);
     newHeader.appendChild(newSub4);
+
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 };
