@@ -173,7 +173,6 @@ newSearch.addEventListener('ionInput', () => { refreshData() });
 
 showSearch.addEventListener('click', e => {
     e.preventDefault();
-
     var xPath = 3;
     var cuPath = [];
 
@@ -186,29 +185,39 @@ showSearch.addEventListener('click', e => {
     cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
     cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
 
+    if (cuPath[3] == 'Notas:') cuPath[3] = '';
 
-    function alertView() {
-        const alert = document.createElement('ion-alert');
-        alert.subHeader = cuPath[0];
-        alert.message = `
-        <ul>
-        <li>Usuario/email:</br>${cuPath[1]}</li>
-        <li>Contraseña:</br>${cuPath[2]}</li>
-        <li>Notas:</br>${cuPath[3]}</li>
-        </ul>
-        `;
-        // alert.buttons = [
-        //     {
-        //         text: 'Editar',
-        //         handler: () => {
-        //             console.log('hola');
-        //         }
-        //     }];
-        document.body.appendChild(alert);
-        return alert.present();
+    // console.log(cuPath);
+
+    for (i = 0; i < newTotal.length; i += 5) {
+        if (
+            cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
+            cuPath[1] == newTotal[i + 1] &&
+            cuPath[2] == newTotal[i + 2] &&
+            cuPath[3] == newTotal[i + 3]
+        ) {
+            function alertView() {
+                const alert = document.createElement('ion-alert');
+                alert.subHeader = newTotal[i];
+                alert.message = `
+                <ul>
+                <li>Usuario/email:</br>${newTotal[i + 1]}</li>
+                <li>Contraseña:</br>${newTotal[i + 2]}</li>
+                <li>Notas:</br>${newTotal[i + 3]}</li>
+                </ul>
+                `;
+                // alert.buttons = [
+                //     {
+                //         text: 'Editar',
+                //         handler: () => { }
+                //     }]
+                document.body.appendChild(alert);
+                return alert.present();
+            }
+            alertView();
+        }
     }
-    alertView();
-})
+});
 
 showSearch.addEventListener('long-press', e => { // TAP
 
@@ -236,7 +245,6 @@ showSearch.addEventListener('long-press', e => { // TAP
             cuPath[2] == newTotal[i + 2] &&
             cuPath[3] == newTotal[i + 3]
         ) {
-
             function presentToastC(msg) {
                 const toast = document.createElement('ion-toast');
                 toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
@@ -248,6 +256,10 @@ showSearch.addEventListener('long-press', e => { // TAP
                         icon: 'pencil',
                         handler: () => {
                             function alertEdit() {
+                                console.log(newTotal[i]);
+                                console.log(newTotal[i + 1]);
+                                console.log(newTotal[i + 2]);
+                                console.log(newTotal[i + 3]);
                                 const toRemplace = i / 5;
                                 const alert = document.createElement('ion-alert');
                                 alert.setAttribute('backdrop-dismiss', 'false');
@@ -300,35 +312,9 @@ showSearch.addEventListener('long-press', e => { // TAP
                                 return alert.present();
                             }
                             alertEdit();
-                        },
+                        }
                     },
-                    {
-                        icon: 'trash',
-                        handler: () => {
-                            function alertDel() {
-                                const alert = document.createElement('ion-alert');
-                                alert.message = `¿Eliminar ${msg}?`;
-                                alert.buttons = [
-                                    { text: 'cancelar', role: 'cancel' },
-                                    {
-                                        text: 'ok',
-                                        handler: () => {
-                                            aTotal.splice(i / 5, 1);
-                                            aTotalTOnewTotal();
-                                            save();
-                                            refreshData();
-                                            presentToast(`"${msg}" eliminado.`, 500, 'danger');
-                                            updateDB('L1', 'B1');
-                                            if (showSearch.value == '') newSearch.value = '';
-                                        },
-                                    },
-                                ];
-                                document.body.appendChild(alert);
-                                return alert.present();
-                            }
-                            alertDel();
-                        },
-                    },
+                    { icon: 'trash', handler: () => { alertDel() } },
                 ];
                 document.body.appendChild(toast);
                 return toast.present();
