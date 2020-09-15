@@ -45,6 +45,8 @@ const refresher = document.getElementById('refresher');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
 
+const barLogoutF = document.getElementById('barLogoutF');
+
 const buttonAdd = document.getElementById('buttonAdd');
 const buttonEye = document.getElementById('buttonEye');
 const buttonSearch = document.getElementById('buttonSearch');
