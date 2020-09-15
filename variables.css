@@ -8,11 +8,11 @@
 }
 
 .pepe{
-  transform: translate(-35%, -10px);
+  transform: translate(-100%, -5px);
 }
-.my-custom-class{
-  /* --background: red; */
-  padding-bottom: 100px;
+
+.pepe2{
+  transform: translate(-10%, -5px);
 }
 
 .card-sub-account{
@@ -97,7 +97,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, versi
   padding-top: 20px;
   padding-bottom: 10px;
 }
-
+/* PEPE */
+.alert-button.ion-focusable.ion-activatable{
+  margin: 0px;
+}
 
 .alert-message.sc-ion-alert-md,
 .alert-input-group.sc-ion-alert-md

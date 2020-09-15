@@ -558,7 +558,6 @@ function alertDel(msg) {
     return alert.present();
 }
 
-
 function alertDelN(cuPath, reemplace) {
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${cuPath[0]}?`;
