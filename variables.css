@@ -15,6 +15,10 @@
   transform: translate(-10%, -5px);
 }
 
+.my-custom-class{
+  display: flex;
+}
+
 .card-sub-account{
   margin-left: 20px;
 }

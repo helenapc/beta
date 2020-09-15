@@ -31,6 +31,7 @@ const item = (id, ico, text, color = '', show = true) => {
     ionItem.setAttribute('color', color);
     ionItem.setAttribute('button', 'click-btn');
     ionItem.setAttribute('id', id);
+    // ionItem.setAttribute('ClassName', id);
     const ionIco = document.createElement('ion-icon');
     ionIco.setAttribute('name', ico);
     ionIco.setAttribute('slot', 'start');
@@ -43,6 +44,8 @@ const item = (id, ico, text, color = '', show = true) => {
         };
     };
     id = document.getElementById(id);
+    // id = document.getElementsByClassName(id);
+    // id = document.querySelector(id);
 }
 
 //######################## FUNCIONES ########################
@@ -79,6 +82,7 @@ function delete_spaces(v1) {
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
     title.setAttribute('style', 'margin-left:0px');
+    setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
     setAttributes(buttonEye, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
@@ -485,7 +489,7 @@ function alertEditN(cuPath, reemplace) {
     alert.setAttribute('backdrop-dismiss', 'false');
     alert.header = 'Editar cuenta';
     alert.inputs = [
-        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: cuPath[0].toUpperCase() },
+        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: cuPath[0].toLowerCase() },
         { name: 'name2', placeholder: 'Usuario/email', value: cuPath[1] },
         { name: 'name3', placeholder: 'Contraseña', value: cuPath[2] },
         { name: 'name4', placeholder: 'Notas(Opcional)', value: cuPath[3] },

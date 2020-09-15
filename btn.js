@@ -437,7 +437,6 @@ barImport.addEventListener('click', () => {
                     showSearch.innerHTML = '';
                     newSearch.value = '';
                     updateDB('B2', 'L1');
-                    // presentToast('Copia de seguridad cargada.', 800, 'success');
                     splitInit();
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
@@ -457,7 +456,6 @@ barImport.addEventListener('click', () => {
 });
 
 barExport.addEventListener('click', () => {
-    // document.getElementById('barMenuPrincipal').close();
     barMenuPrincipal.close();
     function alertExp() {
         const alert = document.createElement('ion-alert');
@@ -484,7 +482,17 @@ barExport.addEventListener('click', () => {
 });
 
 barLogout.addEventListener('click', () => {
+    barProgressF('success', 'indeterminate');
     barMenuPrincipal.close();
+    localStorage.removeItem('L1');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('accessTempData');
+    window.location.reload();
+});
+
+barLogoutF.addEventListener('click', () => {
+
+    barProgressF('success', 'indeterminate');
     localStorage.removeItem('L1');
     localStorage.removeItem('theme');
     localStorage.removeItem('accessTempData');
