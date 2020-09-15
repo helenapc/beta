@@ -35,6 +35,7 @@ const item = (id, ico, text, color = '', show = true) => {
     const ionIco = document.createElement('ion-icon');
     ionIco.setAttribute('name', ico);
     ionIco.setAttribute('slot', 'start');
+    ionIco.setAttribute('className', id);
     ionItem.appendChild(ionIco);
     if (show) {
         barContent.appendChild(ionItem);
@@ -167,17 +168,6 @@ function presentToast(msg, time, color) {
     return toast.present();
 }
 
-function downloadFile(data, fileName, type = 'text/plain') {
-    var data2 = new Blob([data], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.href = window.URL.createObjectURL(new Blob([data2], { type }));
-    a.setAttribute('download', fileName);
-    a.click();
-    window.URL.revokeObjectURL(a.href);
-    document.body.removeChild(a);
-}
 
 function code(cod) {
     let hexCod = '';
@@ -219,19 +209,6 @@ function deco(dec) {
         };
     }
     return str;
-}
-
-function fecha() { //var/let
-    let today = new Date();
-    let DD = String(today.getDate()).padStart(2, '0');
-    let MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let YYYY = today.getFullYear();
-    let hh = today.getHours();
-    if (hh < 10) hh = '0' + hh;
-    let mm = today.getMinutes();
-    if (mm < 10) mm = '0' + mm;
-    today = DD + '-' + MM + '-' + (YYYY - 2000) + '-' + hh + mm;
-    return today;
 }
 
 function splitInit() {
@@ -526,8 +503,8 @@ function alertEditN(cuPath, reemplace) {
                 // console.log(aTotal);
                 // aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
                 aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
-                console.log(aTotal);
-                console.log(newData.name1);            
+                // console.log(aTotal);
+                // console.log(newData.name1);            
                 aTotalTOnewTotal();
                 refreshData();
                 presentToast(`"${cuPath[0]}" editado.`, 500, 'dark');
@@ -584,3 +561,30 @@ function alertDelN(cuPath, reemplace) {
     return alert.present();
 }
 
+
+//EXTRAS
+
+function fecha() { //var/let
+    let today = new Date();
+    let DD = String(today.getDate()).padStart(2, '0');
+    let MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let YYYY = today.getFullYear();
+    let hh = today.getHours();
+    if (hh < 10) hh = '0' + hh;
+    let mm = today.getMinutes();
+    if (mm < 10) mm = '0' + mm;
+    today = DD + '-' + MM + '-' + (YYYY - 2000) + '-' + hh + mm;
+    return today;
+}
+
+function downloadFile(data, fileName, type = 'text/plain') {
+    var data2 = new Blob([data], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.href = window.URL.createObjectURL(new Blob([data2], { type }));
+    a.setAttribute('download', fileName);
+    a.click();
+    window.URL.revokeObjectURL(a.href);
+    document.body.removeChild(a);
+}

@@ -107,8 +107,9 @@ barMenuPrincipal.appendChild(barHeader);
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
+// barLogout.setAttribute('style', )
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.745-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.746-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -289,10 +290,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 // welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
     showSearch.innerHTML = `
-    <div style="text-align:center"><br>Hola! No hay datos guardados. </div>
+    <div style="text-align:center"><br>No hay datos guardados. </div>
     <div style="text-align:center"><br> Aquí hay unos ejemplos de lo que se puede hacer. </div>
     <div style="text-align:center">⬇</div>
     `;
     showCardAll('facebook', 'prueba@hotmail.com', '1234abcd', 'Las notas son opcionales 😎');
     showCardAll('google 👍', 'tucuenta@gmail.com', 'prueba1234', '');
+    `<div style="text-align:center"></br>AAAAAAAAAAAAAAAAAA</div>`
 };

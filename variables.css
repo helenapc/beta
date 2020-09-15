@@ -15,8 +15,13 @@
   transform: translate(-10%, -5px);
 }
 
-.my-custom-class{
-  display: flex;
+.logoutf{
+  transform: scaleX(-1) translateX(2px);
+}
+
+
+ion-icon{
+  transform: scaleX(-1);
 }
 
 .card-sub-account{
