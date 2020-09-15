@@ -7,10 +7,18 @@
   /* transition: 0.1s linear; */
 }
 
+.pepe{
+  transform: translate(-35%, -10px);
+}
+.my-custom-class{
+  /* --background: red; */
+  padding-bottom: 100px;
+}
 
 .card-sub-account{
   margin-left: 20px;
 }
+
 
 #see{
   position: absolute;
@@ -34,9 +42,7 @@ li{
 .hide{
   display: none;
 }
-/* .show{
-  display: block;
-} */
+
 
 /*ITEMS*/
 

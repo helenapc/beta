@@ -97,6 +97,7 @@ function barProgressF(color, state) {
 };
 
 function refreshData() {
+    aTotal.sort();
     if (newSearch.value) {
         iconEye.setAttribute('name', 'eye-off-outline')
         setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
@@ -105,8 +106,12 @@ function refreshData() {
         setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
     }
 
-    aTotal.sort();
     showSearch.innerHTML = '';
+
+    // const decoTotal = [];
+    // for (i=0;i<aTotal.length;i++){decoTotal[i]=deco(aTotal[i])};
+    // console.log(decoTotal);
+    
     var contador = 0;
     for (i = 0; i < newTotal.length; i += 5) {
         if (newSearch.value === '*') {
@@ -234,9 +239,11 @@ function splitInit() {
 
 function aTotalTOnewTotal() {
     aTotal.sort();
+    // console.log(aTotal);
     newTotal = [];
     for (b = 0; b < aTotal.length; b++) {
         const final = aTotal[b].split('OG');
+        // console.log('Final = ' + final);
         for (n = 0; n < final.length; n++) {
             (n % 4 == 0) ? newTotal.push(deco(final[n]).toLowerCase()) : newTotal.push(deco(final[n]));
             if (n == 3) newTotal.push('oo');
@@ -271,6 +278,11 @@ function updateDB(send, receive) {
 }
 
 function save() {
+    // console.log('Save__');
+    // aTotal.sort();
+    // console.log(newTotal);
+    // console.log(aTotal);
+    // console.log(aTotal);
     if (aTotal.length > 0) {
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
     } else {
@@ -410,135 +422,162 @@ function presentAlertCheckboxDel(metaObjDel) {
     }
 };
 
-// function alertEdit() {
+function alertEdit() {
 
-//     const toRemplace = i / 5;
-//     const alert = document.createElement('ion-alert');
-//     alert.setAttribute('backdrop-dismiss', 'false');
-//     alert.header = 'Editar cuenta';
-//     alert.inputs = [
-//         { name: 'name1', placeholder: 'Cuenta(Nombre)', value: newTotal[i] },
-//         { name: 'name2', placeholder: 'Usuario/email', value: newTotal[i + 1] },
-//         { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
-//         { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
-//     ];
-//     alert.buttons = [
-//         { text: 'Cancelar', role: 'cancel' },
-//         {
-//             text: 'Ok',
-//             handler: newData => {
-//                 if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
-//                     alertMsg('Error', 'Datos incorrectos o vacíos.');
-//                     return;
-//                 }
+    const toRemplace = i / 5;
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Editar cuenta';
+    alert.inputs = [
+        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: newTotal[i] },
+        { name: 'name2', placeholder: 'Usuario/email', value: newTotal[i + 1] },
+        { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
+        { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
+    ];
+    alert.buttons = [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+            text: 'Ok',
+            handler: newData => {
+                if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
+                    alertMsg('Error', 'Datos incorrectos o vacíos.');
+                    return;
+                }
 
-//                 newData.name1 = delete_spaces(newData.name1);
-//                 newData.name2 = delete_spaces(newData.name2);
-//                 newData.name3 = delete_spaces(newData.name3);
-//                 newData.name4 = delete_spaces(newData.name4);
+                newData.name1 = delete_spaces(newData.name1);
+                newData.name2 = delete_spaces(newData.name2);
+                newData.name3 = delete_spaces(newData.name3);
+                newData.name4 = delete_spaces(newData.name4);
 
-//                 for (i = 0; i < newTotal.length; i += 5) {
-//                     if (
-//                         newData.name1 == newTotal[i] &&
-//                         newData.name2 == newTotal[i + 1] &&
-//                         newData.name3 == newTotal[i + 2] &&
-//                         newData.name4 == newTotal[i + 3]
-//                     ) {
-//                         alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-//                         return;
-//                     }
-//                 }
-
-
-//                 // aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
-//                 aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
-//                 aTotalTOnewTotal();
-//                 refreshData();
-//                 presentToast(`"${msg}" editado.`, 500, 'dark');
-//                 save();
-//                 updateDB('L1', 'B1');
-//             },
-//         },
-//     ];
-//     document.body.appendChild(alert);
-//     return alert.present();
-// }
-
-// function alertEditN(nm, us, ps, no) {
-//     const toRemplace = i / 5;
-
-//     console.log(i);
-//     console.log(newTotal[i]);
-//     const alert = document.createElement('ion-alert');
-//     alert.setAttribute('backdrop-dismiss', 'false');
-//     alert.header = 'Editar cuenta';
-//     alert.inputs = [
-//         { name: 'name1', placeholder: 'Cuenta(Nombre)', value: nm },
-//         { name: 'name2', placeholder: 'Usuario/email', value: us },
-//         { name: 'name3', placeholder: 'Contraseña', value: ps },
-//         { name: 'name4', placeholder: 'Notas(Opcional)', value: no },
-//     ];
-//     alert.buttons = [
-//         { text: 'Cancelar', role: 'cancel' },
-//         {
-//             text: 'Ok',
-//             handler: newData => {
-//                 if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
-//                     alertMsg('Error', 'Datos incorrectos o vacíos.');
-//                     return;
-//                 }
-
-//                 newData.name1 = delete_spaces(newData.name1);
-//                 newData.name2 = delete_spaces(newData.name2);
-//                 newData.name3 = delete_spaces(newData.name3);
-//                 newData.name4 = delete_spaces(newData.name4);
-
-//                 for (i = 0; i < newTotal.length; i += 5) {
-//                     if (
-//                         newData.name1 == nm &&
-//                         newData.name2 == us &&
-//                         newData.name3 == ps &&
-//                         newData.name4 == no
-//                     ) {
-//                         alertMsg('Error', `La cuenta ${nm} ya existe.`);
-//                         return;
-//                     }
-//                 }
+                for (i = 0; i < newTotal.length; i += 5) {
+                    if (
+                        newData.name1 == newTotal[i] &&
+                        newData.name2 == newTotal[i + 1] &&
+                        newData.name3 == newTotal[i + 2] &&
+                        newData.name4 == newTotal[i + 3]
+                    ) {
+                        alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
+                        return;
+                    }
+                }
 
 
-//                 // aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
-//                 aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
-//                 aTotalTOnewTotal();
-//                 refreshData();
-//                 presentToast(`"${nm}" editado.`, 500, 'dark');
-//                 save();
-//                 updateDB('L1', 'B1');
-//             },
-//         },
-//     ];
-//     document.body.appendChild(alert);
-//     return alert.present();
-// }
+                // aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
+                aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
+                aTotalTOnewTotal();
+                refreshData();
+                presentToast(`"${msg}" editado.`, 500, 'dark');
+                save();
+                updateDB('L1', 'B1');
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
 
-// function alertDel(msg) {
-//     const alert = document.createElement('ion-alert');
-//     alert.message = `¿Eliminar ${msg}?`;
-//     alert.buttons = [
-//         { text: 'cancelar', role: 'cancel' },
-//         {
-//             text: 'ok',
-//             handler: () => {
-//                 aTotal.splice(i / 5, 1);
-//                 aTotalTOnewTotal();
-//                 save();
-//                 refreshData();
-//                 presentToast(`"${msg}" eliminado.`, 500, 'danger');
-//                 updateDB('L1', 'B1');
-//                 if (showSearch.value == '') newSearch.value = '';
-//             },
-//         },
-//     ];
-//     document.body.appendChild(alert);
-//     return alert.present();
-// }
+function alertEditN(cuPath, reemplace) {
+
+
+    const toRemplace = reemplace / 5;
+
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Editar cuenta';
+    alert.inputs = [
+        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: cuPath[0].toUpperCase() },
+        { name: 'name2', placeholder: 'Usuario/email', value: cuPath[1] },
+        { name: 'name3', placeholder: 'Contraseña', value: cuPath[2] },
+        { name: 'name4', placeholder: 'Notas(Opcional)', value: cuPath[3] },
+    ];
+    alert.buttons = [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+            text: 'Ok',
+            handler: newData => {
+                if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
+                    alertMsg('Error', 'Datos incorrectos o vacíos.');
+                    return;
+                }
+
+                // console.log(newData.name1.toLowerCase());
+                // console.log(newData.name1.toLowerCase());
+                newData.name1 = delete_spaces(newData.name1.toLowerCase());
+                newData.name2 = delete_spaces(newData.name2);
+                newData.name3 = delete_spaces(newData.name3);
+                newData.name4 = delete_spaces(newData.name4);
+
+                for (i = 0; i < newTotal.length; i += 5) {
+                    if (
+                        newData.name1 == cuPath[0] &&
+                        newData.name2 == cuPath[1] &&
+                        newData.name3 == cuPath[2] &&
+                        newData.name4 == cuPath[3]
+                    ) {
+                        alertMsg('Error', `La cuenta ${cuPath[0]} ya existe.`);
+                        return;
+                    }
+                }
+                // console.log('Edit__');
+                // console.log(aTotal);
+                // aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
+                aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
+                console.log(aTotal);
+                console.log(newData.name1);            
+                aTotalTOnewTotal();
+                refreshData();
+                presentToast(`"${cuPath[0]}" editado.`, 500, 'dark');
+                save();
+                updateDB('L1', 'B1');
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
+function alertDel(msg) {
+    const alert = document.createElement('ion-alert');
+    alert.message = `¿Eliminar ${msg}?`;
+    alert.buttons = [
+        { text: 'cancelar', role: 'cancel' },
+        {
+            text: 'ok',
+            handler: () => {
+                aTotal.splice(i / 5, 1);
+                aTotalTOnewTotal();
+                refreshData();
+                save();
+                presentToast(`"${msg}" eliminado.`, 500, 'danger');
+                updateDB('L1', 'B1');
+                if (showSearch.value == '') newSearch.value = '';
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
+
+function alertDelN(cuPath, reemplace) {
+    const alert = document.createElement('ion-alert');
+    alert.message = `¿Eliminar ${cuPath[0]}?`;
+    alert.buttons = [
+        { text: 'cancelar', role: 'cancel' },
+        {
+            text: 'ok',
+            handler: () => {
+                aTotal.splice(reemplace / 5, 1);
+                aTotalTOnewTotal();
+                refreshData();
+                save();
+                presentToast(`"${cuPath[0]}" eliminado.`, 500, 'danger');
+                updateDB('L1', 'B1');
+                if (showSearch.value == '') newSearch.value = '';
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
 

@@ -187,8 +187,6 @@ showSearch.addEventListener('click', e => {
 
     if (cuPath[3] == 'Notas:') cuPath[3] = '';
 
-    // console.log(cuPath);
-
     for (i = 0; i < newTotal.length; i += 5) {
         if (
             cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
@@ -197,8 +195,10 @@ showSearch.addEventListener('click', e => {
             cuPath[3] == newTotal[i + 3]
         ) {
             function alertView() {
+                const reemplace = i
                 const alert = document.createElement('ion-alert');
-                alert.subHeader = newTotal[i];
+                alert.cssClass = 'my-custom-class';
+                alert.subHeader = newTotal[i].toUpperCase();
                 alert.message = `
                 <ul>
                 <li>Usuario/email:</br>${newTotal[i + 1]}</li>
@@ -206,11 +206,18 @@ showSearch.addEventListener('click', e => {
                 <li>Notas:</br>${newTotal[i + 3]}</li>
                 </ul>
                 `;
-                // alert.buttons = [
-                //     {
-                //         text: 'Editar',
-                //         handler: () => { }
-                //     }]
+                alert.buttons = [
+                    {
+                        text: 'Editar',
+                        cssClass: 'pepe',
+                        handler: () => {alertEditN(cuPath, reemplace)}
+                    },
+                    {
+                        text: 'Borrar',
+                        cssClass: 'pepe',
+                        handler: () => {alertDelN(cuPath, reemplace)}
+                    },
+                ]
                 document.body.appendChild(alert);
                 return alert.present();
             }
@@ -256,11 +263,13 @@ showSearch.addEventListener('long-press', e => { // TAP
                         icon: 'pencil',
                         handler: () => {
                             function alertEdit() {
+                                console.log(i);
                                 console.log(newTotal[i]);
                                 console.log(newTotal[i + 1]);
                                 console.log(newTotal[i + 2]);
                                 console.log(newTotal[i + 3]);
                                 const toRemplace = i / 5;
+                                console.log(toRemplace);
                                 const alert = document.createElement('ion-alert');
                                 alert.setAttribute('backdrop-dismiss', 'false');
                                 alert.header = 'Editar cuenta';
