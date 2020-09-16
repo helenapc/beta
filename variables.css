@@ -77,7 +77,7 @@ li{
 }
 
 
-ion-icon, .item .sc-ion-label-md-h , .restoreText{ /*icon, inputbox.alert, version*/
+ion-icon, .item .sc-ion-label-md-h , .restoreText , .nameSetting{ /*icon, inputbox.alert, version*/
   color:var(--ion-text-color);
 }
 

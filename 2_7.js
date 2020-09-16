@@ -45,6 +45,7 @@ const refresher = document.getElementById('refresher');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
 
+const nameSetting = document.getElementById('nameSetting');
 const barLogoutF = document.getElementById('barLogoutF');
 
 
@@ -62,6 +63,7 @@ const content = document.getElementById('content');
 
 // setAttributes(newSearch, { style: 'opacity:0', disabled: true });
 setAttributes(barLogoutF, { style: 'opacity:0', disabled: true });
+setAttributes(nameSetting, { style: 'opacity:0', disabled: true });
 setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
 setAttributes(expandCard, { style: 'opacity:0', disabled: true });
 setAttributes(showCard, { style: 'opacity:0', disabled: true });

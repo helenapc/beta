@@ -94,22 +94,11 @@
         <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
       </ion-fab>
 
-      <!-- <ion-fab vertical="center" horizontal="center">
-        <ion-fab-button>Share</ion-fab-button>
-        <ion-fab-list side="top">
-          <ion-fab-button>
-            <ion-icon name="logo-facebook"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button>
-            <ion-icon name="logo-twitter"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button>
-            <ion-icon name="logo-youtube"></ion-icon>
-          </ion-fab-button>
-        </ion-fab-list>
-      </ion-fab> -->
-
       <ion-fab vertical="top" horizontal="start" style="margin-top: 58px; margin-left: -8px;">
+        <ion-fab-button  id="nameSetting" color="light" size="small">
+          <ion-label class="nameSetting" style="font-size: 20px;">A</ion-label>
+        </ion-fab-button>
+
         <ion-fab-button  id="barLogoutF" color="light" size="small">
           <ion-icon  class="logoutf"  name="log-out-outline"></ion-icon>
         </ion-fab-button>
@@ -118,19 +107,13 @@
       
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
 
-
         <ion-fab-button id="expandCard" color="light" size="small">
-          <ion-icon id="expandIcon" name="lock-closed"></ion-icon>
+          <ion-icon id="expandIcon" name="expand-outline"></ion-icon>
         </ion-fab-button>
-
-
 
         <ion-fab-button id="showCard" color="light" size="small">
           <ion-icon id="showIcon" name="eye-outline"></ion-icon>
         </ion-fab-button>
-
-
-
 
         <ion-fab-button id="buttonSearch" color="light" size="small">
           <ion-icon name="search"></ion-icon>
@@ -148,7 +131,7 @@
 
   </ion-app>
   <script src="fun.js"></script>
-  <!-- <script src="extra.js"></script> -->
+  <script src="extra.js"></script>
   <script src="2_7.js"></script>
   <script src="btn.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>

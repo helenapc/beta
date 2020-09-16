@@ -23,7 +23,7 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.setAttribute('class', 'hide');
     newSub4.setAttribute('class', 'hide');
 
-    if (expandIcon.getAttribute('name') == 'lock-closed') {
+    if (expandIcon.getAttribute('name') == 'expand-outline') {
         newSub2.classList.add("hide");
         newSub3.classList.add("hide");
         newSub4.classList.add("hide");
@@ -99,10 +99,10 @@ function delete_spaces(v1) {
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
     title.setAttribute('style', 'margin-left:0px');
+    setAttributes(nameSetting, { style: 'opacity:1', disabled: boolean });
     setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
     setAttributes(showCard, { style: 'opacity:1', disabled: boolean });
-    // setAttributes(expandCard, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
     content.setAttribute('style', '--background: #ffffff00');
@@ -419,7 +419,6 @@ function presentAlertCheckboxDel(metaObjDel) {
 };
 
 function alertEdit() {
-
     const toRemplace = i / 5;
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
@@ -474,7 +473,6 @@ function alertEdit() {
 
 function alertEditN(cuPath, reemplace) {
 
-
     const toRemplace = reemplace / 5;
 
     const alert = document.createElement('ion-alert');
@@ -496,8 +494,6 @@ function alertEditN(cuPath, reemplace) {
                     return;
                 }
 
-                // console.log(newData.name1.toLowerCase());
-                // console.log(newData.name1.toLowerCase());
                 newData.name1 = delete_spaces(newData.name1.toLowerCase());
                 newData.name2 = delete_spaces(newData.name2);
                 newData.name3 = delete_spaces(newData.name3);
@@ -514,12 +510,8 @@ function alertEditN(cuPath, reemplace) {
                         return;
                     }
                 }
-                // console.log('Edit__');
-                // console.log(aTotal);
-                // aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
+
                 aTotal.splice(toRemplace, 1, code(newData.name1) + 'OG' + code(newData.name2) + 'OG' + code(newData.name3) + 'OG' + code(newData.name4));
-                // console.log(aTotal);
-                // console.log(newData.name1);            
                 aTotalTOnewTotal();
                 refreshData();
                 presentToast(`"${cuPath[0]}" editado.`, 500, 'dark');
@@ -533,6 +525,7 @@ function alertEditN(cuPath, reemplace) {
 }
 
 function alertDel(msg) {
+
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${msg}?`;
     alert.buttons = [
@@ -555,6 +548,7 @@ function alertDel(msg) {
 }
 
 function alertDelN(cuPath, reemplace) {
+
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${cuPath[0]}?`;
     alert.buttons = [
@@ -575,6 +569,7 @@ function alertDelN(cuPath, reemplace) {
     document.body.appendChild(alert);
     return alert.present();
 }
+
 
 
 //EXTRAS
