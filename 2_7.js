@@ -110,7 +110,7 @@ item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 // barLogout.setAttribute('style', )
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.746-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.747-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
