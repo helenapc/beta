@@ -118,7 +118,7 @@ function barProgressF(color, state) {
     }
 };
 
-function refreshData() {
+function refreshData(toast = true) {
     aTotal.sort();
     if (newSearch.value) {
         setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
@@ -153,7 +153,7 @@ function refreshData() {
         }
     }
     newSearch.value === '' ? (showSearch.innerHTML = '') : contador == 1 ? (s = '') : (s = 's');
-    if (newSearch.value != '') presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
+    if (newSearch.value != '' && toast) presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
     if (showSearch.innerHTML != '') showIcon.setAttribute('name', 'eye-off-outline');
 }
 

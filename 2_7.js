@@ -63,7 +63,6 @@ const content = document.getElementById('content');
 //******************************************* */
 
 
-// setAttributes(newSearch, { style: 'opacity:0', disabled: true });
 setAttributes(barLogoutF, { style: 'opacity:0', disabled: true });
 setAttributes(nameSetting, { style: 'opacity:0', disabled: true });
 setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
@@ -102,7 +101,7 @@ barTitle.setAttribute('lines', 'none');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON
-setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
+setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-forward-outline', slot: 'start', id: 'barClose'})
 setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
 
 //BLOCK 01
@@ -117,7 +116,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.748-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.7.49-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
