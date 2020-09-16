@@ -125,7 +125,7 @@ function refreshData() {
         setAttributes(expandCard, { style: 'opacity:1', disabled: false });
     } else {
         showIcon.setAttribute('name', 'eye-outline');
-        expandIcon.setAttribute('name', 'lock-closed');
+        expandIcon.setAttribute('name', 'contract-outline');
         setAttributes(expandCard, { style: 'opacity:0', disabled: true });
         setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
     }
