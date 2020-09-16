@@ -37,6 +37,8 @@ const eyePass = document.getElementById('eyePass');
 
 const title = document.getElementById('title');
 
+
+
 const showLogin = document.getElementById('showLogin');
 const buttonLogin = document.getElementById('buttonLogin');
 const buttonCreate = document.getElementById('buttonCreate');
@@ -55,7 +57,7 @@ const showCard = document.getElementById('showCard');
 const buttonSearch = document.getElementById('buttonSearch');
 
 
-// const lock = document.getElementById('lock')
+
 const buttonFocus = document.getElementById('buttonFocus');
 const content = document.getElementById('content');
 //******************************************* */
@@ -90,6 +92,8 @@ const barHeader = document.createElement('ion-header');
 const barToolbar = document.createElement('ion-toolbar');
 const barTitle = document.createElement('ion-item');
 const barLabel = document.createElement('ion-title');
+
+
 const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
 barMenuPrincipal.setAttribute('disabled', true);
@@ -109,13 +113,11 @@ barToolbar.appendChild(barTitle);
 barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
-
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
-// barLogout.setAttribute('style', )
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.747-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.748-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -148,6 +150,7 @@ if (eyePass) {
 // ------------------ START ------------------ //
 
 
+
 localStorage.removeItem('alrt');
 
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
@@ -156,6 +159,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     splitInit();
     aTotalTOnewTotal();
     document.getElementById('userName').innerHTML = deco(txt[0]);
+    document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase()
     compare = false;
 
 
@@ -295,6 +299,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 // welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
+    expandIcon.setAttribute('name', 'contract-outline')
     showSearch.innerHTML = `
     <div style="text-align:center"><br>No hay datos guardados. </div>
     <div style="text-align:center"><br> Aquí hay unos ejemplos de lo que se puede hacer. </div>
@@ -302,5 +307,5 @@ if (!txt[3] && showLogin.innerHTML == '') {
     `;
     showCardAll('facebook', 'prueba@hotmail.com', '1234abcd', 'Las notas son opcionales 😎');
     showCardAll('google 👍', 'tucuenta@gmail.com', 'prueba1234', '');
-    `<div style="text-align:center"></br>AAAAAAAAAAAAAAAAAA</div>`
+    expandIcon.setAttribute('name', 'expand-outline')
 };

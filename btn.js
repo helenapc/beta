@@ -169,31 +169,31 @@ buttonCreate.addEventListener('click', () => {
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
 showSearch.addEventListener('click', e => {
-    if (expandIcon.getAttribute('name') == 'expand-outline') {
-        e.preventDefault();
-        var xPath = 3;
-        var cuPath = [];
+    e.preventDefault();
+    var xPath = 3;
+    var cuPath = [];
 
-        if (e.path[xPath].localName == 'ion-row') return;
-        if (e.path[xPath].innerText == undefined) xPath = 0;
-        if (e.path[xPath].innerText == '') xPath = 5;
+    if (e.path[xPath].localName == 'ion-row') return;
+    if (e.path[xPath].innerText == undefined) xPath = 0;
+    if (e.path[xPath].innerText == '') xPath = 5;
 
-        cuPath[0] = e.path[xPath].children[0].innerText;
-        cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
-        cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
-        cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
+    cuPath[0] = e.path[xPath].children[0].innerText;
+    cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
+    cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
+    cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
 
-        if (cuPath[3] == 'Notas:') cuPath[3] = '';
+    if (cuPath[3] == 'Notas:') cuPath[3] = '';
 
-        for (i = 0; i < newTotal.length; i += 5) {
-            if (
-                cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
-                cuPath[1] == newTotal[i + 1] &&
-                cuPath[2] == newTotal[i + 2] &&
-                cuPath[3] == newTotal[i + 3]
-            ) {
+    for (i = 0; i < newTotal.length; i += 5) {
+        if (
+            cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
+            cuPath[1] == newTotal[i + 1] &&
+            cuPath[2] == newTotal[i + 2] &&
+            cuPath[3] == newTotal[i + 3]
+        ) {
+            const reemplace = i
+            if (expandIcon.getAttribute('name') == 'expand-outline') {
                 function alertView() {
-                    const reemplace = i
                     const alert = document.createElement('ion-alert');
                     alert.subHeader = newTotal[i].toUpperCase();
                     alert.message = `
@@ -206,48 +206,19 @@ showSearch.addEventListener('click', e => {
                     alert.buttons = [
                         {
                             text: 'Borrar', cssClass: 'pepe',
-                            handler: () => { alertDelN(cuPath, reemplace) }
+                            handler: () => { alertDel(cuPath, reemplace) }
                         },
                         {
                             text: 'Editar', cssClass: 'pepe2',
-                            handler: () => { alertEditN(cuPath, reemplace) }
+                            handler: () => { alertEdit(cuPath, reemplace) }
                         },
                     ]
                     document.body.appendChild(alert);
                     return alert.present();
                 }
                 alertView();
-            }
-        }
-    }
-});
-
-showSearch.addEventListener('long-press', e => { // TAP
-    if (expandIcon.getAttribute('name') != 'expand-outline') {
-        e.preventDefault();
-        var xPath = 3;
-        var cuPath = [];
-
-        if (e.path[xPath].localName == 'ion-row') return;
-        if (e.path[xPath].innerText == undefined) xPath = 0;
-        if (e.path[xPath].innerText == '') xPath = 5;
-
-        cuPath[0] = e.path[xPath].children[0].innerText;
-        cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
-        cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
-        cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
-
-        if (cuPath[3] == 'Notas:') cuPath[3] = '';
-
-        // console.log(cuPath);
-
-        for (i = 0; i < newTotal.length; i += 5) {
-            if (
-                cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
-                cuPath[1] == newTotal[i + 1] &&
-                cuPath[2] == newTotal[i + 2] &&
-                cuPath[3] == newTotal[i + 3]
-            ) {
+                return;
+            } else {
                 function presentToastC(msg) {
                     const toast = document.createElement('ion-toast');
                     toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
@@ -257,69 +228,12 @@ showSearch.addEventListener('long-press', e => { // TAP
                     toast.buttons = [
                         {
                             icon: 'pencil',
-                            handler: () => {
-                                function alertEdit() {
-                                    console.log(i);
-                                    console.log(newTotal[i]);
-                                    console.log(newTotal[i + 1]);
-                                    console.log(newTotal[i + 2]);
-                                    console.log(newTotal[i + 3]);
-                                    const toRemplace = i / 5;
-                                    console.log(toRemplace);
-                                    const alert = document.createElement('ion-alert');
-                                    alert.setAttribute('backdrop-dismiss', 'false');
-                                    alert.header = 'Editar cuenta';
-                                    alert.inputs = [
-                                        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: newTotal[i] },
-                                        { name: 'name2', placeholder: 'Usuario/email', value: newTotal[i + 1] },
-                                        { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
-                                        { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
-                                    ];
-                                    alert.buttons = [
-                                        { text: 'Cancelar', role: 'cancel' },
-                                        {
-                                            text: 'Ok',
-                                            handler: newData => {
-                                                if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
-                                                    alertMsg('Error', 'Datos incorrectos o vacíos.');
-                                                    return;
-                                                }
-
-                                                newData.name1 = delete_spaces(newData.name1);
-                                                newData.name2 = delete_spaces(newData.name2);
-                                                newData.name3 = delete_spaces(newData.name3);
-                                                newData.name4 = delete_spaces(newData.name4);
-
-                                                for (i = 0; i < newTotal.length; i += 5) {
-                                                    if (
-                                                        newData.name1 == newTotal[i] &&
-                                                        newData.name2 == newTotal[i + 1] &&
-                                                        newData.name3 == newTotal[i + 2] &&
-                                                        newData.name4 == newTotal[i + 3]
-                                                    ) {
-                                                        alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                                                        return;
-                                                    }
-                                                }
-
-
-                                                // aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
-                                                aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
-                                                aTotalTOnewTotal();
-                                                refreshData();
-                                                presentToast(`"${msg}" editado.`, 500, 'dark');
-                                                save();
-                                                updateDB('L1', 'B1');
-                                            },
-                                        },
-                                    ];
-                                    document.body.appendChild(alert);
-                                    return alert.present();
-                                }
-                                alertEdit();
-                            }
+                            handler: () => { alertEdit(cuPath, reemplace) }
                         },
-                        { icon: 'trash', handler: () => { alertDel() } },
+                        {
+                            icon: 'trash',
+                            handler: () => { alertDel(cuPath, reemplace) }
+                        },
                     ];
                     document.body.appendChild(toast);
                     return toast.present();
@@ -330,6 +244,52 @@ showSearch.addEventListener('long-press', e => { // TAP
         }
     }
 });
+
+// showSearch.addEventListener('long-press', e => { // TAP
+//     if (expandIcon.getAttribute('name') != 'expand-outline') {
+//         e.preventDefault();
+//         var xPath = 3;
+//         var cuPath = [];
+
+//         if (e.path[xPath].localName == 'ion-row') return;
+//         if (e.path[xPath].innerText == undefined) xPath = 0;
+//         if (e.path[xPath].innerText == '') xPath = 5;
+
+//         cuPath[0] = e.path[xPath].children[0].innerText;
+//         cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
+//         cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
+//         cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
+
+//         if (cuPath[3] == 'Notas:') cuPath[3] = '';
+
+//         // console.log(cuPath);
+
+//         for (i = 0; i < newTotal.length; i += 5) {
+//             if (
+//                 cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
+//                 cuPath[1] == newTotal[i + 1] &&
+//                 cuPath[2] == newTotal[i + 2] &&
+//                 cuPath[3] == newTotal[i + 3]
+//             ) {
+//                 function presentToastC() {
+//                     const toast = document.createElement('ion-toast');
+//                     toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
+//                     toast.style.color = 'var(--ion-text-toastC)';
+//                     toast.message = newTotal[i];
+//                     toast.duration = 1250;
+//                     toast.buttons = [
+//                         { icon: 'pencil', handler: () => { alertEdit() }},
+//                         { icon: 'trash', handler: () => { alertDel() }},
+//                     ];
+//                     document.body.appendChild(toast);
+//                     return toast.present();
+//                 }
+//                 presentToastC(cuPath[0]);
+//                 return;
+//             }
+//         }
+//     }
+// });
 
 refresher.addEventListener('ionRefresh', () => {
     setTimeout(() => {
@@ -343,81 +303,10 @@ refresher.addEventListener('ionRefresh', () => {
 //NAV BAR
 barClose.addEventListener('click', () => { barMenuPrincipal.close() });
 
+nameSetting.addEventListener('click', () => { alertPass() });
+
 barEdit.addEventListener('click', () => {
     barMenuPrincipal.close();
-    function alertPass() {
-        const alertPassItem = document.createElement('ion-alert');
-        alertPassItem.message = 'Inserte contraseña para continuar..';
-        alertPassItem.inputs = [
-            { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
-        ];
-        alertPassItem.buttons = [
-            {
-                text: 'Ok',
-                handler: u => {
-                    if (u.uEPass == deco(txt[2])) {
-                        if (txt[0] == '25') txt[0] = '';
-                        function presentAlertEditUserData() {
-                            const alert = document.createElement('ion-alert');
-                            alert.header = 'Editar cuenta';
-                            alert.inputs = [
-                                { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
-                                { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
-                                { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
-                            ];
-                            alert.buttons = [
-                                { text: 'Cancelar', role: 'cancel' },
-                                {
-                                    text: 'Ok',
-                                    handler: usNData => {
-                                        if (usNData.userEditUser == '' || usNData.userEditPass == '') {
-                                            barProgressF('danger', 'determinate');
-                                            alertMsg('Error', 'Datos vacíos.');
-                                            setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-                                            return;
-                                        }
-
-                                        function presentAlertConfirmEdit() {
-                                            const alert = document.createElement('ion-alert');
-                                            alert.header = 'ADVERTENCIA!';
-                                            alert.subHeader = 'Al cambiar estos datos se cerrará la sesión en otros dispositivos';
-                                            alert.message = '¿Confirmar?';
-                                            alert.buttons = [
-                                                { text: 'Cancelar', role: 'cancel' },
-                                                {
-                                                    text: 'Ok',
-                                                    handler: () => {
-                                                        (code(usNData.userEditName) == '') ? txt[0] = '25' : txt[0] = code(usNData.userEditName);
-                                                        txt[1] = code(usNData.userEditUser);
-                                                        txt[2] = code(usNData.userEditPass);
-                                                        document.getElementById('userName').innerHTML = deco(txt[0]);
-                                                        localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                                                        save();
-                                                        updateDB('L1', 'B1');
-                                                        updateDB('L1', 'B2');
-                                                    },
-                                                },
-                                            ];
-                                            document.body.appendChild(alert);
-                                            return alert.present();
-                                        }
-                                        presentAlertConfirmEdit();
-                                    },
-                                },
-                            ];
-                            document.body.appendChild(alert);
-                            return alert.present();
-                        }
-                        presentAlertEditUserData();
-                    } else {
-                        presentToast('Incorrecto.', '800', 'warning');
-                    }
-                },
-            },
-        ];
-        document.body.appendChild(alertPassItem);
-        return alertPassItem.present();
-    }
     alertPass();
 });
 
@@ -586,7 +475,6 @@ barDelAcc.addEventListener('click', () => {
 
 
 //FAB
-
 const expandIcon = document.getElementById('expandIcon');
 document.getElementById('expandCard').addEventListener('click', () => {
     if (expandIcon.getAttribute('name') == 'expand-outline') {
@@ -612,7 +500,6 @@ document.getElementById('showCard').addEventListener('click', () => {
 });
 
 
-
 buttonSearch.addEventListener('click', () => {
     if (!statSearchBar) {
         newSearch.value = '';
@@ -625,8 +512,6 @@ buttonSearch.addEventListener('click', () => {
     }
 
 })
-
-
 
 buttonAdd.addEventListener('click', () => {
     function presentAlertAdd() {
@@ -670,9 +555,12 @@ buttonAdd.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     save();
                     showSearch.innerHTML = '';
+                    // showSearch.innerHTML = newData2.name1a;
                     newSearch.value = newData2.name1a;
+                    expandIcon.setAttribute('name', 'contract-outline');
+                    refreshData();
+                    // showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
                     presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
-                    showCardAll(newData2.name1a.toUpperCase(), newData2.name2a, newData2.name3a, newData2.name4a);
                     updateDB('L1', 'B1');
                 },
             },
@@ -698,3 +586,160 @@ checkbox.addEventListener('click', () => {
     }
     localStorage.setItem('theme', activeTheme);
 });
+
+
+
+// showSearch.addEventListener('click', e => {
+//     if (expandIcon.getAttribute('name') == 'expand-outline') {
+//         e.preventDefault();
+//         var xPath = 3;
+//         var cuPath = [];
+
+//         if (e.path[xPath].localName == 'ion-row') return;
+//         if (e.path[xPath].innerText == undefined) xPath = 0;
+//         if (e.path[xPath].innerText == '') xPath = 5;
+
+//         cuPath[0] = e.path[xPath].children[0].innerText;
+//         cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
+//         cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
+//         cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
+
+//         if (cuPath[3] == 'Notas:') cuPath[3] = '';
+
+//         for (i = 0; i < newTotal.length; i += 5) {
+//             if (
+//                 cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
+//                 cuPath[1] == newTotal[i + 1] &&
+//                 cuPath[2] == newTotal[i + 2] &&
+//                 cuPath[3] == newTotal[i + 3]
+//             ) {
+//                 function alertView() {
+//                     const reemplace = i
+//                     const alert = document.createElement('ion-alert');
+//                     alert.subHeader = newTotal[i].toUpperCase();
+//                     alert.message = `
+//                 <ul>
+//                 <li>Usuario:</br>${newTotal[i + 1]}</li>
+//                 <li>Contraseña:</br>${newTotal[i + 2]}</li>
+//                 <li>Notas:</br>${newTotal[i + 3]}</li>
+//                 </ul>
+//                 `;
+//                     alert.buttons = [
+//                         {
+//                             text: 'Borrar', cssClass: 'pepe',
+//                             handler: () => { alertDelN(cuPath, reemplace) }
+//                         },
+//                         {
+//                             text: 'Editar', cssClass: 'pepe2',
+//                             handler: () => { alertEditN(cuPath, reemplace) }
+//                         },
+//                     ]
+//                     document.body.appendChild(alert);
+//                     return alert.present();
+//                 }
+//                 alertView();
+//             }
+//         }
+//     }
+// });
+
+// showSearch.addEventListener('long-press', e => { // TAP
+//     if (expandIcon.getAttribute('name') != 'expand-outline') {
+//         e.preventDefault();
+//         var xPath = 3;
+//         var cuPath = [];
+
+//         if (e.path[xPath].localName == 'ion-row') return;
+//         if (e.path[xPath].innerText == undefined) xPath = 0;
+//         if (e.path[xPath].innerText == '') xPath = 5;
+
+//         cuPath[0] = e.path[xPath].children[0].innerText;
+//         cuPath[1] = e.path[xPath].children[1].innerText.split('Usuario: ').pop();
+//         cuPath[2] = e.path[xPath].children[2].innerText.split('Contraseña: ').pop();
+//         cuPath[3] = e.path[xPath].children[3].innerText.split('Notas: ').pop();
+
+//         if (cuPath[3] == 'Notas:') cuPath[3] = '';
+
+//         // console.log(cuPath);
+
+//         for (i = 0; i < newTotal.length; i += 5) {
+//             if (
+//                 cuPath[0].toLowerCase() == newTotal[i].toLowerCase() &&
+//                 cuPath[1] == newTotal[i + 1] &&
+//                 cuPath[2] == newTotal[i + 2] &&
+//                 cuPath[3] == newTotal[i + 3]
+//             ) {
+//                 function presentToastC(msg) {
+//                     const toast = document.createElement('ion-toast');
+//                     toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
+//                     toast.style.color = 'var(--ion-text-toastC)';
+//                     toast.message = msg;
+//                     toast.duration = 1250;
+//                     toast.buttons = [
+//                         {
+//                             icon: 'pencil',
+//                             handler: () => {
+//                                 function alertEdit() {
+//                                     const toRemplace = i / 5;
+//                                     const alert = document.createElement('ion-alert');
+//                                     alert.setAttribute('backdrop-dismiss', 'false');
+//                                     alert.header = 'Editar cuenta';
+//                                     alert.inputs = [
+//                                         { name: 'name1', placeholder: 'Cuenta(Nombre)', value: newTotal[i] },
+//                                         { name: 'name2', placeholder: 'Usuario/email', value: newTotal[i + 1] },
+//                                         { name: 'name3', placeholder: 'Contraseña', value: newTotal[i + 2] },
+//                                         { name: 'name4', placeholder: 'Notas(Opcional)', value: newTotal[i + 3] },
+//                                     ];
+//                                     alert.buttons = [
+//                                         { text: 'Cancelar', role: 'cancel' },
+//                                         {
+//                                             text: 'Ok',
+//                                             handler: newData => {
+//                                                 if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
+//                                                     alertMsg('Error', 'Datos incorrectos o vacíos.');
+//                                                     return;
+//                                                 }
+
+//                                                 newData.name1 = delete_spaces(newData.name1);
+//                                                 newData.name2 = delete_spaces(newData.name2);
+//                                                 newData.name3 = delete_spaces(newData.name3);
+//                                                 newData.name4 = delete_spaces(newData.name4);
+
+//                                                 for (i = 0; i < newTotal.length; i += 5) {
+//                                                     if (
+//                                                         newData.name1 == newTotal[i] &&
+//                                                         newData.name2 == newTotal[i + 1] &&
+//                                                         newData.name3 == newTotal[i + 2] &&
+//                                                         newData.name4 == newTotal[i + 3]
+//                                                     ) {
+//                                                         alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
+//                                                         return;
+//                                                     }
+//                                                 }
+
+//                                                 aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
+//                                                 aTotalTOnewTotal();
+//                                                 refreshData();
+//                                                 presentToast(`"${msg}" editado.`, 500, 'dark');
+//                                                 save();
+//                                                 updateDB('L1', 'B1');
+//                                             },
+//                                         },
+//                                     ];
+//                                     document.body.appendChild(alert);
+//                                     return alert.present();
+//                                 }
+//                                 alertEdit();
+//                             }
+//                         },
+//                         { icon: 'trash', handler: () => { alertDel() } },
+//                     ];
+//                     document.body.appendChild(toast);
+//                     return toast.present();
+//                 }
+//                 presentToastC(cuPath[0]);
+//                 return;
+//             }
+//         }
+//     }
+// });
