@@ -47,8 +47,10 @@ const newSearch = document.getElementById('new-s');
 
 const barLogoutF = document.getElementById('barLogoutF');
 
+
 const buttonAdd = document.getElementById('buttonAdd');
 const expandCard = document.getElementById('expandCard');
+const showCard = document.getElementById('showCard');
 const buttonSearch = document.getElementById('buttonSearch');
 
 
@@ -62,6 +64,7 @@ const content = document.getElementById('content');
 setAttributes(barLogoutF, { style: 'opacity:0', disabled: true });
 setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
 setAttributes(expandCard, { style: 'opacity:0', disabled: true });
+setAttributes(showCard, { style: 'opacity:0', disabled: true });
 setAttributes(buttonSearch, { style: 'opacity:0', disabled: true });
 setAttributes(refresher, { style: 'opacity:0', disabled: true });
 title.setAttribute('style', 'margin-left:38px');

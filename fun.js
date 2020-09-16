@@ -101,6 +101,7 @@ function disableItem(boolean) {
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
+    setAttributes(showCard, { style: 'opacity:1', disabled: boolean });
     // setAttributes(expandCard, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
