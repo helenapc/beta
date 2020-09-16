@@ -584,25 +584,25 @@ barDelAcc.addEventListener('click', () => {
 
 //FAB
 
-const iconEye = document.getElementById('iconEye');
+const expandIcon = document.getElementById('expandIcon');
 document.getElementById('expandCard').addEventListener('click', () => {
-    if (iconEye.getAttribute('name') == 'eye-outline') {
-        iconEye.setAttribute('name', 'eye-off-outline')
+    if (expandIcon.getAttribute('name') == 'lock-closed') {
+        expandIcon.setAttribute('name', 'lock-open-outline')
     } else {
-        iconEye.setAttribute('name', 'eye-outline')
+        expandIcon.setAttribute('name', 'lock-closed')
     };
     refreshData();
 });
 
-const albumIcon = document.getElementById('albumIcon');
-document.getElementById('album').addEventListener('click', () => {
+const showIcon = document.getElementById('showIcon');
+document.getElementById('showCard').addEventListener('click', () => {
 
-    if (albumIcon.getAttribute('name') == 'albums-outline') {
-        albumIcon.setAttribute('name', 'close-outline');
+    if (showIcon.getAttribute('name') == 'eye-outline') {
+        showIcon.setAttribute('name', 'eye-off-outline');
         newSearch.value = '*';
         newSearch.setAttribute('style', 'margin-top:-60px');
     } else {
-        albumIcon.setAttribute('name', 'albums-outline');
+        showIcon.setAttribute('name', 'eye-outline');
         newSearch.value = '';
     };
     refreshData();

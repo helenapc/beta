@@ -23,22 +23,15 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.setAttribute('class', 'hide');
     newSub4.setAttribute('class', 'hide');
 
-    if (iconEye.getAttribute('name') == 'eye-off-outline') {
+    if (expandIcon.getAttribute('name') == 'lock-closed') {
         newSub2.classList.add("hide");
         newSub3.classList.add("hide");
         newSub4.classList.add("hide");
     } else {
-
         newSub2.classList.remove("hide");
         newSub3.classList.remove("hide");
         newSub4.classList.remove("hide");
     };
-
-    // newSub4.setAttribute('id', 'newSub4');
-
-    // newSub2.classList.add("hide");
-    // newSub3.classList.add("hide");
-    // newSub4.classList.add("hide");
 
     newHeader.appendChild(newSub1);
     newHeader.appendChild(newSub2);
@@ -108,7 +101,7 @@ function disableItem(boolean) {
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
-    setAttributes(expandCard, { style: 'opacity:1', disabled: boolean });
+    // setAttributes(expandCard, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
     content.setAttribute('style', '--background: #ffffff00');
@@ -128,14 +121,16 @@ function refreshData() {
     aTotal.sort();
     if (newSearch.value) {
         setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
+        setAttributes(expandCard, { style: 'opacity:1', disabled: false });
     } else {
-        iconEye.setAttribute('name', 'eye-off-outline')
-        albumIcon.setAttribute('name', 'albums-outline');
+        showIcon.setAttribute('name', 'eye-outline');
+        expandIcon.setAttribute('name', 'lock-closed');
+        setAttributes(expandCard, { style: 'opacity:0', disabled: true });
         setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
     }
 
     showSearch.innerHTML = '';
-    
+
     var contador = 0;
     for (i = 0; i < newTotal.length; i += 5) {
         if (newSearch.value === '*') {
