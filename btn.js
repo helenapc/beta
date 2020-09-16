@@ -205,11 +205,11 @@ showSearch.addEventListener('click', e => {
                 alert.buttons = [
                     {
                         text: 'Borrar', cssClass: 'pepe',
-                        handler: () => {alertDelN(cuPath, reemplace)}
+                        handler: () => { alertDelN(cuPath, reemplace) }
                     },
                     {
                         text: 'Editar', cssClass: 'pepe2',
-                        handler: () => {alertEditN(cuPath, reemplace)}
+                        handler: () => { alertEditN(cuPath, reemplace) }
                     },
                 ]
                 document.body.appendChild(alert);
@@ -583,6 +583,33 @@ barDelAcc.addEventListener('click', () => {
 
 
 //FAB
+
+const iconEye = document.getElementById('iconEye');
+document.getElementById('expandCard').addEventListener('click', () => {
+    if (iconEye.getAttribute('name') == 'eye-outline') {
+        iconEye.setAttribute('name', 'eye-off-outline')
+    } else {
+        iconEye.setAttribute('name', 'eye-outline')
+    };
+    refreshData();
+});
+
+const albumIcon = document.getElementById('albumIcon');
+document.getElementById('album').addEventListener('click', () => {
+
+    if (albumIcon.getAttribute('name') == 'albums-outline') {
+        albumIcon.setAttribute('name', 'close-outline');
+        newSearch.value = '*';
+        newSearch.setAttribute('style', 'margin-top:-60px');
+    } else {
+        albumIcon.setAttribute('name', 'albums-outline');
+        newSearch.value = '';
+    };
+    refreshData();
+});
+
+
+
 buttonSearch.addEventListener('click', () => {
     if (!statSearchBar) {
         newSearch.value = '';
@@ -596,15 +623,7 @@ buttonSearch.addEventListener('click', () => {
 
 })
 
-buttonEye.addEventListener('click', () => {
-    if (iconEye.getAttribute('name') == 'eye-outline') {
-        newSearch.value = '*';
-        newSearch.setAttribute('style', 'margin-top:-60px');
-    } else {
-        newSearch.value = '';
-    };
-    refreshData();
-});
+
 
 buttonAdd.addEventListener('click', () => {
     function presentAlertAdd() {

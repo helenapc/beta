@@ -48,10 +48,11 @@ const newSearch = document.getElementById('new-s');
 const barLogoutF = document.getElementById('barLogoutF');
 
 const buttonAdd = document.getElementById('buttonAdd');
-const buttonEye = document.getElementById('buttonEye');
+const expandCard = document.getElementById('expandCard');
 const buttonSearch = document.getElementById('buttonSearch');
-const iconEye = document.getElementById('iconEye');
 
+
+// const lock = document.getElementById('lock')
 const buttonFocus = document.getElementById('buttonFocus');
 const content = document.getElementById('content');
 //******************************************* */
@@ -60,7 +61,7 @@ const content = document.getElementById('content');
 // setAttributes(newSearch, { style: 'opacity:0', disabled: true });
 setAttributes(barLogoutF, { style: 'opacity:0', disabled: true });
 setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
-setAttributes(buttonEye, { style: 'opacity:0', disabled: true });
+setAttributes(expandCard, { style: 'opacity:0', disabled: true });
 setAttributes(buttonSearch, { style: 'opacity:0', disabled: true });
 setAttributes(refresher, { style: 'opacity:0', disabled: true });
 title.setAttribute('style', 'margin-left:38px');
@@ -93,7 +94,7 @@ barTitle.setAttribute('lines', 'none');
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON
 setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
-setAttributes(barIcon01, {button: 'click-btn', name: 'build-outline', slot: 'end', id: 'barEdit'})
+setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
 
 //BLOCK 01
 barTitle.appendChild(barIcon00);

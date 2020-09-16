@@ -28,6 +28,9 @@ ion-icon{
   margin-left: 20px;
 }
 
+/* ion-card-subtitle:not(:first-child){
+  display: none;
+} */
 
 #see{
   position: absolute;
@@ -50,6 +53,9 @@ li{
 
 .hide{
   display: none;
+}
+.show{
+  display: flexbox;
 }
 
 

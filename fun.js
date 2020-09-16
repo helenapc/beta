@@ -1,4 +1,6 @@
 
+
+
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
@@ -13,9 +15,30 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.textContent = 'Contraseña: ' + pass;
     newSub4.textContent = 'Notas: ' + notes;
 
+    newSub2.setAttribute('id', 'newSub2');
+    newSub3.setAttribute('id', 'newSub3');
+    newSub4.setAttribute('id', 'newSub4');
+
     newSub2.setAttribute('class', 'hide');
     newSub3.setAttribute('class', 'hide');
     newSub4.setAttribute('class', 'hide');
+
+    if (iconEye.getAttribute('name') == 'eye-off-outline') {
+        newSub2.classList.add("hide");
+        newSub3.classList.add("hide");
+        newSub4.classList.add("hide");
+    } else {
+
+        newSub2.classList.remove("hide");
+        newSub3.classList.remove("hide");
+        newSub4.classList.remove("hide");
+    };
+
+    // newSub4.setAttribute('id', 'newSub4');
+
+    // newSub2.classList.add("hide");
+    // newSub3.classList.add("hide");
+    // newSub4.classList.add("hide");
 
     newHeader.appendChild(newSub1);
     newHeader.appendChild(newSub2);
@@ -85,7 +108,7 @@ function disableItem(boolean) {
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
-    setAttributes(buttonEye, { style: 'opacity:1', disabled: boolean });
+    setAttributes(expandCard, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
     content.setAttribute('style', '--background: #ffffff00');
@@ -104,18 +127,14 @@ function barProgressF(color, state) {
 function refreshData() {
     aTotal.sort();
     if (newSearch.value) {
-        iconEye.setAttribute('name', 'eye-off-outline')
         setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
     } else {
-        iconEye.setAttribute('name', 'eye-outline')
+        iconEye.setAttribute('name', 'eye-off-outline')
+        albumIcon.setAttribute('name', 'albums-outline');
         setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
     }
 
     showSearch.innerHTML = '';
-
-    // const decoTotal = [];
-    // for (i=0;i<aTotal.length;i++){decoTotal[i]=deco(aTotal[i])};
-    // console.log(decoTotal);
     
     var contador = 0;
     for (i = 0; i < newTotal.length; i += 5) {
@@ -502,7 +521,7 @@ function alertEditN(cuPath, reemplace) {
                 // console.log('Edit__');
                 // console.log(aTotal);
                 // aTotal.splice(toRemplace, 1, `${code(newData.name1)}OG${code(newData.name2)}OG${code(newData.name3)}OG${code(newData.name4)}`);
-                aTotal.splice(toRemplace, 1,code(newData.name1) +'OG' +code(newData.name2) +'OG' +code(newData.name3) +'OG' +code(newData.name4));
+                aTotal.splice(toRemplace, 1, code(newData.name1) + 'OG' + code(newData.name2) + 'OG' + code(newData.name3) + 'OG' + code(newData.name4));
                 // console.log(aTotal);
                 // console.log(newData.name1);            
                 aTotalTOnewTotal();
