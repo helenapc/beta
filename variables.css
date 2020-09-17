@@ -100,6 +100,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
 
 #offline{
   transform: scale(1.5,1.5) translate(-5px, 45px);
+  /* transform: scale(6,6) translateX(-16px);
+  position: relative;
+  left: 300%;
+  top: 30%; */
 }
 
 
