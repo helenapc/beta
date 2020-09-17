@@ -24,11 +24,14 @@
 </head>
 
 <body>
-  <ion-app class="fondo">
+  <ion-app class="fondo" >
+    
+    <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
+
     <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
       <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
     </ion-fab>
-    <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
+
     <div class="ion-page" id="main-content">
       <ion-header >
         <ion-row id="barProgress"></ion-row>
@@ -61,7 +64,10 @@
         </ion-col>
       </ion-row>
 
-      <ion-content class="content" id='content'>
+      <ion-content class="content" id='content' >
+        
+        <div style="height: 100vh; overflow: auto;" class="invisible-scrollbar">
+
 
         <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
           <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
@@ -95,10 +101,13 @@
           </ion-col>
         </ion-row>
 
+      </div>
+        
       </ion-content>
 
       
 
+      <!-- FAB TOP-LEFT -->
       <ion-fab vertical="top" horizontal="start" style="margin-top: 58px; margin-left: -8px;">
         <ion-fab-button  id="nameSetting" color="light" size="small">
           <ion-label id="nameSettingText" style="font-size: 20px;"></ion-label>
@@ -111,7 +120,6 @@
 
       
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
-
         <ion-fab-button id="expandCard" color="light" size="small">
           <ion-icon id="expandIcon" name="expand-outline"></ion-icon>
         </ion-fab-button>
@@ -126,7 +134,7 @@
 
       </ion-fab>
 
-      <ion-fab vertical="bottom" horizontal="center" slot="fixed" id="buttonAdd">
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="buttonAdd">
         <ion-fab-button class="add" color="success" size="small">
           <ion-icon name="add" class="add"></ion-icon>
         </ion-fab-button>

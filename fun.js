@@ -101,7 +101,7 @@ function disableItem(boolean) {
     title.setAttribute('style', 'margin-left:0px');
     setAttributes(nameSetting, { style: 'opacity:1', disabled: boolean });
     setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
-    setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px' });
+    setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px', style: 'margin-right:-8px'});
     setAttributes(showCard, { style: 'opacity:1', disabled: boolean });
     setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
     setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
@@ -121,13 +121,13 @@ function barProgressF(color, state) {
 function refreshData(toast = true) {
     aTotal.sort();
     if (newSearch.value) {
-        setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
+        // setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
         setAttributes(expandCard, { style: 'opacity:1', disabled: false });
     } else {
         showIcon.setAttribute('name', 'eye-outline');
         expandIcon.setAttribute('name', 'expand-outline');
         setAttributes(expandCard, { style: 'opacity:0', disabled: true });
-        setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
+        // setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
     }
 
     showSearch.innerHTML = '';
