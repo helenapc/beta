@@ -516,7 +516,7 @@ async function alertView(cuPath) {
     setTimeout(() => {
         if (closeAlert) return alert.dismiss();
         closeAlert = false;
-    }, 1500);
+    }, 1200);
 }
 
 
