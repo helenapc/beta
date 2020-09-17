@@ -102,6 +102,7 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
   transform: scale(1.5,1.5) translate(-5px, 45px);
 }
 
+
 .ion-text-wrap .title{
   margin-right: -100px;
   padding: -100px;

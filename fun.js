@@ -420,10 +420,9 @@ function presentAlertCheckboxDel(metaObjDel) {
 };
 
 
+
 function alertEdit(cuPath, reemplace) {
-
     const toRemplace = reemplace / 5;
-
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
     alert.header = 'Editar cuenta';
@@ -466,6 +465,7 @@ function alertEdit(cuPath, reemplace) {
                 presentToast(`"${newData.name1}" editado.`, 500, 'dark');
                 save();
                 updateDB('L1', 'B1');
+                closeAlert = false;
             },
         },
     ];
@@ -473,10 +473,7 @@ function alertEdit(cuPath, reemplace) {
     return alert.present();
 }
 
-
-
 function alertDel(cuPath, reemplace) {
-
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${cuPath[0]}?`;
     alert.buttons = [
@@ -491,6 +488,7 @@ function alertDel(cuPath, reemplace) {
                 presentToast(`"${cuPath[0]}" eliminado.`, 500, 'danger');
                 updateDB('L1', 'B1');
                 if (showSearch.value == '') newSearch.value = '';
+                closeAlert = false;
             },
         },
     ];
@@ -498,11 +496,34 @@ function alertDel(cuPath, reemplace) {
     return alert.present();
 }
 
+async function alertView(cuPath) {
+    closeAlert = false;
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('style', '--backdrop-opacity:0;')
+    alert.subHeader = cuPath[0].toUpperCase();
+    alert.translucent = true;
+    alert.message =
+        `
+        <ul>
+        <li>Usuario:</br>${cuPath[1]}</li>
+        <li>Contraseña:</br>${cuPath[2]}</li>
+        <li>Notas:</br>${cuPath[3]}</li>
+        </ul>
+        `;
+    document.body.appendChild(alert);
+    await alert.present();
+
+    setTimeout(() => {
+        if (closeAlert) return alert.dismiss();
+        closeAlert = false;
+    }, 900);
+}
 
 
 // EDIT NM/US/PS/NO
 function alertPass() {
     const alertPassItem = document.createElement('ion-alert');
+    alertPassItem.header = 'Configuración personal';
     alertPassItem.message = 'Inserte contraseña para continuar..';
     alertPassItem.inputs = [
         { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },

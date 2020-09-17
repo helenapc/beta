@@ -17,7 +17,7 @@
     function l(i) {
         v(i);
         var m = i.target,
-            u = parseInt(m.getAttribute('data-long-press-delay') || '1000', 10);
+            u = parseInt(m.getAttribute('data-long-press-delay') || '200', 10);
         n = (function (t, n) {
             if (
                 !(

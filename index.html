@@ -16,10 +16,18 @@
   <script src="https://smtpjs.com/v3/smtp.js"></script> <!-- mail -->
   <link rel="stylesheet" href="variables.css">
 
+  <script type="module">
+    import { popoverController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+    window.popoverController = popoverController;
+  </script>
+
 </head>
 
 <body>
   <ion-app class="fondo">
+    <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
+      <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
+    </ion-fab>
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
     <div class="ion-page" id="main-content">
       <ion-header >
@@ -89,9 +97,7 @@
 
       </ion-content>
 
-      <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
-        <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
-      </ion-fab>
+      
 
       <ion-fab vertical="top" horizontal="start" style="margin-top: 58px; margin-left: -8px;">
         <ion-fab-button  id="nameSetting" color="light" size="small">
@@ -130,7 +136,7 @@
 
   </ion-app>
   <script src="fun.js"></script>
-  <script src="extra.js"></script>
+  <!-- <script src="extra.js"></script> -->
   <script src="2_7.js"></script>
   <script src="btn.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>

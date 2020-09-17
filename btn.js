@@ -168,7 +168,11 @@ buttonCreate.addEventListener('click', () => {
 //CONTENT
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
+
+
+
 showSearch.addEventListener('click', e => {  //editCard
+    
     e.preventDefault();
     var xPath = 3;
     var cuPath = [];
@@ -192,55 +196,40 @@ showSearch.addEventListener('click', e => {  //editCard
             cuPath[3] == newTotal[i + 3]
         ) {
             const reemplace = i
+
             if (expandIcon.getAttribute('name') == 'expand-outline') {
-                function alertView() {
-                    const alert = document.createElement('ion-alert');
-                    alert.subHeader = newTotal[i].toUpperCase();
-                    alert.message = `
-                <ul>
-                <li>Usuario:</br>${newTotal[i + 1]}</li>
-                <li>Contraseña:</br>${newTotal[i + 2]}</li>
-                <li>Notas:</br>${newTotal[i + 3]}</li>
-                </ul>
-                `;
-                    alert.buttons = [
-                        {
-                            text: 'Borrar', cssClass: 'pepe',
-                            handler: () => { alertDel(cuPath, reemplace) }
-                        },
-                        {
-                            text: 'Editar', cssClass: 'pepe2',
-                            handler: () => { alertEdit(cuPath, reemplace) }
-                        },
-                    ]
-                    document.body.appendChild(alert);
-                    return alert.present();
-                }
-                alertView();
-                return;
-            } else {
-                function presentToastC(msg) {
-                    const toast = document.createElement('ion-toast');
-                    toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
-                    toast.style.color = 'var(--ion-text-toastC)';
-                    toast.message = msg;
-                    toast.duration = 1250;
-                    toast.buttons = [
-                        {
-                            icon: 'pencil',
-                            handler: () => { alertEdit(cuPath, reemplace) }
-                        },
-                        {
-                            icon: 'trash',
-                            handler: () => { alertDel(cuPath, reemplace) }
-                        },
-                    ];
-                    document.body.appendChild(toast);
-                    return toast.present();
-                }
-                presentToastC(cuPath[0]);
-                return;
+                alertView(cuPath);
             }
+            function presentToastC(msg) {
+                
+                const toast = document.createElement('ion-toast');
+                toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
+                toast.style.color = 'var(--ion-text-toastC)';
+                toast.translucent = true;
+                toast.message = msg;
+                toast.duration = 1000;
+                toast.buttons = [
+                    {
+                        icon: 'pencil',
+                        handler: () => {
+                            closeAlert = true;
+                            // return alert.dismiss();
+                            alertEdit(cuPath, reemplace);
+                        }
+                    },
+                    {
+                        icon: 'trash',
+                        handler: () => {
+                            closeAlert = true;
+                            alertDel(cuPath, reemplace)
+                        }
+                    },
+                ];
+                document.body.appendChild(toast);
+                return toast.present();
+
+            }
+            presentToastC(cuPath[0]);
         }
     }
 });
@@ -538,3 +527,53 @@ checkbox.addEventListener('click', () => {
     }
     localStorage.setItem('theme', activeTheme);
 });
+
+
+// TEST POPOVER
+
+// document.getElementById('showCard').addEventListener('long-press', e => {
+//     e.preventDefault();
+//     presentPopover(e);
+//     contentPopover('hola');
+
+// })
+
+
+// let currentPopover = null;
+// function presentPopover(e) {
+//     const popover = Object.assign(document.createElement('ion-popover'), {
+//         mode: 'ios',
+//         component: 'popover-example-page',
+//         cssClass: 'my-custom-class',
+//         event: e,
+//         translucent: true,
+//     });
+//     currentPopover = popover;
+//     document.body.appendChild(popover);
+//     return popover.present();
+// }
+
+// function contentPopover(content){
+//     customElements.define('popover-example-page', class ModalContent extends HTMLElement {
+//         connectedCallback() {
+//             // console.log('if icon');
+//             this.innerHTML = `
+//             <ion-list>
+//             <ion-item button onClick="dismissPopover()">${content}</ion-item>
+//             </ion-list>
+//             `;
+
+//         }
+//     });
+// }
+
+// function dismissPopover() {
+//     saludar();
+//     if (currentPopover) {
+//       currentPopover.dismiss().then(() => { currentPopover = null; });
+//     }
+//   }
+
+// function saludar(){
+//     console.log('hola');
+// }

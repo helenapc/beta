@@ -1,4 +1,3 @@
-// import '/fun.js';
 
 
 
@@ -28,7 +27,7 @@ const coll = 'users2';
 var alertcompare = true;
 var resetLogin = false;
 var offline = true;
-
+var closeAlert = false;
 
 // // Init components
 const nameLog = document.getElementById('nameLog');
