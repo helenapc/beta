@@ -51,7 +51,8 @@ const item = (id, ico, text, color = '', show = true) => {
     const ionIco = document.createElement('ion-icon');
     ionIco.setAttribute('name', ico);
     ionIco.setAttribute('slot', 'start');
-    ionIco.setAttribute('className', id);
+    ionIco.setAttribute('class', id);
+    ionIco.setAttribute('style', 'margin-right:10px;');
     ionItem.appendChild(ionIco);
     if (show) {
         barContent.appendChild(ionItem);
@@ -69,7 +70,7 @@ const item = (id, ico, text, color = '', show = true) => {
 
 function helpFunction(opacity, activate) {
     document.getElementById('help-config').setAttribute('style', `opacity:${opacity}`);
-    document.getElementById('help-logout').setAttribute('style', `opacity:${opacity}`);
+    // document.getElementById('help-logout').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-show').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-search').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-add').setAttribute('style', `opacity:${opacity}`);
@@ -116,7 +117,7 @@ function disableItem(boolean) {
     document.getElementById('title').setAttribute('style', 'margin-left:0px');
     setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px' ,disabled: boolean });
     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
-    setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:1', disabled: boolean });
+    // setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:1', disabled: boolean });
     // expand
     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });

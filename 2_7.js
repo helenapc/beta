@@ -43,11 +43,10 @@ const buttonCreate = document.getElementById('buttonCreate');
 
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
-// const refresher = document.getElementById('refresher');
 
+// const refresher = document.getElementById('refresher');
 // const nameSetting = document.getElementById('nameSetting');
 // const barLogoutF = document.getElementById('barLogoutF');
-
 
 // const buttonAdd = document.getElementById('buttonAdd');
 // const expandCard = document.getElementById('expandCard');
@@ -64,7 +63,7 @@ const content = document.getElementById('content');
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
 setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
-setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:0', disabled: true });
+// setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
@@ -76,8 +75,6 @@ setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabl
 
 var statSearchBar = false;
 newSearch.setAttribute('style', 'opacity:1; margin-top:-60px;');
-// setAttributes(newSearch, { style: 'opacity:1; margin-top:-60px', disabled: false });
-
 
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
@@ -104,7 +101,7 @@ barTitle.setAttribute('lines', 'none');
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON
 setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
-setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
+// setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
 
 //BLOCK 01
 barTitle.appendChild(barIcon00);
@@ -118,7 +115,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.7.50-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.7.51-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -196,7 +193,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             function alertCompareData() {
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
-                // alert.setAttribute('backdrop-dismiss', 'false');
+                alert.setAttribute('backdrop-dismiss', 'false');
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                 alert.buttons = [

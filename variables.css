@@ -25,26 +25,38 @@
 }
 
 
+
 .help{
   opacity: 0;
   padding: 8px;
   border-radius: 8px;
   font-size: 18px;
   color: #ffffff;
-  background-color: #505050da;
+  background-color: var(--ion-color-dark);
   position: absolute;
 }
 
+/* .help-cerrar-sesion{ left: 100%; top: 55%; } */
 .help-configuracion{ left: 100%; top: 10%; }
-.help-cerrar-sesion{ left: 100%; top: 55%; }
 .help-expandir-contraer{ left: 100%; top: 6%; }
 .help-mostrar-ocultar{ left: 100%; top: 38%; }
 .help-buscar{ left: 100%; top: 69%; }
 .help-agregar{ right: 100%; top: 16%; }
 
-.logoutf{
+/* .logoutf{
   transform: scaleX(-1) translateX(2px);
+} */
+
+.barLogout{
+  transform: scaleX(-1);
+  padding-left: 2px;
 }
+
+.input-wrapper{
+  /* padding-left: 80px; */
+  --padding-start: 2px;
+}
+
 
 
 /* CARDS */
@@ -77,6 +89,8 @@ li{
 
 
 /*ITEMS*/
+
+
 
 .ion-text-wrap #title{
   margin-right: -100px;

@@ -230,8 +230,6 @@ showSearch.addEventListener('click', e => {  //editCard
     }
 });
 
-
-
 document.getElementById('refresher').addEventListener('ionRefresh', () => {
     setTimeout(() => {
         window.location.reload();
@@ -246,10 +244,10 @@ document.getElementById('refresher').addEventListener('ionRefresh', () => {
 document.getElementById('barOpen').addEventListener('click', ()=>{ helpFunction('0', false) });
 document.getElementById('barClose').addEventListener('click', () => { barMenuPrincipal.close() });
 
-barEdit.addEventListener('click', () => {
-    barMenuPrincipal.close();
-    alertPass();
-});
+// barEdit.addEventListener('click', () => {
+//     barMenuPrincipal.close();
+//     alertPass();
+// });
 
 barImport.addEventListener('click', () => {
     barMenuPrincipal.close();
@@ -414,16 +412,17 @@ document.getElementById('buttonHelp').addEventListener('click', () => {
 
 document.getElementById('nameSetting').addEventListener('click', () => {
     helpFunction('0', false);
-    alertPass()
+    alertPass();
 });
 
-document.getElementById('barLogoutF').addEventListener('click', () => {
-    // localStorage.removeItem('L1');
-    // localStorage.removeItem('theme');
-    // localStorage.removeItem('accessTempData');
-    localStorage.clear();
-    window.location.reload();
-});
+
+// document.getElementById('barLogoutF').addEventListener('click', () => {
+//     // localStorage.removeItem('L1');
+//     // localStorage.removeItem('theme');
+//     // localStorage.removeItem('accessTempData');
+//     localStorage.clear();
+//     window.location.reload();
+// });
 
 document.getElementById('expandCard').addEventListener('click', () => {
     helpFunction('0', false);
