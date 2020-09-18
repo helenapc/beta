@@ -67,6 +67,21 @@ const item = (id, ico, text, color = '', show = true) => {
 
 //######################## FUNCIONES ########################
 
+function helpFunction(opacity, activate) {
+    document.getElementById('help-config').setAttribute('style', `opacity:${opacity}`);
+    document.getElementById('help-logout').setAttribute('style', `opacity:${opacity}`);
+    document.getElementById('help-show').setAttribute('style', `opacity:${opacity}`);
+    document.getElementById('help-search').setAttribute('style', `opacity:${opacity}`);
+    document.getElementById('help-add').setAttribute('style', `opacity:${opacity}`);
+
+    if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
+        document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}`);
+    }else{
+        document.getElementById('help-exp-com').setAttribute('style', `opacity:0`);
+    };
+    helpActivate = activate;
+}
+
 function setAttributes(elem, obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop)) elem[prop] = obj[prop];
@@ -98,13 +113,17 @@ function delete_spaces(v1) {
 
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
-    title.setAttribute('style', 'margin-left:0px');
-    setAttributes(nameSetting, { style: 'opacity:1', disabled: boolean });
-    setAttributes(barLogoutF, { style: 'opacity:1', disabled: boolean });
-    setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:0px', style: 'margin-right:-8px'});
-    setAttributes(showCard, { style: 'opacity:1', disabled: boolean });
-    setAttributes(buttonSearch, { style: 'opacity:1', disabled: boolean });
-    setAttributes(refresher, { style: 'opacity:1', disabled: boolean });
+    document.getElementById('title').setAttribute('style', 'margin-left:0px');
+    setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px' ,disabled: boolean });
+    setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
+    setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:1', disabled: boolean });
+    // expand
+    setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
+    setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
+    // space
+    setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:1; margin-bottom:0px; margin-right:-8px'});
+    setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
+
     content.setAttribute('style', '--background: #ffffff00');
     if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
 }
@@ -121,13 +140,11 @@ function barProgressF(color, state) {
 function refreshData(toast = true) {
     aTotal.sort();
     if (newSearch.value) {
-        // setAttributes(buttonAdd, { horizontal: 'end', style: 'margin-right:-3px' })
-        setAttributes(expandCard, { style: 'opacity:1', disabled: false });
+        setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
     } else {
         showIcon.setAttribute('name', 'eye-outline');
         expandIcon.setAttribute('name', 'expand-outline');
-        setAttributes(expandCard, { style: 'opacity:0', disabled: true });
-        // setAttributes(buttonAdd, { horizontal: 'center', style: 'margin-right:0px' })
+        setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
     }
 
     showSearch.innerHTML = '';
@@ -421,6 +438,8 @@ function presentAlertCheckboxDel(metaObjDel) {
 
 
 
+
+
 function alertEdit(cuPath, reemplace) {
     const toRemplace = reemplace / 5;
     const alert = document.createElement('ion-alert');
@@ -596,8 +615,6 @@ function presentAlertConfirmEdit() {
     document.body.appendChild(alert);
     return alert.present();
 }
-
-
 
 
 

@@ -28,13 +28,12 @@ var alertcompare = true;
 var resetLogin = false;
 var offline = true;
 var closeAlert = false;
-
+var helpActivate = false;
 // // Init components
 const nameLog = document.getElementById('nameLog');
 const passLog = document.getElementById('passLog');
 const eyePass = document.getElementById('eyePass');
-
-const title = document.getElementById('title');
+// const title = document.getElementById('title');
 
 
 
@@ -42,18 +41,18 @@ const showLogin = document.getElementById('showLogin');
 const buttonLogin = document.getElementById('buttonLogin');
 const buttonCreate = document.getElementById('buttonCreate');
 
-const refresher = document.getElementById('refresher');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
+// const refresher = document.getElementById('refresher');
 
-const nameSetting = document.getElementById('nameSetting');
-const barLogoutF = document.getElementById('barLogoutF');
+// const nameSetting = document.getElementById('nameSetting');
+// const barLogoutF = document.getElementById('barLogoutF');
 
 
-const buttonAdd = document.getElementById('buttonAdd');
-const expandCard = document.getElementById('expandCard');
-const showCard = document.getElementById('showCard');
-const buttonSearch = document.getElementById('buttonSearch');
+// const buttonAdd = document.getElementById('buttonAdd');
+// const expandCard = document.getElementById('expandCard');
+// const showCard = document.getElementById('showCard');
+// const buttonSearch = document.getElementById('buttonSearch');
 
 
 
@@ -62,18 +61,22 @@ const content = document.getElementById('content');
 //******************************************* */
 
 
-setAttributes(barLogoutF, { style: 'opacity:0', disabled: true });
-setAttributes(nameSetting, { style: 'opacity:0', disabled: true });
-setAttributes(buttonAdd, { style: 'opacity:1', style: 'margin-bottom:-200px' });
-setAttributes(expandCard, { style: 'opacity:0', disabled: true });
-setAttributes(showCard, { style: 'opacity:0', disabled: true });
-setAttributes(buttonSearch, { style: 'opacity:0', disabled: true });
-setAttributes(refresher, { style: 'opacity:0', disabled: true });
-title.setAttribute('style', 'margin-left:38px');
+document.getElementById('title').setAttribute('style', 'margin-left:38px');
+setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
+setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
+setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:0', disabled: true });
+setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
+setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
+setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
+// space
+setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:0; margin-bottom:-200px' });
+setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
+
 
 
 var statSearchBar = false;
-setAttributes(newSearch, { style: 'opacity:1', style: 'margin-top:-60px', disabled: false });
+newSearch.setAttribute('style', 'opacity:1; margin-top:-60px;');
+// setAttributes(newSearch, { style: 'opacity:1; margin-top:-60px', disabled: false });
 
 
 // PROGRESS BAR
@@ -100,7 +103,7 @@ barTitle.setAttribute('lines', 'none');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON
-setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-forward-outline', slot: 'start', id: 'barClose'})
+setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
 setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
 
 //BLOCK 01
@@ -115,7 +118,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.7.495-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.7.50-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
