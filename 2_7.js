@@ -115,7 +115,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.7.51-beta'});
+setAttributes(ver, {innerHTML: 'Versión 2.7.52-beta'});
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -157,7 +157,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     splitInit();
     aTotalTOnewTotal();
     document.getElementById('userName').innerHTML = deco(txt[0]);
-    document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase()
+    document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
 
 

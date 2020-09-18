@@ -579,9 +579,6 @@ function presentAlertEditUserData() {
         {
             text: 'Ok',
             handler: usNData => {
-                console.log(usNData.userEditName);
-                console.log(usNData.userEditUser);
-                console.log(usNData.userEditPass);
                 if (usNData.userEditUser == '' || usNData.userEditPass == '') {
                     barProgressF('danger', 'determinate');
                     alertMsg('Error', 'Datos vacíos.');
@@ -611,6 +608,7 @@ function presentAlertConfirmEdit(confPersonal) {
                 txt[1] = code(confPersonal[1]);
                 txt[2] = code(confPersonal[2]);
                 document.getElementById('userName').innerHTML = deco(txt[0]);
+                document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
                 localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
                 save();
                 updateDB('L1', 'B1');
