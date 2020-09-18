@@ -565,6 +565,7 @@ function alertPass() {
     return alertPassItem.present();
 }
 
+
 function presentAlertEditUserData() {
     const alert = document.createElement('ion-alert');
     alert.header = 'Editar cuenta';
@@ -578,13 +579,17 @@ function presentAlertEditUserData() {
         {
             text: 'Ok',
             handler: usNData => {
+                console.log(usNData.userEditName);
+                console.log(usNData.userEditUser);
+                console.log(usNData.userEditPass);
                 if (usNData.userEditUser == '' || usNData.userEditPass == '') {
                     barProgressF('danger', 'determinate');
                     alertMsg('Error', 'Datos vacíos.');
                     setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                     return;
                 }
-                presentAlertConfirmEdit();
+                const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass];
+                presentAlertConfirmEdit(confPersonal);
             },
         },
     ];
@@ -592,7 +597,7 @@ function presentAlertEditUserData() {
     return alert.present();
 }
 
-function presentAlertConfirmEdit() {
+function presentAlertConfirmEdit(confPersonal) {
     const alert = document.createElement('ion-alert');
     alert.header = 'ADVERTENCIA!';
     alert.subHeader = 'Al cambiar estos datos se cerrará la sesión en otros dispositivos';
@@ -602,9 +607,9 @@ function presentAlertConfirmEdit() {
         {
             text: 'Ok',
             handler: () => {
-                (code(usNData.userEditName) == '') ? txt[0] = '25' : txt[0] = code(usNData.userEditName);
-                txt[1] = code(usNData.userEditUser);
-                txt[2] = code(usNData.userEditPass);
+                (code(confPersonal[0]) == '') ? txt[0] = '25' : txt[0] = code(confPersonal[0]);
+                txt[1] = code(confPersonal[1]);
+                txt[2] = code(confPersonal[2]);
                 document.getElementById('userName').innerHTML = deco(txt[0]);
                 localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
                 save();
