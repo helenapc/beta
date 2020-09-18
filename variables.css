@@ -18,7 +18,7 @@
   top: 30%; */
 }
 
-@media screen and (min-width: 582px) {
+@media screen and (min-width: 600px) {
   #buttonAdd, #buttonHelp, #offline {
     padding-right: 20px;
   }
@@ -37,7 +37,7 @@
 
 .help-configuracion{ left: 100%; top: 10%; }
 .help-cerrar-sesion{ left: 100%; top: 55%; }
-.help-expandir-comprimir{ left: 100%; top: 6%; }
+.help-expandir-contraer{ left: 100%; top: 6%; }
 .help-mostrar-ocultar{ left: 100%; top: 38%; }
 .help-buscar{ left: 100%; top: 69%; }
 .help-agregar{ right: 100%; top: 16%; }
