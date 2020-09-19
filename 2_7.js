@@ -27,7 +27,7 @@ const coll = 'users2';
 var alertcompare = true;
 var resetLogin = false;
 var offline = true;
-var offline2 = false;
+// var offline2 = false;
 var closeAlert = false;
 var helpActivate = false;
 // // Init components
@@ -165,13 +165,14 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
-            alert("test offline");
+            // alert("test offline");
+            offline = false;
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
                 userID = doc.id;
                 compare = true;
-                offline = false;
+                // offline = false;
                 return;
             }
         });
