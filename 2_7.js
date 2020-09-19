@@ -164,8 +164,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
     db.collection(coll).onSnapshot(querySnapshot => {
+        alert("test offline");
         querySnapshot.forEach(doc => {
-            alert("test offline");
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
