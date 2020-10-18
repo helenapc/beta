@@ -115,7 +115,6 @@ buttonCreate.addEventListener('click', () => {
                                     docB1 = doc.data().B1;
                                     docB2 = doc.data().B2;
                                     userID = doc.id;
-                                    // return
                                 };
                             });
                         };
@@ -144,13 +143,10 @@ buttonCreate.addEventListener('click', () => {
                                     disableItem(false);
                                     barProgressF('light', 'determinate');
                                     window.location.reload();
-                                    // return;
                                 })
                                 .catch(function (error) {
                                     console.error('Error adding document: ', error);
-                                    // return;
                                 });
-                            // return
                         };
                     });
                 }
@@ -209,7 +205,6 @@ showSearch.addEventListener('click', e => {  //editCard
                         icon: 'pencil',
                         handler: () => {
                             closeAlert = true;
-                            // return alert.dismiss();
                             alertEdit(cuPath, reemplace);
                         }
                     },
@@ -242,12 +237,8 @@ document.getElementById('refresher').addEventListener('ionRefresh', () => {
 //NAV BAR
 
 document.getElementById('barOpen').addEventListener('click', ()=>{ helpFunction('0', false) });
-document.getElementById('barClose').addEventListener('click', () => { barMenuPrincipal.close() });
 
-// barEdit.addEventListener('click', () => {
-//     barMenuPrincipal.close();
-//     alertPass();
-// });
+document.getElementById('barClose').addEventListener('click', () => { barMenuPrincipal.close() });
 
 barImport.addEventListener('click', () => {
     barMenuPrincipal.close();
@@ -310,9 +301,6 @@ barExport.addEventListener('click', () => {
 
 barLogout.addEventListener('click', () => {
     barMenuPrincipal.close();
-    // localStorage.removeItem('L1');
-    // localStorage.removeItem('theme');
-    // localStorage.removeItem('accessTempData');
     localStorage.clear();
     window.location.reload();
 });
@@ -414,15 +402,6 @@ document.getElementById('nameSetting').addEventListener('click', () => {
     helpFunction('0', false);
     alertPass();
 });
-
-
-// document.getElementById('barLogoutF').addEventListener('click', () => {
-//     // localStorage.removeItem('L1');
-//     // localStorage.removeItem('theme');
-//     // localStorage.removeItem('accessTempData');
-//     localStorage.clear();
-//     window.location.reload();
-// });
 
 document.getElementById('expandCard').addEventListener('click', () => {
     helpFunction('0', false);
@@ -535,49 +514,3 @@ checkbox.addEventListener('click', () => {
     }
     localStorage.setItem('theme', activeTheme);
 });
-
-
-// TEST POPOVER
-
-// document.getElementById('showCard').addEventListener('long-press', e => {
-//     e.preventDefault();
-//     presentPopover(e);
-//     contentPopover("saludar()", 'Mostrar todo / Ocultar todo.');
-
-// })
-
-
-// let currentPopover = null;
-// function presentPopover(e) {
-//     const popover = Object.assign(document.createElement('ion-popover'), {
-//         mode: 'ios',
-//         component: 'popover-example-page',
-//         cssClass: 'my-custom-class',
-//         event: e,
-//         translucent: true,
-//     });
-//     currentPopover = popover;
-//     document.body.appendChild(popover);
-//     return popover.present();
-// }
-
-// function contentPopover(func, content) {
-//     customElements.define('popover-example-page', class ModalContent extends HTMLElement {
-//         connectedCallback() {
-//             this.innerHTML = `
-//             <ion-list>
-//             <ion-item button onClick="${func}">${content}</ion-item>
-//             </ion-list>
-//             `;
-
-//         }
-//     });
-// }
-
-
-// function saludar() {
-//     console.log('hola');
-//     if (currentPopover) {
-//         currentPopover.dismiss().then(() => { currentPopover = null; });
-//     }
-// }

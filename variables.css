@@ -1,10 +1,7 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;700&display=swap'); */
 
 
 *{
   box-sizing: border-box;
-  /* font-family: 'Roboto', sans-serif; */
-  /* transition: 0.1s linear; */
 }
 
 /* ICONS */
@@ -12,10 +9,6 @@
 
 #offline{
   transform: scale(-1.5,1.5) translate(2px, 80px);
-  /* transform: scale(-6,6) translateX(-16px);
-  position: relative;
-  left: -300%;
-  top: 30%; */
 }
 
 @media screen and (min-width: 600px) {
@@ -36,16 +29,11 @@
   position: absolute;
 }
 
-/* .help-cerrar-sesion{ left: 100%; top: 55%; } */
 .help-configuracion{ left: 100%; top: 18%; }
 .help-expandir-contraer{ left: 100%; top: 6%; }
 .help-mostrar-ocultar{ left: 100%; top: 38%; }
 .help-buscar{ left: 100%; top: 69%; }
 .help-agregar{ right: 100%; top: 16%; }
-
-/* .logoutf{
-  transform: scaleX(-1) translateX(2px);
-} */
 
 .barLogout{
   transform: scaleX(-1);
@@ -62,7 +50,6 @@ ion-title#userName.md.title-default.hydrated{
 }
 
 .input-wrapper{
-  /* padding-left: 80px; */
   --padding-start: 2px;
 }
 
@@ -97,9 +84,8 @@ li{
 }
 
 
+
 /*ITEMS*/
-
-
 
 .ion-text-wrap #title{
   margin-right: -100px;
@@ -126,14 +112,12 @@ li{
   border-bottom-left-radius: 4px;
 }
 
-
 .sc-ion-searchbar-md-h {
   color: var(--ion-text-color);
   --background: var(--ion-color-light);
   --icon-color:var(--ion-text-color);
   transition: 0.05s cubic-bezier(1, 0, 0, 1);
 }
-
 
 ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, inputbox.alert, nameSetting*/
   color:var(--ion-text-color);

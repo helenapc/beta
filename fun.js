@@ -70,7 +70,6 @@ const item = (id, ico, text, color = '', show = true) => {
 
 function helpFunction(opacity, activate) {
     document.getElementById('help-config').setAttribute('style', `opacity:${opacity}`);
-    // document.getElementById('help-logout').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-show').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-search').setAttribute('style', `opacity:${opacity}`);
     document.getElementById('help-add').setAttribute('style', `opacity:${opacity}`);
@@ -117,7 +116,6 @@ function disableItem(boolean) {
     document.getElementById('title').setAttribute('style', 'margin-left:0px');
     setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px' ,disabled: boolean });
     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
-    // setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:1', disabled: boolean });
     // expand
     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
@@ -245,20 +243,29 @@ function deco(dec) {
     return str;
 }
 
+// function splitInit() {
+//     txt = localStorage.getItem('L1').split('GD');
+//     console.log(txt);
+//     txt[3] == undefined ? (txt2 = txt.unshift('')) : null;
+//     aTotal = txt[3].split(txt[3].includes('Q0') ? 'Q0' : 'BO');
+//     aTotal.splice(-1, 1);
+// }
+
 function splitInit() {
     txt = localStorage.getItem('L1').split('GD');
-    txt[3] == undefined ? (txt2 = txt.unshift('')) : null;
-    aTotal = txt[3].split(txt[3].includes('Q0') ? 'Q0' : 'BO');
+    if (txt[4] == undefined){
+        txt.splice(3,0, 'pepe');
+    }
+    aTotal = txt[4].split(txt[4].includes('Q0') ? 'Q0' : 'BO');
     aTotal.splice(-1, 1);
+    console.log(txt);
 }
 
 function aTotalTOnewTotal() {
     aTotal.sort();
-    // console.log(aTotal);
     newTotal = [];
     for (b = 0; b < aTotal.length; b++) {
         const final = aTotal[b].split('OG');
-        // console.log('Final = ' + final);
         for (n = 0; n < final.length; n++) {
             (n % 4 == 0) ? newTotal.push(deco(final[n]).toLowerCase()) : newTotal.push(deco(final[n]));
             if (n == 3) newTotal.push('oo');
@@ -293,11 +300,6 @@ function updateDB(send, receive) {
 }
 
 function save() {
-    // console.log('Save__');
-    // aTotal.sort();
-    // console.log(newTotal);
-    // console.log(aTotal);
-    // console.log(aTotal);
     if (aTotal.length > 0) {
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
     } else {
@@ -573,6 +575,7 @@ function presentAlertEditUserData() {
         { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
         { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
         { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
+        { name: 'userPin', placeholder: 'PIN', value: localStorage.getItem('Bpin') },
     ];
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
@@ -586,6 +589,7 @@ function presentAlertEditUserData() {
                     return;
                 }
                 const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass];
+                // localStorage.setItem('Bpin', usNData.userPin);
                 presentAlertConfirmEdit(confPersonal);
             },
         },

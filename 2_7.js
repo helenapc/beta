@@ -12,6 +12,8 @@ firebase.initializeApp({
     measurementId: deco("4C32473736353D575B55563D")
 });
 
+var Tpin = Date.now();
+
 
 var db = firebase.firestore();
 var coincidencia = false;
@@ -19,23 +21,21 @@ var txt = [];
 var aTotal = [];
 var newTotal = [];
 var compare = false;
-var docB1 = '';
-var docB2 = '';
+// var docB1 = '';
+// var docB2 = '';
 var uCA = [];
 var userID = '';
 const coll = 'users2';
 var alertcompare = true;
 var resetLogin = false;
 var offline = true;
-// var offline2 = false;
 var closeAlert = false;
 var helpActivate = false;
+
 // // Init components
 const nameLog = document.getElementById('nameLog');
 const passLog = document.getElementById('passLog');
 const eyePass = document.getElementById('eyePass');
-// const title = document.getElementById('title');
-
 
 
 const showLogin = document.getElementById('showLogin');
@@ -45,17 +45,6 @@ const buttonCreate = document.getElementById('buttonCreate');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
 
-// const refresher = document.getElementById('refresher');
-// const nameSetting = document.getElementById('nameSetting');
-// const barLogoutF = document.getElementById('barLogoutF');
-
-// const buttonAdd = document.getElementById('buttonAdd');
-// const expandCard = document.getElementById('expandCard');
-// const showCard = document.getElementById('showCard');
-// const buttonSearch = document.getElementById('buttonSearch');
-
-
-
 const buttonFocus = document.getElementById('buttonFocus');
 const content = document.getElementById('content');
 //******************************************* */
@@ -64,7 +53,6 @@ const content = document.getElementById('content');
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
 setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
-// setAttributes(document.getElementById('barLogoutF'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
@@ -102,8 +90,7 @@ barTitle.setAttribute('lines', 'none');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
 const barIcon01 = document.createElement('ion-icon'); // ICON
-setAttributes(barIcon00, {button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose'})
-// setAttributes(barIcon01, {button: 'click-btn', name: 'options-outline', slot: 'end', id: 'barEdit'})
+setAttributes(barIcon00, { button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose' })
 
 //BLOCK 01
 barTitle.appendChild(barIcon00);
@@ -117,14 +104,14 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, {innerHTML: 'Versión 2.7.52-beta'});
+setAttributes(ver, { innerHTML: 'Versión 2.7.5 -beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
 //DARK THEME
 const lTheme = localStorage.getItem('theme');
 const checkbox = document.getElementById('checkbox');
-if (lTheme == null || lTheme == 'dark' || lTheme == 'light' || lTheme == '' ) localStorage.setItem('theme', ['light', '']);
+if (lTheme == null || lTheme == 'dark' || lTheme == 'light' || lTheme == '') localStorage.setItem('theme', ['light', '']);
 var activeTheme = localStorage.getItem('theme').split(',');
 if (activeTheme[1] == 'dark') {
     document.body.classList.toggle(activeTheme[1]);
@@ -165,17 +152,27 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
-            // alert("test offline");
             offline = false;
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
+                // localStorage.setItem('Bpin', doc.data().Bpin);
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
+                docBpin = doc.data().Bpin;
                 userID = doc.id;
                 compare = true;
-                // offline = false;
                 return;
             }
         });
+
+
+        // PIN
+        // console.log(Tpin);
+        // localStorage.setItem('Bpin', docBpin);
+        // localStorage.setItem('Tpin', (Tpin + 60000));
+        // console.log(localStorage.getItem('Tpin'));
+        // console.log(localStorage.getItem('Bpin'));
+        // console.log(`Resta= ${(localStorage.getItem('Tpin') - Tpin)}` );
+
 
         if (!compare && !offline) {
             localStorage.removeItem('accessTempData')
@@ -294,10 +291,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
     })
 
-
 } else {
     localStorage.setItem('L1', 'GDGDGDGD');
 };
+
 
 // welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
