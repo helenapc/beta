@@ -66,6 +66,39 @@ const item = (id, ico, text, color = '', show = true) => {
     // id = document.querySelector(id);
 }
 
+// document.getElementById('cardPin').setAttribute('style', 'opacity: 0');
+
+// console.log(Date.now() - localStorage.getItem('tPin'));
+// if (localStorage.getItem('tPin')) {
+//     if (Date.now() - localStorage.getItem('tPin') > 10000) {
+//         console.log('Tiempo');
+
+//         document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
+
+//         // disableItem(true);
+//         // document.getElementById('title').setAttribute('style', 'margin-left:38px');
+//         // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
+//         // setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
+//         // setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
+//         // setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
+//         // setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
+//         // // space
+//         // setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:0; margin-bottom:-200px' });
+//         // setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
+//     }
+// }
+
+// document.getElementById('pin').addEventListener('ionInput', () => {
+//     if (pin.value == deco(txt[4])) {
+//         console.log('coincide');
+//         localStorage.setItem('tPin', Date.now());
+//         document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+//         disableItem(false);
+//     }
+// });
+
+
+
 //######################## FUNCIONES ########################
 
 function helpFunction(opacity, activate) {
@@ -114,13 +147,13 @@ function delete_spaces(v1) {
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
     document.getElementById('title').setAttribute('style', 'margin-left:0px');
+    document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
     setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
     // expand
     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
     // space
-    setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:1; margin-bottom:0px; margin-right:-8px' });
     setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
 
     content.setAttribute('style', '--background: #ffffff00');
@@ -246,16 +279,9 @@ function deco(dec) {
 function splitInit() {
     txt = localStorage.getItem('L1').split('GD');
     // txt[3] == undefined ? (txt2 = txt.unshift('')) : null;
-    // txt[4] = '';
-    console.log(txt.length);
     aTotal = txt[3].split(txt[3].includes('Q0') ? 'Q0' : 'BO');
-
     aTotal.splice(-1, 1);
     if (txt.length == 4) txt.push('');
-    // if (txt.length == 5) txt.pop();
-    // save();
-    console.log(txt);
-
 }
 
 function aTotalTOnewTotal() {
@@ -298,17 +324,15 @@ function updateDB(send, receive) {
 
 function save() {
     if (aTotal.length > 0) {
-    //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
-    // } else {
-    //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-    // }
+        //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
+        // } else {
+        //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+        // }
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0' + 'GD' + txt[4]);
     } else {
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + txt[4]);
     }
 }
-
-
 
 function sendEmail() {
     coincidencia = false
@@ -578,7 +602,9 @@ function presentAlertEditUserData() {
         { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
         { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
         { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
-        { name: 'userPin', placeholder: 'PIN', value: deco(txt[4]) },
+        {
+            name: 'userPin', placeholder: 'PIN', value: deco(txt[4]),
+        },
     ];
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
@@ -625,7 +651,7 @@ function presentAlertConfirmEdit(confPersonal) {
                 // 
                 localStorage.setItem('bp', txt[4]);
                 // 
-                
+
                 save();
                 updateDB('L1', 'B1');
                 updateDB('L1', 'B2');
@@ -638,6 +664,7 @@ function presentAlertConfirmEdit(confPersonal) {
 
 
 
+// PIN
 
 //EXTRAS
 

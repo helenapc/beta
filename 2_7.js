@@ -12,7 +12,7 @@ firebase.initializeApp({
     measurementId: deco("4C32473736353D575B55563D")
 });
 
-var Tpin = Date.now();
+
 
 
 var db = firebase.firestore();
@@ -51,14 +51,15 @@ const content = document.getElementById('content');
 
 
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
+document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
 setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
 setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
 // space
-setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:0; margin-bottom:-200px' });
 setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
+
 
 
 
@@ -134,10 +135,11 @@ if (eyePass) {
     })
 }
 
+
+
+
+
 // ------------------ START ------------------ //
-
-
-
 localStorage.removeItem('alrt');
 
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
@@ -146,18 +148,57 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     splitInit();
     aTotalTOnewTotal();
     localStorage.setItem('bp', txt[4]);
+    // localStorage.setItem('tPin', Date.now());
     document.getElementById('userName').innerHTML = deco(txt[0]);
     document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
 
 
+    document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+
+    console.log(Date.now() - localStorage.getItem('tPin'));
+    if (localStorage.getItem('tPin')) {
+        if (Date.now() - localStorage.getItem('tPin') > 60000) {
+            document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
+            disableItem(true);
+            document.getElementById('title').setAttribute('style', 'margin-left:38px');
+            document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
+            document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
+            document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
+            document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+            document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+            document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
+
+        }
+    }
+
+    document.getElementById('pin').addEventListener('ionInput', () => {
+        if (pin.value == deco(txt[4])) {
+            localStorage.setItem('tPin', Date.now());
+            document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+            disableItem(false);
+        }
+    });
+
+    // console.log('PIN');
+    // var tPin = Date.now();
+    // console.log(Date.now());
+    // localStorage.setItem('tPin', true)
+    // disableItem(true);
+
+    // setTimeout(() => {
+    // console.log('AFTER');
+    // localStorage.removeItem('tPin');
+    // disableItem(false);
+    // console.log(Date.now());
+    // }, 5000);
+
+
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
             offline = false;
-            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))&& doc.data().B1.includes(localStorage.getItem('bp'))) {
-                // localStorage.setItem('Bpin', doc.data().Bpin);
+            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
                 docB1 = doc.data().B1;
-                // console.log(docB1);
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
@@ -177,10 +218,19 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // console.log(`Resta= ${(localStorage.getItem('Tpin') - Tpin)}` );
 
 
-        if (!compare && !offline) {
-            // 
+        updateDB('B1', 'L1');
+        splitInit();
+        // aTotalTOnewTotal();
+
+        // if (localStorage.getItem('bp') != txt[4]) {
+        //     localStorage.removeItem('bp');
+        //     localStorage.removeItem('accessTempData')
+        //     localStorage.setItem('L1', 'GDGDGDGD');
+        //     window.location.reload();
+        // }
+
+        if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
-            // 
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
@@ -302,9 +352,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 };
 
 
+
+
 // welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
-// if (!txt[4] && showLogin.innerHTML == '') {
+    // if (!txt[4] && showLogin.innerHTML == '') {
     expandIcon.setAttribute('name', 'contract-outline')
     showSearch.innerHTML = `
     <div style="text-align:center"><br>No hay datos guardados. </div>

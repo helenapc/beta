@@ -15,6 +15,9 @@ buttonLogin.addEventListener('click', () => {
                 userID = doc.id;
                 uRA = doc.data().B1.split('GD');
                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
+                    // 
+                    localStorage.setItem('tPin', Date.now());
+                    // 
                     coincidencia = true;
                     updateDB('B1', 'L1');
                     splitInit();
@@ -44,6 +47,8 @@ buttonLogin.addEventListener('click', () => {
                                         return;
                                     }
 
+                                    
+
                                     localStorage.setItem('L1', uRA[0] + 'GD' + uRA[1] + 'GD' + code(usRData.pass01) + 'GD' + uRA[3]);
                                     localStorage.setItem('accessTempData', uRA[1] + 'GD' + code(usRData.pass01) + 'GD')
                                     updateDB('L1', 'B1');
@@ -56,6 +61,8 @@ buttonLogin.addEventListener('click', () => {
                                     db.collection(coll).doc(userID).update({
                                         B3: firebase.firestore.FieldValue.delete()
                                     }).then(function () { window.location.reload() });
+
+                                    
                                 },
                             },
                         ];
@@ -401,6 +408,7 @@ document.getElementById('buttonHelp').addEventListener('click', () => {
 document.getElementById('nameSetting').addEventListener('click', () => {
     helpFunction('0', false);
     alertPass();
+    // presentPin();
 });
 
 document.getElementById('expandCard').addEventListener('click', () => {
