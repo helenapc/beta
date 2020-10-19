@@ -154,31 +154,35 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     compare = false;
 
 
+    // console.log(txt[4]);
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
-    console.log(Date.now() - localStorage.getItem('tPin'));
-    if (localStorage.getItem('tPin')) {
-        if (Date.now() - localStorage.getItem('tPin') > 60000) {
-            document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
-            disableItem(true);
-            document.getElementById('title').setAttribute('style', 'margin-left:38px');
-            document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
-            document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
-
+    if (txt[4] != ''){
+        if (localStorage.getItem('tPin')) {
+            if (Date.now() - localStorage.getItem('tPin') > 60000) {
+                document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
+                disableItem(true);
+                document.getElementById('title').setAttribute('style', 'margin-left:38px');
+                document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
+                document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
+                document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
+                document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+                document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+                document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
+    
+            }
         }
+    
+        document.getElementById('pin').addEventListener('ionInput', () => {
+            if (pin.value == deco(txt[4])) {
+                localStorage.setItem('tPin', Date.now());
+                document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+                disableItem(false);
+            }
+        });
+
     }
 
-    document.getElementById('pin').addEventListener('ionInput', () => {
-        if (pin.value == deco(txt[4])) {
-            localStorage.setItem('tPin', Date.now());
-            document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-            disableItem(false);
-        }
-    });
 
     // console.log('PIN');
     // var tPin = Date.now();
@@ -202,7 +206,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
-                console.log(userID);
+                // console.log(userID);
                 compare = true;
                 return;
             }
