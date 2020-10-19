@@ -137,7 +137,7 @@ if (eyePass) {
 
 
 
-
+document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 // ------------------ START ------------------ //
 localStorage.removeItem('alrt');
