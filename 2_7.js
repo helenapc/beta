@@ -145,6 +145,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     disableItem(false);
     splitInit();
     aTotalTOnewTotal();
+    localStorage.setItem('bp', txt[4]);
     document.getElementById('userName').innerHTML = deco(txt[0]);
     document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
@@ -153,9 +154,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
             offline = false;
-            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
+            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))&& doc.data().B1.includes(localStorage.getItem('bp'))) {
                 // localStorage.setItem('Bpin', doc.data().Bpin);
                 docB1 = doc.data().B1;
+                // console.log(docB1);
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
@@ -176,6 +178,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         if (!compare && !offline) {
+            // 
+            localStorage.removeItem('bp');
+            // 
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
