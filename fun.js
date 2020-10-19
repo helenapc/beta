@@ -296,6 +296,23 @@ function aTotalTOnewTotal() {
     }
 }
 
+function updateData(text){
+    let mensaje = 'Base de datos sincronizada'
+    if (text == 'Aceptar') updateDB('B1', 'L1');
+    splitInit();
+    aTotalTOnewTotal();
+    localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+    document.getElementById('userName').innerHTML = deco(txt[0]);
+    showLogin.innerHTML = '';
+    disableItem(false);
+    if (text == 'Rechazar') {updateDB('L1', 'B1'); mensaje = 'Cancelando cambios.';};
+    newSearch.value = '';
+    refreshData();
+    presentToast(mensaje, '1000', 'dark');
+    setTimeout(() => { window.location.reload() }, 1000);
+}
+
+
 function updateDB(send, receive) {
     if (send == 'B1') localStorage.setItem(receive, docB1);
     if (send == 'B2') localStorage.setItem(receive, docB2);
@@ -404,10 +421,25 @@ function sendEmail() {
 
 // ALERTS
 
+function presentCompare(metaObj){
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Se detectaron cambios';
+    alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
+    alert.inputs = metaObj;
+    alert.buttons = [
+        { text: 'Rechazar', handler: () => { updateData('Rechazar') } },
+        { text: 'Aceptar', handler: () => { updateData('Aceptar') } },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 function presentAlertCheckboxAdd(metaObjAdd, metaObjDel) {
     const alert = document.createElement('ion-alert');
     alert.subHeader = 'Cuentas agregadas';
     alert.message = 'Seleccione para confirmar';
+    // alert.inputs = metaObjAdd;
     alert.inputs = metaObjAdd;
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
@@ -424,6 +456,8 @@ function presentAlertCheckboxAdd(metaObjAdd, metaObjDel) {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
+                    // console.log(localStorage.getItem('L1'));
+                    // console.log(newCompareData);
                     alertcompare = false;
                     window.location.reload();
                 };
@@ -455,6 +489,7 @@ function presentAlertCheckboxDel(metaObjDel) {
                     aTotalTOnewTotal();
                     save();
                     updateDB('L1', 'B1');
+
                     alertcompare = false;
 
                     window.location.reload();

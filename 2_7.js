@@ -105,7 +105,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.0007 -beta' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.0008 -beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -157,7 +157,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     // console.log(txt[4]);
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
-    if (txt[4] != ''){
+    if (txt[4] != '') {
         if (localStorage.getItem('tPin')) {
             if (Date.now() - localStorage.getItem('tPin') > 60000) {
                 document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
@@ -169,10 +169,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
-    
+
             }
         }
-    
+
         document.getElementById('pin').addEventListener('ionInput', () => {
             if (pin.value == deco(txt[4])) {
                 localStorage.setItem('tPin', Date.now());
@@ -222,9 +222,23 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // console.log(`Resta= ${(localStorage.getItem('Tpin') - Tpin)}` );
 
 
+        // console.log(docB1);
+
+        // console.log('Pre:');
+        // console.log(txt);
+        // console.log(docB1);
+        const newCompareData = localStorage.getItem('L1');
+        // console.log(localStorage.getItem('L1'));
+
+
         updateDB('B1', 'L1');
         splitInit();
         // aTotalTOnewTotal();
+
+        // console.log('Post:');
+        // console.log(docB1);
+        // console.log(txt);
+        // console.log(localStorage.getItem('L1'));
 
         // if (localStorage.getItem('bp') != txt[4]) {
         //     localStorage.removeItem('bp');
@@ -249,57 +263,66 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         compare = false;
 
-        if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
+        // if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
+        if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
+
+            // 
+            // 
+            // 
+            // var txtTemp = [];
+            // var aTotalTemp = [];
+            // var newa = [];
+            // var metaObjAdd = [];
+            // var metaObjDel = [];
+
+            // txtTemp = newCompareData.split('GD');
+            // aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
+            // aTotalTemp.splice(-1, 1);
+            // aTotalTemp = aTotalTemp.concat(aTotal);
+            // aTotalTemp.sort();
+
+            // for (i = 0; i < aTotalTemp.length; i++) {
+            //     (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
+            // };
+
+            // for (i = 0; i < newa.length; i++) {
+            //     const newaName = newa[i].split('OG');
+            //     var myObj = {value: deco(newaName[0]).toUpperCase(), disabled: true};
+            //     (txtTemp[3].includes(newa[i])) ? metaObjDel.push(myObj) : metaObjAdd.push(myObj);
+            // }
+
+            // 
+            // 
+            // 
+
             function alertCompareData() {
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
                 alert.setAttribute('backdrop-dismiss', 'false');
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
+                // alert.message = pepe;
+                // alert.inputs = metaObjAdd;
                 alert.buttons = [
+                    { text: 'Aceptar', handler: () => { updateData('Aceptar') } },
+                    { text: 'Rechazar', handler: () => { updateData('Rechazar') } },
                     {
-                        text: 'Aceptar',
+                        text: 'Detalles..',
                         handler: () => {
-                            updateDB('B1', 'L1');
-                            splitInit();
-                            aTotalTOnewTotal();
-                            localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                            document.getElementById('userName').innerHTML = deco(txt[0]);
-                            showLogin.innerHTML = '';
-                            disableItem(false);
-                            newSearch.value = '';
-                            refreshData();
-                            presentToast('Base de datos sincronizada.', '1000', 'dark');
-                            setTimeout(() => { window.location.reload() }, 1000);
-                        },
-                    },
-                    {
-                        text: 'Rechazar',
-                        handler: () => {
-                            splitInit();
-                            aTotalTOnewTotal();
-                            localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                            document.getElementById('userName').innerHTML = deco(txt[0]);
-                            showLogin.innerHTML = '';
-                            disableItem(false);
-                            updateDB('L1', 'B1')
-                            newSearch.value = '';
-                            refreshData();
-                            presentToast('Cancelando cambios.', '1000', 'dark');
-                            setTimeout(() => { window.location.reload() }, 1000);
-                        },
-                    },
-                    {
-                        text: 'Mas..',
-                        handler: () => {
+
                             var txtTemp = [];
                             var aTotalTemp = [];
                             var newa = [];
                             var metaObjAdd = [];
                             var metaObjDel = [];
+                            var myObj = '';
+                            var metaObj = '';
+                            // var metaObj = [{ value: 'DETALLES', disabled: true }],
+                            // var metaObjAdd = [{ value: 'Agregadas', disabled: true }];
+                            // var metaObjDel = [{ value: 'Borradas', disabled: true }];
 
-                            txtTemp = docB1.split('GD');
+                            txtTemp = newCompareData.split('GD');
                             aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
                             aTotalTemp.splice(-1, 1);
                             aTotalTemp = aTotalTemp.concat(aTotal);
@@ -310,20 +333,62 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             };
 
                             for (i = 0; i < newa.length; i++) {
+                                
                                 const newaName = newa[i].split('OG');
-                                var myObj = { type: 'checkbox', label: deco(newaName[0]).toUpperCase(), value: newa[i], checked: true };
-                                (txtTemp[3].includes(newa[i])) ? metaObjAdd.push(myObj) : metaObjDel.push(myObj);
+                                if (txtTemp[3].includes(newa[i])) {
+                                    myObj = { value: '(–) '+deco(newaName[0]).toUpperCase(), disabled: true };
+                                    metaObjDel.push(myObj)
+                                }else{
+                                    myObj = { value: '(+) '+deco(newaName[0]).toUpperCase(), disabled: true };
+                                    metaObjAdd.push(myObj)
+                                };
                             }
+                            metaObj = metaObjAdd.concat(metaObjDel);
+                            // metaObj = metaObj.concat(metaObjAdd.concat(metaObjDel));
+                            // console.log(metaObj);
+                            // metaObj = metaObj.splice( 0, 0, { value: 'Cambios', disabled: true });
+                            // console.log(metaObj);
+                            // metaObj = metaObjAdd.concat(metaObjDel);
+                            presentCompare(metaObj);
 
-                            console.log(metaObjAdd);
-
-                            if (metaObjAdd.length != '') {
-                                presentAlertCheckboxAdd(metaObjAdd, metaObjDel);
-                            } else {
-                                presentAlertCheckboxDel(metaObjDel);
-                            };
+                            // if (metaObjAdd.length != '') {
+                            //     presentAlertCheckboxAdd(metaObjAdd, metaObjDel, newCompareData);
+                            // } else {
+                            //     presentAlertCheckboxDel(metaObjDel);
+                            // };
                         },
                     },
+
+                    //         var txtTemp = [];
+                    //         var aTotalTemp = [];
+                    //         var newa = [];
+                    //         var metaObjAdd = [];
+                    //         var metaObjDel = [];
+
+                    //         txtTemp = newCompareData.split('GD');
+                    //         aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
+                    //         aTotalTemp.splice(-1, 1);
+                    //         aTotalTemp = aTotalTemp.concat(aTotal);
+                    //         aTotalTemp.sort();
+
+                    //         for (i = 0; i < aTotalTemp.length; i++) {
+                    //             (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
+                    //         };
+
+                    //         for (i = 0; i < newa.length; i++) {
+                    //             const newaName = newa[i].split('OG');
+                    //             var myObj = { type: 'checkbox', label: deco(newaName[0]).toUpperCase(), value: newa[i], checked: true };
+                    //             (txtTemp[3].includes(newa[i])) ? metaObjDel.push(myObj) : metaObjAdd.push(myObj);
+                    //         }
+
+
+                    //         if (metaObjAdd.length != '') {
+                    //             presentAlertCheckboxAdd(metaObjAdd, metaObjDel, newCompareData);
+                    //         } else {
+                    //             presentAlertCheckboxDel(metaObjDel);
+                    //         };
+                    //     },
+                    // },
                     {
                         text: localStorage.getItem('offline'),
                         handler: () => {
