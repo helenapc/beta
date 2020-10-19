@@ -297,7 +297,7 @@ function aTotalTOnewTotal() {
 }
 
 function updateData(text, newCompareData){
-    let mensaje = 'Base de datos sincronizada'
+    let mensaje = 'Base de datos sincronizada.';
     // console.log(text);
     // console.log(localStorage.getItem('L1'));
     // console.log(newCompareData);
@@ -314,20 +314,14 @@ function updateData(text, newCompareData){
     showLogin.innerHTML = '';
     disableItem(false);
     if (text != 'Aceptar') {
-        // console.log(newCompareData)
-        mensaje = 'Cancelando';
+        mensaje = 'Cancelando cambios.';
         localStorage.setItem('L1', newCompareData);
         updateDB('L1', 'B1');
     };
 
-    // console.log(text);
-    // console.log(localStorage.getItem('L1'));
-    // console.log(txt);
-
-
     newSearch.value = '';
     refreshData();
-    presentToast('Listo', '1000', 'dark');
+    presentToast(mensaje, '1000', 'dark');
     setTimeout(() => { window.location.reload() }, 1000);
 }
 

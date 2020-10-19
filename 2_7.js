@@ -154,9 +154,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     compare = false;
 
 
-    // console.log(txt[4]);
+    // PIN;
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-
     if (txt[4] != '') {
         if (localStorage.getItem('tPin')) {
             if (Date.now() - localStorage.getItem('tPin') > 60000) {
@@ -180,24 +179,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 disableItem(false);
             }
         });
-
     }
 
-
-    // console.log('PIN');
-    // var tPin = Date.now();
-    // console.log(Date.now());
-    // localStorage.setItem('tPin', true)
-    // disableItem(true);
-
-    // setTimeout(() => {
-    // console.log('AFTER');
-    // localStorage.removeItem('tPin');
-    // disableItem(false);
-    // console.log(Date.now());
-    // }, 5000);
-
-
+    // DB
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
             offline = false;
@@ -206,46 +190,16 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
-                // console.log(userID);
                 compare = true;
                 return;
             }
         });
 
 
-        // PIN
-        // console.log(Tpin);
-        // localStorage.setItem('Bpin', docBpin);
-        // localStorage.setItem('Tpin', (Tpin + 60000));
-        // console.log(localStorage.getItem('Tpin'));
-        // console.log(localStorage.getItem('Bpin'));
-        // console.log(`Resta= ${(localStorage.getItem('Tpin') - Tpin)}` );
 
-
-        // console.log(docB1);
-
-        // console.log('Pre:');
-        // console.log(txt);
-        // console.log(docB1);
         const newCompareData = localStorage.getItem('L1');
-        // console.log(localStorage.getItem('L1'));
-
-
         updateDB('B1', 'L1');
         splitInit();
-        // aTotalTOnewTotal();
-
-        // console.log('Post:');
-        // console.log(docB1);
-        // console.log(txt);
-        // console.log(localStorage.getItem('L1'));
-
-        // if (localStorage.getItem('bp') != txt[4]) {
-        //     localStorage.removeItem('bp');
-        //     localStorage.removeItem('accessTempData')
-        //     localStorage.setItem('L1', 'GDGDGDGD');
-        //     window.location.reload();
-        // }
 
         if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
@@ -255,10 +209,13 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
 
         if (offline) {
+            var msgRechazar = '';
             localStorage.setItem('offline', '(Sin conexión)');
             document.getElementById('offline').setAttribute('style', 'opacity:1');
+            msgRechazar = '(Sin conexión)';
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
+            msgRechazar = 'Rechazar';
         };
 
         compare = false;
@@ -267,34 +224,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
 
-            // 
-            // 
-            // 
-            // var txtTemp = [];
-            // var aTotalTemp = [];
-            // var newa = [];
-            // var metaObjAdd = [];
-            // var metaObjDel = [];
 
-            // txtTemp = newCompareData.split('GD');
-            // aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-            // aTotalTemp.splice(-1, 1);
-            // aTotalTemp = aTotalTemp.concat(aTotal);
-            // aTotalTemp.sort();
-
-            // for (i = 0; i < aTotalTemp.length; i++) {
-            //     (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
-            // };
-
-            // for (i = 0; i < newa.length; i++) {
-            //     const newaName = newa[i].split('OG');
-            //     var myObj = {value: deco(newaName[0]).toUpperCase(), disabled: true};
-            //     (txtTemp[3].includes(newa[i])) ? metaObjDel.push(myObj) : metaObjAdd.push(myObj);
-            // }
-
-            // 
-            // 
-            // 
 
             function alertCompareData() {
                 alertcompare = false
@@ -302,13 +232,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 alert.setAttribute('backdrop-dismiss', 'false');
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
-                // alert.message = pepe;
-                // alert.inputs = metaObjAdd;
                 alert.buttons = [
                     { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                    { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
+                    { text: 'Rechazar', handler: () => { updateData(msgRechazar, newCompareData) } },
                     {
-                        text: 'Detalles..',
+                        text: 'Detalles',
                         handler: () => {
 
                             var txtTemp = [];
@@ -318,9 +246,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             var metaObjDel = [];
                             var myObj = '';
                             var metaObj = '';
-                            // var metaObj = [{ value: 'DETALLES', disabled: true }],
-                            // var metaObjAdd = [{ value: 'Agregadas', disabled: true }];
-                            // var metaObjDel = [{ value: 'Borradas', disabled: true }];
 
                             txtTemp = newCompareData.split('GD');
                             aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
@@ -333,81 +258,43 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             };
 
                             for (i = 0; i < newa.length; i++) {
-                                
+
                                 const newaName = newa[i].split('OG');
                                 if (txtTemp[3].includes(newa[i])) {
-                                    myObj = { value: '(–) '+deco(newaName[0]).toUpperCase(), disabled: true };
+                                    myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
                                     metaObjDel.push(myObj)
-                                }else{
-                                    myObj = { value: '(+) '+deco(newaName[0]).toUpperCase(), disabled: true };
+                                } else {
+                                    myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
                                     metaObjAdd.push(myObj)
                                 };
                             }
                             metaObj = metaObjAdd.concat(metaObjDel);
-                            // metaObj = metaObj.concat(metaObjAdd.concat(metaObjDel));
-                            // console.log(metaObj);
-                            // metaObj = metaObj.splice( 0, 0, { value: 'Cambios', disabled: true });
-                            // console.log(metaObj);
-                            // metaObj = metaObjAdd.concat(metaObjDel);
                             presentCompareData(metaObj, newCompareData);
-
-                            // if (metaObjAdd.length != '') {
-                            //     presentAlertCheckboxAdd(metaObjAdd, metaObjDel, newCompareData);
-                            // } else {
-                            //     presentAlertCheckboxDel(metaObjDel);
-                            // };
                         },
                     },
-
-                    //         var txtTemp = [];
-                    //         var aTotalTemp = [];
-                    //         var newa = [];
-                    //         var metaObjAdd = [];
-                    //         var metaObjDel = [];
-
-                    //         txtTemp = newCompareData.split('GD');
-                    //         aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-                    //         aTotalTemp.splice(-1, 1);
-                    //         aTotalTemp = aTotalTemp.concat(aTotal);
-                    //         aTotalTemp.sort();
-
-                    //         for (i = 0; i < aTotalTemp.length; i++) {
-                    //             (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
-                    //         };
-
-                    //         for (i = 0; i < newa.length; i++) {
-                    //             const newaName = newa[i].split('OG');
-                    //             var myObj = { type: 'checkbox', label: deco(newaName[0]).toUpperCase(), value: newa[i], checked: true };
-                    //             (txtTemp[3].includes(newa[i])) ? metaObjDel.push(myObj) : metaObjAdd.push(myObj);
-                    //         }
-
-
-                    //         if (metaObjAdd.length != '') {
-                    //             presentAlertCheckboxAdd(metaObjAdd, metaObjDel, newCompareData);
-                    //         } else {
-                    //             presentAlertCheckboxDel(metaObjDel);
+                    // {
+                    //     text: localStorage.getItem('offline'),
+                    //     handler: () => {
+                    //         if (localStorage.getItem('offline') != '') {
+                    //             // localStorage.setItem('offline', '');
+                    //             localStorage.removeItem('offline');
+                    //             splitInit();
+                    //             aTotalTOnewTotal();
+                    //             localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                    //             document.getElementById('userName').innerHTML = deco(txt[0]);
+                    //             showLogin.innerHTML = '';
+                    //             disableItem(false);
+                    //             // 
+                    //             localStorage.setItem('L1', newCompareData);
+                    //             // 
+                    //             updateDB('L1', 'B1')
+                    //             newSearch.value = '';
+                    //             refreshData();
+                    //             presentToast('Sincronizando datos.', '1000', 'dark');
+                    //             setTimeout(() => { window.location.reload() }, 1000);
                     //         };
                     //     },
                     // },
-                    {
-                        text: localStorage.getItem('offline'),
-                        handler: () => {
-                            if (localStorage.getItem('offline') != '') {
-                                localStorage.setItem('offline', '');
-                                splitInit();
-                                aTotalTOnewTotal();
-                                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                                document.getElementById('userName').innerHTML = deco(txt[0]);
-                                showLogin.innerHTML = '';
-                                disableItem(false);
-                                updateDB('L1', 'B1')
-                                newSearch.value = '';
-                                refreshData();
-                                presentToast('Sincronizando datos.', '1000', 'dark');
-                                setTimeout(() => { window.location.reload() }, 1000);
-                            };
-                        },
-                    },
                 ];
                 document.body.appendChild(alert);
                 return alert.present();
