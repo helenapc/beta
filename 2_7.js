@@ -51,12 +51,20 @@ const content = document.getElementById('content');
 
 
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
-document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
-setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
-setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
-setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
-setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
-setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
+// document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
+
+document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
+
+// setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
+// setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
+// setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
+// setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
+// setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
 // space
 setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
 
@@ -105,7 +113,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.09 -beta' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.091-beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -201,21 +209,22 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         updateDB('B1', 'L1');
         splitInit();
 
-        if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
+        // if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
+        if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
+        var msgRechazar = '';
         if (offline) {
-            var msgRechazar = '';
-            localStorage.setItem('offline', '(Sin conexión)');
+            localStorage.setItem('offline', 'offline');
             document.getElementById('offline').setAttribute('style', 'opacity:1');
             msgRechazar = '(Sin conexión)';
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-            msgRechazar = 'Rechazar';
+            msgRechazar = 'Reeee';
         };
 
         compare = false;
