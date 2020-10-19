@@ -224,7 +224,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             msgRechazar = localStorage.getItem('offline');
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-            msgRechazar = 'Reeee';
+            msgRechazar = 'Rechazar';
         };
 
         compare = false;
@@ -243,7 +243,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                 alert.buttons = [
                     { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                    { text: 'Rechazar', handler: () => { updateData(msgRechazar, newCompareData) } },
+                    { text: msgRechazar, handler: () => { updateData(msgRechazar, newCompareData) } },
                     {
                         text: 'Detalles',
                         handler: () => {
