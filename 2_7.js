@@ -1,21 +1,4 @@
 
-
-
-firebase.initializeApp({
-    apyKey: deco("464E7F66587E465F5C3A6B7A4B4B3D5D387F745A5C69696E466C374E554A74697953585D383868"),
-    authDomain: deco("6D6A716A7366326967323A683A3738336B6E776A6766786A66757533687472"),
-    databaseURL: deco("6D797975783F34346D6A716A7366326967323A683A3738336B6E776A6766786A6E7433687472"),
-    projectId: deco("6D6A716A7366326967323A683A3738"),
-    storageBucket: deco("6D6A716A7366326967323A683A3738336675757875747933687472"),
-    messagingSenderId: deco("39373E3B3A383538393A3635"),
-    appId: deco("363F39373E3B3A383538393A36353F7C6A673F68366968363A66676A3E393D373D3C6B3766366A3A6B"),
-    measurementId: deco("4C32473736353D575B55563D")
-});
-
-
-
-
-var db = firebase.firestore();
 var coincidencia = false;
 var txt = [];
 var aTotal = [];
@@ -31,6 +14,7 @@ var resetLogin = false;
 var offline = true;
 var closeAlert = false;
 var helpActivate = false;
+
 
 // // Init components
 const nameLog = document.getElementById('nameLog');
@@ -147,6 +131,19 @@ if (eyePass) {
 
 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('offline').setAttribute('style', 'opacity:1');
+
+
+firebase.initializeApp({
+    apyKey: deco("464E7F66587E465F5C3A6B7A4B4B3D5D387F745A5C69696E466C374E554A74697953585D383868"),
+    authDomain: deco("6D6A716A7366326967323A683A3738336B6E776A6766786A66757533687472"),
+    databaseURL: deco("6D797975783F34346D6A716A7366326967323A683A3738336B6E776A6766786A6E7433687472"),
+    projectId: deco("6D6A716A7366326967323A683A3738"),
+    storageBucket: deco("6D6A716A7366326967323A683A3738336675757875747933687472"),
+    messagingSenderId: deco("39373E3B3A383538393A3635"),
+    appId: deco("363F39373E3B3A383538393A36353F7C6A673F68366968363A66676A3E393D373D3C6B3766366A3A6B"),
+    measurementId: deco("4C32473736353D575B55563D")
+});
+var db = firebase.firestore();
 
 // ------------------ START ------------------ //
 localStorage.removeItem('alrt');
