@@ -296,20 +296,53 @@ function aTotalTOnewTotal() {
     }
 }
 
-function updateData(text){
+function updateData(text, newCompareData){
     let mensaje = 'Base de datos sincronizada'
-    if (text == 'Aceptar') updateDB('B1', 'L1');
+    // console.log(text);
+    // console.log(localStorage.getItem('L1'));
+    // console.log(newCompareData);
+    // console.log(txt);
+    // if (text == 'Aceptar') updateDB('B1', 'L1');
+    // (text == 'Aceptar') ? updateDB('B1', 'L1') : updateDB('L1', 'B1');
     splitInit();
     aTotalTOnewTotal();
+
+
+
     localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
     disableItem(false);
-    if (text == 'Rechazar') {updateDB('L1', 'B1'); mensaje = 'Cancelando cambios.';};
+    if (text != 'Aceptar') {
+        // console.log(newCompareData)
+        mensaje = 'Cancelando';
+        localStorage.setItem('L1', newCompareData);
+        updateDB('L1', 'B1');
+    };
+
+    // console.log(text);
+    // console.log(localStorage.getItem('L1'));
+    // console.log(txt);
+
+
     newSearch.value = '';
     refreshData();
-    presentToast(mensaje, '1000', 'dark');
+    presentToast('Listo', '1000', 'dark');
     setTimeout(() => { window.location.reload() }, 1000);
+}
+
+function presentCompareData(metaObj, newCompareData){
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Se detectaron cambios';
+    alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
+    alert.inputs = metaObj;
+    alert.buttons = [
+        { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
+        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
 }
 
 
@@ -421,19 +454,7 @@ function sendEmail() {
 
 // ALERTS
 
-function presentCompare(metaObj){
-    const alert = document.createElement('ion-alert');
-    alert.setAttribute('backdrop-dismiss', 'false');
-    alert.header = 'Se detectaron cambios';
-    alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
-    alert.inputs = metaObj;
-    alert.buttons = [
-        { text: 'Rechazar', handler: () => { updateData('Rechazar') } },
-        { text: 'Aceptar', handler: () => { updateData('Aceptar') } },
-    ];
-    document.body.appendChild(alert);
-    return alert.present();
-}
+
 
 function presentAlertCheckboxAdd(metaObjAdd, metaObjDel) {
     const alert = document.createElement('ion-alert');

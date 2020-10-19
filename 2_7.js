@@ -105,7 +105,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.0008 -beta' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.09 -beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -305,8 +305,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 // alert.message = pepe;
                 // alert.inputs = metaObjAdd;
                 alert.buttons = [
-                    { text: 'Aceptar', handler: () => { updateData('Aceptar') } },
-                    { text: 'Rechazar', handler: () => { updateData('Rechazar') } },
+                    { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+                    { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
                     {
                         text: 'Detalles..',
                         handler: () => {
@@ -349,7 +349,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             // metaObj = metaObj.splice( 0, 0, { value: 'Cambios', disabled: true });
                             // console.log(metaObj);
                             // metaObj = metaObjAdd.concat(metaObjDel);
-                            presentCompare(metaObj);
+                            presentCompareData(metaObj, newCompareData);
 
                             // if (metaObjAdd.length != '') {
                             //     presentAlertCheckboxAdd(metaObjAdd, metaObjDel, newCompareData);
