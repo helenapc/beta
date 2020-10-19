@@ -76,7 +76,7 @@ function helpFunction(opacity, activate) {
 
     if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
         document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}`);
-    }else{
+    } else {
         document.getElementById('help-exp-com').setAttribute('style', `opacity:0`);
     };
     helpActivate = activate;
@@ -114,13 +114,13 @@ function delete_spaces(v1) {
 function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
     document.getElementById('title').setAttribute('style', 'margin-left:0px');
-    setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px' ,disabled: boolean });
+    setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
     // expand
     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
     // space
-    setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:1; margin-bottom:0px; margin-right:-8px'});
+    setAttributes(document.getElementById('buttonAdd'), { style: 'opacity:1; margin-bottom:0px; margin-right:-8px' });
     setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
 
     content.setAttribute('style', '--background: #ffffff00');
@@ -243,22 +243,19 @@ function deco(dec) {
     return str;
 }
 
-// function splitInit() {
-//     txt = localStorage.getItem('L1').split('GD');
-//     console.log(txt);
-//     txt[3] == undefined ? (txt2 = txt.unshift('')) : null;
-//     aTotal = txt[3].split(txt[3].includes('Q0') ? 'Q0' : 'BO');
-//     aTotal.splice(-1, 1);
-// }
-
 function splitInit() {
     txt = localStorage.getItem('L1').split('GD');
-    if (txt[4] == undefined){
-        txt.splice(3,0, 'pepe');
-    }
-    aTotal = txt[4].split(txt[4].includes('Q0') ? 'Q0' : 'BO');
+    // txt[3] == undefined ? (txt2 = txt.unshift('')) : null;
+    // txt[4] = '';
+    console.log(txt.length);
+    aTotal = txt[3].split(txt[3].includes('Q0') ? 'Q0' : 'BO');
+
     aTotal.splice(-1, 1);
+    if (txt.length == 4) txt.push('');
+    // if (txt.length == 5) txt.pop();
+    // save();
     console.log(txt);
+
 }
 
 function aTotalTOnewTotal() {
@@ -301,11 +298,17 @@ function updateDB(send, receive) {
 
 function save() {
     if (aTotal.length > 0) {
-        localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
+    //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
+    // } else {
+    //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+    // }
+        localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0' + 'GD' + txt[4]);
     } else {
-        localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+        localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + txt[4]);
     }
 }
+
+
 
 function sendEmail() {
     coincidencia = false
@@ -575,7 +578,7 @@ function presentAlertEditUserData() {
         { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
         { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
         { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
-        { name: 'userPin', placeholder: 'PIN', value: localStorage.getItem('Bpin') },
+        { name: 'userPin', placeholder: 'PIN', value: deco(txt[4]) },
     ];
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
@@ -588,7 +591,7 @@ function presentAlertEditUserData() {
                     setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                     return;
                 }
-                const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass];
+                const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
                 // localStorage.setItem('Bpin', usNData.userPin);
                 presentAlertConfirmEdit(confPersonal);
             },
@@ -611,9 +614,14 @@ function presentAlertConfirmEdit(confPersonal) {
                 (code(confPersonal[0]) == '') ? txt[0] = '25' : txt[0] = code(confPersonal[0]);
                 txt[1] = code(confPersonal[1]);
                 txt[2] = code(confPersonal[2]);
+                // 
+                txt[4] = code(confPersonal[3]);
+                // 
+
                 document.getElementById('userName').innerHTML = deco(txt[0]);
                 document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
-                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + txt[4] + 'GD');
                 save();
                 updateDB('L1', 'B1');
                 updateDB('L1', 'B2');

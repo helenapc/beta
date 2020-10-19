@@ -159,6 +159,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
+                console.log(userID);
                 compare = true;
                 return;
             }
@@ -298,6 +299,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 // welcome();
 if (!txt[3] && showLogin.innerHTML == '') {
+// if (!txt[4] && showLogin.innerHTML == '') {
     expandIcon.setAttribute('name', 'contract-outline')
     showSearch.innerHTML = `
     <div style="text-align:center"><br>No hay datos guardados. </div>
