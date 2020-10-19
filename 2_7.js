@@ -146,6 +146,7 @@ if (eyePass) {
 
 
 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('offline').setAttribute('style', 'opacity:1');
 
 // ------------------ START ------------------ //
 localStorage.removeItem('alrt');
@@ -189,6 +190,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         });
     }
 
+    
     // DB
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -220,7 +222,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         var msgRechazar = '';
         if (offline) {
             localStorage.setItem('offline', 'offlineee');
-            document.getElementById('offline').setAttribute('style', 'opacity:1');
+            // document.getElementById('offline').setAttribute('style', 'opacity:1');
             msgRechazar = localStorage.getItem('offline');
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
