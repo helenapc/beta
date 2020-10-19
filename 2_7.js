@@ -219,9 +219,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         var msgRechazar = '';
         if (offline) {
-            localStorage.setItem('offline', 'offline');
+            localStorage.setItem('offline', 'offlineee');
             document.getElementById('offline').setAttribute('style', 'opacity:1');
-            msgRechazar = '(Sin conexión)';
+            msgRechazar = localStorage.getItem('offline');
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
             msgRechazar = 'Reeee';
