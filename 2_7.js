@@ -217,16 +217,21 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
 
         // var msgRechazar = '';
-        document.getElementById('offline').setAttribute('style', 'opacity:1');
+        // document.getElementById('offline').setAttribute('style', 'opacity:1');
         // document.getElementById('offline').setAttribute('style', 'opacity:0');
-        if (offline) {
-            localStorage.setItem('offline', 'offlineee');
-            // document.getElementById('offline').setAttribute('style', 'opacity:1');
-            // msgRechazar = localStorage.getItem('offline');
-        } else {
-            document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-            // msgRechazar = 'Rechazarr';
-        };
+        // if (offline) localStorage.setItem('offline', 'offlineee');
+        // document.getElementById('offline').setAttribute('style', 'opacity:1');
+        // msgRechazar = localStorage.getItem('offline');
+        // } else {
+        // document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
+        // msgRechazar = 'Rechazarr';
+        // };
+
+
+        // 
+        if (offline) localStorage.setItem('offline', 'offlineee');
+        // 
+
 
         compare = false;
         console.log(localStorage.getItem('offline'));
@@ -234,81 +239,62 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
 
-            if (localStorage.getItem('offline') != null) {
-                localStorage.removeItem('offline');
-                function alertOffline() {
-                    alertcompare = false
-                    const alert = document.createElement('ion-alert');
-                    alert.setAttribute('backdrop-dismiss', 'false');
-                    alert.header = 'Se detectaron cambios';
-                    alert.message = '¿Deseas aplicar cambios hechos sin conexión a internet?';
-                    alert.buttons = [
-                        { text: 'Cancelar', handler: () => { updateData('Aceptar', newCompareData) } },
-                        { text: 'Aceptar', handler: () => { updateData('Ok', newCompareData) } },
-                    ];
-                    document.body.appendChild(alert);
-                    return alert.present();
-                }
-                alertOffline();
+            // 
+            localStorage.removeItem('offline');
+            // 
 
-            } else {
-                function alertCompareData() {
-                    alertcompare = false
-                    const alert = document.createElement('ion-alert');
-                    alert.setAttribute('backdrop-dismiss', 'false');
-                    alert.header = 'Se detectaron cambios';
-                    alert.message = '¿Aceptar y sincorinizar con la base de datos?';
-                    alert.buttons = [
-                        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                        { text: 'Rechazarr', handler: () => { updateData('Rechazar', newCompareData) } },
-                        {
-                            text: 'Detalles',
-                            handler: () => {
+            function alertCompareData() {
+                alertcompare = false
+                const alert = document.createElement('ion-alert');
+                alert.setAttribute('backdrop-dismiss', 'false');
+                alert.header = 'Se detectaron cambios';
+                alert.message = '¿Aceptar y sincorinizar con la base de datos?';
+                alert.buttons = [
+                    { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+                    { text: 'Rechazar/Offline', handler: () => { updateData('Rechazar', newCompareData) } },
+                    {
+                        text: 'Detalles',
+                        handler: () => {
 
-                                var txtTemp = [];
-                                var aTotalTemp = [];
-                                var newa = [];
-                                var metaObjAdd = [];
-                                var metaObjDel = [];
-                                var myObj = '';
-                                var metaObj = '';
+                            var txtTemp = [];
+                            var aTotalTemp = [];
+                            var newa = [];
+                            var metaObjAdd = [];
+                            var metaObjDel = [];
+                            var myObj = '';
+                            var metaObj = '';
 
-                                txtTemp = newCompareData.split('GD');
-                                aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-                                aTotalTemp.splice(-1, 1);
-                                aTotalTemp = aTotalTemp.concat(aTotal);
-                                aTotalTemp.sort();
+                            txtTemp = newCompareData.split('GD');
+                            aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
+                            aTotalTemp.splice(-1, 1);
+                            aTotalTemp = aTotalTemp.concat(aTotal);
+                            aTotalTemp.sort();
 
-                                for (i = 0; i < aTotalTemp.length; i++) {
-                                    (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
+                            for (i = 0; i < aTotalTemp.length; i++) {
+                                (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
+                            };
+
+                            for (i = 0; i < newa.length; i++) {
+
+                                const newaName = newa[i].split('OG');
+                                if (txtTemp[3].includes(newa[i])) {
+                                    myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                                    metaObjDel.push(myObj)
+                                } else {
+                                    myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                                    metaObjAdd.push(myObj)
                                 };
-
-                                for (i = 0; i < newa.length; i++) {
-
-                                    const newaName = newa[i].split('OG');
-                                    if (txtTemp[3].includes(newa[i])) {
-                                        myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                        metaObjDel.push(myObj)
-                                    } else {
-                                        myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                        metaObjAdd.push(myObj)
-                                    };
-                                }
-                                metaObj = metaObjAdd.concat(metaObjDel);
-                                presentCompareData(metaObj, newCompareData);
-                            },
+                            }
+                            metaObj = metaObjAdd.concat(metaObjDel);
+                            presentCompareData(metaObj, newCompareData);
                         },
+                    },
 
-                    ];
-                    document.body.appendChild(alert);
-                    return alert.present();
-                }
-                alertCompareData();
-
+                ];
+                document.body.appendChild(alert);
+                return alert.present();
             }
-
-
-
+            alertCompareData();
         }
     })
 
