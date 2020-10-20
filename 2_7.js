@@ -97,7 +97,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.094-beta' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.095-beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -130,8 +130,7 @@ if (eyePass) {
 
 
 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('offline').setAttribute('style', 'opacity:1');
-document.getElementById('offline').setAttribute('style', 'opacity:0');
+
 
 
 firebase.initializeApp({
@@ -217,23 +216,25 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             window.location.reload();
         }
 
-        var msgRechazar = '';
+        // var msgRechazar = '';
+        document.getElementById('offline').setAttribute('style', 'opacity:1');
+        // document.getElementById('offline').setAttribute('style', 'opacity:0');
         if (offline) {
             localStorage.setItem('offline', 'offlineee');
-            document.getElementById('offline').setAttribute('style', 'opacity:1');
-            msgRechazar = localStorage.getItem('offline');
+            // document.getElementById('offline').setAttribute('style', 'opacity:1');
+            // msgRechazar = localStorage.getItem('offline');
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-            msgRechazar = 'Rechazarr';
+            // msgRechazar = 'Rechazarr';
         };
 
         compare = false;
-
+        console.log(localStorage.getItem('offline'));
         // if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
         if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
 
-            if (localStorage.getItem('offline') != '') {
+            if (localStorage.getItem('offline') != null) {
                 localStorage.removeItem('offline');
                 function alertOffline() {
                     alertcompare = false
@@ -242,8 +243,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                     alert.header = 'Se detectaron cambios';
                     alert.message = '¿Deseas aplicar cambios hechos sin conexión a internet?';
                     alert.buttons = [
-                        { text: 'Confirmar', handler: () => { updateData('Confirmar', newCompareData) } },
                         { text: 'Cancelar', handler: () => { updateData('Aceptar', newCompareData) } },
+                        { text: 'Aceptar', handler: () => { updateData('Ok', newCompareData) } },
                     ];
                     document.body.appendChild(alert);
                     return alert.present();
