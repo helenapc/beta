@@ -130,7 +130,7 @@ if (eyePass) {
 
 
 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('offline').setAttribute('style', 'opacity:1');
+document.getElementById('offline').setAttribute('style', 'opacity:0');
 
 
 firebase.initializeApp({
@@ -187,7 +187,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         });
     }
 
-    
+
     // DB
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -219,11 +219,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         var msgRechazar = '';
         if (offline) {
             localStorage.setItem('offline', 'offlineee');
-            // document.getElementById('offline').setAttribute('style', 'opacity:1');
+            document.getElementById('offline').setAttribute('style', 'opacity:1');
             msgRechazar = localStorage.getItem('offline');
         } else {
             document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-            msgRechazar = 'Rechazar';
+            msgRechazar = 'Rechazarr';
         };
 
         compare = false;
@@ -232,82 +232,80 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
 
+            if (localStorage.getItem('offline') != '') {
+                function alertOffline() {
+                    alertcompare = false
+                    const alert = document.createElement('ion-alert');
+                    alert.setAttribute('backdrop-dismiss', 'false');
+                    alert.header = 'Se detectaron cambios';
+                    alert.message = '¿Deseas aplicar cambios hechos sin conexión a internet?';
+                    alert.buttons = [
+                        { text: 'Confirmar', handler: () => { updateData('Confirmar', newCompareData) } },
+                        { text: 'Cancelar', handler: () => { updateData('Aceptar', newCompareData) } },
+                    ];
+                    document.body.appendChild(alert);
+                    return alert.present();
+                }
+                alertOffline();
 
+            } else {
+                function alertCompareData() {
+                    alertcompare = false
+                    const alert = document.createElement('ion-alert');
+                    alert.setAttribute('backdrop-dismiss', 'false');
+                    alert.header = 'Se detectaron cambios';
+                    alert.message = '¿Aceptar y sincorinizar con la base de datos?';
+                    alert.buttons = [
+                        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+                        { text: msgRechazar, handler: () => { updateData(msgRechazar, newCompareData) } },
+                        {
+                            text: 'Detalles',
+                            handler: () => {
 
-            function alertCompareData() {
-                alertcompare = false
-                const alert = document.createElement('ion-alert');
-                alert.setAttribute('backdrop-dismiss', 'false');
-                alert.header = 'Se detectaron cambios';
-                alert.message = '¿Aceptar y sincorinizar con la base de datos?';
-                alert.buttons = [
-                    { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                    { text: msgRechazar, handler: () => { updateData(msgRechazar, newCompareData) } },
-                    {
-                        text: 'Detalles',
-                        handler: () => {
+                                var txtTemp = [];
+                                var aTotalTemp = [];
+                                var newa = [];
+                                var metaObjAdd = [];
+                                var metaObjDel = [];
+                                var myObj = '';
+                                var metaObj = '';
 
-                            var txtTemp = [];
-                            var aTotalTemp = [];
-                            var newa = [];
-                            var metaObjAdd = [];
-                            var metaObjDel = [];
-                            var myObj = '';
-                            var metaObj = '';
+                                txtTemp = newCompareData.split('GD');
+                                aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
+                                aTotalTemp.splice(-1, 1);
+                                aTotalTemp = aTotalTemp.concat(aTotal);
+                                aTotalTemp.sort();
 
-                            txtTemp = newCompareData.split('GD');
-                            aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-                            aTotalTemp.splice(-1, 1);
-                            aTotalTemp = aTotalTemp.concat(aTotal);
-                            aTotalTemp.sort();
-
-                            for (i = 0; i < aTotalTemp.length; i++) {
-                                (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
-                            };
-
-                            for (i = 0; i < newa.length; i++) {
-
-                                const newaName = newa[i].split('OG');
-                                if (txtTemp[3].includes(newa[i])) {
-                                    myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                    metaObjDel.push(myObj)
-                                } else {
-                                    myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                    metaObjAdd.push(myObj)
+                                for (i = 0; i < aTotalTemp.length; i++) {
+                                    (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
                                 };
-                            }
-                            metaObj = metaObjAdd.concat(metaObjDel);
-                            presentCompareData(metaObj, newCompareData);
+
+                                for (i = 0; i < newa.length; i++) {
+
+                                    const newaName = newa[i].split('OG');
+                                    if (txtTemp[3].includes(newa[i])) {
+                                        myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                                        metaObjDel.push(myObj)
+                                    } else {
+                                        myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                                        metaObjAdd.push(myObj)
+                                    };
+                                }
+                                metaObj = metaObjAdd.concat(metaObjDel);
+                                presentCompareData(metaObj, newCompareData);
+                            },
                         },
-                    },
-                    // {
-                    //     text: localStorage.getItem('offline'),
-                    //     handler: () => {
-                    //         if (localStorage.getItem('offline') != '') {
-                    //             // localStorage.setItem('offline', '');
-                    //             localStorage.removeItem('offline');
-                    //             splitInit();
-                    //             aTotalTOnewTotal();
-                    //             localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                    //             document.getElementById('userName').innerHTML = deco(txt[0]);
-                    //             showLogin.innerHTML = '';
-                    //             disableItem(false);
-                    //             // 
-                    //             localStorage.setItem('L1', newCompareData);
-                    //             // 
-                    //             updateDB('L1', 'B1')
-                    //             newSearch.value = '';
-                    //             refreshData();
-                    //             presentToast('Sincronizando datos.', '1000', 'dark');
-                    //             setTimeout(() => { window.location.reload() }, 1000);
-                    //         };
-                    //     },
-                    // },
-                ];
-                document.body.appendChild(alert);
-                return alert.present();
+
+                    ];
+                    document.body.appendChild(alert);
+                    return alert.present();
+                }
+                alertCompareData();
+
             }
-            alertCompareData();
+
+
+
         }
     })
 
