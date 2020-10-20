@@ -260,7 +260,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                     alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                     alert.buttons = [
                         { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                        { text: 'Rechazarr', handler: () => { updateData(msgRechazar, newCompareData) } },
+                        { text: 'Rechazarr', handler: () => { updateData('Rechazar', newCompareData) } },
                         {
                             text: 'Detalles',
                             handler: () => {
