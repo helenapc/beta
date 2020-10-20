@@ -97,7 +97,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.093-beta' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.094-beta' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -130,6 +130,7 @@ if (eyePass) {
 
 
 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+document.getElementById('offline').setAttribute('style', 'opacity:1');
 document.getElementById('offline').setAttribute('style', 'opacity:0');
 
 
@@ -233,6 +234,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             showSearch.innerHTML = '';
 
             if (localStorage.getItem('offline') != '') {
+                localStorage.removeItem('offline');
                 function alertOffline() {
                     alertcompare = false
                     const alert = document.createElement('ion-alert');
