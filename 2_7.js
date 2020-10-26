@@ -164,7 +164,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
     if (txt[4] != '') {
         if (localStorage.getItem('tPin')) {
-            if (Date.now() - localStorage.getItem('tPin') > 60000) {
+            if (Date.now() - localStorage.getItem('tPin') > 300000) {
                 document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
                 disableItem(true);
                 document.getElementById('title').setAttribute('style', 'margin-left:38px');

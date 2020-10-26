@@ -368,10 +368,6 @@ function updateDB(send, receive) {
 
 function save() {
     if (aTotal.length > 0) {
-        //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0');
-        // } else {
-        //     localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-        // }
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + aTotal.join('Q0') + 'Q0' + 'GD' + txt[4]);
     } else {
         localStorage.setItem('L1', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD' + txt[4]);
@@ -447,76 +443,6 @@ function sendEmail() {
 
 
 // ALERTS
-
-
-
-function presentAlertCheckboxAdd(metaObjAdd, metaObjDel) {
-    const alert = document.createElement('ion-alert');
-    alert.subHeader = 'Cuentas agregadas';
-    alert.message = 'Seleccione para confirmar';
-    // alert.inputs = metaObjAdd;
-    alert.inputs = metaObjAdd;
-    alert.buttons = [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-            text: 'Terminar',
-            handler: (data) => {
-                aTotal = aTotal.concat(data);
-                alertcompare = true;
-                if (metaObjDel.length != '') {
-                    presentAlertCheckboxDel(metaObjDel);
-                    metaObjDel = [];
-                } else {
-                    console.log('No hay datos borrados');
-                    aTotalTOnewTotal();
-                    save();
-                    updateDB('L1', 'B1');
-                    // console.log(localStorage.getItem('L1'));
-                    // console.log(newCompareData);
-                    alertcompare = false;
-                    window.location.reload();
-                };
-            },
-        },
-    ];
-    document.body.appendChild(alert);
-    return alert.present();
-}
-
-function presentAlertCheckboxDel(metaObjDel) {
-    if (metaObjDel.length != '') {
-        const alert = document.createElement('ion-alert');
-        alert.header = 'Cuentas eliminadas';
-        alert.message = 'Seleccionar para confirmar';
-        alert.inputs = metaObjDel;
-        alert.buttons = [
-            { text: 'Cancelar', role: 'cancel' },
-            {
-                text: 'Terminar',
-                handler: (data2) => {
-                    aTotal = aTotal.concat(data2);
-                    aTotal.sort();
-                    newa = [];
-                    for (i = 0; i < aTotal.length; i++) {
-                        (aTotal[i] == aTotal[i + 1]) ? i++ : newa.push(aTotal[i]);
-                    };
-                    aTotal = newa;
-                    aTotalTOnewTotal();
-                    save();
-                    updateDB('L1', 'B1');
-
-                    alertcompare = false;
-
-                    window.location.reload();
-                },
-            },
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-};
-
-
 
 
 
