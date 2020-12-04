@@ -1,5 +1,6 @@
-
-
+function testEdit(){
+    console.log('hola');
+}
 
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
@@ -442,6 +443,7 @@ function sendEmail() {
 }
 
 
+
 // ALERTS
 
 
@@ -462,6 +464,8 @@ function alertEdit(cuPath, reemplace) {
         {
             text: 'Ok',
             handler: newData => {
+                document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+
                 if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
                     alertMsg('Error', 'Datos incorrectos o vacíos.');
                     return;
@@ -491,6 +495,7 @@ function alertEdit(cuPath, reemplace) {
                 save();
                 updateDB('L1', 'B1');
                 closeAlert = false;
+
             },
         },
     ];
@@ -529,11 +534,13 @@ async function alertView(cuPath) {
     alert.translucent = true;
     alert.message =
         `
+        <p>
         <ul>
         <li>Usuario:</br>${cuPath[1]}</li>
         <li>Contraseña:</br>${cuPath[2]}</li>
         <li>Notas:</br>${cuPath[3]}</li>
         </ul>
+        </p>
         `;
     document.body.appendChild(alert);
     await alert.present();
@@ -544,6 +551,23 @@ async function alertView(cuPath) {
     }, 1200);
 }
 
+async function alertView2(cuPath) {
+    document.getElementById('modal').innerHTML =
+    `
+    <label id="op1" class="card_content_tit">${cuPath[0]}</br></label>
+
+    <p id="op1" class="card_content_edit">
+        <ul>
+        <li><b>Usuario: </b>${cuPath[1]}</li>
+        <li><b>Contraseña: </b>${cuPath[2]}</li>
+        <li><b>Notas: </b>${cuPath[3]}</li>
+        </ul>
+    </p>
+    `;
+
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+}
 
 // EDIT NM/US/PS/NO
 function alertPass() {
