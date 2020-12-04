@@ -24,15 +24,30 @@
 }
 
 .card_content_edit{
-  /* line-height: 1.6; */
-  
-  color: var(--ion-color-step-550);
+  /* color: var(--ion-color-step-550); */
+  text-decoration-color: red;
+}
+
+li{
+  color: var(--ion-color-step-550)
+}
+
+.bkpopup{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: red;
+
+
+
+  opacity: 0;
+  pointer-events: none;
 }
 
 .popup_box{
   position: absolute;
   left: 50%;
-  top: 20%;
+  top: 30%;
   /* margin-top: 100px; */
   /* width: 100%; */
   width: 250px;
@@ -52,8 +67,8 @@
   z-index: 1;
 
   /*CAMBIAR*/
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .btns{

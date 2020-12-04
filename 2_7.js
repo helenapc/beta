@@ -14,6 +14,7 @@ var resetLogin = false;
 var offline = true;
 var closeAlert = false;
 var helpActivate = false;
+const timePin = 3000000;
 
 
 // // Init components
@@ -97,7 +98,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-setAttributes(ver, { innerHTML: 'Versión 2.7.096-beta-test7' });
+setAttributes(ver, { innerHTML: 'Versión 2.7.098-beta-test' });
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -164,7 +165,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
     if (txt[4] != '') {
         if (localStorage.getItem('tPin')) {
-            if (Date.now() - localStorage.getItem('tPin') > 300000) {
+            if (Date.now() - localStorage.getItem('tPin') > timePin) {
                 document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
                 disableItem(true);
                 document.getElementById('title').setAttribute('style', 'margin-left:38px');
