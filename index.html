@@ -19,8 +19,10 @@
 
 <body>
   <ion-app class="fondo">
+    
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
 
+    
     <!-- <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
       <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
     </ion-fab> -->
@@ -61,9 +63,10 @@
           <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
           </ion-refresher-content>
         </ion-refresher>
-
+        
         <ion-row>
           <ion-col id="show-accounts1" size="9" offset="1.5" size-md="5" offset-md="3.5"></ion-col>
+          
         </ion-row>
 
         <ion-row id="showLogin" style="margin-top: 50px;">
@@ -99,7 +102,39 @@
 
       </ion-content>
 
+      <div id="modal" class="popup_box">
 
+        <label id="op1" class="card_content_tit">
+          CABLEVISION FIBERTEL</br>
+        </label>
+
+        <label id="op1" class="card_content_edit">
+          <ul>
+            <li><b>Usuario: </b>pepe@gmail.com</li>
+            <li><b>Contraseña: </b>contraseña</li>
+            <li><b>Notas: </b>bla bla bla</li>
+          </ul>
+        </label>
+
+        <!-- <label id="op1" class="card_content_edit">
+          <ul>
+            <li>Usuario: pepe@gmail.com</li>
+            <li>Contraseña: contraseñapepe</li>
+            <li>Notas: bla bla bla</li>
+          </ul>
+        </label> -->
+
+        <!-- <label id="op1" class="card_content_edit">
+          Usuario: pepe@gmail.com</br>
+          Contraseña: contraseñapepeasdasdasd</br>
+          Notas: bla bla bla
+        </label> -->
+
+        <div class="btns">
+            <input class="btn" type="button" value="A" />
+            <input class="btn" type="button" value="B" />
+        </div>
+    </div>
 
 
       <!-- FAB TOP-LEFT -->

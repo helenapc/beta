@@ -171,6 +171,9 @@ buttonCreate.addEventListener('click', () => {
 //CONTENT
 newSearch.addEventListener('ionInput', () => { refreshData() });
 
+
+
+
 showSearch.addEventListener('click', e => {  //editCard
     helpFunction('0', false);
     e.preventDefault();
@@ -230,6 +233,10 @@ showSearch.addEventListener('click', e => {  //editCard
             presentToastC(cuPath[0]);
         }
     }
+
+    // e.preventDefault();
+    // console.log('click '+e);
+
 });
 
 document.getElementById('refresher').addEventListener('ionRefresh', () => {

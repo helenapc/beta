@@ -640,7 +640,6 @@ function presentAlertConfirmEdit(confPersonal) {
 
 
 
-// PIN
 
 //EXTRAS
 
