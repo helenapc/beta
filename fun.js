@@ -1,4 +1,4 @@
-function testEdit(){
+function testEdit() {
     console.log('hola');
 }
 
@@ -6,10 +6,12 @@ const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
     const newHeader = document.createElement('ion-card-header');
+    // const 
     const newSub1 = document.createElement('ion-card-subtitle');
     const newSub2 = document.createElement('ion-card-subtitle');
     const newSub3 = document.createElement('ion-card-subtitle');
     const newSub4 = document.createElement('ion-card-subtitle');
+    const sep = document.createElement('ion-item');
 
     newSub1.textContent = account.toUpperCase();
     newSub2.textContent = 'Usuario: ' + user;
@@ -29,6 +31,7 @@ const showCardAll = (account, user, pass, notes) => {
         newSub3.classList.add("hide");
         newSub4.classList.add("hide");
     } else {
+        newSub1.setAttribute('style','font-weight: bold; text-align: center;');
         newSub2.classList.remove("hide");
         newSub3.classList.remove("hide");
         newSub4.classList.remove("hide");
@@ -38,7 +41,7 @@ const showCardAll = (account, user, pass, notes) => {
     newHeader.appendChild(newSub2);
     newHeader.appendChild(newSub3);
     newHeader.appendChild(newSub4);
-
+    
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 };
@@ -297,7 +300,7 @@ function aTotalTOnewTotal() {
     }
 }
 
-function updateData(text, newCompareData){
+function updateData(text, newCompareData) {
     let mensaje = 'Base de datos sincronizada.';
     // console.log(text);
     // console.log(localStorage.getItem('L1'));
@@ -326,7 +329,7 @@ function updateData(text, newCompareData){
     setTimeout(() => { window.location.reload() }, 1000);
 }
 
-function presentCompareData(metaObj, newCompareData){
+function presentCompareData(metaObj, newCompareData) {
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
     alert.header = 'Se detectaron cambios';
@@ -449,6 +452,8 @@ function sendEmail() {
 
 
 function alertEdit(cuPath, reemplace) {
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
     const toRemplace = reemplace / 5;
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
@@ -554,20 +559,31 @@ async function alertView(cuPath) {
 async function alertView2(cuPath) {
     document.getElementById('modal').innerHTML =
     `
-    <label id="op1" class="card_content_tit">${cuPath[0]}</br></label>
-
-    <p id="op1" class="card_content_edit">
-        <ul>
-        <li><b>Usuario: </b>${cuPath[1]}</li>
-        <li><b>Contraseña: </b>${cuPath[2]}</li>
-        <li><b>Notas: </b>${cuPath[3]}</li>
-        </ul>
+    <p id="op1" class="cct">${cuPath[0]}</br></p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 10px 0px 1px 0px;">
+        <label class="cce" > Usuario: </label>
+        <p class="ccse" > ${cuPath[1]} </p>
+        <label class="cce" > Contraseña: </label>
+        <p class="ccse" > ${cuPath[2]} </p>
+        <label class="cce" > Notas: </label>
+        <p class="ccse" > ${cuPath[3]} </p>
     </p>
     `;
 
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
 }
+
+/*
+
+        <ul>
+        <li><b>Usuario: </b>${cuPath[1]}</li>
+        <li><b>Contraseña: </b>${cuPath[2]}</li>
+        <li><b>Notas: </b>${cuPath[3]}</li>
+        </ul>
+*/
+
 
 // EDIT NM/US/PS/NO
 function alertPass() {
