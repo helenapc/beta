@@ -138,7 +138,9 @@ li{
   display: none;
 }
 
-
+p{
+  user-select: all;
+}
 
 /*ITEMS*/
 

@@ -42,6 +42,7 @@ const showCardAll = (account, user, pass, notes) => {
     
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
+    // showSearch.setAttribute('draggable', 'true');
 };
 const item = (id, ico, text, color = '', show = true) => {
     const ionItem = document.createElement('ion-item');
@@ -558,7 +559,7 @@ async function alertView(cuPath) {
     }, 1200);
 }
 
-async function alertView2(cuPath) {
+function alertView2(cuPath) {
     document.getElementById('modal').innerHTML =
     `
     <p id="op1" class="cct">${cuPath[0]}</br></p>
@@ -573,8 +574,9 @@ async function alertView2(cuPath) {
     </p>
     `;
 
-    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+
+    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
 }
 
 /*

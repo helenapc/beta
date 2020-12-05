@@ -216,8 +216,10 @@ showSearch.addEventListener('click', e => {  //editCard
 
             if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
                 alertView2(cuPath);
-
-
+                document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+            }else{
+                document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: auto');
             }
             function presentToastC(msg) {
                 const toastC = document.createElement('ion-toast');
@@ -248,7 +250,6 @@ showSearch.addEventListener('click', e => {  //editCard
 
             }
             presentToastC(cuPath[0]);
-
         }
     }
 
