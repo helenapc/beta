@@ -30,6 +30,7 @@
 .ccse{
   color: var(--ion-color-step-550);
   margin: 0px 0px 10px 0px;
+  
 }
 
 li{
@@ -46,6 +47,8 @@ li{
   pointer-events: none;
 }
 
+
+
 .popup_box{
   position: absolute;
   left: 50%;
@@ -56,7 +59,7 @@ li{
   background: var(--ion-background-color);
   text-align: left;
   align-items: center;
-  padding: 20px 20px 0px 20px;
+  padding: 12px 20px 0px 20px;
   
   border-radius: 5px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);

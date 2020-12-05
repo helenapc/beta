@@ -1,6 +1,3 @@
-function testEdit() {
-    console.log('hola');
-}
 
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
@@ -237,6 +234,8 @@ function presentToast(msg, time, color) {
     document.body.appendChild(toast);
     return toast.present();
 }
+
+
 
 
 function code(cod) {
@@ -564,7 +563,7 @@ async function alertView2(cuPath) {
     `
     <p id="op1" class="cct">${cuPath[0]}</br></p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-    <p style="margin: 10px 0px 1px 0px;">
+    <p style="margin: 0px 0px 0px 0px;">
         <label class="cce" > Usuario: </label>
         <p class="ccse" > ${cuPath[1]} </p>
         <label class="cce" > Contraseña: </label>
@@ -586,6 +585,7 @@ async function alertView2(cuPath) {
         <li><b>Notas: </b>${cuPath[3]}</li>
         </ul>
 */
+
 
 
 // EDIT NM/US/PS/NO

@@ -7,6 +7,8 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     console.log('hola');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('toastC').setAttribute('style', 'transform: translateY(60px);');
+    
 })
 
 
@@ -213,17 +215,18 @@ showSearch.addEventListener('click', e => {  //editCard
 
             if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
                 alertView2(cuPath);
-               
+
 
             }
             function presentToastC(msg) {
-                const toast = document.createElement('ion-toast');
-                toast.setAttribute('style', `--background:var(--ion-color-toastC)`);
-                toast.style.color = 'var(--ion-text-toastC)';
-                toast.translucent = true;
-                toast.message = msg;
-                toast.duration = 2500;
-                toast.buttons = [
+                const toastC = document.createElement('ion-toast');
+                // toastC.setAttribute('style', `--background:var(--ion-color-toastC)`);
+                toastC.setAttribute('id', 'toastC');
+                toastC.style.color = 'var(--ion-text-toastC)';
+                toastC.translucent = true;
+                toastC.message = msg;
+                toastC.duration = 2500;
+                toastC.buttons = [
                     {
                         icon: 'pencil',
                         handler: () => {
@@ -239,35 +242,62 @@ showSearch.addEventListener('click', e => {  //editCard
                         }
                     },
                 ];
-                document.body.appendChild(toast);
-                return toast.present();
+                document.body.appendChild(toastC);
+                return toastC.present();
 
             }
             presentToastC(cuPath[0]);
+            // document.getElementById('toastC').setAttribute('style', 'opacity:1;');
+            // async function presentToastWithOptions() {
+            //     const toast = document.createElement('ion-toast');
+            //     toast.header = 'Toast header';
+            //     toast.message = 'Click to Close';
+            //     toast.position = 'top';
+            //     toast.buttons = [
+            //         {
+            //             side: 'start',
+            //             icon: 'star',
+            //             text: 'Favorite',
+            //             handler: () => {
+            //                 console.log('Favorite clicked');
+            //             }
+            //         }, {
+            //             text: 'Done',
+            //             role: 'cancel',
+            //             handler: () => {
+            //                 console.log('Cancel clicked');
+            //             }
+            //         }
+            //     ];
+
+            //     document.body.appendChild(toast);
+            //     return toast.present();
+            // }
+            // presentToastWithOptions();
         }
     }
 
 
-                // document.getElementById('modal').innerHTML =
-                // `
-                // <label id="op1" class="card_content_tit">${cuPath[0]}</br></label>
-            
-                // <p id="op1" class="card_content_edit">
-                //     <ul>
-                //     <li><b>Usuario: </b>${cuPath[1]}</li>
-                //     <li><b>Contraseña: </b>${cuPath[2]}</li>
-                //     <li><b>Notas: </b>${cuPath[3]}</li>
-                //     </ul>
-                // </p>
-            
-                // <div class="btns">
-                //     <button class="btnEdit"><i class="fa fa-edit" onClick="alertEdit(cuPath, reemplace)"></i></button>
-                //     <button class="btnDel"><i class="fa fa-trash"></i></button>
-                // </div>
-                // `;
-            
-                // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+    // document.getElementById('modal').innerHTML =
+    // `
+    // <label id="op1" class="card_content_tit">${cuPath[0]}</br></label>
+
+    // <p id="op1" class="card_content_edit">
+    //     <ul>
+    //     <li><b>Usuario: </b>${cuPath[1]}</li>
+    //     <li><b>Contraseña: </b>${cuPath[2]}</li>
+    //     <li><b>Notas: </b>${cuPath[3]}</li>
+    //     </ul>
+    // </p>
+
+    // <div class="btns">
+    //     <button class="btnEdit"><i class="fa fa-edit" onClick="alertEdit(cuPath, reemplace)"></i></button>
+    //     <button class="btnDel"><i class="fa fa-trash"></i></button>
+    // </div>
+    // `;
+
+    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
 
 
 
