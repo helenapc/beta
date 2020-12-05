@@ -14,7 +14,7 @@ var resetLogin = false;
 var offline = true;
 var closeAlert = false;
 var helpActivate = false;
-const timePin = 3000000;
+const timePin = 300000;
 
 
 // // Init components
