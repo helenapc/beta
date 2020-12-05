@@ -6,8 +6,8 @@ const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
     const newHeader = document.createElement('ion-card-header');
-    // const 
     const newSub1 = document.createElement('ion-card-subtitle');
+    // newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
     const newSub2 = document.createElement('ion-card-subtitle');
     const newSub3 = document.createElement('ion-card-subtitle');
     const newSub4 = document.createElement('ion-card-subtitle');
@@ -27,11 +27,12 @@ const showCardAll = (account, user, pass, notes) => {
     newSub4.setAttribute('class', 'hide');
 
     if (expandIcon.getAttribute('name') == 'expand-outline') {
+        newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
         newSub2.classList.add("hide");
         newSub3.classList.add("hide");
         newSub4.classList.add("hide");
     } else {
-        newSub1.setAttribute('style','font-weight: bold; text-align: center;');
+        newSub1.setAttribute('style','font-weight: bold; margin-bottom:15px;');
         newSub2.classList.remove("hide");
         newSub3.classList.remove("hide");
         newSub4.classList.remove("hide");
@@ -509,6 +510,8 @@ function alertEdit(cuPath, reemplace) {
 }
 
 function alertDel(cuPath, reemplace) {
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${cuPath[0]}?`;
     alert.buttons = [

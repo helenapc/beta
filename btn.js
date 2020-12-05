@@ -222,7 +222,7 @@ showSearch.addEventListener('click', e => {  //editCard
                 toast.style.color = 'var(--ion-text-toastC)';
                 toast.translucent = true;
                 toast.message = msg;
-                toast.duration = 1000;
+                toast.duration = 2500;
                 toast.buttons = [
                     {
                         icon: 'pencil',
