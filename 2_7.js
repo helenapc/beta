@@ -14,6 +14,8 @@ var resetLogin = false;
 var offline = true;
 var closeAlert = false;
 var helpActivate = false;
+var cuPath = [];
+var reemplace;
 const timePin = 300000;
 
 
