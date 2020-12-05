@@ -8,6 +8,7 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('toastC').setAttribute('style', 'transform: translateY(60px);');
+    document.selection.empty();
     
 })
 
