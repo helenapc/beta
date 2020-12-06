@@ -17,7 +17,13 @@ var helpActivate = false;
 var cuPath = [];
 var reemplace;
 // const timePin = 300000;
-
+// const icoEdit = 'pencil';
+// const icoDelete = 'trash';
+const icoShow = '';
+const icoHide = '';
+const icoExp = '';
+const icoCom = '';
+const icoSearch = '';
 
 // // Init components
 const nameLog = document.getElementById('nameLog');
@@ -51,12 +57,6 @@ document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: n
 document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
 
-// setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:0', disabled: true });
-// setAttributes(document.getElementById('nameSetting'), { style: 'opacity:0', disabled: true });
-// setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
-// setAttributes(document.getElementById('showCard'), { style: 'opacity:0', disabled: true });
-// setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:0', disabled: true });
-// space
 setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
 
 

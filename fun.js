@@ -522,7 +522,6 @@ function alertDel(cuPath, reemplace) {
     return alert.present();
 }
 
-
 function alertView2(cuPath) {
     document.getElementById('modal').innerHTML =
     `
@@ -565,7 +564,6 @@ function alertPass() {
     document.body.appendChild(alertPassItem);
     return alertPassItem.present();
 }
-
 
 function presentAlertEditUserData() {
     const alert = document.createElement('ion-alert');
