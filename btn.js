@@ -237,45 +237,6 @@ showSearch.addEventListener('click', e => {  //editCard
             document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:all;');
             document.querySelectorAll('p.ccse')[2].setAttribute('style', 'user-select:all;');
         
-            // document.querySelector('p.ccse').setAttribute('style', 'color:red;');
-            // matches[2].setAttribute('style', 'color:red;');
-            
-            // document.querySelector("p.ccse").setAttribute('style', 'color:red;');
-            // document.getElementsByClassName(".ccse").setAttribute('style','font-weight: bold; margin-bottom:0px');
-            
-            // if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
-            // }else{
-                // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: auto');
-            // }
-            // function presentToastC(msg) {
-            //     const toastC = document.createElement('ion-toast');
-            //     // toastC.setAttribute('style', `--background:var(--ion-color-toastC)`);
-            //     toastC.setAttribute('id', 'toastC');
-            //     toastC.style.color = 'var(--ion-text-toastC)';
-            //     toastC.translucent = true;
-            //     toastC.message = msg;
-            //     toastC.duration = 2500;
-            //     toastC.buttons = [
-            //         {
-            //             icon: 'pencil',
-            //             handler: () => {
-            //                 closeAlert = true;
-            //                 alertEdit(cuPath, reemplace);
-            //             }
-            //         },
-            //         {
-            //             icon: 'trash',
-            //             handler: () => {
-            //                 closeAlert = true;
-            //                 alertDel(cuPath, reemplace)
-            //             }
-            //         },
-            //     ];
-            //     document.body.appendChild(toastC);
-            //     return toastC.present();
-
-            // }
-            // presentToastC(cuPath[0]);
         }
     }
 
@@ -470,29 +431,51 @@ document.getElementById('nameSetting').addEventListener('click', () => {
     // presentPin();
 });
 
+// document.getElementById('expandCard').addEventListener('click', () => {
+//     helpFunction('0', false);
+//     if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
+//         document.getElementById('expandIcon').setAttribute('name', 'contract-outline')
+//     } else {
+//         document.getElementById('expandIcon').setAttribute('name', 'expand-outline')
+//     };
+//     refreshData(false);
+// });
+
+// document.getElementById('showCard').addEventListener('click', () => {
+//     helpFunction('0', false);
+//     if (document.getElementById('showIcon').getAttribute('name') == 'eye-outline') {
+//         document.getElementById('showIcon').setAttribute('name', 'eye-off-outline');
+//         newSearch.value = '*';
+//         newSearch.setAttribute('style', 'margin-top:-60px');
+//     } else {
+//         document.getElementById('showIcon').setAttribute('name', 'eye-outline');
+//         newSearch.value = '';
+//     };
+//     refreshData();
+// });
+
 document.getElementById('expandCard').addEventListener('click', () => {
     helpFunction('0', false);
-    if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
-        document.getElementById('expandIcon').setAttribute('name', 'contract-outline')
+    if (document.getElementById('expandIcon').getAttribute('name') == icoExp) {
+        document.getElementById('expandIcon').setAttribute('name', icoCom)
     } else {
-        document.getElementById('expandIcon').setAttribute('name', 'expand-outline')
+        document.getElementById('expandIcon').setAttribute('name', icoExp)
     };
     refreshData(false);
 });
 
 document.getElementById('showCard').addEventListener('click', () => {
     helpFunction('0', false);
-    if (document.getElementById('showIcon').getAttribute('name') == 'eye-outline') {
-        document.getElementById('showIcon').setAttribute('name', 'eye-off-outline');
+    if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
+        document.getElementById('showIcon').setAttribute('name', icoHide);
         newSearch.value = '*';
         newSearch.setAttribute('style', 'margin-top:-60px');
     } else {
-        document.getElementById('showIcon').setAttribute('name', 'eye-outline');
+        document.getElementById('showIcon').setAttribute('name', icoShow);
         newSearch.value = '';
     };
     refreshData();
 });
-
 document.getElementById('buttonSearch').addEventListener('click', () => {
     helpFunction('0', false);
     if (!statSearchBar) {
@@ -551,7 +534,8 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
                     save();
                     showSearch.innerHTML = '';
                     newSearch.value = newData2.name1a;
-                    document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
+                    // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
+                    document.getElementById('expandIcon').setAttribute('name', icoCom);
                     refreshData();
                     presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
                     updateDB('L1', 'B1');

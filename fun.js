@@ -23,11 +23,9 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.setAttribute('class', 'hide');
     newSub4.setAttribute('class', 'hide');
 
-    if (expandIcon.getAttribute('name') == 'expand-outline') {
+    // if (expandIcon.getAttribute('name') == 'expand-outline') {
+        if (expandIcon.getAttribute('name') == icoExp) {
         newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
-        // newSub2.classList.add("hide");
-        // newSub3.classList.add("hide");
-        // newSub4.classList.add("hide");
     } else {
         newSub1.setAttribute('style','font-weight: bold; margin-bottom:15px;');
         newSub2.classList.remove("hide");
@@ -161,8 +159,11 @@ function refreshData(toast = true) {
     if (newSearch.value) {
         setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
     } else {
-        showIcon.setAttribute('name', 'eye-outline');
-        expandIcon.setAttribute('name', 'expand-outline');
+        // showIcon.setAttribute('name', 'eye-outline');
+        // expandIcon.setAttribute('name', 'expand-outline');
+
+        showIcon.setAttribute('name', icoShow);
+        expandIcon.setAttribute('name', icoExp);
         setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
     }
 
@@ -190,7 +191,8 @@ function refreshData(toast = true) {
     }
     newSearch.value === '' ? (showSearch.innerHTML = '') : contador == 1 ? (s = '') : (s = 's');
     if (newSearch.value != '' && toast) presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
-    if (showSearch.innerHTML != '') showIcon.setAttribute('name', 'eye-off-outline');
+    // if (showSearch.innerHTML != '') showIcon.setAttribute('name', 'eye-off-outline');
+    if (showSearch.innerHTML != '') showIcon.setAttribute('name', icoHide);
 }
 
 function alertMsg(msg1, msg2) {
