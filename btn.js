@@ -7,8 +7,15 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     console.log('hola');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('toastC').setAttribute('style', 'transform: translateY(60px);');
-    document.selection.empty();
+    
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
+    // document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
+    helpFunction('0', false);
+    // setAttributes(document.getElementById('buttonEdit'), { style: 'opacity:1', disabled: false });
+    // document.getElementById('toastC').setAttribute('style', 'transform: translateY(60px);');
+    // document.selection.empty();
     
 })
 
@@ -190,6 +197,7 @@ newSearch.addEventListener('ionInput', () => { refreshData() });
 
 showSearch.addEventListener('click', e => {  //editCard
     helpFunction('0', false);
+
     e.preventDefault();
     var xPath = 3;
     // var cuPath = [];
@@ -214,43 +222,44 @@ showSearch.addEventListener('click', e => {  //editCard
         ) {
             // const reemplace = i
             reemplace = i
+            alertView2(cuPath);
+            document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+            document.getElementById('bkmodal').setAttribute('style', 'opacity:0.5; pointer-events: auto');
+            document.getElementById('buttonEdit').setAttribute('style', 'opacity:1; pointer-events: auto');
+            document.getElementById('buttonDelete').setAttribute('style', 'opacity:1; pointer-events: auto');
+            // if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
+            // }else{
+                // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: auto');
+            // }
+            // function presentToastC(msg) {
+            //     const toastC = document.createElement('ion-toast');
+            //     // toastC.setAttribute('style', `--background:var(--ion-color-toastC)`);
+            //     toastC.setAttribute('id', 'toastC');
+            //     toastC.style.color = 'var(--ion-text-toastC)';
+            //     toastC.translucent = true;
+            //     toastC.message = msg;
+            //     toastC.duration = 2500;
+            //     toastC.buttons = [
+            //         {
+            //             icon: 'pencil',
+            //             handler: () => {
+            //                 closeAlert = true;
+            //                 alertEdit(cuPath, reemplace);
+            //             }
+            //         },
+            //         {
+            //             icon: 'trash',
+            //             handler: () => {
+            //                 closeAlert = true;
+            //                 alertDel(cuPath, reemplace)
+            //             }
+            //         },
+            //     ];
+            //     document.body.appendChild(toastC);
+            //     return toastC.present();
 
-            if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
-                alertView2(cuPath);
-                document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-            }else{
-                document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: auto');
-            }
-            function presentToastC(msg) {
-                const toastC = document.createElement('ion-toast');
-                // toastC.setAttribute('style', `--background:var(--ion-color-toastC)`);
-                toastC.setAttribute('id', 'toastC');
-                toastC.style.color = 'var(--ion-text-toastC)';
-                toastC.translucent = true;
-                toastC.message = msg;
-                toastC.duration = 2500;
-                toastC.buttons = [
-                    {
-                        icon: 'pencil',
-                        handler: () => {
-                            closeAlert = true;
-                            alertEdit(cuPath, reemplace);
-                        }
-                    },
-                    {
-                        icon: 'trash',
-                        handler: () => {
-                            closeAlert = true;
-                            alertDel(cuPath, reemplace)
-                        }
-                    },
-                ];
-                document.body.appendChild(toastC);
-                return toastC.present();
-
-            }
-            presentToastC(cuPath[0]);
+            // }
+            // presentToastC(cuPath[0]);
         }
     }
 
@@ -425,11 +434,13 @@ barDelAcc.addEventListener('click', () => {
 
 //FAB
 
-document.getElementById('testEdit').addEventListener('click', () => {
+document.getElementById('buttonEdit').addEventListener('click', () => {
+    helpFunction('0', false);
     alertEdit(cuPath, reemplace);
 })
 
-document.getElementById('testDel').addEventListener('click', () => {
+document.getElementById('buttonDelete').addEventListener('click', () => {
+    helpFunction('0', false);
     alertDel(cuPath, reemplace);
 })
 

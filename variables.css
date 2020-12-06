@@ -3,7 +3,7 @@
 /* ICONS */
 .add{ color: #2f3136; }
 
-#offline{  transform: scale(-1.5,1.5) translate(2px, 80px);}
+/* #offline{  transform: scale(-1.5,1.5) translate(2px, 80px);} */
 
 @media screen and (min-width: 600px) {
   #buttonAdd, #buttonHelp, #offline {
@@ -84,11 +84,15 @@ li{
   position: absolute;
 }
 
+
 .help-configuracion{ left: 100%; top: 18%; }
-.help-expandir-contraer{ left: 100%; top: 6%; }
-.help-mostrar-ocultar{ left: 100%; top: 38%; }
-.help-buscar{ left: 100%; top: 69%; }
+.help-editar{ left: 100%; top: 5%; }
+.help-borrar{ left: 100%; top: 24%; }
+.help-expandir-contraer{ left: 100%; top: 43%; }
+.help-mostrar-ocultar{ left: 100%; top: 62%; }
+.help-buscar{ left: 100%; top: 81%; }
 .help-agregar{ right: 100%; top: 16%; }
+
 
 .barLogout{
   transform: scaleX(-1);
@@ -246,13 +250,9 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
   transition: transform 0.1s linear;;
 }
 
-.fa-moon{
-  color: #414141;
-}
+.fa-moon{ color: #414141; }
 
-.fa-color{
-  color: #ffffff;
-}
+.fa-color{ color: #ffffff; }
 
 /*THEMES*/
 body.light {

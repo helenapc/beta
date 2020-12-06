@@ -105,15 +105,31 @@ const item = (id, ico, text, color = '', show = true) => {
 //######################## FUNCIONES ########################
 
 function helpFunction(opacity, activate) {
-    document.getElementById('help-config').setAttribute('style', `opacity:${opacity}`);
-    document.getElementById('help-show').setAttribute('style', `opacity:${opacity}`);
-    document.getElementById('help-search').setAttribute('style', `opacity:${opacity}`);
-    document.getElementById('help-add').setAttribute('style', `opacity:${opacity}`);
+    (opacity=='1') ? pointer = 'auto' : pointer = 'none';
+    document.getElementById('help-config').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+
+    // document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    // document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    document.getElementById('help-show').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    document.getElementById('help-search').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    document.getElementById('help-add').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
 
     if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
-        document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}`);
+        document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
     } else {
-        document.getElementById('help-exp-com').setAttribute('style', `opacity:0`);
+        document.getElementById('help-exp-com').setAttribute('style', `opacity:0; pointer-events: none`);
+    };
+
+    if (document.getElementById('buttonEdit').getAttribute('style').includes(`${opacity}`)) {
+        document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    } else {
+        document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
+    };
+
+    if (document.getElementById('buttonDelete').getAttribute('style').includes(`${opacity}`)) {
+        document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+    } else {
+        document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
     };
     helpActivate = activate;
 }
@@ -455,6 +471,8 @@ function sendEmail() {
 function alertEdit(cuPath, reemplace) {
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     const toRemplace = reemplace / 5;
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
@@ -512,6 +530,8 @@ function alertEdit(cuPath, reemplace) {
 function alertDel(cuPath, reemplace) {
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar ${cuPath[0]}?`;
     alert.buttons = [
@@ -573,20 +593,7 @@ function alertView2(cuPath) {
         <p class="ccse" > ${cuPath[3]} </p>
     </p>
     `;
-
-
-    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-    // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
 }
-
-/*
-
-        <ul>
-        <li><b>Usuario: </b>${cuPath[1]}</li>
-        <li><b>Contraseña: </b>${cuPath[2]}</li>
-        <li><b>Notas: </b>${cuPath[3]}</li>
-        </ul>
-*/
 
 
 
