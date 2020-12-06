@@ -33,9 +33,10 @@
   
 }
 
-li{
-  color: var(--ion-color-step-550)
-}
+/* li{
+  color: var(--ion-color-step-550);
+  padding-bottom: 10px;
+} */
 
 .bkpopup{
   position: absolute;
@@ -72,6 +73,7 @@ li{
 
 
 /* ********* */
+
 
 
 .help{
@@ -120,31 +122,31 @@ ion-title#userName.md.title-default.hydrated{
   margin-left: 20px;
 }
 
-#see{
+/* #see{
   position: absolute;
   display: flexbox;
   justify-content: flex-end;
   align-self: flex-end;
   transform: translate( 0px , -15px);
   
-}
+} */
 
-ul{
+/* ul{
   list-style-type: disc;
   padding-left: 10px;
-}
+} */
 
-li{
+/* li{
   padding-bottom: 10px;
-}
+} */
 
 .hide{
   display: none;
 }
 
-p{
+/* p{
   user-select: all;
-}
+} */
 
 /*ITEMS*/
 

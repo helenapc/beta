@@ -13,12 +13,14 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     // document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
     // document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
     helpFunction('0', false);
-    // setAttributes(document.getElementById('buttonEdit'), { style: 'opacity:1', disabled: false });
-    // document.getElementById('toastC').setAttribute('style', 'transform: translateY(60px);');
-    // document.selection.empty();
+
+    document.querySelectorAll('p.ccse')[0].setAttribute('style', 'user-select:none;');
+    document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:none;');
+    document.querySelectorAll('p.ccse')[2].setAttribute('style', 'user-select:none;');
+
+
     
 })
-
 
 
 
@@ -227,6 +229,20 @@ showSearch.addEventListener('click', e => {  //editCard
             document.getElementById('bkmodal').setAttribute('style', 'opacity:0.5; pointer-events: auto');
             document.getElementById('buttonEdit').setAttribute('style', 'opacity:1; pointer-events: auto');
             document.getElementById('buttonDelete').setAttribute('style', 'opacity:1; pointer-events: auto');
+
+
+            // var matches = document.querySelectorAll('p.ccse');
+            // console.log(matches);
+            document.querySelectorAll('p.ccse')[0].setAttribute('style', 'user-select:all;');
+            document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:all;');
+            document.querySelectorAll('p.ccse')[2].setAttribute('style', 'user-select:all;');
+        
+            // document.querySelector('p.ccse').setAttribute('style', 'color:red;');
+            // matches[2].setAttribute('style', 'color:red;');
+            
+            // document.querySelector("p.ccse").setAttribute('style', 'color:red;');
+            // document.getElementsByClassName(".ccse").setAttribute('style','font-weight: bold; margin-bottom:0px');
+            
             // if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
             // }else{
                 // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: auto');
