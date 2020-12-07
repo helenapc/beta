@@ -5,6 +5,9 @@
 
 /* #offline{  transform: scale(-1.5,1.5) translate(2px, 80px);} */
 
+@viewport {  
+  orientation: portrait;  
+} 
 
 @keyframes op {
   0% { opacity: 0; }
