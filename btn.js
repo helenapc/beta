@@ -253,7 +253,7 @@ document.getElementById('refresher').addEventListener('ionRefresh', () => {
 
 //NAV BAR
 
-document.getElementById('barOpen').addEventListener('click', () => { helpFunction('0', false) });
+// document.getElementById('barOpen').addEventListener('click', () => { helpFunction('0', false) });
 
 document.getElementById('barClose').addEventListener('click', () => { barMenuPrincipal.close() });
 
