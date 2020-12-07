@@ -45,14 +45,10 @@ const buttonFocus = document.getElementById('buttonFocus');
 const content = document.getElementById('content');
 //******************************************* */
 
-// screen.orientation.lock("portrait-primary");
-// screen.lockOrientation('portrait');
-// screen.addEventListener("orientationchange", function () {
-//     console.log("The orientation of the screen is: " + screen.orientation);
-//   });
-
 
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
+// document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
+
 document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
@@ -111,7 +107,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.23-beta-(@media)';
+ver.innerHTML = 'Versión 2.7.19-beta-(active_anim)';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
