@@ -29,31 +29,16 @@
 }
 
 @media screen and (max-width: 601px) {
-  /* #buttonAdd, #buttonHelp, #offline {
-    padding-right: 20px;
-  } */
 
-  #nameSetting:active ~ #help-config{ opacity: 1; transition: 0.6s; }
-  #buttonEdit:active ~ #help-edit{ opacity: 1; transition: 0.6s; }
-  #buttonDelete:active ~ #help-delete{ opacity: 1; transition: 0.6s; }
-  #expandCard:active ~ #help-exp-com{ opacity: 1; transition: 0.6s; }
-  #showCard:active ~ #help-show{ opacity: 1; transition: 0.6s; }
-  #buttonSearch:active ~ #help-search{ opacity: 1; transition: 0.6s; }
-  #buttonAdd:active > #help-add{ opacity: 1; transition: 0.6s; }
+  #nameSetting:active ~ #help-config{ opacity: 1;}
+  #buttonEdit:active ~ #help-edit{ opacity: 1;}
+  #buttonDelete:active ~ #help-delete{ opacity: 1;}
+  #expandCard:active ~ #help-exp-com{ opacity: 1;}
+  #showCard:active ~ #help-show{ opacity: 1;}
+  #buttonSearch:active ~ #help-search{ opacity: 1;}
+  #buttonAdd:active > #help-add{ opacity: 1;}
   
-
-  /* #nameSetting:active ~ #help-config{ animation: op 1.5s ease-in-out }
-  #buttonEdit:active ~ #help-edit{ animation: op 1.5s ease-in-out }
-  #buttonDelete:active ~ #help-delete{ animation: op 1.5s ease-in-out }
-  #expandCard:active ~ #help-exp-com{ animation: op 2s ease-in-out }
-  #showCard:active ~ #help-show{ animation: op 2s ease-in-out }
-  #buttonSearch:active ~ #help-search{ animation: op 1.5s ease-in-out }
-  #buttonAdd:active > #help-add{ animation: op 1.5s ease-in-out } */
 }
-
-
-
-
 
 
   /* #nameSetting:hover ~ #help-config{ animation: op 1.5s ease-in-out }
@@ -64,9 +49,10 @@
   #buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-in-out }
   #buttonAdd:hover > #help-add{ animation: op 1.5s ease-in-out } */
 
-#buttonEdit, #buttonDelete{
+  
+/* #buttonEdit, #buttonDelete{
   transition: 0.1s ease-in-out;
-}
+} */
 
 /* ********* */
 .cct{
