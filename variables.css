@@ -5,13 +5,68 @@
 
 /* #offline{  transform: scale(-1.5,1.5) translate(2px, 80px);} */
 
+
+@keyframes op {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100%{ opacity: 0; }
+}
+
+
 @media screen and (min-width: 600px) {
   #buttonAdd, #buttonHelp, #offline {
     padding-right: 20px;
   }
+
+  #nameSetting:hover ~ #help-config{ opacity: 1; transition: 0.6s; }
+  #buttonEdit:hover ~ #help-edit{ opacity: 1; transition: 0.6s; }
+  #buttonDelete:hover ~ #help-delete{ opacity: 1; transition: 0.6s; }
+  #expandCard:hover ~ #help-exp-com{ opacity: 1; transition: 0.6s; }
+  #showCard:hover ~ #help-show{ opacity: 1; transition: 0.6s; }
+  #buttonSearch:hover ~ #help-search{ opacity: 1; transition: 0.6s; }
+  #buttonAdd:hover > #help-add{ opacity: 1; transition: 0.6s; }
+}
+
+@media screen and (max-width: 601px) {
+  /* #buttonAdd, #buttonHelp, #offline {
+    padding-right: 20px;
+  } */
+
+  #nameSetting:active ~ #help-config{ opacity: 1; transition: 0.6s; }
+  #buttonEdit:active ~ #help-edit{ opacity: 1; transition: 0.6s; }
+  #buttonDelete:active ~ #help-delete{ opacity: 1; transition: 0.6s; }
+  #expandCard:active ~ #help-exp-com{ opacity: 1; transition: 0.6s; }
+  #showCard:active ~ #help-show{ opacity: 1; transition: 0.6s; }
+  #buttonSearch:active ~ #help-search{ opacity: 1; transition: 0.6s; }
+  #buttonAdd:active > #help-add{ opacity: 1; transition: 0.6s; }
+  
+
+  /* #nameSetting:active ~ #help-config{ animation: op 1.5s ease-in-out }
+  #buttonEdit:active ~ #help-edit{ animation: op 1.5s ease-in-out }
+  #buttonDelete:active ~ #help-delete{ animation: op 1.5s ease-in-out }
+  #expandCard:active ~ #help-exp-com{ animation: op 2s ease-in-out }
+  #showCard:active ~ #help-show{ animation: op 2s ease-in-out }
+  #buttonSearch:active ~ #help-search{ animation: op 1.5s ease-in-out }
+  #buttonAdd:active > #help-add{ animation: op 1.5s ease-in-out } */
 }
 
 
+
+
+
+
+  /* #nameSetting:hover ~ #help-config{ animation: op 1.5s ease-in-out }
+  #buttonEdit:hover ~ #help-edit{ animation: op 1.5s ease-in-out }
+  #buttonDelete:hover ~ #help-delete{ animation: op 1.5s ease-in-out }
+  #expandCard:hover ~ #help-exp-com{ animation: op 2s ease-in-out }
+  #showCard:hover ~ #help-show{ animation: op 2s ease-in-out }
+  #buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-in-out }
+  #buttonAdd:hover > #help-add{ animation: op 1.5s ease-in-out } */
+
+#buttonEdit, #buttonDelete{
+  transition: 0.1s ease-in-out;
+}
 
 /* ********* */
 .cct{
@@ -104,21 +159,9 @@
 #buttonSearch:hover ~ #help-search{ opacity: 1; }
 #buttonAdd:hover > #help-add{ opacity: 1 ;} */
 
-#nameSetting:hover ~ #help-config{ animation: op 1.5s ease-out }
-#buttonEdit:hover ~ #help-edit{ animation: op 1.5s ease-out }
-#buttonDelete:hover ~ #help-delete{ animation: op 1.5s ease-out }
-#expandCard:hover ~ #help-exp-com{ animation: op 2s ease-out }
-#showCard:hover ~ #help-show{ animation: op 2s ease-out }
-#buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-out }
-#buttonAdd:hover > #help-add{ animation: op 1.5s ease-out }
 
 
-@keyframes op {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  80% { opacity: 1; }
-  100%{ opacity: 0; }
-}
+
 
 
 .barLogout{
