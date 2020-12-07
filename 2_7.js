@@ -57,7 +57,7 @@ document.getElementById('expandCard').setAttribute('style', 'pointer-events: non
 document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
 
-document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
+// document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
@@ -107,7 +107,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.16-beta-(hover)';
+ver.innerHTML = 'Versión 2.7.17-beta-(hover_anim)';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 

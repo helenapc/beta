@@ -127,6 +127,16 @@ const item = (id, ico, text, color = '', show = true) => {
 
 // }
 
+function helpClear(){
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+    document.getElementById('help-config').setAttribute('style', 'opacity:0');
+};
+
 function setAttributes(elem, obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop)) elem[prop] = obj[prop];
@@ -160,7 +170,7 @@ function disableItem(boolean) {
     barMenuPrincipal.setAttribute('disabled', boolean);
     document.getElementById('title').setAttribute('style', 'margin-left:0px');
     document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
-    setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
+    // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
     // expand
     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });

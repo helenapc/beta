@@ -421,18 +421,17 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
     alertDel(cuPath, reemplace);
 })
 
-document.getElementById('buttonHelp').addEventListener('click', () => {
-    // (!helpActivate) ? helpFunction('1', true) : helpFunction('0', false);
-    // (!helpActivate) ? helpLabel('1', true) : helpLabel('0', false);
-    console.log('aiuda');
-});
+// document.getElementById('buttonHelp').addEventListener('click', () => {
+//     (!helpActivate) ? helpFunction('1', true) : helpFunction('0', false);
+//     (!helpActivate) ? helpLabel('1', true) : helpLabel('0', false);
+//     console.log('aiuda');
+// });
 
 document.getElementById('nameSetting').addEventListener('click', () => {
     // helpFunction('0', false);
     alertPass();
     // presentPin();
 });
-
 
 document.getElementById('expandCard').addEventListener('click', () => {
     // helpFunction('0', false);
@@ -456,6 +455,7 @@ document.getElementById('showCard').addEventListener('click', () => {
     };
     refreshData();
 });
+
 document.getElementById('buttonSearch').addEventListener('click', () => {
     // helpFunction('0', false);
     if (!statSearchBar) {
@@ -472,6 +472,7 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
     // helpFunction('0', false);
+    // document.getElementById('help-add').setAttribute('style', 'opacity:0');
     function presentAlertAdd() {
         const alert = document.createElement('ion-alert');
         alert.setAttribute('backdrop-dismiss', 'false');

@@ -86,13 +86,7 @@
 }
 
 
-#nameSetting:hover ~ #help-config{ opacity: 1; }
-#buttonEdit:hover ~ #help-edit{ opacity: 1; }
-#buttonDelete:hover ~ #help-delete{ opacity: 1; }
-#expandCard:hover ~ #help-exp-com{ opacity: 1; }
-#showCard:hover ~ #help-show{ opacity: 1; }
-#buttonSearch:hover ~ #help-search{ opacity: 1; }
-.buttonAdd:hover ~ #help-add{ opacity: 1; }
+
 
 .help-configuracion{ left: 100%; top: 18%; opacity: 0; pointer-events: none;} 
 .help-editar{ left: 100%; top: 5%; opacity: 0; pointer-events: none; }
@@ -102,6 +96,29 @@
 .help-buscar{ left: 100%; top: 81%; opacity: 0; pointer-events: none; }
 .help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; }
 
+/* #nameSetting:hover ~ #help-config{ opacity: 1; }
+#buttonEdit:hover ~ #help-edit{ opacity: 1; }
+#buttonDelete:hover ~ #help-delete{ opacity: 1; }
+#expandCard:hover ~ #help-exp-com{ opacity: 1; }
+#showCard:hover ~ #help-show{ opacity: 1; }
+#buttonSearch:hover ~ #help-search{ opacity: 1; }
+#buttonAdd:hover > #help-add{ opacity: 1 ;} */
+
+#nameSetting:hover ~ #help-config{ animation: op 1.5s ease-out }
+#buttonEdit:hover ~ #help-edit{ animation: op 1.5s ease-out }
+#buttonDelete:hover ~ #help-delete{ animation: op 1.5s ease-out }
+#expandCard:hover ~ #help-exp-com{ animation: op 2s ease-out }
+#showCard:hover ~ #help-show{ animation: op 2s ease-out }
+#buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-out }
+#buttonAdd:hover > #help-add{ animation: op 1.5s ease-out }
+
+
+@keyframes op {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100%{ opacity: 0; }
+}
 
 
 .barLogout{
