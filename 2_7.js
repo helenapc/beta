@@ -45,7 +45,7 @@ const buttonFocus = document.getElementById('buttonFocus');
 const content = document.getElementById('content');
 //******************************************* */
 
-screen.lockOrientation('portrait');
+screen.orientation.lock("portrait-primary");
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
 document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
 
