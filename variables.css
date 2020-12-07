@@ -1,7 +1,7 @@
 *{ box-sizing: border-box; }
 
 /* ICONS */
-.add{ color: #2f3136; }
+
 
 /* #offline{  transform: scale(-1.5,1.5) translate(2px, 80px);} */
 
@@ -24,19 +24,13 @@
 .cce{
   color: var(--ion-color-primary);
   font-size: 0.7rem;
-  
 }
 
 .ccse{
   color: var(--ion-color-step-550);
   margin: 0px 0px 10px 0px;
-  
 }
 
-/* li{
-  color: var(--ion-color-step-550);
-  padding-bottom: 10px;
-} */
 
 .bkpopup{
   position: absolute;
@@ -72,7 +66,12 @@
 }
 
 
-/* ********* */
+/* **** ICONS ***** */
+
+.add{
+  color: #2f3136;
+}
+
 
 
 
@@ -87,13 +86,22 @@
 }
 
 
-.help-configuracion{ left: 100%; top: 18%; }
-.help-editar{ left: 100%; top: 5%; }
-.help-borrar{ left: 100%; top: 24%; }
-.help-expandir-contraer{ left: 100%; top: 43%; }
-.help-mostrar-ocultar{ left: 100%; top: 62%; }
-.help-buscar{ left: 100%; top: 81%; }
-.help-agregar{ right: 100%; top: 16%; }
+#nameSetting:hover ~ #help-config{ opacity: 1; }
+#buttonEdit:hover ~ #help-edit{ opacity: 1; }
+#buttonDelete:hover ~ #help-delete{ opacity: 1; }
+#expandCard:hover ~ #help-exp-com{ opacity: 1; }
+#showCard:hover ~ #help-show{ opacity: 1; }
+#buttonSearch:hover ~ #help-search{ opacity: 1; }
+.buttonAdd:hover ~ #help-add{ opacity: 1; }
+
+.help-configuracion{ left: 100%; top: 18%; opacity: 0; pointer-events: none;} 
+.help-editar{ left: 100%; top: 5%; opacity: 0; pointer-events: none; }
+.help-borrar{ left: 100%; top: 24%; opacity: 0; pointer-events: none; }
+.help-expandir-contraer{ left: 100%; top: 43%; opacity: 0; pointer-events: none; }
+.help-mostrar-ocultar{ left: 100%; top: 62%; opacity: 0; pointer-events: none;}
+.help-buscar{ left: 100%; top: 81%; opacity: 0; pointer-events: none; }
+.help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; }
+
 
 
 .barLogout{
@@ -122,31 +130,11 @@ ion-title#userName.md.title-default.hydrated{
   margin-left: 20px;
 }
 
-/* #see{
-  position: absolute;
-  display: flexbox;
-  justify-content: flex-end;
-  align-self: flex-end;
-  transform: translate( 0px , -15px);
-  
-} */
-
-/* ul{
-  list-style-type: disc;
-  padding-left: 10px;
-} */
-
-/* li{
-  padding-bottom: 10px;
-} */
 
 .hide{
   display: none;
 }
 
-/* p{
-  user-select: all;
-} */
 
 /*ITEMS*/
 
@@ -163,16 +151,10 @@ ion-title#userName.md.title-default.hydrated{
   --background:var(--val);
 }
 
-.bordeSup{ /*login*/
-  --background: #ffffff50;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-}
 
-.bordeInf{ /*login*/
+
+.bordeInf, .bordeSup{
   --background: #ffffff50;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
 }
 
 .sc-ion-searchbar-md-h {

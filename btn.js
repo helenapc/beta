@@ -4,7 +4,7 @@
 // NEW MODAL
 
 document.getElementById('bkmodal').addEventListener('click', () => {
-    console.log('hola');
+    // console.log('hola');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
     
@@ -12,7 +12,7 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     // document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
     // document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
-    helpFunction('0', false);
+    // helpFunction('0', false);
 
     document.querySelectorAll('p.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:none;');
@@ -198,7 +198,7 @@ newSearch.addEventListener('ionInput', () => { refreshData() });
 
 
 showSearch.addEventListener('click', e => {  //editCard
-    helpFunction('0', false);
+    // helpFunction('0', false);
 
     e.preventDefault();
     var xPath = 3;
@@ -412,50 +412,30 @@ barDelAcc.addEventListener('click', () => {
 //FAB
 
 document.getElementById('buttonEdit').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     alertEdit(cuPath, reemplace);
 })
 
 document.getElementById('buttonDelete').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     alertDel(cuPath, reemplace);
 })
 
 document.getElementById('buttonHelp').addEventListener('click', () => {
-    (!helpActivate) ? helpFunction('1', true) : helpFunction('0', false);
-})
+    // (!helpActivate) ? helpFunction('1', true) : helpFunction('0', false);
+    // (!helpActivate) ? helpLabel('1', true) : helpLabel('0', false);
+    console.log('aiuda');
+});
 
 document.getElementById('nameSetting').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     alertPass();
     // presentPin();
 });
 
-// document.getElementById('expandCard').addEventListener('click', () => {
-//     helpFunction('0', false);
-//     if (document.getElementById('expandIcon').getAttribute('name') == 'expand-outline') {
-//         document.getElementById('expandIcon').setAttribute('name', 'contract-outline')
-//     } else {
-//         document.getElementById('expandIcon').setAttribute('name', 'expand-outline')
-//     };
-//     refreshData(false);
-// });
-
-// document.getElementById('showCard').addEventListener('click', () => {
-//     helpFunction('0', false);
-//     if (document.getElementById('showIcon').getAttribute('name') == 'eye-outline') {
-//         document.getElementById('showIcon').setAttribute('name', 'eye-off-outline');
-//         newSearch.value = '*';
-//         newSearch.setAttribute('style', 'margin-top:-60px');
-//     } else {
-//         document.getElementById('showIcon').setAttribute('name', 'eye-outline');
-//         newSearch.value = '';
-//     };
-//     refreshData();
-// });
 
 document.getElementById('expandCard').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     if (document.getElementById('expandIcon').getAttribute('name') == icoExp) {
         document.getElementById('expandIcon').setAttribute('name', icoCom)
     } else {
@@ -465,7 +445,7 @@ document.getElementById('expandCard').addEventListener('click', () => {
 });
 
 document.getElementById('showCard').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
         document.getElementById('showIcon').setAttribute('name', icoHide);
         newSearch.value = '*';
@@ -477,7 +457,7 @@ document.getElementById('showCard').addEventListener('click', () => {
     refreshData();
 });
 document.getElementById('buttonSearch').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     if (!statSearchBar) {
         newSearch.value = '';
         newSearch.setAttribute('style', 'margin-top:0px');
@@ -491,7 +471,7 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     function presentAlertAdd() {
         const alert = document.createElement('ion-alert');
         alert.setAttribute('backdrop-dismiss', 'false');
@@ -553,7 +533,7 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
 
 //CHECK/TOGGLE
 checkbox.addEventListener('click', () => {
-    helpFunction('0', false);
+    // helpFunction('0', false);
     if (activeTheme[1] == 'dark') {
         document.body.classList.toggle('dark');
         document.body.classList.toggle(activeTheme[0]);

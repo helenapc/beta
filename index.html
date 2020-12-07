@@ -21,10 +21,10 @@
 
 <body>
   <ion-app class="fondo">
-    
+
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal"></ion-menu>
 
-    
+
     <!-- <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
       <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
     </ion-fab> -->
@@ -65,10 +65,10 @@
           <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular">
           </ion-refresher-content>
         </ion-refresher>
-        
+
         <ion-row>
           <ion-col id="show-accounts1" size="9" offset="1.5" size-md="5" offset-md="3.5"></ion-col>
-          
+
         </ion-row>
 
         <ion-row id="showLogin" style="margin-top: 50px;">
@@ -95,26 +95,27 @@
 
         <ion-row id="cardPin">
           <ion-col size="5" offset="3.5" size-md="2" offset-md="5">
-             <!-- size="5" offset="3.5" size-md="2" offset-md="5" -->
+            <!-- size="5" offset="3.5" size-md="2" offset-md="5" -->
             <ion-card>
-                <ion-input type="password" style="text-align: center; --padding-start: 0px;" placeholder="PIN" id="pin"></ion-input>
+              <ion-input type="password" style="text-align: center; --padding-start: 0px;" placeholder="PIN" id="pin">
+              </ion-input>
             </ion-card>
-           </ion-col>
+          </ion-col>
         </ion-row>
       </ion-content>
 
-      
+
       <!-- MODAL -->
       <div id="bkmodal" class="bkpopup"></div>
       <div id="modal" class="popup_box"></div>
 
-      
+
       <!-- FAB TOP-LEFT -->
       <ion-fab vertical="top" horizontal="start" style="margin-top: 58px; margin-left: -8px;">
-        <ion-label id="help-config" class="help help-configuracion">Configuración</ion-label>
         <ion-fab-button id="nameSetting" color="light" size="small">
           <ion-label id="nameSettingText" style="font-size: 20px;"></ion-label>
         </ion-fab-button>
+        <ion-label id="help-config" class="help help-configuracion">Configuración</ion-label>
       </ion-fab>
 
       <!-- FAB TOP-RIGHT -->
@@ -127,42 +128,38 @@
       <!-- FAB BOTTOM-LEFT -->
       <ion-fab vertical="bottom" horizontal="start" style="margin-left:-8px">
 
-        <ion-label id="help-edit" class="help help-editar">Editar</ion-label>
         <ion-fab-button id="buttonEdit" color="light" size="small">
           <ion-icon name="pencil" color="primary"></ion-icon>
         </ion-fab-button>
+        <ion-label id="help-edit" class="help help-editar">Editar</ion-label>
 
-        <ion-label id="help-delete" class="help help-borrar">Borrar</ion-label>
         <ion-fab-button id="buttonDelete" color="light" size="small">
           <ion-icon name="trash" color="danger"></ion-icon>
         </ion-fab-button>
+        <ion-label id="help-delete" class="help help-borrar">Borrar</ion-label>
 
-        <ion-label id="help-exp-com" class="help help-expandir-contraer">Expandir/Contraer</ion-label>
         <ion-fab-button id="expandCard" color="light" size="small">
           <ion-icon id="expandIcon" name="expand-outline"></ion-icon>
-          <!-- <ion-icon id="expandIcon" name="eye-outline"></ion-icon> -->
-
         </ion-fab-button>
+        <ion-label id="help-exp-com" class="help help-expandir-contraer">Expandir/Contraer</ion-label>
 
-        <ion-label id="help-show" class="help help-mostrar-ocultar">Mostrar/Ocultar</ion-label>
         <ion-fab-button id="showCard" color="light" size="small">
           <ion-icon id="showIcon" name="eye-outline"></ion-icon>
-          <!-- <ion-icon id="showIcon" name="albums-outline"></ion-icon> -->
-
         </ion-fab-button>
+        <ion-label id="help-show" class="help help-mostrar-ocultar">Mostrar/Ocultar</ion-label>
 
-        <ion-label id="help-search" class="help help-buscar">Buscar</ion-label>
         <ion-fab-button id="buttonSearch" color="light" size="small">
           <ion-icon name="search"></ion-icon>
         </ion-fab-button>
+        <ion-label id="help-search" class="help help-buscar">Buscar</ion-label>
       </ion-fab>
 
       <!-- FAB BOTTOM-RIGHT -->
       <ion-fab vertical="bottom" horizontal="end" slot="end" id="buttonAdd">
-        <ion-label id="help-add" class="help help-agregar">Agregar</ion-label>
-        <ion-fab-button class="add" color="success" size="small">
+        <ion-fab-button class="buttonAdd" color="success" size="small">
           <ion-icon name="add" class="add"></ion-icon>
         </ion-fab-button>
+        <ion-label id="help-add" class="help help-agregar">Agregar</ion-label>
       </ion-fab>
 
     </div>

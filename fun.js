@@ -70,35 +70,62 @@ const item = (id, ico, text, color = '', show = true) => {
 
 //######################## FUNCIONES ########################
 
-function helpFunction(opacity, activate) {
-    (opacity=='1') ? pointer = 'auto' : pointer = 'none';
-    document.getElementById('help-config').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+// function helpFunction(opacity, activate) {
+//     // (opacity=='1') ? pointer = 'auto' : pointer = 'none';
+//     document.getElementById('help-config').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
 
-    // document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    // document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    document.getElementById('help-show').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    document.getElementById('help-search').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    document.getElementById('help-add').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
+//     // document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     // document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     document.getElementById('help-show').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     document.getElementById('help-search').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     document.getElementById('help-add').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
 
-    if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
-        document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    } else {
-        document.getElementById('help-exp-com').setAttribute('style', `opacity:0; pointer-events: none`);
-    };
+//     if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     } else {
+//         document.getElementById('help-exp-com').setAttribute('style', `opacity:0; pointer-events: none`);
+//     };
 
-    if (document.getElementById('buttonEdit').getAttribute('style').includes(`${opacity}`)) {
-        document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    } else {
-        document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
-    };
+//     if (document.getElementById('buttonEdit').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-edit').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     } else {
+//         document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
+//     };
 
-    if (document.getElementById('buttonDelete').getAttribute('style').includes(`${opacity}`)) {
-        document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: ${pointer}`);
-    } else {
-        document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
-    };
-    helpActivate = activate;
-}
+//     if (document.getElementById('buttonDelete').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-delete').setAttribute('style', `opacity:${opacity}; pointer-events: none`);
+//     } else {
+//         document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
+//     };
+//     helpActivate = activate;
+// }
+
+// function helpLabel(opacity, activate)  {
+//     document.getElementById('help-config').setAttribute('style', `opacity:${opacity};`);
+//     document.getElementById('help-show').setAttribute('style', `opacity:${opacity};`);
+//     document.getElementById('help-search').setAttribute('style', `opacity:${opacity};`);
+//     document.getElementById('help-add').setAttribute('style', `opacity:${opacity};`);
+    
+//     if (document.getElementById('expandCard').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-exp-com').setAttribute('style', `opacity:${opacity};`);
+//     } else {
+//         document.getElementById('help-exp-com').setAttribute('style', `opacity:0;`);
+//     };
+    
+//     if (document.getElementById('buttonEdit').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-edit').setAttribute('style', `opacity:${opacity};`);
+//     } else {
+//         document.getElementById('help-edit').setAttribute('style', `opacity:0;`);
+//     };
+    
+//     if (document.getElementById('buttonDelete').getAttribute('style').includes(`${opacity}`)) {
+//         document.getElementById('help-delete').setAttribute('style', `opacity:${opacity};`);
+//     } else {
+//         document.getElementById('help-delete').setAttribute('style', `opacity:0;`);
+//     };
+//     helpActivate = activate;
+
+// }
 
 function setAttributes(elem, obj) {
     for (var prop in obj) {
