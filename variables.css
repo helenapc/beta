@@ -30,13 +30,13 @@
 
 @media screen and (max-width: 601px) {
 
-  #nameSetting:active ~ #help-config{ opacity: 1;}
-  #buttonEdit:active ~ #help-edit{ opacity: 1;}
-  #buttonDelete:active ~ #help-delete{ opacity: 1;}
-  #expandCard:active ~ #help-exp-com{ opacity: 1;}
-  #showCard:active ~ #help-show{ opacity: 1;}
-  #buttonSearch:active ~ #help-search{ opacity: 1;}
-  #buttonAdd:active > #help-add{ opacity: 1;}
+  #nameSetting:active ~ #help-config{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
+  #buttonEdit:active ~ #help-edit{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
+  #buttonDelete:active ~ #help-delete{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
+  #expandCard:active ~ #help-exp-com{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
+  #showCard:active ~ #help-show{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
+  #buttonSearch:active ~ #help-search{ opacity:1;  transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0);}
+  #buttonAdd:active > #help-add{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0);; }
   
 }
 
@@ -49,7 +49,7 @@
   #buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-in-out }
   #buttonAdd:hover > #help-add{ animation: op 1.5s ease-in-out } */
 
-  
+
 /* #buttonEdit, #buttonDelete{
   transition: 0.1s ease-in-out;
 } */
