@@ -16,7 +16,7 @@ var closeAlert = false;
 var helpActivate = false;
 var cuPath = [];
 var reemplace;
-
+const timePin = 300000;
 
 const icoShow = 'eye-outline';
 const icoHide = 'eye-off-outline';
@@ -107,7 +107,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.25-beta-(@media movil)';
+ver.innerHTML = 'Versión 2.7.2-beta';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -179,7 +179,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 disableItem(true);
                 document.getElementById('title').setAttribute('style', 'margin-left:38px');
                 document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
-                document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
+                //document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
