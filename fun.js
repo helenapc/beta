@@ -579,7 +579,7 @@ function alertView2(cuPath) {
 
 
 
-// EDIT NM/US/PS/NO
+// CONFIG EDIT NM/US/PS/NO
 function alertPass() {
     const alertPassItem = document.createElement('ion-alert');
     alertPassItem.header = 'Configuración personal';
@@ -611,9 +611,7 @@ function presentAlertEditUserData() {
         { name: 'userEditName', placeholder: 'Nombre (Opcional)', value: deco(txt[0]) },
         { name: 'userEditUser', placeholder: 'Email', value: deco(txt[1]) },
         { name: 'userEditPass', placeholder: 'Contraseña', value: deco(txt[2]) },
-        {
-            name: 'userPin', placeholder: 'PIN', value: deco(txt[4]),
-        },
+        { name: 'userPin', placeholder: 'PIN', value: deco(txt[4]) },
     ];
     alert.buttons = [
         { text: 'Cancelar', role: 'cancel' },
