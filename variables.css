@@ -67,6 +67,13 @@
   border-bottom: 1px solid var(--ion-color-primary);
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  /* color: red; */
+
+  font-size: 13px;
+  opacity: 0.7;
+}
+
 .modal_btns{
   color: var(--ion-color-primary);
   background-color: rgba(255, 255, 255, 0);

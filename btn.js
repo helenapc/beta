@@ -231,7 +231,7 @@ showSearch.addEventListener('click', e => {  //editCard
             document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
             document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
             document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
-        
+
         }
     }
 
@@ -407,51 +407,81 @@ barDelAcc.addEventListener('click', () => {
 // <input type="submit" class="modal_btns" value="OK">
 // 
 
-function botones_modal(func){
-    if(func === 'ok'){
-        const newTempModal = [
-        document.querySelectorAll('.modal_input')[0].value,
-        document.querySelectorAll('.modal_input')[1].value,
-        document.querySelectorAll('.modal_input')[2].value,
-        document.querySelectorAll('.modal_input')[3].value,
-    ];
-        // console.log(document.querySelectorAll('.modal_input')[].value);
-        // console.log(document.querySelectorAll('.modal_input')[1].value);
-        // console.log(document.querySelectorAll('.modal_input')[2].value);
-        
-        
-        alertEdit2(newTempModal, reemplace);
+function botones_modal(func) {
+    if (func === 'ok') {
+        let newTempModal = [
+            document.querySelectorAll('.modal_input')[0].value,
+            document.querySelectorAll('.modal_input')[1].value,
+            document.querySelectorAll('.modal_input')[2].value,
+            document.querySelectorAll('.modal_input')[3].value,
+        ];
+        if (document.getElementById('op1').innerHTML == 'Editar cuenta') {
+            alertEdit2(newTempModal, reemplace);
+        }
+        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') {
+            alertAdd2(newTempModal);
+        }
 
-        alertView2(newTempModal);
         document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
         document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
         document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
+    }
+    if (func === 'cancel') {
 
+        // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+        // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     }
-    if(func === 'cancel'){
-        document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-        document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-        document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-        document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    }
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 }
 
 
 //FAB TEST
-document.getElementById('buttonTest').addEventListener('click', () => {
+// document.getElementById('buttonTest').addEventListener('click', () => {
+//     document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+//     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+//     document.getElementById('modal').innerHTML =
+//         `
+//     <p id="op1" class="cct">Agregar cuenta</p>
+//     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+//     <p style="margin: 0px 0px 0px 0px;">
+//         <label class="cce" > Cuenta: </label>
+//         <input type="text" id="modalInputAccount" class="ccse modal_input" value="">
+//         <label class="cce" > Usuario: </label>
+//         <input type="text" id="modalInputUser" class="ccse modal_input" value="">
+//         <label class="cce" > Contraseña: </label>
+//         <input type="text" id="modalInputPass" class="ccse modal_input" value="">
+//         <label class="cce" > Notas: </label>
+//         <input type="text" id="modalInputNote" class="ccse modal_input" value="">
+
+//         <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
+//         <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+
+//     </p>
+//     `;
+//     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+//     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+
+// });
+
+
+//FAB
+
+document.getElementById('buttonEdit').addEventListener('click', () => {
+    // alertEdit(cuPath, reemplace); 
     document.getElementById('modal').innerHTML =
-    `
-    <p id="op1" class="cct">Editar cuenta</br></p>
+        `
+    <p id="op1" class="cct">Editar cuenta</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
         <label class="cce" > Cuenta: </label>
-        <input type="text" id="modalInputAccount" class="ccse modal_input" value="${cuPath[0]}">
+        <input type="text" class="ccse modal_input" value="${cuPath[0].toLowerCase()}">
         <label class="cce" > Usuario: </label>
-        <input type="text" id="modalInputUser" class="ccse modal_input" value="${cuPath[1]}">
+        <input type="text" class="ccse modal_input" value="${cuPath[1]}">
         <label class="cce" > Contraseña: </label>
-        <input type="text" id="modalInputPass" class="ccse modal_input" value="${cuPath[2]}">
+        <input type="text" class="ccse modal_input" value="${cuPath[2]}">
         <label class="cce" > Notas: </label>
-        <input type="text" id="modalInputNote" class="ccse modal_input" value="${cuPath[3]}">
+        <input type="text" class="ccse modal_input" value="${cuPath[3]}">
 
         <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
         <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
@@ -460,12 +490,8 @@ document.getElementById('buttonTest').addEventListener('click', () => {
     `;
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+
 });
-
-
-//FAB
-
-document.getElementById('buttonEdit').addEventListener('click', () => { alertEdit(cuPath, reemplace); });
 
 document.getElementById('buttonDelete').addEventListener('click', () => { alertDel(cuPath, reemplace); });
 
@@ -508,60 +534,84 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
-    function presentAlertAdd() {
-        const alert = document.createElement('ion-alert');
-        alert.setAttribute('backdrop-dismiss', 'false');
-        alert.header = 'Agregar cuenta';
-        alert.inputs = [
-            { name: 'name1a', placeholder: 'Cuenta(Nombre):', value: '' },
-            { name: 'name2a', placeholder: 'Usuario/email:', value: '' },
-            { name: 'name3a', placeholder: 'Contraseña:', value: '' },
-            { name: 'name4a', placeholder: 'Notas(Opcional):', value: '' },
-        ];
-        alert.buttons = [
-            { text: 'Cancelar', role: 'cancel' },
-            {
-                text: 'Ok',
-                handler: newData2 => {
-                    if (
-                        newData2.name1a == '' ||
-                        newData2.name2a == '' ||
-                        newData2.name3a == ''
-                    ) {
-                        barProgressF('warning', 'determinate');
-                        alertMsg('Error', 'Datos obligroios vacíos.');
-                        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-                        return;
-                    }
+    // function presentAlertAdd() {
+    //     const alert = document.createElement('ion-alert');
+    //     alert.setAttribute('backdrop-dismiss', 'false');
+    //     alert.header = 'Agregar cuenta';
+    //     alert.inputs = [
+    //         { name: 'name1a', placeholder: 'Cuenta(Nombre):', value: '' },
+    //         { name: 'name2a', placeholder: 'Usuario/email:', value: '' },
+    //         { name: 'name3a', placeholder: 'Contraseña:', value: '' },
+    //         { name: 'name4a', placeholder: 'Notas(Opcional):', value: '' },
+    //     ];
+    //     alert.buttons = [
+    //         { text: 'Cancelar', role: 'cancel' },
+    //         {
+    //             text: 'Ok',
+    //             handler: newData2 => {
+    //                 if (
+    //                     newData2.name1a == '' ||
+    //                     newData2.name2a == '' ||
+    //                     newData2.name3a == ''
+    //                 ) {
+    //                     barProgressF('warning', 'determinate');
+    //                     alertMsg('Error', 'Datos obligroios vacíos.');
+    //                     setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+    //                     return;
+    //                 }
 
-                    for (let i = 0; i < newTotal.length; i += 5) {
-                        if (
-                            newData2.name1a == newTotal[i] &&
-                            newData2.name2a == newTotal[i + 1] &&
-                            newData2.name3a == newTotal[i + 2]
-                        ) {
-                            alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-                            return;
-                        }
-                    }
+    //                 for (let i = 0; i < newTotal.length; i += 5) {
+    //                     if (
+    //                         newData2.name1a == newTotal[i] &&
+    //                         newData2.name2a == newTotal[i + 1] &&
+    //                         newData2.name3a == newTotal[i + 2]
+    //                     ) {
+    //                         alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
+    //                         return;
+    //                     }
+    //                 }
 
-                    aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
-                    aTotalTOnewTotal();
-                    save();
-                    showSearch.innerHTML = '';
-                    newSearch.value = newData2.name1a;
-                    // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
-                    document.getElementById('expandIcon').setAttribute('name', icoCom);
-                    refreshData();
-                    presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
-                    updateDB('L1', 'B1');
-                },
-            },
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    presentAlertAdd();
+    //                 aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
+    //                 aTotalTOnewTotal();
+    //                 save();
+    //                 showSearch.innerHTML = '';
+    //                 newSearch.value = newData2.name1a;
+    //                 // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
+    //                 document.getElementById('expandIcon').setAttribute('name', icoCom);
+    //                 refreshData();
+    //                 presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
+    //                 updateDB('L1', 'B1');
+    //             },
+    //         },
+    //     ];
+    //     document.body.appendChild(alert);
+    //     return alert.present();
+    // }
+    // presentAlertAdd();
+
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    document.getElementById('modal').innerHTML =
+        `
+    <p id="op1" class="cct">Agregar cuenta</p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+        <label class="cce" > Cuenta*: </label>
+        <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+        <label class="cce" > Usuario*: </label>
+        <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+        <label class="cce" > Contraseña*: </label>
+        <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+        <label class="cce" > Notas*: </label>
+        <input type="text" placeholder="*Opcional" class="ccse modal_input" value="">
+
+        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
+        <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+
+    </p>
+    `;
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
 });
 
 

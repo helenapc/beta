@@ -27,7 +27,7 @@ const showCardAll = (account, user, pass, notes) => {
     if (expandIcon.getAttribute('name') == icoExp) {
         newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
     } else {
-        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:15px;');
+        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:12px;');
         newSub2.classList.remove("hide");
         newSub3.classList.remove("hide");
         newSub4.classList.remove("hide");
@@ -419,75 +419,52 @@ function sendEmail() {
 
 
 // ALERTS
+function alertAdd2(newTempModal){
+    if (
+        newTempModal[0] == '' ||
+        newTempModal[1] == '' ||
+        newTempModal[2] == ''
+    ) {
+        barProgressF('warning', 'determinate');
+        alertMsg('Error', 'Campos obligroios vacíos.');
+        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+        return;
+    }
 
+    newTempModal[0] = delete_spaces(newTempModal[0].toLowerCase());
+    newTempModal[1] = delete_spaces(newTempModal[1]);
+    newTempModal[2] = delete_spaces(newTempModal[2]);
+    newTempModal[3] = delete_spaces(newTempModal[3]);
 
+    for (let i = 0; i < newTotal.length; i += 5) {
+        if (
+            newTempModal[0] == newTotal[i] &&
+            newTempModal[1] == newTotal[i + 1] &&
+            newTempModal[2] == newTotal[i + 2]
+        ) {
+            alertMsg('Error', `La cuenta ${newTempModal[0]} ya existe.`);
+            return;
+        }
+    }
 
-function alertEdit(cuPath, reemplace) {
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    const toRemplace = reemplace / 5;
-    const alert = document.createElement('ion-alert');
-    alert.setAttribute('backdrop-dismiss', 'false');
-    alert.header = 'Editar cuenta';
-    alert.inputs = [
-        { name: 'name1', placeholder: 'Cuenta(Nombre)', value: cuPath[0].toLowerCase() },
-        { name: 'name2', placeholder: 'Usuario/email', value: cuPath[1] },
-        { name: 'name3', placeholder: 'Contraseña', value: cuPath[2] },
-        { name: 'name4', placeholder: 'Notas(Opcional)', value: cuPath[3] },
-    ];
-    alert.buttons = [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-            text: 'Ok',
-            handler: newData => {
-                document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-
-                if (newData.name1 == '' || newData.name2 == '' || newData.name3 == '') {
-                    alertMsg('Error', 'Datos incorrectos o vacíos.');
-                    return;
-                }
-
-                newData.name1 = delete_spaces(newData.name1.toLowerCase());
-                newData.name2 = delete_spaces(newData.name2);
-                newData.name3 = delete_spaces(newData.name3);
-                newData.name4 = delete_spaces(newData.name4);
-
-                for (i = 0; i < newTotal.length; i += 5) {
-                    if (
-                        newData.name1 == cuPath[0] &&
-                        newData.name2 == cuPath[1] &&
-                        newData.name3 == cuPath[2] &&
-                        newData.name4 == cuPath[3]
-                    ) {
-                        alertMsg('Error', `La cuenta ${cuPath[0]} ya existe.`);
-                        return;
-                    }
-                }
-
-                aTotal.splice(toRemplace, 1, code(newData.name1) + 'OG' + code(newData.name2) + 'OG' + code(newData.name3) + 'OG' + code(newData.name4));
-                aTotalTOnewTotal();
-                refreshData();
-                presentToast(`"${newData.name1}" editado.`, 500, 'dark');
-                save();
-                updateDB('L1', 'B1');
-                closeAlert = false;
-
-            },
-        },
-    ];
-    document.body.appendChild(alert);
-    return alert.present();
+    aTotal.push(`${code(newTempModal[0].toLowerCase())}OG${code(newTempModal[1])}OG${code(newTempModal[2])}OG${code(newTempModal[3])}`)
+    aTotalTOnewTotal();
+    save();
+    showSearch.innerHTML = '';
+    newSearch.value = newTempModal[0];
+    // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
+    document.getElementById('expandIcon').setAttribute('name', icoCom);
+    refreshData();
+    presentToast(`"${newTempModal[0].toUpperCase()}" agregada`, 800, 'success');
+    updateDB('L1', 'B1');
 }
 
 function alertEdit2(newTempModal, reemplace) {
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
     const toRemplace = reemplace / 5;
 
     if (newTempModal[0] == '' || newTempModal[1] == '' || newTempModal[2] == '') {
-        alertMsg('Error', 'Datos incorrectos o vacíos.');
+        // alertMsg('Error', 'Datos incorrectos o vacíos.');
+        alertMsg('Error', 'Campos obligroios vacíos.');
         return;
     }
     
@@ -496,6 +473,14 @@ function alertEdit2(newTempModal, reemplace) {
     newTempModal[2] = delete_spaces(newTempModal[2]);
     newTempModal[3] = delete_spaces(newTempModal[3]);
 
+    if (
+        newTempModal[0] == cuPath[0].toLowerCase() &&
+        newTempModal[1] == cuPath[1] &&
+        newTempModal[2] == cuPath[2] &&
+        newTempModal[3] == cuPath[3]
+    ) {
+        return;
+    }
 
     for (i = 0; i < newTotal.length; i += 5) {
         if (
@@ -512,7 +497,7 @@ function alertEdit2(newTempModal, reemplace) {
     aTotal.splice(toRemplace, 1, code(newTempModal[0]) + 'OG' + code(newTempModal[1]) + 'OG' + code(newTempModal[2]) + 'OG' + code(newTempModal[3]));
     aTotalTOnewTotal();
     refreshData();
-    presentToast(`"${newTempModal[0]}" editado.`, 500, 'dark');
+    presentToast(`"${newTempModal[0].toUpperCase()}" editado.`, 800, 'success');
     save();
     updateDB('L1', 'B1');
     closeAlert = false;
@@ -549,7 +534,7 @@ function alertDel(cuPath, reemplace) {
 function alertView2(cuPath) {
     document.getElementById('modal').innerHTML =
         `
-    <p id="op1" class="cct">${cuPath[0]}</br></p>
+    <p id="op1" class="cct">${cuPath[0]}</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
         <label class="cce" > Usuario: </label>

@@ -107,7 +107,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta (new_edit_tool)';
+ver.innerHTML = 'Versión 2.7.2-beta-IU_newfunc(add-edit)';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -213,7 +213,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         });
 
 
-
         const newCompareData = localStorage.getItem('L1');
         updateDB('B1', 'L1');
         splitInit();
@@ -244,7 +243,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         compare = false;
-        console.log(localStorage.getItem('offline'));
+        // console.log(localStorage.getItem('offline'));
         // if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
         if (docB1 != newCompareData && alertcompare && !offline) {
             showSearch.innerHTML = '';
