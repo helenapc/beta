@@ -7,19 +7,14 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     // console.log('hola');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-    
+
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('help-edit').setAttribute('style', `opacity:0; pointer-events: none`);
-    // document.getElementById('help-delete').setAttribute('style', `opacity:0; pointer-events: none`);
-    // helpFunction('0', false);
 
-    document.querySelectorAll('p.ccse')[0].setAttribute('style', 'user-select:none;');
-    document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:none;');
-    document.querySelectorAll('p.ccse')[2].setAttribute('style', 'user-select:none;');
+    // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
+    // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
+    // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
 
-
-    
 })
 
 
@@ -226,16 +221,16 @@ showSearch.addEventListener('click', e => {  //editCard
             reemplace = i
             alertView2(cuPath);
             document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-            document.getElementById('bkmodal').setAttribute('style', 'opacity:0.5; pointer-events: auto');
+            document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
             document.getElementById('buttonEdit').setAttribute('style', 'opacity:1; pointer-events: auto');
             document.getElementById('buttonDelete').setAttribute('style', 'opacity:1; pointer-events: auto');
 
 
             // var matches = document.querySelectorAll('p.ccse');
             // console.log(matches);
-            document.querySelectorAll('p.ccse')[0].setAttribute('style', 'user-select:all;');
-            document.querySelectorAll('p.ccse')[1].setAttribute('style', 'user-select:all;');
-            document.querySelectorAll('p.ccse')[2].setAttribute('style', 'user-select:all;');
+            document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
+            document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
+            document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
         
         }
     }
@@ -407,31 +402,68 @@ barDelAcc.addEventListener('click', () => {
     deleteData();
 });
 
+// <textarea name="" id="" cols="30" rows="10"></textarea>
+
+// <input type="submit" class="modal_btns" value="OK">
+// 
+
+function botones_modal(func){
+    if(func === 'ok'){
+        const newTempModal = [
+        document.querySelectorAll('.modal_input')[0].value,
+        document.querySelectorAll('.modal_input')[1].value,
+        document.querySelectorAll('.modal_input')[2].value,
+        document.querySelectorAll('.modal_input')[3].value];
+        console.log(newTempModal);
+        // console.log(document.querySelectorAll('.modal_input')[].value);
+        // console.log(document.querySelectorAll('.modal_input')[1].value);
+        // console.log(document.querySelectorAll('.modal_input')[2].value);
+
+        alertView2(newTempModal);
+        document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
+        document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
+        document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
+    }
+    if(func === 'cancel'){
+        document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+        document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+        document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+        document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    }
+}
+
+
+//FAB TEST
+document.getElementById('buttonTest').addEventListener('click', () => {
+    document.getElementById('modal').innerHTML =
+    `
+    <p id="op1" class="cct">Editar cuenta</br></p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+        <label class="cce" > Cuenta: </label>
+        <input type="text" id="modalInputAccount" class="ccse modal_input" value="${cuPath[0]}">
+        <label class="cce" > Usuario: </label>
+        <input type="text" id="modalInputUser" class="ccse modal_input" value="${cuPath[1]}">
+        <label class="cce" > Contraseña: </label>
+        <input type="text" id="modalInputPass" class="ccse modal_input" value="${cuPath[2]}">
+        <label class="cce" > Notas: </label>
+        <input type="text" id="modalInputNote" class="ccse modal_input" value="${cuPath[3]}">
+
+        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
+        <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+
+    </p>
+    `;
+});
 
 
 //FAB
 
-document.getElementById('buttonEdit').addEventListener('click', () => {
-    // helpFunction('0', false);
-    alertEdit(cuPath, reemplace);
-})
+document.getElementById('buttonEdit').addEventListener('click', () => { alertEdit(cuPath, reemplace); });
 
-document.getElementById('buttonDelete').addEventListener('click', () => {
-    // helpFunction('0', false);
-    alertDel(cuPath, reemplace);
-})
+document.getElementById('buttonDelete').addEventListener('click', () => { alertDel(cuPath, reemplace); });
 
-// document.getElementById('buttonHelp').addEventListener('click', () => {
-//     (!helpActivate) ? helpFunction('1', true) : helpFunction('0', false);
-//     (!helpActivate) ? helpLabel('1', true) : helpLabel('0', false);
-//     console.log('aiuda');
-// });
-
-document.getElementById('nameSetting').addEventListener('click', () => {
-    // helpFunction('0', false);
-    alertPass();
-    // presentPin();
-});
+document.getElementById('nameSetting').addEventListener('click', () => { alertPass(); });
 
 document.getElementById('expandCard').addEventListener('click', () => {
     // helpFunction('0', false);
@@ -457,7 +489,6 @@ document.getElementById('showCard').addEventListener('click', () => {
 });
 
 document.getElementById('buttonSearch').addEventListener('click', () => {
-    // helpFunction('0', false);
     if (!statSearchBar) {
         newSearch.value = '';
         newSearch.setAttribute('style', 'margin-top:0px');
@@ -471,8 +502,6 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
-    // helpFunction('0', false);
-    // document.getElementById('help-add').setAttribute('style', 'opacity:0');
     function presentAlertAdd() {
         const alert = document.createElement('ion-alert');
         alert.setAttribute('backdrop-dismiss', 'false');

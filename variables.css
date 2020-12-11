@@ -29,7 +29,7 @@
 }
 
 /* @media screen and (max-width: 599px) and (orientation: portrait){ */
-  @media (pointer:none), (pointer:coarse) {
+@media (pointer:none), (pointer:coarse) {
 
   #nameSetting:active ~ #help-config{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
   #buttonEdit:active ~ #help-edit{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
@@ -41,19 +41,6 @@
   
 }
 
-
-  /* #nameSetting:hover ~ #help-config{ animation: op 1.5s ease-in-out }
-  #buttonEdit:hover ~ #help-edit{ animation: op 1.5s ease-in-out }
-  #buttonDelete:hover ~ #help-delete{ animation: op 1.5s ease-in-out }
-  #expandCard:hover ~ #help-exp-com{ animation: op 2s ease-in-out }
-  #showCard:hover ~ #help-show{ animation: op 2s ease-in-out }
-  #buttonSearch:hover ~ #help-search{ animation: op 1.5s ease-in-out }
-  #buttonAdd:hover > #help-add{ animation: op 1.5s ease-in-out } */
-
-
-/* #buttonEdit, #buttonDelete{
-  transition: 0.1s ease-in-out;
-} */
 
 /* ********* */
 .cct{
@@ -73,6 +60,19 @@
   margin: 0px 0px 10px 0px;
 }
 
+.modal_input{
+  margin-bottom: 4px;
+}
+
+.modal_btns{
+  color: var(--ion-color-primary);
+  font-size: 15px;
+  border: 0px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  float: right;
+}
 
 .bkpopup{
   position: absolute;
@@ -98,8 +98,8 @@
   align-items: center;
   padding: 12px 20px 0px 20px;
   
-  border-radius: 5px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.4);
   z-index: 1;
 
   /*CAMBIAR*/
