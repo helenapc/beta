@@ -11,9 +11,9 @@ document.getElementById('bkmodal').addEventListener('click', () => {
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
 
-    // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
-    // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
-    // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
+    document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
+    document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
+    document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
 
 })
 
