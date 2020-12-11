@@ -442,7 +442,7 @@ function alertAdd2(newTempModal){
             newTempModal[1] == newTotal[i + 1] &&
             newTempModal[2] == newTotal[i + 2]
         ) {
-            alertMsg('Error', `La cuenta ${newTempModal[0]} ya existe.`);
+            alertMsg('Error', `La cuenta "${newTempModal[0].toUpperCase()}" ya existe.`);
             return;
         }
     }
