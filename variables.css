@@ -62,9 +62,8 @@
 
 .modal_input{
   margin-bottom: 4px;
-  /* background-color: var(--ion-color-light); */
-  /* border: 0; */
-  border: none;
+  background-color: #ffffff00;
+  border: 0;
   border-bottom: 1px solid var(--ion-color-primary);
 }
 

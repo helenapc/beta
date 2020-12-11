@@ -24,10 +24,10 @@ const showCardAll = (account, user, pass, notes) => {
     newSub4.setAttribute('class', 'hide');
 
     // if (expandIcon.getAttribute('name') == 'expand-outline') {
-        if (expandIcon.getAttribute('name') == icoExp) {
-        newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
+    if (expandIcon.getAttribute('name') == icoExp) {
+        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
     } else {
-        newSub1.setAttribute('style','font-weight: bold; margin-bottom:15px;');
+        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:15px;');
         newSub2.classList.remove("hide");
         newSub3.classList.remove("hide");
         newSub4.classList.remove("hide");
@@ -37,7 +37,7 @@ const showCardAll = (account, user, pass, notes) => {
     newHeader.appendChild(newSub2);
     newHeader.appendChild(newSub3);
     newHeader.appendChild(newSub4);
-    
+
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 };
@@ -87,23 +87,27 @@ function setAttributes(elem, obj) {
 }
 
 function delete_spaces(v1) {
-    v1 = v1.split("");
-    for (let i = 0; i < v1.length; i++) {
-        if (v1[i] == " ") {
-            v1.shift();
-            i--;
-        } else {
-            while (true) {
-                if (v1[v1.length - 1] == " ") {
-                    v1.pop();
-                } else { break; }
+    if(!v1){
+        v1 = "";
+    }else{
+        v1 = v1.split("");
+        for (let i = 0; i < v1.length; i++) {
+            if (v1[i] == " ") {
+                v1.shift();
+                i--;
+            } else {
+                while (true) {
+                    if (v1[v1.length - 1] == " ") {
+                        v1.pop();
+                    } else { break; }
+                }
+                v1 = v1.join("");
+                while (v1.includes("  ")) {
+                    v1 = v1.split("  ");
+                    v1 = v1.join(" ");
+                }
+                break;
             }
-            v1 = v1.join("");
-            while (v1.includes("  ")) {
-                v1 = v1.split("  ");
-                v1 = v1.join(" ");
-            }
-            break;
         }
     }
     return v1;
@@ -477,6 +481,44 @@ function alertEdit(cuPath, reemplace) {
     return alert.present();
 }
 
+function alertEdit2(newTempModal, reemplace) {
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    const toRemplace = reemplace / 5;
+
+    if (newTempModal[0] == '' || newTempModal[1] == '' || newTempModal[2] == '') {
+        alertMsg('Error', 'Datos incorrectos o vacíos.');
+        return;
+    }
+    
+    newTempModal[0] = delete_spaces(newTempModal[0].toLowerCase());
+    newTempModal[1] = delete_spaces(newTempModal[1]);
+    newTempModal[2] = delete_spaces(newTempModal[2]);
+    newTempModal[3] = delete_spaces(newTempModal[3]);
+
+
+    for (i = 0; i < newTotal.length; i += 5) {
+        if (
+            newTempModal[0] == newTotal[i] &&
+            newTempModal[1] == newTotal[i+1] &&
+            newTempModal[2] == newTotal[i+2] &&
+            newTempModal[3] == newTotal[i+3]
+        ) {
+            alertMsg('Error', `La cuenta ${newTempModal[0]} ya existe.`);
+            return;
+        }
+    }
+
+    aTotal.splice(toRemplace, 1, code(newTempModal[0]) + 'OG' + code(newTempModal[1]) + 'OG' + code(newTempModal[2]) + 'OG' + code(newTempModal[3]));
+    aTotalTOnewTotal();
+    refreshData();
+    presentToast(`"${newTempModal[0]}" editado.`, 500, 'dark');
+    save();
+    updateDB('L1', 'B1');
+    closeAlert = false;
+
+}
+
 function alertDel(cuPath, reemplace) {
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
@@ -506,7 +548,7 @@ function alertDel(cuPath, reemplace) {
 
 function alertView2(cuPath) {
     document.getElementById('modal').innerHTML =
-    `
+        `
     <p id="op1" class="cct">${cuPath[0]}</br></p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">

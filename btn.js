@@ -413,16 +413,20 @@ function botones_modal(func){
         document.querySelectorAll('.modal_input')[0].value,
         document.querySelectorAll('.modal_input')[1].value,
         document.querySelectorAll('.modal_input')[2].value,
-        document.querySelectorAll('.modal_input')[3].value];
-        console.log(newTempModal);
+        document.querySelectorAll('.modal_input')[3].value,
+    ];
         // console.log(document.querySelectorAll('.modal_input')[].value);
         // console.log(document.querySelectorAll('.modal_input')[1].value);
         // console.log(document.querySelectorAll('.modal_input')[2].value);
+        
+        
+        alertEdit2(newTempModal, reemplace);
 
         alertView2(newTempModal);
         document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
         document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
         document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
+
     }
     if(func === 'cancel'){
         document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
@@ -454,6 +458,8 @@ document.getElementById('buttonTest').addEventListener('click', () => {
 
     </p>
     `;
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
 });
 
 
