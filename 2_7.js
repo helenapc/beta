@@ -107,7 +107,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-IU_newfunc(add-edit)';
+ver.innerHTML = 'Versión 2.7.2-beta-(menos)detalle';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -259,45 +259,45 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                 alert.buttons = [
+                    { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
                     { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                    { text: 'Rechazar/Offline', handler: () => { updateData('Rechazar', newCompareData) } },
-                    {
-                        text: 'Detalles',
-                        handler: () => {
+                    // {
+                    //     text: 'Detalles',
+                    //     handler: () => {
 
-                            var txtTemp = [];
-                            var aTotalTemp = [];
-                            var newa = [];
-                            var metaObjAdd = [];
-                            var metaObjDel = [];
-                            var myObj = '';
-                            var metaObj = '';
+                    //         let txtTemp = [];
+                    //         let aTotalTemp = [];
+                    //         let newa = [];
+                    //         let metaObjAdd = [];
+                    //         let metaObjDel = [];
+                    //         let myObj = '';
+                    //         let metaObj = '';
 
-                            txtTemp = newCompareData.split('GD');
-                            aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-                            aTotalTemp.splice(-1, 1);
-                            aTotalTemp = aTotalTemp.concat(aTotal);
-                            aTotalTemp.sort();
+                    //         txtTemp = newCompareData.split('GD');
+                    //         aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
+                    //         aTotalTemp.splice(-1, 1);
+                    //         aTotalTemp = aTotalTemp.concat(aTotal);
+                    //         aTotalTemp.sort();
 
-                            for (i = 0; i < aTotalTemp.length; i++) {
-                                (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
-                            };
 
-                            for (i = 0; i < newa.length; i++) {
+                    //         for (i = 0; i < aTotalTemp.length; i++) {
+                    //             (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
+                    //         };
 
-                                const newaName = newa[i].split('OG');
-                                if (txtTemp[3].includes(newa[i])) {
-                                    myObj = { value: '(–) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                    metaObjDel.push(myObj)
-                                } else {
-                                    myObj = { value: '(+) ' + deco(newaName[0]).toUpperCase(), disabled: true };
-                                    metaObjAdd.push(myObj)
-                                };
-                            }
-                            metaObj = metaObjAdd.concat(metaObjDel);
-                            presentCompareData(metaObj, newCompareData);
-                        },
-                    },
+                    //         for (i = 0; i < newa.length; i++) {
+                    //             const newaName = newa[i].split('OG');
+                    //             if (txtTemp[3].includes(newa[i])) {
+                    //                 myObj = { value: '(-) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                    //                 metaObjDel.push(myObj)
+                    //             } else {
+                    //                 myObj = { value: '( + ) ' + deco(newaName[0]).toUpperCase(), disabled: true };
+                    //                 metaObjAdd.push(myObj)
+                    //             };
+                    //         }
+                    //         metaObj = metaObjAdd.concat(metaObjDel);
+                    //         presentCompareData(metaObj, newCompareData);
+                    //     },
+                    // },
 
                 ];
                 document.body.appendChild(alert);

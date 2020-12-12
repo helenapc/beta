@@ -426,11 +426,9 @@ function botones_modal(func) {
         document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
         document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
-    if (func === 'cancel') {
 
-        // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-        // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    }
+    if (func === 'cancel') {};
+
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 }

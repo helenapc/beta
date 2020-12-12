@@ -272,7 +272,7 @@ function aTotalTOnewTotal() {
 }
 
 function updateData(text, newCompareData) {
-    let mensaje = 'Base de datos sincronizada.';
+    let mensaje = 'Datos actualizados.';
     // console.log(text);
     // console.log(localStorage.getItem('L1'));
     // console.log(newCompareData);
@@ -300,19 +300,7 @@ function updateData(text, newCompareData) {
     setTimeout(() => { window.location.reload() }, 1000);
 }
 
-function presentCompareData(metaObj, newCompareData) {
-    const alert = document.createElement('ion-alert');
-    alert.setAttribute('backdrop-dismiss', 'false');
-    alert.header = 'Se detectaron cambios';
-    alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
-    alert.inputs = metaObj;
-    alert.buttons = [
-        { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
-        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-    ];
-    document.body.appendChild(alert);
-    return alert.present();
-}
+
 
 
 function updateDB(send, receive) {
@@ -418,7 +406,7 @@ function sendEmail() {
 
 
 
-// ALERTS
+// ALERTS / POPUP
 function alertAdd2(newTempModal){
     if (
         newTempModal[0] == '' ||
@@ -426,7 +414,7 @@ function alertAdd2(newTempModal){
         newTempModal[2] == ''
     ) {
         barProgressF('warning', 'determinate');
-        alertMsg('Error', 'Campos obligroios vacíos.');
+        alertMsg('Error', 'Campos obligatorios vacíos.');
         setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
         return;
     }
@@ -464,7 +452,7 @@ function alertEdit2(newTempModal, reemplace) {
 
     if (newTempModal[0] == '' || newTempModal[1] == '' || newTempModal[2] == '') {
         // alertMsg('Error', 'Datos incorrectos o vacíos.');
-        alertMsg('Error', 'Campos obligroios vacíos.');
+        alertMsg('Error', 'Campos obligatorios vacíos.');
         return;
     }
     
@@ -510,7 +498,7 @@ function alertDel(cuPath, reemplace) {
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     const alert = document.createElement('ion-alert');
-    alert.message = `¿Eliminar ${cuPath[0]}?`;
+    alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [
         { text: 'cancelar', role: 'cancel' },
         {
@@ -547,6 +535,19 @@ function alertView2(cuPath) {
     `;
 }
 
+function presentCompareData(metaObj, newCompareData) {
+    const alert = document.createElement('ion-alert');
+    alert.setAttribute('backdrop-dismiss', 'false');
+    alert.header = 'Se detectaron cambios';
+    alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
+    alert.inputs = metaObj;
+    alert.buttons = [
+        { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
+        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
 
 
 // CONFIG EDIT NM/US/PS/NO
