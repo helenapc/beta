@@ -402,110 +402,132 @@ barDelAcc.addEventListener('click', () => {
     deleteData();
 });
 
-// <textarea name="" id="" cols="30" rows="10"></textarea>
-
-// <input type="submit" class="modal_btns" value="OK">
-// 
 
 
 
 //FAB TEST
 document.getElementById('buttonTest').addEventListener('click', () => {
-    let openAdd = 0;
-    let openDel = 0;
-    let openEdit = 0;
+    let openAdd = 0; openDel = 0; openEdit = 0;
+    let arrCompareAdd = ['Agregadas', "I", "II", "III", "IV"];
+    let arrCompareDel = ['Borradas', 'GOOGLE'];
+    let arrCompareEdit = ['Editadas'];
 
-    let arrA = ["I", "II", "III", "IV"];
-    let arrB = [5];
-    let arrE = [3,4,8];
-
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
-    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-
-
-    //     <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
-    //     <label class="ccse" > (${options.length}) Cuentas agregadas</label>
-    //     <button id="bd">></button>
-    //     <div class="dropdown-content"></div>
-    // </div>
-
-    // <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
-    //     <label class="ccse" > (${options2.length}) Cuentas eliminadas</label>
-    //     <button id="bd2">></button>
-    //     <div class="dropdown-content"></div>
-    // </div>
-
-    // <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
-    //     <label class="ccse" > (${options3.length}) Cuentas editadas </label>
-    //     <button id="bd3">></button>
-    //     <div class="dropdown-content"></div>
-    // </div>
-
-
-
-    document.getElementById('modal').innerHTML =
-        `
+    document.getElementById('modal').innerHTML = `
     <p id="op1" class="cct">Detalles</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
-
-        ${listDetail(arrA,  'Cuentas Agregadas', 'bd')}
-        ${listDetail(arrB, 'Cuentas Borradas', 'bd2')}
-        ${listDetail(arrE, 'Cuentas Editadas', 'bd3')}
-
-
-        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
-        <input type="button" class="modal_btns" value="CANCELADO" onClick="botones_modal('cancel')">
-
+    
+    ${listDetail(arrCompareAdd, 'Agregadas', 'dropAddButton')}
+    ${listDetail(arrCompareDel, 'Borradas', 'dropDelButton')}
+    ${listDetail(arrCompareEdit, 'Editadas', 'dropEditButton')}
+    
+    <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
+    <input type="button" class="modal_btns" value="CANCELADO" onClick="botones_modal('cancel')">
     </p>
-
     `;
 
 
-    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-
-
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
     document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
 
+    const dropAddButton = document.querySelector('#dropAddButton');
+    const dropDelButton = document.querySelector('#dropDelButton');
+    const dropEditButton = document.querySelector('#dropEditButton');
 
-    if (arrA.length > 0){
-        document.querySelector('#bd').addEventListener('click', () => {
+
+    if (arrCompareAdd.length != 1) {
+        dropAddButton.addEventListener('click', () => {
             openDel = 0, openEdit = 0, openAdd++
-            if (openAdd < 2) { lista(arrA); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
-            else { openAdd = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+            // if (openAdd < 2) { listDrop(arrCompareAdd); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
+            // else { openAdd = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+
+            if (openAdd < 2) {
+                listDrop(arrCompareAdd);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+            else {
+                openAdd = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
         });
     }
 
-    if (arrB.length > 0){
-        document.querySelector('#bd2').addEventListener('click', () => {
+    if (arrCompareDel.length != 1) {
+        dropDelButton.addEventListener('click', () => {
             openDel++, openEdit = 0, openAdd = 0;
-            if (openDel < 2) { lista(arrB); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
-            else { openDel = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+            // if (openDel < 2) { listDrop(arrCompareDel); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
+            // else { openDel = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+
+            if (openDel < 2) {
+                listDrop(arrCompareDel);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+            else {
+                openDel = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
         });
     }
 
-    if (arrE.length > 0){
-        document.querySelector('#bd3').addEventListener('click', () => {
+    if (arrCompareEdit.length != 1) {
+        dropEditButton.addEventListener('click', () => {
             openDel = 0, openEdit++, openAdd = 0;
-            if (openEdit < 2) { lista(arrE); document.querySelector('.dropdown-content').setAttribute('style', 'display: block;'); }
-            else { openEdit = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+            // if (openEdit < 2) { listDrop(arrCompareEdit); document.querySelector('.dropdown-content').setAttribute('style', 'display: block;'); }
+            // else { openEdit = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+
+            if (openEdit < 2) {
+                listDrop(arrCompareEdit);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+
+            }
+            else {
+                openEdit = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
         });
     }
 
 });
 
 
-function lista(arrayFinal) {
+function listDrop(arrayFinal) {
     document.querySelector(".dropdown-content").innerHTML = '';
     for (let i = 0; i < arrayFinal.length; i++) {
         let el = document.createElement("p");
-        el.textContent = '\u25cb ' + arrayFinal[i];
+        (i == 0) ? el.textContent = arrayFinal[0] :
+            el.textContent = '\u25cb ' + arrayFinal[i];
         document.querySelector(".dropdown-content").appendChild(el);
     };
+
+
 }
 
-
+function listDetail(arrLista, tituloLista, idbtn) {
+    if (arrLista.length != 1) {
+        return `
+        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+            <label class="ccse" > (${arrLista.length - 1}) Cuentas ${tituloLista}</label>
+            <button id=${idbtn}>></button>
+            <div class="dropdown-content"></div>
+        </div>
+        `
+    } else {
+        return '';
+    }
+};
 
 
 
@@ -539,9 +561,13 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
 
 });
 
-document.getElementById('buttonDelete').addEventListener('click', () => { alertDel(cuPath, reemplace); });
+document.getElementById('buttonDelete').addEventListener('click', () => {
+    alertDel(cuPath, reemplace);
+});
 
-document.getElementById('nameSetting').addEventListener('click', () => { alertPass(); });
+document.getElementById('nameSetting').addEventListener('click', () => {
+    alertPass();
+});
 
 document.getElementById('expandCard').addEventListener('click', () => {
     // helpFunction('0', false);

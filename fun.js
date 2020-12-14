@@ -69,32 +69,12 @@ const item = (id, ico, text, color = '', show = true) => {
 
 
 
-function listDetail(arrLista, tituloLista, idbtn){
-    if(arrLista.length != 0){
-        return `
-        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
-            <label class="ccse" > (${arrLista.length}) ${tituloLista}</label>
-            <button id=${idbtn}>></button>
-            <div class="dropdown-content"></div>
-        </div>
-        ` 
-    }else{
-        return '';
-    }
-};
+
 
 
 //######################## FUNCIONES ########################
 
-// function helpClear(){
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-//     document.getElementById('help-config').setAttribute('style', 'opacity:0');
-// };
+
 
 function setAttributes(elem, obj) {
     for (var prop in obj) {
@@ -103,19 +83,15 @@ function setAttributes(elem, obj) {
 }
 
 function delete_spaces(v1) {
-    if(!v1){
-        v1 = "";
-    }else{
+    if(!v1) { v1 = ""; }
+    else{
         v1 = v1.split("");
         for (let i = 0; i < v1.length; i++) {
-            if (v1[i] == " ") {
-                v1.shift();
-                i--;
-            } else {
+            if (v1[i] == " ") { v1.shift(); i--; }
+            else {
                 while (true) {
-                    if (v1[v1.length - 1] == " ") {
-                        v1.pop();
-                    } else { break; }
+                    if (v1[v1.length - 1] == " ") { v1.pop(); }
+                    else { break; }
                 }
                 v1 = v1.join("");
                 while (v1.includes("  ")) {
