@@ -15,9 +15,9 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.textContent = 'Contraseña: ' + pass;
     newSub4.textContent = 'Notas: ' + notes;
 
-    newSub2.setAttribute('id', 'newSub2');
-    newSub3.setAttribute('id', 'newSub3');
-    newSub4.setAttribute('id', 'newSub4');
+    // newSub2.setAttribute('id', 'newSub2');
+    // newSub3.setAttribute('id', 'newSub3');
+    // newSub4.setAttribute('id', 'newSub4');
 
     newSub2.setAttribute('class', 'hide');
     newSub3.setAttribute('class', 'hide');
@@ -54,6 +54,7 @@ const item = (id, ico, text, color = '', show = true) => {
     ionIco.setAttribute('class', id);
     ionIco.setAttribute('style', 'margin-right:10px;');
     ionItem.appendChild(ionIco);
+
     if (show) {
         barContent.appendChild(ionItem);
     } else {
@@ -66,6 +67,21 @@ const item = (id, ico, text, color = '', show = true) => {
 }
 
 
+
+
+function listDetail(arrLista, tituloLista, idbtn){
+    if(arrLista.length != 0){
+        return `
+        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+            <label class="ccse" > (${arrLista.length}) ${tituloLista}</label>
+            <button id=${idbtn}>></button>
+            <div class="dropdown-content"></div>
+        </div>
+        ` 
+    }else{
+        return '';
+    }
+};
 
 
 //######################## FUNCIONES ########################
@@ -548,6 +564,33 @@ function presentCompareData(metaObj, newCompareData) {
     document.body.appendChild(alert);
     return alert.present();
 }
+
+function botones_modal(func) {
+    if (func === 'ok') {
+        let newTempModal = [
+            document.querySelectorAll('.modal_input')[0].value,
+            document.querySelectorAll('.modal_input')[1].value,
+            document.querySelectorAll('.modal_input')[2].value,
+            document.querySelectorAll('.modal_input')[3].value,
+        ];
+        if (document.getElementById('op1').innerHTML == 'Editar cuenta') {
+            alertEdit2(newTempModal, reemplace);
+        }
+        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') {
+            alertAdd2(newTempModal);
+        }
+
+        document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
+        document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
+        document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
+    }
+
+    if (func === 'cancel') { };
+
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+}
+
 
 
 // CONFIG EDIT NM/US/PS/NO

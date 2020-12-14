@@ -407,60 +407,108 @@ barDelAcc.addEventListener('click', () => {
 // <input type="submit" class="modal_btns" value="OK">
 // 
 
-function botones_modal(func) {
-    if (func === 'ok') {
-        let newTempModal = [
-            document.querySelectorAll('.modal_input')[0].value,
-            document.querySelectorAll('.modal_input')[1].value,
-            document.querySelectorAll('.modal_input')[2].value,
-            document.querySelectorAll('.modal_input')[3].value,
-        ];
-        if (document.getElementById('op1').innerHTML == 'Editar cuenta') {
-            alertEdit2(newTempModal, reemplace);
-        }
-        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') {
-            alertAdd2(newTempModal);
-        }
-
-        document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
-        document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
-        document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
-    }
-
-    if (func === 'cancel') {};
-
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-}
 
 
 //FAB TEST
-// document.getElementById('buttonTest').addEventListener('click', () => {
-//     document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-//     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-//     document.getElementById('modal').innerHTML =
-//         `
-//     <p id="op1" class="cct">Agregar cuenta</p>
-//     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-//     <p style="margin: 0px 0px 0px 0px;">
-//         <label class="cce" > Cuenta: </label>
-//         <input type="text" id="modalInputAccount" class="ccse modal_input" value="">
-//         <label class="cce" > Usuario: </label>
-//         <input type="text" id="modalInputUser" class="ccse modal_input" value="">
-//         <label class="cce" > Contraseña: </label>
-//         <input type="text" id="modalInputPass" class="ccse modal_input" value="">
-//         <label class="cce" > Notas: </label>
-//         <input type="text" id="modalInputNote" class="ccse modal_input" value="">
+document.getElementById('buttonTest').addEventListener('click', () => {
+    let openAdd = 0;
+    let openDel = 0;
+    let openEdit = 0;
 
-//         <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
-//         <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+    let arrA = ["I", "II", "III", "IV"];
+    let arrB = [5];
+    let arrE = [3,4,8];
 
-//     </p>
-//     `;
-//     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-//     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
 
-// });
+
+    //     <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+    //     <label class="ccse" > (${options.length}) Cuentas agregadas</label>
+    //     <button id="bd">></button>
+    //     <div class="dropdown-content"></div>
+    // </div>
+
+    // <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+    //     <label class="ccse" > (${options2.length}) Cuentas eliminadas</label>
+    //     <button id="bd2">></button>
+    //     <div class="dropdown-content"></div>
+    // </div>
+
+    // <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+    //     <label class="ccse" > (${options3.length}) Cuentas editadas </label>
+    //     <button id="bd3">></button>
+    //     <div class="dropdown-content"></div>
+    // </div>
+
+
+
+    document.getElementById('modal').innerHTML =
+        `
+    <p id="op1" class="cct">Detalles</p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+
+        ${listDetail(arrA,  'Cuentas Agregadas', 'bd')}
+        ${listDetail(arrB, 'Cuentas Borradas', 'bd2')}
+        ${listDetail(arrE, 'Cuentas Editadas', 'bd3')}
+
+
+        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
+        <input type="button" class="modal_btns" value="CANCELADO" onClick="botones_modal('cancel')">
+
+    </p>
+
+    `;
+
+
+    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+
+
+    document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+
+
+    if (arrA.length > 0){
+        document.querySelector('#bd').addEventListener('click', () => {
+            openDel = 0, openEdit = 0, openAdd++
+            if (openAdd < 2) { lista(arrA); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
+            else { openAdd = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+        });
+    }
+
+    if (arrB.length > 0){
+        document.querySelector('#bd2').addEventListener('click', () => {
+            openDel++, openEdit = 0, openAdd = 0;
+            if (openDel < 2) { lista(arrB); document.querySelector('.dropdown-content').setAttribute('style', 'display: block'); }
+            else { openDel = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+        });
+    }
+
+    if (arrE.length > 0){
+        document.querySelector('#bd3').addEventListener('click', () => {
+            openDel = 0, openEdit++, openAdd = 0;
+            if (openEdit < 2) { lista(arrE); document.querySelector('.dropdown-content').setAttribute('style', 'display: block;'); }
+            else { openEdit = 0; document.querySelector('.dropdown-content').setAttribute('style', 'display: none'); }
+        });
+    }
+
+});
+
+
+function lista(arrayFinal) {
+    document.querySelector(".dropdown-content").innerHTML = '';
+    for (let i = 0; i < arrayFinal.length; i++) {
+        let el = document.createElement("p");
+        el.textContent = '\u25cb ' + arrayFinal[i];
+        document.querySelector(".dropdown-content").appendChild(el);
+    };
+}
+
+
+
+
+
 
 
 //FAB
