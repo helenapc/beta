@@ -421,8 +421,8 @@ barDelAcc.addEventListener('click', () => {
 //     ${listDetail(arrCompareDel, 'Borradas', 'dropDelButton')}
 //     ${listDetail(arrCompareEdit, 'Editadas', 'dropEditButton')}
     
-//     <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
-//     <input type="button" class="modal_btns" value="CANCELADO" onClick="botones_modal('cancel')">
+//     <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
+//     <input type="button" class="modal_btns" value="CANCELADO" onClick="buttons_modal('cancel')">
 //     </p>
 //     `;
 
@@ -503,31 +503,6 @@ barDelAcc.addEventListener('click', () => {
 // });
 
 
-function listDrop(arrayFinal) {
-    document.querySelector(".dropdown-content").innerHTML = '';
-    for (let i = 0; i < arrayFinal.length; i++) {
-        let el = document.createElement("p");
-        (i == 0) ? el.textContent = arrayFinal[0] :
-            el.textContent = '\u25cb ' + arrayFinal[i];
-        document.querySelector(".dropdown-content").appendChild(el);
-    };
-
-
-}
-
-function listDetail(arrLista, tituloLista, idbtn) {
-    if (arrLista.length != 1) {
-        return `
-        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
-            <label class="ccse" > (${arrLista.length - 1}) Cuentas ${tituloLista}</label>
-            <button id=${idbtn}>></button>
-            <div class="dropdown-content"></div>
-        </div>
-        `
-    } else {
-        return '';
-    }
-};
 
 
 
@@ -551,8 +526,8 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
         <label class="cce" > Notas: </label>
         <input type="text" class="ccse modal_input" value="${cuPath[3]}">
 
-        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
-        <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
+        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
     </p>
     `;
@@ -606,61 +581,7 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
-    // function presentAlertAdd() {
-    //     const alert = document.createElement('ion-alert');
-    //     alert.setAttribute('backdrop-dismiss', 'false');
-    //     alert.header = 'Agregar cuenta';
-    //     alert.inputs = [
-    //         { name: 'name1a', placeholder: 'Cuenta(Nombre):', value: '' },
-    //         { name: 'name2a', placeholder: 'Usuario/email:', value: '' },
-    //         { name: 'name3a', placeholder: 'Contraseña:', value: '' },
-    //         { name: 'name4a', placeholder: 'Notas(Opcional):', value: '' },
-    //     ];
-    //     alert.buttons = [
-    //         { text: 'Cancelar', role: 'cancel' },
-    //         {
-    //             text: 'Ok',
-    //             handler: newData2 => {
-    //                 if (
-    //                     newData2.name1a == '' ||
-    //                     newData2.name2a == '' ||
-    //                     newData2.name3a == ''
-    //                 ) {
-    //                     barProgressF('warning', 'determinate');
-    //                     alertMsg('Error', 'Datos obligroios vacíos.');
-    //                     setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-    //                     return;
-    //                 }
-
-    //                 for (let i = 0; i < newTotal.length; i += 5) {
-    //                     if (
-    //                         newData2.name1a == newTotal[i] &&
-    //                         newData2.name2a == newTotal[i + 1] &&
-    //                         newData2.name3a == newTotal[i + 2]
-    //                     ) {
-    //                         alertMsg('Error', `La cuenta ${newTotal[i]} ya existe.`);
-    //                         return;
-    //                     }
-    //                 }
-
-    //                 aTotal.push(`${code(newData2.name1a.toLowerCase())}OG${code(newData2.name2a)}OG${code(newData2.name3a)}OG${code(newData2.name4a)}`)
-    //                 aTotalTOnewTotal();
-    //                 save();
-    //                 showSearch.innerHTML = '';
-    //                 newSearch.value = newData2.name1a;
-    //                 // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
-    //                 document.getElementById('expandIcon').setAttribute('name', icoCom);
-    //                 refreshData();
-    //                 presentToast(`"${newData2.name1a.toUpperCase()}" agregada`, 800, 'success');
-    //                 updateDB('L1', 'B1');
-    //             },
-    //         },
-    //     ];
-    //     document.body.appendChild(alert);
-    //     return alert.present();
-    // }
-    // presentAlertAdd();
-
+    
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
     document.getElementById('modal').innerHTML =
@@ -677,8 +598,8 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
         <label class="cce" > Notas*: </label>
         <input type="text" placeholder="*Opcional" class="ccse modal_input" value="">
 
-        <input type="button" class="modal_btns" value="OK" onClick="botones_modal('ok')">
-        <input type="button" class="modal_btns" value="CANCELAR" onClick="botones_modal('cancel')">
+        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
+        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
     </p>
     `;

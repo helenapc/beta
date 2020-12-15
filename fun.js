@@ -545,7 +545,9 @@ function presentCompareData(metaObj, newCompareData) {
     return alert.present();
 }
 
-function botones_modal(func) {
+
+function buttons_modal(func) {
+
     if (func === 'ok') {
         let newTempModal = [
             document.querySelectorAll('.modal_input')[0].value,
@@ -565,11 +567,38 @@ function botones_modal(func) {
         document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
 
-    if (func === 'cancel') { };
+    if (func == 'aceptar') {updateData('Aceptar', newCompareData)};
+    if (func == 'rechazar') {updateData('Rechazar', newCompareData)};
 
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 }
+
+function listDrop(arrayFinal) {
+    document.querySelector(".dropdown-content").innerHTML = '';
+    for (let i = 0; i < arrayFinal.length; i++) {
+        let el = document.createElement("p");
+        (i == 0) ? el.textContent = arrayFinal[0] :
+            el.textContent = '\u25b8 ' + arrayFinal[i];
+        document.querySelector(".dropdown-content").appendChild(el);
+    };
+
+
+}
+
+function listDetail(arrLista, tituloLista, idbtn) {
+    if (arrLista.length != 1) {
+        return `
+        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+            <label class="ccse" >\u25b8 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
+            <button id=${idbtn}>></button>
+            <div class="dropdown-content"></div>
+        </div>
+        `
+    } else {
+        return '';
+    }
+};
 
 
 
