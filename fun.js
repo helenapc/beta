@@ -132,6 +132,10 @@ function barProgressF(color, state) {
 
 function refreshData(toast = true) {
     aTotal.sort();
+
+    if(newSearch.value == '::id') newSearch.value = userID;
+
+
     if (newSearch.value) {
         setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
     } else {
