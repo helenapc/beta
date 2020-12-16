@@ -275,6 +275,8 @@ barImport.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     updateDB('L1', 'B1');
+                    alertcompare = false;
+                    setTimeout(() => { alertcompare = true; }, 1500);
                     refreshData();
                     setTimeout(() => {
                         presentToast('Copia de seguridad cargada.', 800, 'success');
