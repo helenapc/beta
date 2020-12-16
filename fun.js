@@ -510,6 +510,8 @@ function alertDel(cuPath, reemplace) {
                 updateDB('L1', 'B1');
                 if (showSearch.value == '') newSearch.value = '';
                 closeAlert = false;
+                alertcompare = false;
+                setTimeout(() => { alertcompare = true; }, 1500);
             },
         },
     ];
@@ -574,6 +576,9 @@ function buttons_modal(func) {
 
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+
+    alertcompare = false;
+    setTimeout(() => { alertcompare = true; }, 1500);
 }
 
 function listDrop(arrayFinal) {
@@ -691,6 +696,9 @@ function presentAlertConfirmEdit(confPersonal) {
                 save();
                 updateDB('L1', 'B1');
                 updateDB('L1', 'B2');
+
+                alertcompare = false;
+                setTimeout(() => { alertcompare = true; }, 1500);
             },
         },
     ];

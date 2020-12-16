@@ -71,6 +71,7 @@ buttonLogin.addEventListener('click', () => {
 
                                     localStorage.setItem('L1', userRestoreAccount[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD' + userRestoreAccount[3]);
                                     localStorage.setItem('accessTempData', userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD')
+                                    coincidencia = true;
                                     updateDB('L1', 'B1');
                                     updateDB('L1', 'B2');
                                     splitInit();
@@ -82,7 +83,6 @@ buttonLogin.addEventListener('click', () => {
                                         B3: firebase.firestore.FieldValue.delete()
                                     }).then(function () { window.location.reload() });
 
-
                                 },
                             },
                         ];
@@ -90,7 +90,7 @@ buttonLogin.addEventListener('click', () => {
                         return alert.present();
                     }
                     presentRestorePass();
-                    coincidencia = true;
+                    // coincidencia = true;
                 }
             };
 
@@ -103,7 +103,9 @@ buttonLogin.addEventListener('click', () => {
             alertMsg('Error', 'Datos incorrectos o vacíos.');
             setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
         }
+
     });
+
 
 });
 
@@ -437,7 +439,7 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
     `;
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-
+    // alertcompare = false;
 });
 
 document.getElementById('buttonDelete').addEventListener('click', () => {
@@ -509,6 +511,7 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
     `;
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    // alertcompare = false;
 });
 
 

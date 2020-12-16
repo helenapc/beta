@@ -117,7 +117,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-debug-01(changes)';
+ver.innerHTML = 'Versión 2.7.2-beta-debug-02(changes)(4.55)';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -183,6 +183,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     document.getElementById('userName').innerHTML = deco(txt[0]);
     document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
+    // alertcompare = true;
 
 
     // PIN;
@@ -230,7 +231,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         });
 
         // console.log(localStorage.getItem('bp'));
-        console.log(txt[4]);
 
         // if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
         //     localStorage.removeItem('bp');
@@ -244,10 +244,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // newCompareData = localStorage.getItem('L1');
         updateDB('B1', 'L1');
 
-        console.log(txt[4]);
         splitInit();
 
-        console.log(txt[4]);
         // if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
         if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
@@ -263,9 +261,12 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         compare = false;
+        // alertcompare = true;
         // console.log(localStorage.getItem('offline'));
-        // if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
-        if (docB1 != newCompareData && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
+        
+        
+        if (docB1 != newCompareData && alertcompare && !offline) {
+        // if (docB1 != newCompareData && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
             showSearch.innerHTML = '';
 
             // 
