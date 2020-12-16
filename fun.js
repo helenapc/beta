@@ -58,7 +58,7 @@ const item = (id, ico, text, color = '', show = true) => {
     if (show) {
         barContent.appendChild(ionItem);
     } else {
-        if (localStorage.getItem('accessTempData') == '596A787925466868747A7379GD7DGD7DGD') {
+        if (localStorage.getItem('accessTempData') == '6669726E73GD6669726E73GD') {
             barContent.appendChild(ionItem);
         };
     };
@@ -280,7 +280,9 @@ function updateData(text, newCompareData) {
 
 
 
-    localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+    // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+    localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
+
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
     disableItem(false);
@@ -648,8 +650,11 @@ function presentAlertEditUserData() {
                     return;
                 }
                 const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
-                // localStorage.setItem('Bpin', usNData.userPin);
+                
                 presentAlertConfirmEdit(confPersonal);
+
+
+
             },
         },
     ];
@@ -676,7 +681,8 @@ function presentAlertConfirmEdit(confPersonal) {
 
                 document.getElementById('userName').innerHTML = deco(txt[0]);
                 document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
-                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
 
                 // 
                 localStorage.setItem('bp', txt[4]);

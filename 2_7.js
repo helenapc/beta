@@ -13,6 +13,7 @@ const arrCompareEdit = ['Editadas'];
 // var docB1 = '';
 // var docB2 = '';
 var uCA = [];
+var userRestoreAccount = [];
 var userID = '';
 const coll = 'users2';
 var alertcompare = true;
@@ -116,7 +117,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-list_Fn.pt2(Data)fix';
+ver.innerHTML = 'Versión 2.7.2-beta-debug-01(changes)';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -164,6 +165,8 @@ firebase.initializeApp({
 });
 var db = firebase.firestore();
 
+
+
 // ------------------ START ------------------ //
 localStorage.removeItem('alrt');
 
@@ -172,8 +175,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     disableItem(false);
     splitInit();
     aTotalTOnewTotal();
-    localStorage.setItem('bp', txt[4]);
+
+    // localStorage.setItem('bp', txt[4]);
+
     // localStorage.setItem('tPin', Date.now());
+
     document.getElementById('userName').innerHTML = deco(txt[0]);
     document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
@@ -181,21 +187,21 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
     // PIN;
     document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-    if (txt[4] != '') {
-        if (localStorage.getItem('tPin')) {
+    // if (txt[4] != '') {
+        // if (localStorage.getItem('tPin')) {
+    if (txt[4] != '' && localStorage.getItem('tPin')) {
             if (Date.now() - localStorage.getItem('tPin') > timePin) {
                 document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
                 disableItem(true);
                 document.getElementById('title').setAttribute('style', 'margin-left:38px');
                 document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
-                //document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 1');
                 document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
                 document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
 
             }
-        }
+        // }
 
         document.getElementById('pin').addEventListener('ionInput', () => {
             if (pin.value == deco(txt[4])) {
@@ -205,6 +211,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
         });
     }
+
+
 
 
     // DB
@@ -221,41 +229,43 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
         });
 
+        // console.log(localStorage.getItem('bp'));
+        console.log(txt[4]);
+
+        // if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
+        //     localStorage.removeItem('bp');
+        //     localStorage.removeItem('accessTempData')
+        //     localStorage.setItem('L1', 'GDGDGDGD');
+        //     window.location.reload();
+        // }
+
 
         // var newCompareData = localStorage.getItem('L1');
         // newCompareData = localStorage.getItem('L1');
         updateDB('B1', 'L1');
+
+        console.log(txt[4]);
         splitInit();
 
-        // if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
-        if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
+        console.log(txt[4]);
+        // if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
+        if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
-        // var msgRechazar = '';
-        // document.getElementById('offline').setAttribute('style', 'opacity:1');
-        // document.getElementById('offline').setAttribute('style', 'opacity:0');
-        // if (offline) localStorage.setItem('offline', 'offlineee');
-        // document.getElementById('offline').setAttribute('style', 'opacity:1');
-        // msgRechazar = localStorage.getItem('offline');
-        // } else {
-        // document.getElementById('offline').setAttribute('style', 'opacity:0'); //0
-        // msgRechazar = 'Rechazarr';
-        // };
-
 
         // 
-        if (offline) localStorage.setItem('offline', 'offlineee');
+        // if (offline) localStorage.setItem('offline', 'offlineee'); // PROBAR
         // 
 
 
         compare = false;
         // console.log(localStorage.getItem('offline'));
         // if (docB1 != localStorage.getItem('L1') && alertcompare && !offline) {
-        if (docB1 != newCompareData && alertcompare && !offline) {
+        if (docB1 != newCompareData && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
             showSearch.innerHTML = '';
 
             // 
@@ -279,7 +289,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             let aTotalTemp = [];
                             let newa = [];
 
-                        
+
 
                             //copia y union 2 arrays
                             txtTemp = newCompareData.split('GD');
@@ -302,9 +312,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                     arrCompareEdit.push(deco(newaName[0]).toUpperCase());
                                     i++
                                 } else {
-                                    (txtTemp[3].includes(newa[i])) ? 
-                                    arrCompareDel.push(deco(newaName[0]).toUpperCase()):
-                                    arrCompareAdd.push(deco(newaName[0]).toUpperCase());
+                                    (txtTemp[3].includes(newa[i])) ?
+                                        arrCompareDel.push(deco(newaName[0]).toUpperCase()) :
+                                        arrCompareAdd.push(deco(newaName[0]).toUpperCase());
                                 };
                             };
 
