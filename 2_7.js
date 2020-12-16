@@ -4,11 +4,12 @@ var txt = [];
 var aTotal = [];
 var newTotal = [];
 var compare = false;
-var newCompareData = '';
+// var newCompareData = '';
+var newCompareData = localStorage.getItem('L1');
 // var acept_changes = '';
-// const arrCompareAdd = ['Nuevas'];
-// const arrCompareDel = ['Borradas'];
-// const arrCompareEdit = ['Editadas'];
+const arrCompareAdd = ['Nuevas'];
+const arrCompareDel = ['Borradas'];
+const arrCompareEdit = ['Editadas'];
 // var docB1 = '';
 // var docB2 = '';
 var uCA = [];
@@ -115,7 +116,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-list_Fn.pt2(Data)';
+ver.innerHTML = 'Versión 2.7.2-beta-list_Fn.pt2(Data)fix';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -222,7 +223,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         // var newCompareData = localStorage.getItem('L1');
-        newCompareData = localStorage.getItem('L1');
+        // newCompareData = localStorage.getItem('L1');
         updateDB('B1', 'L1');
         splitInit();
 
@@ -277,9 +278,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             let txtTemp = [];
                             let aTotalTemp = [];
                             let newa = [];
-                            const arrCompareAdd = ['Nuevas'];
-                            const arrCompareDel = ['Borradas'];
-                            const arrCompareEdit = ['Editadas'];
+
+                        
 
                             //copia y union 2 arrays
                             txtTemp = newCompareData.split('GD');
@@ -294,25 +294,20 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             };
 
 
-                            for (i = 0; i < newa.length - 1; i++) { //
-                                let newaName = newa[i].split('OG');
-                                let newaName2 = newa[i + 1].split('OG');
+                            for (i = 0; i < newa.length - 1; i++) {
+                                const newaName = newa[i].split('OG');
+                                const newaName2 = newa[i + 1].split('OG');
 
                                 if (newaName[0] == newaName2[0]) {
-                                    arrCompareEdit.push(deco(newaName[0]).toUpperCase())
+                                    arrCompareEdit.push(deco(newaName[0]).toUpperCase());
                                     i++
                                 } else {
+                                    (txtTemp[3].includes(newa[i])) ? 
+                                    arrCompareDel.push(deco(newaName[0]).toUpperCase()):
+                                    arrCompareAdd.push(deco(newaName[0]).toUpperCase());
+                                };
+                            };
 
-                                    if (txtTemp[3].includes(newa[i])) {
-                                        arrCompareDel.push(deco(newaName[0]).toUpperCase())
-
-                                    } else {
-                                        arrCompareAdd.push(deco(newaName[0]).toUpperCase())
-                                    };
-                                }
-                            }
-
-                            // funNewCompareData(newCompareData);
 
                             // MODAL //
                             let openAdd = 0; openDel = 0; openEdit = 0;
