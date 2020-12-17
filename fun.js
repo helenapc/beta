@@ -278,8 +278,6 @@ function updateData(text, newCompareData) {
     splitInit();
     aTotalTOnewTotal();
 
-
-
     // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
     localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
 
@@ -508,10 +506,11 @@ function alertDel(cuPath, reemplace) {
                 save();
                 presentToast(`"${cuPath[0]}" eliminado.`, 500, 'danger');
                 updateDB('L1', 'B1');
-                if (showSearch.value == '') newSearch.value = '';
+                // if (showSearch.value == '') newSearch.value = '';
                 closeAlert = false;
-                alertcompare = false;
-                setTimeout(() => { alertcompare = true; }, 1500);
+                // alertcompare = false;
+                // setTimeout(() => { alertcompare = true; }, 1500);
+                noCompare();
             },
         },
     ];
@@ -577,16 +576,34 @@ function buttons_modal(func) {
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 
-    alertcompare = false;
-    setTimeout(() => { alertcompare = true; }, 1500);
+    // alertcompare = false;
+    // setTimeout(() => { alertcompare = true; }, 1500);
+    noCompare();
 }
+
+
+
+
+
+
+function noCompare () {
+        // alertcompare = false;
+    // setTimeout(() => {
+        // alertcompare = true;
+    // }, 10);
+}
+
+
+
+
+
 
 function listDrop(arrayFinal) {
     document.querySelector(".dropdown-content").innerHTML = '';
     for (let i = 0; i < arrayFinal.length; i++) {
         let el = document.createElement("p");
         (i == 0) ? el.textContent = arrayFinal[0] :
-            el.textContent = '\u25b8 ' + arrayFinal[i];
+        el.textContent = '\u25b8 ' + arrayFinal[i];
         document.querySelector(".dropdown-content").appendChild(el);
     };
 
@@ -697,8 +714,9 @@ function presentAlertConfirmEdit(confPersonal) {
                 updateDB('L1', 'B1');
                 updateDB('L1', 'B2');
 
-                alertcompare = false;
-                setTimeout(() => { alertcompare = true; }, 1500);
+                // alertcompare = false;
+                
+                // noCompare();
             },
         },
     ];
