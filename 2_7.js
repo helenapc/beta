@@ -4,8 +4,8 @@ var txt = [];
 var aTotal = [];
 var newTotal = [];
 var compare = false;
-var newCompareData = '';
-// var newCompareData = localStorage.getItem('L1');
+var compareChanges = '';
+// var compareChanges = localStorage.getItem('L1');
 var newCompareData2 = localStorage.getItem('L1');
 // var acept_changes = '';
 const arrCompareAdd = ['Nuevas'];
@@ -58,17 +58,12 @@ const content = document.getElementById('content');
 
 
 document.getElementById('title').setAttribute('style', 'margin-left:38px');
-// document.getElementById('buttonAdd').setAttribute('style', 'opacity:0; margin-bottom:-200px');
-
 document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
-
 document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
 document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
 document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
-
-// document.getElementById('buttonHelp').setAttribute('style', 'pointer-events: none; opacity: 0');
 document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
@@ -118,9 +113,11 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-debug-04(restart-name)(4.57)';
+ver.innerHTML = 'Versión 2.7.2-beta-debug(rechazar)(4.58)'; 
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
+
+document.querySelector('#verLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
 const lTheme = localStorage.getItem('theme');
@@ -234,7 +231,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         // var newCompareData2 = localStorage.getItem('L1');
-        newCompareData = localStorage.getItem('L1');
+        compareChanges = localStorage.getItem('L1');
         updateDB('B1', 'L1');
 
         splitInit();
@@ -255,36 +252,47 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         compare = false;
 
-        if (docB1 != newCompareData && alertcompare && !offline) {
-            // if (docB1 != newCompareData && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
+        if (docB1 != compareChanges && alertcompare && !offline) {
+            // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
             showSearch.innerHTML = '';
 
             // 
             localStorage.removeItem('offline');
             // 
-
+            console.log(deco(docB1));
+            console.log(deco(compareChanges));
+            console.log(deco(newCompareData2));
+            console.log('++++++++++++++++++++++++++++');
             function alertCompareData() {
-                // console.log(alertcompare);
+                // console.log(deco(compareChanges));
+                // console.log(deco(newCompareData2));
+                console.log(alertcompare);
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
                 alert.setAttribute('backdrop-dismiss', 'false');
                 alert.header = 'Se detectaron cambios';
                 alert.message = '¿Aceptar y sincorinizar con la base de datos?';
                 alert.buttons = [
-                    { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
-                    { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
+                    { text: 'Aceptar', handler: () => { updateData('Aceptar', compareChanges) } },
+                    { text: 'Rechazar', handler: () => { updateData('Rechazar', compareChanges) } },
                     {
                         text: 'Ver cambios',
                         handler: () => {
 
-                            // newCompareData = localStorage.getItem('L1');
+                            // compareChanges = localStorage.getItem('L1');
 
                             let txtTemp = [];
                             let aTotalTemp = [];
                             let newa = [];
 
                             //copia y union 2 arrays
-                            // txtTemp = newCompareData.split('GD');
+                            // txtTemp = compareChanges.split('GD');
+                            console.log('-------------------------------');
+                            console.log(deco(docB1));
+                            console.log(deco(compareChanges));
+                            console.log(deco(newCompareData2));
+
+
                             txtTemp = newCompareData2.split('GD');
 
 

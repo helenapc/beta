@@ -83,8 +83,8 @@ function setAttributes(elem, obj) {
 }
 
 function delete_spaces(v1) {
-    if(!v1) { v1 = ""; }
-    else{
+    if (!v1) { v1 = ""; }
+    else {
         v1 = v1.split("");
         for (let i = 0; i < v1.length; i++) {
             if (v1[i] == " ") { v1.shift(); i--; }
@@ -133,7 +133,7 @@ function barProgressF(color, state) {
 function refreshData(toast = true) {
     aTotal.sort();
 
-    if(newSearch.value == '::id') newSearch.value = userID;
+    if (newSearch.value == '::id') newSearch.value = userID;
 
 
     if (newSearch.value) {
@@ -267,28 +267,40 @@ function aTotalTOnewTotal() {
     }
 }
 
-function updateData(text, newCompareData) {
-    let mensaje = 'Datos actualizados.';
+function updateData(text, compareChanges) {
     // console.log(text);
     // console.log(localStorage.getItem('L1'));
-    // console.log(newCompareData);
+    // console.log(compareChanges);
     // console.log(txt);
     // if (text == 'Aceptar') updateDB('B1', 'L1');
     // (text == 'Aceptar') ? updateDB('B1', 'L1') : updateDB('L1', 'B1');
     splitInit();
     aTotalTOnewTotal();
-
+    
     localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
     // localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
-
+    
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
     disableItem(false);
-    if (text != 'Aceptar') {
+    let mensaje = 'Datos actualizados.';
+    if (text == 'Rechazar') {
         mensaje = 'Cancelando cambios.';
-        localStorage.setItem('L1', newCompareData);
+        console.log(deco(docB1));
+        console.log(deco(compareChanges));
+        console.log(deco(newCompareData2));
+        // localStorage.setItem('L1', compareChanges);
+        // localStorage.setItem('L1', newCompareData2);
+        (docB1 == newCompareData2) ? localStorage.setItem('L1', compareChanges): localStorage.setItem('L1', newCompareData2);
         updateDB('L1', 'B1');
+        console.log('////////////////////////////////');
     };
+
+    // if (text != 'Rechazar') {
+    //     // mensaje = 'Cancelando cambios.';
+    //     // localStorage.setItem('L1', compareChanges);
+    //     // updateDB('L1', 'B1');
+    // };
 
     newSearch.value = '';
     refreshData();
@@ -403,7 +415,7 @@ function sendEmail() {
 
 
 // ALERTS / POPUP
-function alertAdd2(newTempModal){
+function alertAdd2(newTempModal) {
     if (
         newTempModal[0] == '' ||
         newTempModal[1] == '' ||
@@ -451,7 +463,7 @@ function alertEdit2(newTempModal, reemplace) {
         alertMsg('Error', 'Campos obligatorios vacíos.');
         return;
     }
-    
+
     newTempModal[0] = delete_spaces(newTempModal[0].toLowerCase());
     newTempModal[1] = delete_spaces(newTempModal[1]);
     newTempModal[2] = delete_spaces(newTempModal[2]);
@@ -469,9 +481,9 @@ function alertEdit2(newTempModal, reemplace) {
     for (i = 0; i < newTotal.length; i += 5) {
         if (
             newTempModal[0] == newTotal[i] &&
-            newTempModal[1] == newTotal[i+1] &&
-            newTempModal[2] == newTotal[i+2] &&
-            newTempModal[3] == newTotal[i+3]
+            newTempModal[1] == newTotal[i + 1] &&
+            newTempModal[2] == newTotal[i + 2] &&
+            newTempModal[3] == newTotal[i + 3]
         ) {
             alertMsg('Error', `La cuenta "${newTempModal[0].toUpperCase()}" ya existe.`);
             return;
@@ -510,7 +522,7 @@ function alertDel(cuPath, reemplace) {
                 closeAlert = false;
                 // alertcompare = false;
                 // setTimeout(() => { alertcompare = true; }, 1500);
-                noCompare();
+                // noCompare();
             },
         },
     ];
@@ -534,15 +546,15 @@ function alertView2(cuPath) {
     `;
 }
 
-function presentCompareData(metaObj, newCompareData) {
+function presentCompareData(metaObj, compareChanges) {
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
     alert.header = 'Se detectaron cambios';
     alert.message = `¿Aceptar y sincorinizar con la base de datos? </br></br> DETALLES:`;
     alert.inputs = metaObj;
     alert.buttons = [
-        { text: 'Rechazar', handler: () => { updateData('Rechazar', newCompareData) } },
-        { text: 'Aceptar', handler: () => { updateData('Aceptar', newCompareData) } },
+        { text: 'Rechazar', handler: () => { updateData('Rechazar', compareChanges) } },
+        { text: 'Aceptar', handler: () => { updateData('Aceptar', compareChanges) } },
     ];
     document.body.appendChild(alert);
     return alert.present();
@@ -570,15 +582,15 @@ function buttons_modal(func) {
         document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
 
-    if (func == 'aceptar') {updateData('Aceptar', newCompareData)};
-    if (func == 'rechazar') {updateData('Rechazar', newCompareData)};
+    if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
+    if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
 
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 
     // alertcompare = false;
     // setTimeout(() => { alertcompare = true; }, 1500);
-    noCompare();
+    // noCompare();
 }
 
 
@@ -586,10 +598,10 @@ function buttons_modal(func) {
 
 
 
-function noCompare () {
-        // alertcompare = false;
+function noCompare() {
+    // alertcompare = false;
     // setTimeout(() => {
-        // alertcompare = true;
+    // alertcompare = true;
     // }, 10);
 }
 
@@ -603,7 +615,7 @@ function listDrop(arrayFinal) {
     for (let i = 0; i < arrayFinal.length; i++) {
         let el = document.createElement("p");
         (i == 0) ? el.textContent = arrayFinal[0] :
-        el.textContent = '\u25b8 ' + arrayFinal[i];
+            el.textContent = '\u25b8 ' + arrayFinal[i];
         document.querySelector(".dropdown-content").appendChild(el);
     };
 
@@ -672,7 +684,7 @@ function presentAlertEditUserData() {
                     return;
                 }
                 const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
-                
+
                 presentAlertConfirmEdit(confPersonal);
 
 
@@ -715,7 +727,7 @@ function presentAlertConfirmEdit(confPersonal) {
                 updateDB('L1', 'B2');
 
                 // alertcompare = false;
-                
+
                 // noCompare();
             },
         },
