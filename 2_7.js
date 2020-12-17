@@ -113,7 +113,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.2-beta-debug(rechazar)(4.58)'; 
+ver.innerHTML = 'Versión 2.7.2-beta-debug(detalle)(4.59)'; 
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -216,6 +216,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
     // DB
     db.collection(coll).onSnapshot(querySnapshot => {
+
         querySnapshot.forEach(doc => {
             offline = false;
             if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
@@ -232,12 +233,16 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // var newCompareData2 = localStorage.getItem('L1');
         compareChanges = localStorage.getItem('L1');
+        // (docB1 == newCompareData2)localStorage.setItem('L1', if (docB1 == newCompareData2) ? compareChanges : newCompareData2);
+
         updateDB('B1', 'L1');
 
         splitInit();
 
         // if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
         if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
+        // if (!compare && !offline) {
+
             localStorage.removeItem('bp');
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
@@ -259,14 +264,18 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             // 
             localStorage.removeItem('offline');
             // 
-            console.log(deco(docB1));
+            console.log('++++++++++++++ Comparando 1 ++++++++++++++');
+            console.log( 'DocB1 ahora vale -> ' + deco(docB1));
             console.log(deco(compareChanges));
             console.log(deco(newCompareData2));
-            console.log('++++++++++++++++++++++++++++');
+            console.log('++++++++++++++ Comparando 1 ++++++++++++++');
+
+
+
             function alertCompareData() {
                 // console.log(deco(compareChanges));
                 // console.log(deco(newCompareData2));
-                console.log(alertcompare);
+
                 alertcompare = false
                 const alert = document.createElement('ion-alert');
                 alert.setAttribute('backdrop-dismiss', 'false');
@@ -279,7 +288,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                         text: 'Ver cambios',
                         handler: () => {
 
-                            // compareChanges = localStorage.getItem('L1');
+                            // newCompareData2 = localStorage.getItem('L1');
+                            // localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
+
+
+                            
 
                             let txtTemp = [];
                             let aTotalTemp = [];
@@ -287,23 +300,40 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
                             //copia y union 2 arrays
                             // txtTemp = compareChanges.split('GD');
-                            console.log('-------------------------------');
+                            console.log('-------------- Detalles -----------------');
                             console.log(deco(docB1));
-                            console.log(deco(compareChanges));
+                            console.log(compareChanges);
                             console.log(deco(newCompareData2));
 
 
-                            txtTemp = newCompareData2.split('GD');
+                            // if (docB1 == newCompareData2) {
+                            //     txtTemp = compareChanges.split('GD');
+                            // } else{
+                            //     txtTemp = newCompareData2.split('GD');
+                            // }
+
+                            txtTemp = (docB1 == newCompareData2) ? compareChanges.split('GD') : newCompareData2.split('GD'); ;
+
+
 
 
                             aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
 
-
+                            
                             aTotalTemp.splice(-1, 1);
+                            
+                            console.log(aTotalTemp);
+
+
+
 
                             aTotalTemp = aTotalTemp.concat(aTotal);
+
+
                             aTotalTemp.sort();
                             aTotalTemp.push('');
+
+                            console.log(aTotalTemp);
 
 
                             for (i = 0; i < aTotalTemp.length; i++) {
@@ -418,6 +448,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             }
 
                             // console.log(acept_changes);
+
+
 
                         },
                     },

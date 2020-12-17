@@ -268,12 +268,10 @@ function aTotalTOnewTotal() {
 }
 
 function updateData(text, compareChanges) {
-    // console.log(text);
-    // console.log(localStorage.getItem('L1'));
-    // console.log(compareChanges);
-    // console.log(txt);
+
     // if (text == 'Aceptar') updateDB('B1', 'L1');
     // (text == 'Aceptar') ? updateDB('B1', 'L1') : updateDB('L1', 'B1');
+
     splitInit();
     aTotalTOnewTotal();
     
@@ -284,23 +282,20 @@ function updateData(text, compareChanges) {
     showLogin.innerHTML = '';
     disableItem(false);
     let mensaje = 'Datos actualizados.';
+
     if (text == 'Rechazar') {
         mensaje = 'Cancelando cambios.';
+
+        // console.log('-------------- Detalles -----------------');
+        console.log('////////////// Rechazar /////////////////');
         console.log(deco(docB1));
         console.log(deco(compareChanges));
         console.log(deco(newCompareData2));
         // localStorage.setItem('L1', compareChanges);
-        // localStorage.setItem('L1', newCompareData2);
-        (docB1 == newCompareData2) ? localStorage.setItem('L1', compareChanges): localStorage.setItem('L1', newCompareData2);
+        // (docB1 == newCompareData2) ? localStorage.setItem('L1', compareChanges): localStorage.setItem('L1', newCompareData2);
+        localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         updateDB('L1', 'B1');
-        console.log('////////////////////////////////');
     };
-
-    // if (text != 'Rechazar') {
-    //     // mensaje = 'Cancelando cambios.';
-    //     // localStorage.setItem('L1', compareChanges);
-    //     // updateDB('L1', 'B1');
-    // };
 
     newSearch.value = '';
     refreshData();
