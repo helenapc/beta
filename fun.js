@@ -278,8 +278,8 @@ function updateData(text, newCompareData) {
     splitInit();
     aTotalTOnewTotal();
 
-    // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-    localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
+    localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+    // localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
 
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
@@ -703,8 +703,8 @@ function presentAlertConfirmEdit(confPersonal) {
 
                 document.getElementById('userName').innerHTML = deco(txt[0]);
                 document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
-                // localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
-                localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
+                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                // localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
 
                 // 
                 localStorage.setItem('bp', txt[4]);
