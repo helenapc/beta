@@ -131,20 +131,46 @@ function barProgressF(color, state) {
 };
 
 function refreshData(toast = true) {
-    aTotal.sort();
+    //funciones
 
+    // if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha() ))}
     if (newSearch.value == '::id') newSearch.value = userID;
+    if (newSearch.value == '::cs') newSearch.value = deco(txt[2]);
 
 
+    // if (newSearch.value == '::a1') {
+    //     newSearch.value = '';
+    //     document.body.style.transitionDuration = '2s';
+    // };
+
+    // if (newSearch.value == '::a0') {
+    //     newSearch.value = '';
+    //     document.body.style.transitionDuration = '0s';
+    // };
+
+    // if (newSearch.value == '::bk'){
+    //     newSearch.value = 'Hacer copia de seguridad';
+    
+    // }
+
+
+
+
+
+    
+    
+    aTotal.sort();
     if (newSearch.value) {
-        setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
+        // setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
+        document.querySelector('#expandCard').setAttribute('style', 'opacity:1; pointer-events: auto');
     } else {
         // showIcon.setAttribute('name', 'eye-outline');
         // expandIcon.setAttribute('name', 'expand-outline');
 
         showIcon.setAttribute('name', icoShow);
         expandIcon.setAttribute('name', icoExp);
-        setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
+        // setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
+        document.querySelector('#expandCard').setAttribute('style', 'opacity:0; pointer-events: none');
     }
 
     showSearch.innerHTML = '';
@@ -214,13 +240,8 @@ function code(cod) {
             hexCod = (parseInt(hexCod, 16) + parseInt('05', 16)).toString(16).toUpperCase();
             hexF += '' + hexCod;
         } else {
-            if (hexCod.length == 5) {
-                hexF += '' + ("0x" + hexCod);
-                i++
-            }
-            if (hexCod.length == 4) {
-                hexF += '' + ("0x" + hexCod + 'Z');
-            }
+            if (hexCod.length == 5) { hexF += '' + ("0x" + hexCod); i++ }
+            if (hexCod.length == 4) hexF += '' + ("0x" + hexCod + 'Z');
         }
     }
     return hexF;
@@ -274,10 +295,10 @@ function updateData(text, compareChanges) {
 
     splitInit();
     aTotalTOnewTotal();
-    
+
     localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
     // localStorage.setItem('accessTempData', txt[1] + 'GD' + txt[2] + 'GD');
-    
+
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
     disableItem(false);
@@ -286,11 +307,10 @@ function updateData(text, compareChanges) {
     if (text == 'Rechazar') {
         mensaje = 'Cancelando cambios.';
 
-        // console.log('-------------- Detalles -----------------');
-        console.log('////////////// Rechazar /////////////////');
-        console.log(deco(docB1));
-        console.log(deco(compareChanges));
-        console.log(deco(newCompareData2));
+        // console.log('////////////// Rechazar /////////////////');
+        // console.log(deco(docB1));
+        // console.log(deco(compareChanges));
+        // console.log(deco(newCompareData2));
         // localStorage.setItem('L1', compareChanges);
         // (docB1 == newCompareData2) ? localStorage.setItem('L1', compareChanges): localStorage.setItem('L1', newCompareData2);
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
@@ -516,8 +536,7 @@ function alertDel(cuPath, reemplace) {
                 // if (showSearch.value == '') newSearch.value = '';
                 closeAlert = false;
                 // alertcompare = false;
-                // setTimeout(() => { alertcompare = true; }, 1500);
-                // noCompare();
+                // setTimeout(() => { alertcompare = true; }, 1500)
             },
         },
     ];
@@ -526,19 +545,19 @@ function alertDel(cuPath, reemplace) {
 }
 
 function alertView2(cuPath) {
-    document.getElementById('modal').innerHTML =
-        `
-    <p id="op1" class="cct">${cuPath[0]}</p>
-    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-    <p style="margin: 0px 0px 0px 0px;">
-        <label class="cce" > Usuario: </label>
-        <p class="ccse" > ${cuPath[1]} </p>
-        <label class="cce" > Contraseña: </label>
-        <p class="ccse" > ${cuPath[2]} </p>
-        <label class="cce" > Notas: </label>
-        <p class="ccse" > ${cuPath[3]} </p>
-    </p>
-    `;
+    // document.getElementById('modal').innerHTML =
+    //     `
+    // <p id="op1" class="cct">${cuPath[0]}</p>
+    // <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    // <p style="margin: 0px 0px 0px 0px;">
+    //     <label class="cce" > Usuario: </label>
+    //     <p class="ccse" > ${cuPath[1]} </p>
+    //     <label class="cce" > Contraseña: </label>
+    //     <p class="ccse" > ${cuPath[2]} </p>
+    //     <label class="cce" > Notas: </label>
+    //     <p class="ccse" > ${cuPath[3]} </p>
+    // </p>
+    // `;
 }
 
 function presentCompareData(metaObj, compareChanges) {
@@ -554,7 +573,6 @@ function presentCompareData(metaObj, compareChanges) {
     document.body.appendChild(alert);
     return alert.present();
 }
-
 
 function buttons_modal(func) {
 
@@ -580,12 +598,34 @@ function buttons_modal(func) {
     if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
     if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
 
+    if (func == 'ok_user'){
+        let newTempModal = [
+            document.querySelectorAll('.modal_input')[0].value,
+            document.querySelectorAll('.modal_input')[1].value,
+            document.querySelectorAll('.modal_input')[2].value,
+            document.querySelectorAll('.modal_input')[3].value,
+        ];
+        
+        if (newTempModal[1] == '' || newTempModal[2] == '') {
+            barProgressF('danger', 'determinate');
+            alertMsg('Error', 'Datos vacíos.');
+            setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+            return;
+        }
+
+        if (newTempModal[0] == deco(txt[0]) && newTempModal[1] == deco(txt[1]) && newTempModal[2] == deco(txt[2]) && newTempModal[4] == deco(txt[4])) {
+            return;
+        }
+        // const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
+        // presentAlertConfirmEdit(confPersonal);
+        presentAlertConfirmEdit(newTempModal);
+    }
+
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 
     // alertcompare = false;
-    // setTimeout(() => { alertcompare = true; }, 1500);
-    // noCompare();
+    // setTimeout(() => { alertcompare = true; }, 15
 }
 
 
@@ -593,12 +633,6 @@ function buttons_modal(func) {
 
 
 
-function noCompare() {
-    // alertcompare = false;
-    // setTimeout(() => {
-    // alertcompare = true;
-    // }, 10);
-}
 
 
 
@@ -620,9 +654,9 @@ function listDrop(arrayFinal) {
 function listDetail(arrLista, tituloLista, idbtn) {
     if (arrLista.length != 1) {
         return `
-        <div style="margin:10px 0px 5px 0px; padding: 5px 5px 5px 5px">
+        <div style="margin:5px 0px 2px 0px; padding: 5px 5px 5px 5px">
             <label class="ccse" >\u25b8 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
-            <button id=${idbtn}>></button>
+            <button id=${idbtn}>+</button>
             <div class="dropdown-content"></div>
         </div>
         `
@@ -647,7 +681,9 @@ function alertPass() {
             handler: u => {
                 if (u.uEPass == deco(txt[2])) {
                     if (txt[0] == '25') txt[0] = '';
-                    presentAlertEditUserData();
+                    // presentAlertEditUserData();
+                    // presentAlertEditUserData2(txt);
+                    
                 } else {
                     presentToast('Incorrecto.', '800', 'warning');
                 }
@@ -678,6 +714,10 @@ function presentAlertEditUserData() {
                     setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
                     return;
                 }
+
+                if (usNData.userEditUser == deco(txt[0]) && usNData.userEditPass == deco(txt[1]) && usNData.userEditPass == deco(txt[2]) && usNData.userPin == deco(txt[4])) {
+                    return;
+                }
                 const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
 
                 presentAlertConfirmEdit(confPersonal);
@@ -690,6 +730,35 @@ function presentAlertEditUserData() {
     document.body.appendChild(alert);
     return alert.present();
 }
+function presentAlertEditUserData2(txt) {
+
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+
+
+    document.getElementById('modal').innerHTML =
+    `
+    <p id="op1" class="cct">Editar cuenta</p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+    <input type="text" placeholder="*Opcional" class="ccse modal_input" value="${deco(txt[0])}">
+    <label class="cce" > Nombre: </label>
+    <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${deco(txt[1])}">
+    <label class="cce" > Email: </label>
+    <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${deco(txt[2])}">
+    <label class="cce" > Contraseña: </label>
+    <input type="text" placeholder="*Opcional" class="ccse modal_input" value="${deco(txt[4])}">
+    <label class="cce" > PIN: </label>
+
+        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_user')">
+        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
+
+    </p>
+`;
+
+}
+
+
 
 function presentAlertConfirmEdit(confPersonal) {
     const alert = document.createElement('ion-alert');
@@ -722,8 +791,6 @@ function presentAlertConfirmEdit(confPersonal) {
                 updateDB('L1', 'B2');
 
                 // alertcompare = false;
-
-                // noCompare();
             },
         },
     ];

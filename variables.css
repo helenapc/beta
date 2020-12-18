@@ -1,6 +1,15 @@
 /* *{ box-sizing: border-box; } */
+*{  transition-duration: 0.15s;}
+/* *{  transition-duration: 2s;} */
 
-
+#point_backup{
+  position: fixed;
+  left: 29px;
+  top: 56px;
+  font-size: 1.6rem;
+  color: red;
+  transition-duration: 0s;
+}
 
 /* .dropbtn {
   float: right;
@@ -128,20 +137,83 @@
 /* ********* */
 .cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color); }
 
-.cce{ color: var(--ion-color-primary); font-size: 0.7rem; }
+.cce2{
+  position: fixed;
+  left: 0px;
+  padding: 10px 20px 0px 20px;
+  /* color: var(--ion-text-color); */
+  color: var(--ion-color-success);
+  font-size: 1rem;
+  pointer-events: none;
+}
 
-.ccse{ color: var(--ion-color-step-550); margin: 0px 0px 10px 0px; }
+.cce{
+  position: fixed;
+  left: 0px;
+  /* padding: 10px 20px 0px 20px; */
+  /* color: var(--ion-text-color); */
+  color: var(--ion-color-primary);
+  padding: 1px 20px 0px 20px;
+  font-size: 0.7rem;
+  /* font-size: 1rem; */
+  pointer-events: none;
+}
+
+.cce_st{ color: var(--ion-color-primary); font-size: 0.7rem; }
+
+.ccse{ color: var(--ion-color-step-550); margin: 2px 0px 8px 0px; }
+
+
 
 .modal_input{
+  /* margin-top: 20px; */
+  color: var(--ion-text-color);
+  padding-top: 20px;
   margin-bottom: 4px;
   background-color: #ffffff00;
   border: 0;
-  border-bottom: 1px solid var(--ion-color-light);
+  border-bottom: 2px solid var(--ion-color-light);
 }
 
-.modal_input:focus { outline: none; border-bottom: 2px solid var(--ion-color-primary); }
 
-::placeholder { opacity: 1; }
+
+
+.modal_input:placeholder-shown + .cce{
+  position: fixed;
+  left: 0px;
+  /* color: var(--ion-text-color); */
+  color: var(--ion-color-step-550);
+  padding: 10px 20px 0px 20px;
+  /* color: var(--ion-color-danger); */
+  font-size: 1rem;
+}
+
+
+.modal_input:focus + .cce {
+  color: var(--ion-color-primary);
+  padding: 1px 20px 0px 20px;
+  font-size: 0.7rem;
+}
+
+
+
+
+
+p .modal_input::-webkit-input-placeholder{opacity: 0;}
+p .modal_input:focus::-webkit-input-placeholder{opacity: 0.5;}
+
+.modal_input:focus {
+  outline: none; border-bottom:
+  2px solid var(--ion-color-primary);
+  /* transition: width 2s; */
+}
+
+
+
+
+
+
+
 
 .modal_btns{
   float: right;

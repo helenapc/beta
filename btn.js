@@ -224,7 +224,25 @@ showSearch.addEventListener('click', e => {  //editCard
         ) {
             // const reemplace = i
             reemplace = i
-            alertView2(cuPath);
+
+
+
+            // alertView2(cuPath);
+            document.getElementById('modal').innerHTML =
+            `
+            <p id="op1" class="cct">${cuPath[0]}</p>
+            <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+            <p style="margin: 0px 0px 0px 0px;">
+            <label class="cce_st" > Usuario: </label>
+            <p class="ccse" > ${cuPath[1]} </p>
+            <label class="cce_st" > Contraseña: </label>
+            <p class="ccse" > ${cuPath[2]} </p>
+            <label class="cce_st" > Notas: </label>
+            <p class="ccse" > ${cuPath[3]} </p>
+            </p>
+            `;
+
+
             document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
             document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
             document.getElementById('buttonEdit').setAttribute('style', 'opacity:1; pointer-events: auto');
@@ -421,6 +439,7 @@ barDelAcc.addEventListener('click', () => {
 
 document.getElementById('buttonEdit').addEventListener('click', () => {
     // alertEdit(cuPath, reemplace); 
+    /*
     document.getElementById('modal').innerHTML =
         `
     <p id="op1" class="cct">Editar cuenta</p>
@@ -440,6 +459,27 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
 
     </p>
     `;
+    */
+
+   document.getElementById('modal').innerHTML =
+   `
+    <p id="op1" class="cct">Editar cuenta</p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+    <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${cuPath[0].toLowerCase()}">
+    <label class="cce" > Cuenta: </label>
+    <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${cuPath[1]}">
+    <label class="cce" > Usuario: </label>
+    <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${cuPath[2]}">
+    <label class="cce" > Contraseña: </label>
+    <input type="text" placeholder="*Opcional" class="ccse modal_input" value="${cuPath[3]}">
+    <label class="cce" > Notas: </label>
+
+   <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
+   <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
+
+</p>
+`;
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     // alertcompare = false;
@@ -450,7 +490,55 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
 });
 
 document.getElementById('nameSetting').addEventListener('click', () => {
-    alertPass();
+    // alertPass();
+    // function alertPass() {
+        const alertPassItem = document.createElement('ion-alert');
+        alertPassItem.header = 'Datos de usuario';
+        alertPassItem.message = 'Inserte contraseña para continuar..';
+        alertPassItem.inputs = [
+            { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
+        ];
+        alertPassItem.buttons = [
+            {
+                text: 'Ok',
+                handler: u => {
+                    if (u.uEPass == deco(txt[2])) {
+                        if (txt[0] == '25') txt[0] = '';
+                        // presentAlertEditUserData();
+                        // presentAlertEditUserData2(txt);
+                        document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+                        document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                    
+                    
+                        document.getElementById('modal').innerHTML =
+                        `
+                        <p id="op1" class="cct">Datos de usuario</p>
+                        <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+                        <p style="margin: 0px 0px 0px 0px;">
+                        <input type="text" placeholder="*Opcional" class="ccse modal_input" value="${deco(txt[0])}">
+                        <label class="cce" > Nombre: </label>
+                        <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${deco(txt[1])}">
+                        <label class="cce" > Email: </label>
+                        <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="${deco(txt[2])}">
+                        <label class="cce" > Contraseña: </label>
+                        <input type="text" placeholder="*Opcional" class="ccse modal_input" value="${deco(txt[4])}">
+                        <label class="cce" > PIN: </label>
+                    
+                            <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_user')">
+                            <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
+                    
+                        </p>
+                    `;
+                        
+                    } else {
+                        presentToast('Incorrecto.', '800', 'warning');
+                    }
+                },
+            },
+        ];
+        document.body.appendChild(alertPassItem);
+        return alertPassItem.present();
+    // }
 });
 
 document.getElementById('expandCard').addEventListener('click', () => {
@@ -490,28 +578,54 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
-    
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    /*
+        document.getElementById('modal').innerHTML =
+        `
+        <p id="op1" class="cct">Agregar cuenta</p>
+        <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+        <p style="margin: 0px 0px 0px 0px;">
+            <label class="cce" > Cuenta*: </label>
+            <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+            <label class="cce" > Usuario*: </label>
+            <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+            <label class="cce" > Contraseña*: </label>
+            <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
+            <label class="cce" > Notas*: </label>
+            <input type="text" placeholder="*Opcional" class="ccse modal_input" value="">
+    
+            <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
+            <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
+    
+        </p>
+        `;
+    */
+
+
     document.getElementById('modal').innerHTML =
         `
     <p id="op1" class="cct">Agregar cuenta</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
-        <label class="cce" > Cuenta*: </label>
+
         <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Usuario*: </label>
+        <label class="cce" > Cuenta:</label>
         <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Contraseña*: </label>
+        <label class="cce" > Usuario:</label>
         <input type="text" placeholder="*Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Notas*: </label>
+        <label class="cce" > Contraseña:</label>
         <input type="text" placeholder="*Opcional" class="ccse modal_input" value="">
+        <label class="cce" > Notas:</label>
 
         <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
         <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
     </p>
     `;
+
+
     document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     // alertcompare = false;
@@ -534,3 +648,5 @@ checkbox.addEventListener('click', () => {
     }
     localStorage.setItem('theme', activeTheme);
 });
+
+
