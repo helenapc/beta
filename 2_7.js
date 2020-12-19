@@ -5,6 +5,8 @@ var aTotal = [];
 var newTotal = [];
 var compare = false;
 var compareChanges = '';
+
+// var listTemp = [];
 // var compareChanges = localStorage.getItem('L1');
 var newCompareData2 = localStorage.getItem('L1');
 // var acept_changes = '';
@@ -113,7 +115,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.3-beta-style'; 
+ver.innerHTML = 'Versión 2.7.3(8.0)-beta-style';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -242,13 +244,14 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
         if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
-        // if (!compare && !offline) {
+            // if (!compare && !offline) {
             localStorage.removeItem('bp');
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
+        compare = false;
 
 
         // 
@@ -256,9 +259,14 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // 
 
 
-        compare = false;
-        if (docB1 != docB2) { document.getElementById('point_backup').setAttribute('style', 'z-index:2;');}
-        else{document.getElementById('point_backup').setAttribute('style', 'z-index:0;')}
+
+
+
+        //POINT BACKUP
+        // document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
+        document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
+
+
 
         if (docB1 != compareChanges && alertcompare && !offline) {
             // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
@@ -299,7 +307,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             //     txtTemp = newCompareData2.split('GD');
                             // }
 
-                            txtTemp = (docB1 == newCompareData2) ? compareChanges.split('GD') : newCompareData2.split('GD'); ;
+                            txtTemp = (docB1 == newCompareData2) ? compareChanges.split('GD') : newCompareData2.split('GD');;
 
                             aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
                             aTotalTemp.splice(-1, 1);
@@ -320,108 +328,122 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                                     arrCompareEdit.push(deco(newaName[0]).toUpperCase());
                                     i++
                                 } else {
-                                    // if (txtTemp[3].includes(newa[i])){
-                                        // arrCompareDel.push(deco(newaName[0]).toUpperCase());
-                                    // }else{
-                                        // arrCompareAdd.push(deco(newaName[0]).toUpperCase());
-                                    // };
+
                                     (txtTemp[3].includes(newa[i])) ?
                                         arrCompareDel.push(deco(newaName[0]).toUpperCase()) :
                                         arrCompareAdd.push(deco(newaName[0]).toUpperCase());
                                 };
 
                             };
-                            
 
-                            // MODAL //
-                            let openAdd = 0; openDel = 0; openEdit = 0;
+
+                            // let openAdd = 0; openDel = 0; openEdit = 0;
 
                             document.getElementById('modal').innerHTML = `
                             <p id="op1" class="cct">Cambios</p>
                             <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-                            <p style="margin: 0px 0px 0px 0px;">
-                            
-                            ${listDetail(arrCompareAdd, 'Nuevas', 'dropAddButton')}
-                            ${listDetail(arrCompareDel, 'Borradas', 'dropDelButton')}
-                            ${listDetail(arrCompareEdit, 'Editadas', 'dropEditButton')}
-                            
-                            <input type="button" class="modal_btns" value="ACEPTAR" onClick="buttons_modal('aceptar')">
-                            <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
-                            </p>
-                            `;
+                            <div style="width: 200px; max-height: 150px; overflow: auto; margin:10px 10px 15px 5px">
 
+
+                            ${listDetail2(arrCompareAdd, 'Nuevas')}
+                            ${listDrop2(arrCompareAdd)}
+                            ${listDetail2(arrCompareDel, 'Borradas')}
+                            ${listDrop2(arrCompareDel)}
+                            ${listDetail2(arrCompareEdit, 'Editadas')}
+                            ${listDrop2(arrCompareEdit)}
+
+
+                            </div>
+
+                            <input type="button" class="modal_btns" value="CONFIRMAR" onClick="buttons_modal('aceptar')">
+                            <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+                            `
+                                ;
 
                             document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
                             document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                            document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
 
-                            const dropAddButton = document.querySelector('#dropAddButton');
-                            const dropDelButton = document.querySelector('#dropDelButton');
-                            const dropEditButton = document.querySelector('#dropEditButton');
+                            // document.getElementById('modal').innerHTML = `
+                            // <p id="op1" class="cct">Cambios</p>
+                            // <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+                            // <p style="margin: 0px 0px 0px 0px;">
 
-                            console.log( dropAddButton.innerHTML);
-                            // console.log( dropDelButton.innerHTML);
-                            // console.log( dropEditButton.innerHTML);
+                            // ${listDetail(arrCompareAdd, 'Nuevas', 'dropAddButton')}
+                            // ${listDetail(arrCompareDel, 'Borradas', 'dropDelButton')}
+                            // ${listDetail(arrCompareEdit, 'Editadas', 'dropEditButton')}
 
-                            if (arrCompareAdd.length != 1) {
-                                dropAddButton.addEventListener('click', () => {
-                                    openDel = 0, openEdit = 0, openAdd++
+                            // <input type="button" class="modal_btns" value="ACEPTAR" onClick="buttons_modal('aceptar')">
+                            // <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+                            // </p>
+                            // `;
 
-                                    if (openAdd < 2) {
-                                        listDrop(arrCompareAdd);
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
-                                        if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-border-color)');
-                                        if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                        if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                    }
-                                    else {
-                                        openAdd = 0;
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
-                                        dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                    }
-                                });
-                            }
 
-                            if (arrCompareDel.length != 1) {
-                                dropDelButton.addEventListener('click', () => {
-                                    openDel++, openEdit = 0, openAdd = 0;
+                            // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+                            // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                            // document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
 
-                                    if (openDel < 2) {
-                                        listDrop(arrCompareDel);
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
-                                        if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                        if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-border-color)');
-                                        if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                    }
-                                    else {
-                                        openDel = 0;
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
-                                        dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                    }
-                                });
-                            }
+                            // const dropAddButton = document.querySelector('#dropAddButton');
+                            // const dropDelButton = document.querySelector('#dropDelButton');
+                            // const dropEditButton = document.querySelector('#dropEditButton');
 
-                            if (arrCompareEdit.length != 1) {
-                                dropEditButton.addEventListener('click', () => {
-                                    openDel = 0, openEdit++, openAdd = 0;
+                            // if (arrCompareAdd.length != 1) {
+                            //     dropAddButton.addEventListener('click', () => {
+                            //         openDel = 0, openEdit = 0, openAdd++
 
-                                    if (openEdit < 2) {
-                                        listDrop(arrCompareEdit);
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
-                                        if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                        if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                        if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                            //         if (openAdd < 2) {
+                            //             listDrop(arrCompareAdd);
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                            //             if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                            //             if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //             if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //         }
+                            //         else {
+                            //             openAdd = 0;
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                            //             dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //         }
+                            //     });
+                            // }
 
-                                    }
-                                    else {
-                                        openEdit = 0;
-                                        document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
-                                        dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
-                                    }
-                                });
-                            }
+                            // if (arrCompareDel.length != 1) {
+                            //     dropDelButton.addEventListener('click', () => {
+                            //         openDel++, openEdit = 0, openAdd = 0;
 
-                            // console.log(acept_changes);
+                            //         if (openDel < 2) {
+                            //             listDrop(arrCompareDel);
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                            //             if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //             if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                            //             if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //         }
+                            //         else {
+                            //             openDel = 0;
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                            //             dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //         }
+                            //     });
+                            // }
+
+                            // if (arrCompareEdit.length != 1) {
+                            //     dropEditButton.addEventListener('click', () => {
+                            //         openDel = 0, openEdit++, openAdd = 0;
+
+                            //         if (openEdit < 2) {
+                            //             listDrop(arrCompareEdit);
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                            //             if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //             if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //             if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+
+                            //         }
+                            //         else {
+                            //             openEdit = 0;
+                            //             document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                            //             dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                            //         }
+                            //     });
+                            // }
+
 
 
 

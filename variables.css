@@ -1,24 +1,37 @@
-/* *{ box-sizing: border-box; } */
-*{  transition-duration: 0.15s;}
-/* *{  transition-duration: 2s;} */
 
-#point_backup{
+/* *{  transition-duration: 0s; } */
+
+/* left: 29px;
+top: 56px;
+font-size: 1.6rem; */
+/* #point_backup{
   position: fixed;
   left: 29px;
   top: 56px;
-  font-size: 1.6rem;
+  font-size: 4rem;
   color: red;
   transition-duration: 0s;
+} */
+
+.point_backup{
+  pointer-events: none;
+  position: fixed;
+  left: 33px;
+  top: 60px;
+  color: #ff00007e;
 }
 
-/* .dropbtn {
-  float: right;
-  background-color: var(--ion-color-primary);
-  color: white;
-  font-size: 22px;
-  border: none;
-  cursor: pointer;
-  outline: none;
+#point_backup_nav{
+  left: 5px;
+  top: 10px;
+}
+
+/* #point_backup_nav{
+  pointer-events: none;
+  font-size: 6rem;
+  left: -35px;
+  top: -25px;
+  transition-duration: 0s;
 } */
 
 #dropAddButton,
@@ -33,29 +46,19 @@
   outline: none;
 }
 
-/* #dropAddButton:focus,
-#dropDelButton:focus,
-#dropEditButtons:focus {
-  background-color: var(--ion-border-color);
-} */
-
 
 .dropdown-content {
   left: 35px;
   top: 39px;
   display: none;
   position: absolute;
-  /* background-color: #f9f9f9; */
-  /* background-color: var(--ion-color-light); */
-  /* background: var(--ion-background-color); */
   background: var(--ion-item-background);
-  /* min-width: 159px; */
-  /* max-width: 160px; */
   border-radius: 3px;
   width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
   z-index: 1;
 }
+
 
 .dropdown-content p{
   /* color: black; */
@@ -87,14 +90,6 @@
     padding-right: 20px;
   }
 
-  /* #nameSetting:hover ~ #help-config{ opacity: 1; transition: 0.6s; }
-  #buttonEdit:hover ~ #help-edit{ opacity: 1; transition: 0.6s; }
-  #buttonDelete:hover ~ #help-delete{ opacity: 1; transition: 0.6s; }
-  #expandCard:hover ~ #help-exp-com{ opacity: 1; transition: 0.6s; }
-  #showCard:hover ~ #help-show{ opacity: 1; transition: 0.6s; }
-  #buttonSearch:hover ~ #help-search{ opacity: 1; transition: 0.6s; }
-  #buttonAdd:hover > #help-add{ opacity: 1; transition: 0.6s; } */
-
   #nameSetting:hover ~ #help-config,
   #buttonEdit:hover ~ #help-edit,
   #buttonDelete:hover ~ #help-delete,
@@ -108,16 +103,7 @@
 }
 
 @media (pointer:none), (pointer:coarse) {
-
   /* @media screen and (max-width: 599px) and (orientation: portrait){ */
-  
-  /* #nameSetting:active ~ #help-config{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
-  #buttonEdit:active ~ #help-edit{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
-  #buttonDelete:active ~ #help-delete{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
-  #expandCard:active ~ #help-exp-com{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
-  #showCard:active ~ #help-show{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); }
-  #buttonSearch:active ~ #help-search{ opacity:1;  transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0);}
-  #buttonAdd:active > #help-add{ opacity: 1; transition: 0.4s; transition-timing-function: cubic-bezier(1,0,0,0); } */
 
   #nameSetting:active ~ #help-config,
   #buttonEdit:active ~ #help-edit,
@@ -137,25 +123,13 @@
 /* ********* */
 .cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color); }
 
-.cce2{
-  position: fixed;
-  left: 0px;
-  padding: 10px 20px 0px 20px;
-  /* color: var(--ion-text-color); */
-  color: var(--ion-color-success);
-  font-size: 1rem;
-  pointer-events: none;
-}
-
 .cce{
   position: fixed;
   left: 0px;
-  /* padding: 10px 20px 0px 20px; */
-  /* color: var(--ion-text-color); */
   color: var(--ion-color-primary);
   padding: 1px 20px 0px 20px;
   font-size: 0.7rem;
-  /* font-size: 1rem; */
+  transition-duration: 0.2s;
   pointer-events: none;
 }
 
@@ -163,7 +137,14 @@
 
 .ccse{ color: var(--ion-color-step-550); margin: 2px 0px 8px 0px; }
 
-
+.list_text{
+  user-select: none;
+  font-size: 14px;
+  color: var(--ion-color-step-550);
+  margin: 5px 0px 5px 5px;
+  padding: 6px 5px 6px 10px;
+  white-space: nowrap;
+}
 
 .modal_input{
   /* margin-top: 20px; */
@@ -173,6 +154,7 @@
   background-color: #ffffff00;
   border: 0;
   border-bottom: 2px solid var(--ion-color-light);
+  transition-duration: 0.2s;
 }
 
 
@@ -181,11 +163,10 @@
 .modal_input:placeholder-shown + .cce{
   position: fixed;
   left: 0px;
-  /* color: var(--ion-text-color); */
   color: var(--ion-color-step-550);
   padding: 10px 20px 0px 20px;
-  /* color: var(--ion-color-danger); */
   font-size: 1rem;
+  transition-duration: 0.2s;
 }
 
 
@@ -196,16 +177,13 @@
 }
 
 
-
-
-
 p .modal_input::-webkit-input-placeholder{opacity: 0;}
-p .modal_input:focus::-webkit-input-placeholder{opacity: 0.5;}
+p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic;}
 
 .modal_input:focus {
   outline: none; border-bottom:
   2px solid var(--ion-color-primary);
-  /* transition: width 2s; */
+  transition-duration: 0.2s;
 }
 
 
@@ -221,10 +199,8 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.5;}
   background-color: #ff000000;
   font-size: 15px;
   border: 0px;
-  margin: 1rem 0rem 1rem 1rem;
-  /* margin-top: 1rem; */
-  /* margin-bottom: 1rem; */
-  /* margin-left: 1rem; */
+  /* margin: 1rem 0rem 1rem 1rem; */
+  margin: 0rem 0rem 1rem 1rem;
   outline: none;
 }
 
@@ -238,28 +214,18 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.5;}
 }
 
 .popup_box{
-  /* background-color: #f4f5f8; */
-  /* background: #f4f5f8; */
   position: absolute;
   left: 50%;
   top: 30%;
   width: 250px;
   transform: translateX(-125px);
-
-  /* background: var(--ion-background-color); */
   background: var(--ion-item-background);
-
-
-  /* text-align: left;
-  align-items: center; */
-
-
   padding: 12px 20px 0px 20px;
   
   border-radius: 3px;
   box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.5);
-  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8); */
   z-index: 1;
+  transition-duration: 0.1s;
 
   /*CAMBIAR*/
   opacity: 0;

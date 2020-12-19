@@ -69,9 +69,6 @@ const item = (id, ico, text, color = '', show = true) => {
 
 
 
-
-
-
 //######################## FUNCIONES ########################
 
 
@@ -123,11 +120,13 @@ function disableItem(boolean) {
 
 function barProgressF(color, state) {
     setAttributes(barProgress01, { color: color, type: state, value: '100' });
-    if (color == 'light' && state == 'determinate') {
-        barProgress.setAttribute('style', 'opacity:0');
-    } else {
-        barProgress.setAttribute('style', 'opacity:1');
-    }
+    // if (color == 'light' && state == 'determinate') {
+    //     barProgress.setAttribute('style', 'opacity:0');
+    // } else {
+    //     barProgress.setAttribute('style', 'opacity:1');
+    // }
+
+    barProgress.setAttribute('style', `opacity: ${(color == 'light' && state == 'determinate') ? 0 : 1}`);
 };
 
 function refreshData(toast = true) {
@@ -150,15 +149,15 @@ function refreshData(toast = true) {
 
     // if (newSearch.value == '::bk'){
     //     newSearch.value = 'Hacer copia de seguridad';
-    
+
     // }
 
 
 
 
 
-    
-    
+
+
     aTotal.sort();
     if (newSearch.value) {
         // setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
@@ -227,7 +226,6 @@ function presentToast(msg, time, color) {
     document.body.appendChild(toast);
     return toast.present();
 }
-
 
 
 
@@ -322,7 +320,6 @@ function updateData(text, compareChanges) {
     presentToast(mensaje, '1000', 'dark');
     setTimeout(() => { window.location.reload() }, 1000);
 }
-
 
 
 
@@ -544,22 +541,6 @@ function alertDel(cuPath, reemplace) {
     return alert.present();
 }
 
-function alertView2(cuPath) {
-    // document.getElementById('modal').innerHTML =
-    //     `
-    // <p id="op1" class="cct">${cuPath[0]}</p>
-    // <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-    // <p style="margin: 0px 0px 0px 0px;">
-    //     <label class="cce" > Usuario: </label>
-    //     <p class="ccse" > ${cuPath[1]} </p>
-    //     <label class="cce" > Contraseña: </label>
-    //     <p class="ccse" > ${cuPath[2]} </p>
-    //     <label class="cce" > Notas: </label>
-    //     <p class="ccse" > ${cuPath[3]} </p>
-    // </p>
-    // `;
-}
-
 function presentCompareData(metaObj, compareChanges) {
     const alert = document.createElement('ion-alert');
     alert.setAttribute('backdrop-dismiss', 'false');
@@ -598,14 +579,14 @@ function buttons_modal(func) {
     if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
     if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
 
-    if (func == 'ok_user'){
+    if (func == 'ok_user') {
         let newTempModal = [
             document.querySelectorAll('.modal_input')[0].value,
             document.querySelectorAll('.modal_input')[1].value,
             document.querySelectorAll('.modal_input')[2].value,
             document.querySelectorAll('.modal_input')[3].value,
         ];
-        
+
         if (newTempModal[1] == '' || newTempModal[2] == '') {
             barProgressF('danger', 'determinate');
             alertMsg('Error', 'Datos vacíos.');
@@ -630,25 +611,44 @@ function buttons_modal(func) {
 
 
 
-
-
-
-
-
-
-
-
-
 function listDrop(arrayFinal) {
     document.querySelector(".dropdown-content").innerHTML = '';
     for (let i = 0; i < arrayFinal.length; i++) {
         let el = document.createElement("p");
         (i == 0) ? el.textContent = arrayFinal[0] :
             el.textContent = '\u25b8 ' + arrayFinal[i];
-        document.querySelector(".dropdown-content").appendChild(el);
+        // document.querySelector(".dropdown-content").appendChild(el);
     };
 
+}
 
+
+function listDrop2(arrayFinal) {
+    // document.querySelector(".dropdown-content").innerHTML = '';
+    if (arrayFinal.length != 1) {
+        // let listTemp = [];
+        let el = '';
+        for (let i = 1; i < arrayFinal.length; i++) {
+
+            el += `<p class="list_text">- ${arrayFinal[i]}</p>`;
+
+
+
+
+            // let el = document.createElement("p").textContent = `<p class="list_text"><input type="checkbox" id= "${delete_spaces(arrayFinal[i])}"> ${arrayFinal[i]}
+            // </p>`
+            // listTemp.push(el);
+
+            // el += `<p class="list_text"><input type="checkbox">${arrayFinal[i]}</p>`;
+
+
+            // el += `<p class="list_text">\u21b3 ${arrayFinal[i]}</p>`
+            // return el;
+        };
+        return el;
+        // return listTemp.join('');
+    };
+    return '';
 }
 
 function listDetail(arrLista, tituloLista, idbtn) {
@@ -664,6 +664,19 @@ function listDetail(arrLista, tituloLista, idbtn) {
         return '';
     }
 };
+
+function listDetail2(arrLista, tituloLista) {
+    if (arrLista.length != 1) {
+        return `
+        <div style="margin:5px 0px 2px 0px; padding: 5px 5px 5px 0px">
+            <label class="ccse" >&#9679 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
+        </div>
+        `
+    } else {
+        return '';
+    }
+};
+
 
 
 
@@ -683,7 +696,7 @@ function alertPass() {
                     if (txt[0] == '25') txt[0] = '';
                     // presentAlertEditUserData();
                     // presentAlertEditUserData2(txt);
-                    
+
                 } else {
                     presentToast('Incorrecto.', '800', 'warning');
                 }
@@ -737,7 +750,7 @@ function presentAlertEditUserData2(txt) {
 
 
     document.getElementById('modal').innerHTML =
-    `
+        `
     <p id="op1" class="cct">Editar cuenta</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
@@ -826,4 +839,90 @@ function downloadFile(data, fileName, type = 'text/plain') {
     a.click();
     window.URL.revokeObjectURL(a.href);
     document.body.removeChild(a);
+}
+
+
+function mostrarCambios() {
+    let openAdd = 0; openDel = 0; openEdit = 0;
+
+    document.getElementById('modal').innerHTML = `
+    <p id="op1" class="cct">Cambios</p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+    
+    ${listDetail(arrCompareAdd, 'Nuevas', 'dropAddButton')}
+    ${listDetail(arrCompareDel, 'Borradas', 'dropDelButton')}
+    ${listDetail(arrCompareEdit, 'Editadas', 'dropEditButton')}
+    
+    <input type="button" class="modal_btns" value="ACEPTAR" onClick="buttons_modal('aceptar')">
+    <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+    </p>
+    `;
+
+
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+    document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+
+    const dropAddButton = document.querySelector('#dropAddButton');
+    const dropDelButton = document.querySelector('#dropDelButton');
+    const dropEditButton = document.querySelector('#dropEditButton');
+
+    if (arrCompareAdd.length != 1) {
+        dropAddButton.addEventListener('click', () => {
+            openDel = 0, openEdit = 0, openAdd++
+
+            if (openAdd < 2) {
+                listDrop(arrCompareAdd);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+            else {
+                openAdd = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+        });
+    }
+
+    if (arrCompareDel.length != 1) {
+        dropDelButton.addEventListener('click', () => {
+            openDel++, openEdit = 0, openAdd = 0;
+
+            if (openDel < 2) {
+                listDrop(arrCompareDel);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+            else {
+                openDel = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+        });
+    }
+
+    if (arrCompareEdit.length != 1) {
+        dropEditButton.addEventListener('click', () => {
+            openDel = 0, openEdit++, openAdd = 0;
+
+            if (openEdit < 2) {
+                listDrop(arrCompareEdit);
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: block;');
+                if (dropAddButton) dropAddButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropDelButton) dropDelButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+                if (dropEditButton) dropEditButton.setAttribute('style', 'background-color: var(--ion-border-color)');
+
+            }
+            else {
+                openEdit = 0;
+                document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
+                dropEditButton.setAttribute('style', 'background-color: var(--ion-color-primary)');
+            }
+        });
+    }
 }
