@@ -137,13 +137,38 @@ font-size: 1.6rem; */
 
 .ccse{ color: var(--ion-color-step-550); margin: 2px 0px 8px 0px; }
 
+.div_list{
+  width: 200px;
+  max-height: 150px;
+  overflow: auto;
+  margin:10px 10px 15px 5px
+}
+
 .list_text{
   user-select: none;
   font-size: 14px;
   color: var(--ion-color-step-550);
-  margin: 5px 0px 5px 5px;
-  padding: 6px 5px 6px 10px;
+  margin: 5px 0px 0px 5px;
+  padding: 6px 5px 4px 10px;
   white-space: nowrap;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #00000000; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #bebebe; 
+  border-radius: 10px;
 }
 
 .modal_input{

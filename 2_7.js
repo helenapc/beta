@@ -115,7 +115,7 @@ item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.3(8.0)-beta-style';
+ver.innerHTML = 'Versión 2.7.3-beta';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
 
@@ -342,7 +342,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                             document.getElementById('modal').innerHTML = `
                             <p id="op1" class="cct">Cambios</p>
                             <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-                            <div style="width: 200px; max-height: 150px; overflow: auto; margin:10px 10px 15px 5px">
+                            <div class="div_list">
 
 
                             ${listDetail2(arrCompareAdd, 'Nuevas')}

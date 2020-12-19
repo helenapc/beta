@@ -226,7 +226,7 @@ showSearch.addEventListener('click', e => {  //editCard
             reemplace = i
 
             document.getElementById('modal').innerHTML =
-            `
+                `
             <p id="op1" class="cct">${cuPath[0]}</p>
             <hr style="height:1px; border-width:0; color:gray;background-color:gray">
             <p style="margin: 0px 0px 0px 0px;">
@@ -437,8 +437,8 @@ barDelAcc.addEventListener('click', () => {
 document.getElementById('buttonEdit').addEventListener('click', () => {
     // alertEdit(cuPath, reemplace); 
 
-   document.getElementById('modal').innerHTML =
-   `
+    document.getElementById('modal').innerHTML =
+        `
     <p id="op1" class="cct">Editar cuenta</p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 15px 0px;">
@@ -468,25 +468,25 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
 document.getElementById('nameSetting').addEventListener('click', () => {
     // alertPass();
     // function alertPass() {
-        const alertPassItem = document.createElement('ion-alert');
-        alertPassItem.header = 'Datos de usuario';
-        alertPassItem.message = 'Inserte contraseña para continuar..';
-        alertPassItem.inputs = [
-            { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
-        ];
-        alertPassItem.buttons = [
-            {
-                text: 'Ok',
-                handler: u => {
-                    if (u.uEPass == deco(txt[2])) {
-                        if (txt[0] == '25') txt[0] = '';
-                        // presentAlertEditUserData();
-                        // presentAlertEditUserData2(txt);
-                        document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-                        document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                    
-                    
-                        document.getElementById('modal').innerHTML =
+    const alertPassItem = document.createElement('ion-alert');
+    alertPassItem.header = 'Datos de usuario';
+    alertPassItem.message = 'Inserte contraseña para continuar..';
+    alertPassItem.inputs = [
+        { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
+    ];
+    alertPassItem.buttons = [
+        {
+            text: 'Ok',
+            handler: u => {
+                if (u.uEPass == deco(txt[2])) {
+                    if (txt[0] == '25') txt[0] = '';
+                    // presentAlertEditUserData();
+                    // presentAlertEditUserData2(txt);
+                    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+                    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+
+
+                    document.getElementById('modal').innerHTML =
                         `
                         <p id="op1" class="cct">Datos de usuario</p>
                         <hr style="height:1px; border-width:0; color:gray;background-color:gray">
@@ -504,25 +504,29 @@ document.getElementById('nameSetting').addEventListener('click', () => {
                         <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_user')">
                         <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
                     `;
-                        
-                    } else {
-                        presentToast('Incorrecto.', '800', 'warning');
-                    }
-                },
+
+                } else {
+                    bar
+                    presentToast('Contraseña incorrecta.', '800', 'warning');
+                }
             },
-        ];
-        document.body.appendChild(alertPassItem);
-        return alertPassItem.present();
+        },
+    ];
+    document.body.appendChild(alertPassItem);
+    return alertPassItem.present();
     // }
 });
 
 document.getElementById('expandCard').addEventListener('click', () => {
     // helpFunction('0', false);
-    if (document.getElementById('expandIcon').getAttribute('name') == icoExp) {
-        document.getElementById('expandIcon').setAttribute('name', icoCom)
-    } else {
-        document.getElementById('expandIcon').setAttribute('name', icoExp)
-    };
+    // if (document.getElementById('expandIcon').getAttribute('name') == icoExp) {
+    //     document.getElementById('expandIcon').setAttribute('name', icoCom);
+    // } else {
+    //     document.getElementById('expandIcon').setAttribute('name', icoExp);
+    // };
+
+    let icon = document.getElementById('expandIcon');
+    icon.setAttribute('name', (icon.getAttribute('name') == icoExp) ? icoCom : icoExp);
     refreshData(false);
 });
 

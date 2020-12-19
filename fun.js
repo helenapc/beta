@@ -427,11 +427,11 @@ function sendEmail() {
 
 
 // ALERTS / POPUP
-function alertAdd2(newTempModal) {
+function alertAdd2(modalVal) {
     if (
-        newTempModal[0] == '' ||
-        newTempModal[1] == '' ||
-        newTempModal[2] == ''
+        modalVal[0] == '' ||
+        modalVal[1] == '' ||
+        modalVal[2] == ''
     ) {
         barProgressF('warning', 'determinate');
         alertMsg('Error', 'Campos obligatorios vacíos.');
@@ -439,73 +439,73 @@ function alertAdd2(newTempModal) {
         return;
     }
 
-    newTempModal[0] = delete_spaces(newTempModal[0].toLowerCase());
-    newTempModal[1] = delete_spaces(newTempModal[1]);
-    newTempModal[2] = delete_spaces(newTempModal[2]);
-    newTempModal[3] = delete_spaces(newTempModal[3]);
+    modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
+    modalVal[1] = delete_spaces(modalVal[1]);
+    modalVal[2] = delete_spaces(modalVal[2]);
+    modalVal[3] = delete_spaces(modalVal[3]);
 
     for (let i = 0; i < newTotal.length; i += 5) {
         if (
-            newTempModal[0] == newTotal[i] &&
-            newTempModal[1] == newTotal[i + 1] &&
-            newTempModal[2] == newTotal[i + 2]
+            modalVal[0] == newTotal[i] &&
+            modalVal[1] == newTotal[i + 1] &&
+            modalVal[2] == newTotal[i + 2]
         ) {
-            alertMsg('Error', `La cuenta "${newTempModal[0].toUpperCase()}" ya existe.`);
+            alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
             return;
         }
     }
 
-    aTotal.push(`${code(newTempModal[0].toLowerCase())}OG${code(newTempModal[1])}OG${code(newTempModal[2])}OG${code(newTempModal[3])}`)
+    aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
     aTotalTOnewTotal();
     save();
     showSearch.innerHTML = '';
-    newSearch.value = newTempModal[0];
+    newSearch.value = modalVal[0];
     // document.getElementById('expandIcon').setAttribute('name', 'contract-outline');
     document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
-    presentToast(`"${newTempModal[0].toUpperCase()}" agregada`, 800, 'success');
+    presentToast(`"${modalVal[0].toUpperCase()}" agregada`, 800, 'success');
     updateDB('L1', 'B1');
 }
 
-function alertEdit2(newTempModal, reemplace) {
+function alertEdit2(modalVal, reemplace) {
     const toRemplace = reemplace / 5;
 
-    if (newTempModal[0] == '' || newTempModal[1] == '' || newTempModal[2] == '') {
+    if (modalVal[0] == '' || modalVal[1] == '' || modalVal[2] == '') {
         // alertMsg('Error', 'Datos incorrectos o vacíos.');
         alertMsg('Error', 'Campos obligatorios vacíos.');
         return;
     }
 
-    newTempModal[0] = delete_spaces(newTempModal[0].toLowerCase());
-    newTempModal[1] = delete_spaces(newTempModal[1]);
-    newTempModal[2] = delete_spaces(newTempModal[2]);
-    newTempModal[3] = delete_spaces(newTempModal[3]);
+    modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
+    modalVal[1] = delete_spaces(modalVal[1]);
+    modalVal[2] = delete_spaces(modalVal[2]);
+    modalVal[3] = delete_spaces(modalVal[3]);
 
     if (
-        newTempModal[0] == cuPath[0].toLowerCase() &&
-        newTempModal[1] == cuPath[1] &&
-        newTempModal[2] == cuPath[2] &&
-        newTempModal[3] == cuPath[3]
+        modalVal[0] == cuPath[0].toLowerCase() &&
+        modalVal[1] == cuPath[1] &&
+        modalVal[2] == cuPath[2] &&
+        modalVal[3] == cuPath[3]
     ) {
         return;
     }
 
     for (i = 0; i < newTotal.length; i += 5) {
         if (
-            newTempModal[0] == newTotal[i] &&
-            newTempModal[1] == newTotal[i + 1] &&
-            newTempModal[2] == newTotal[i + 2] &&
-            newTempModal[3] == newTotal[i + 3]
+            modalVal[0] == newTotal[i] &&
+            modalVal[1] == newTotal[i + 1] &&
+            modalVal[2] == newTotal[i + 2] &&
+            modalVal[3] == newTotal[i + 3]
         ) {
-            alertMsg('Error', `La cuenta "${newTempModal[0].toUpperCase()}" ya existe.`);
+            alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
             return;
         }
     }
 
-    aTotal.splice(toRemplace, 1, code(newTempModal[0]) + 'OG' + code(newTempModal[1]) + 'OG' + code(newTempModal[2]) + 'OG' + code(newTempModal[3]));
+    aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
     aTotalTOnewTotal();
     refreshData();
-    presentToast(`"${newTempModal[0].toUpperCase()}" editado.`, 800, 'success');
+    presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
     save();
     updateDB('L1', 'B1');
     closeAlert = false;
@@ -558,17 +558,17 @@ function presentCompareData(metaObj, compareChanges) {
 function buttons_modal(func) {
 
     if (func === 'ok') {
-        let newTempModal = [
+        let modalVal = [
             document.querySelectorAll('.modal_input')[0].value,
             document.querySelectorAll('.modal_input')[1].value,
             document.querySelectorAll('.modal_input')[2].value,
             document.querySelectorAll('.modal_input')[3].value,
         ];
         if (document.getElementById('op1').innerHTML == 'Editar cuenta') {
-            alertEdit2(newTempModal, reemplace);
+            alertEdit2(modalVal, reemplace);
         }
         if (document.getElementById('op1').innerHTML == 'Agregar cuenta') {
-            alertAdd2(newTempModal);
+            alertAdd2(modalVal);
         }
 
         document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
@@ -580,28 +580,41 @@ function buttons_modal(func) {
     if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
 
     if (func == 'ok_user') {
-        let newTempModal = [
+        let modalVal = [
             document.querySelectorAll('.modal_input')[0].value,
             document.querySelectorAll('.modal_input')[1].value,
             document.querySelectorAll('.modal_input')[2].value,
             document.querySelectorAll('.modal_input')[3].value,
         ];
 
-        if (newTempModal[1] == '' || newTempModal[2] == '') {
+        // console.log(modalVal[0] + '==' + deco(txt[0]));
+        // console.log(modalVal[1] + '==' + deco(txt[1]));
+        // console.log(modalVal[2] + '==' + deco(txt[2]));
+        // console.log(modalVal[3] + '==' + deco(txt[4]));
+
+        if (modalVal[1] == '' || modalVal[2] == '') {
             barProgressF('danger', 'determinate');
             alertMsg('Error', 'Datos vacíos.');
             setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
             return;
         }
 
-        if (newTempModal[0] == deco(txt[0]) && newTempModal[1] == deco(txt[1]) && newTempModal[2] == deco(txt[2]) && newTempModal[4] == deco(txt[4])) {
-            return;
-        }
+        // if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4])) {
+        //     return;
+        // }
+
+
+        if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4]))
+        { 
+            //return;
+        } else { presentAlertConfirmEdit(modalVal); }
         // const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
         // presentAlertConfirmEdit(confPersonal);
-        presentAlertConfirmEdit(newTempModal);
+        // console.log(modalVal);
+        // console.log(deco(txt[4]));
     }
 
+    // console.log('Listo');
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
 
@@ -681,7 +694,7 @@ function listDetail2(arrLista, tituloLista) {
 
 
 // CONFIG EDIT NM/US/PS/NO
-function alertPass() {
+function alertPass_DELETE() {
     const alertPassItem = document.createElement('ion-alert');
     alertPassItem.header = 'Configuración personal';
     alertPassItem.message = 'Inserte contraseña para continuar..';
@@ -706,8 +719,7 @@ function alertPass() {
     document.body.appendChild(alertPassItem);
     return alertPassItem.present();
 }
-
-function presentAlertEditUserData() {
+function presentAlertEditUserData_DELETE() {
     const alert = document.createElement('ion-alert');
     alert.header = 'Editar cuenta';
     alert.inputs = [
@@ -743,7 +755,7 @@ function presentAlertEditUserData() {
     document.body.appendChild(alert);
     return alert.present();
 }
-function presentAlertEditUserData2(txt) {
+function presentAlertEditUserData2_DELETE(txt) {
 
     document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
@@ -772,7 +784,6 @@ function presentAlertEditUserData2(txt) {
 }
 
 
-
 function presentAlertConfirmEdit(confPersonal) {
     const alert = document.createElement('ion-alert');
     alert.header = 'ADVERTENCIA!';
@@ -786,9 +797,7 @@ function presentAlertConfirmEdit(confPersonal) {
                 (code(confPersonal[0]) == '') ? txt[0] = '25' : txt[0] = code(confPersonal[0]);
                 txt[1] = code(confPersonal[1]);
                 txt[2] = code(confPersonal[2]);
-                // 
                 txt[4] = code(confPersonal[3]);
-                // 
 
                 document.getElementById('userName').innerHTML = deco(txt[0]);
                 document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
