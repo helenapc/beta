@@ -315,12 +315,18 @@ ion-title#userName.md.title-default.hydrated{ text-align: center; }
 
 /*ITEMS*/
 
-.ion-text-wrap #title{ margin-right: -100px; padding: -100px; }
+/* .ion-text-wrap #title{ margin-right: -100px; padding: -100px; } */
 
 #eyePass{ margin-top: 18px; }
 
-#content{ --background:var(--val); }
+/* #content{ --background:var(--val); } */
+/* .content {--background: #ffffff00 } */
 
+.button_nav{
+  opacity: 0;
+  pointer-events: none;
+  margin-right: -30px;
+}
 
 
 .bordeInf, .bordeSup{ --background: #ffffff50; }

@@ -44,7 +44,10 @@ buttonLogin.addEventListener('click', () => {
                     localStorage.setItem('bp', txt[4]); //FIX?
 
                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                    disableItem(false);
+                    // disableItem(false);
+                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+                    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+                    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
                     window.location.reload();
                 }
 
@@ -78,7 +81,9 @@ buttonLogin.addEventListener('click', () => {
                                     splitInit();
                                     aTotalTOnewTotal();
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    disableItem(false);
+                                    // disableItem(false);
+                                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+                                    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
 
                                     db.collection(coll).doc(userID).update({
                                         B3: firebase.firestore.FieldValue.delete()
@@ -170,7 +175,9 @@ buttonCreate.addEventListener('click', () => {
                                     splitInit();
                                     aTotalTOnewTotal();
                                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    disableItem(false);
+                                    // disableItem(false);
+                                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+                                    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
                                     barProgressF('light', 'determinate');
                                     window.location.reload();
                                 })

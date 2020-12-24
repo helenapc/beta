@@ -6,15 +6,11 @@ var newTotal = [];
 var compare = false;
 var compareChanges = '';
 
-// var listTemp = [];
-// var compareChanges = localStorage.getItem('L1');
 var newCompareData2 = localStorage.getItem('L1');
-// var acept_changes = '';
 const arrCompareAdd = ['Nuevas'];
 const arrCompareDel = ['Borradas'];
 const arrCompareEdit = ['Editadas'];
-// var docB1 = '';
-// var docB2 = '';
+
 var uCA = [];
 var userRestoreAccount = [];
 var userID = '';
@@ -26,20 +22,13 @@ var closeAlert = false;
 var helpActivate = false;
 var cuPath = [];
 var reemplace;
-const timePin = 300000;
+const timePin = 30000;
 
 const icoShow = 'eye-outline';
 const icoHide = 'eye-off-outline';
 const icoExp = 'expand-outline';
 const icoCom = 'contract-outline';
 
-
-
-
-// const icoShow = 'albums-outline';
-// const icoHide = 'close-outline';
-// const icoExp = 'eye-outline';
-// const icoCom = 'eye-off-outline';
 
 // // Init components
 const nameLog = document.getElementById('nameLog');
@@ -54,21 +43,19 @@ const buttonCreate = document.getElementById('buttonCreate');
 const showSearch = document.getElementById('show-accounts1');
 const newSearch = document.getElementById('new-s');
 
-const buttonFocus = document.getElementById('buttonFocus');
-const content = document.getElementById('content');
+// const buttonFocus = document.getElementById('buttonFocus');
+// const content = document.getElementById('content');
+
+// content.setAttribute('style', ' --background:var(--val)');
+// document.getElementById('content').style.background = "ffffff00";
+document.getElementById('content').setAttribute('style', ' --background:var(--val)');
+
+
 //******************************************* */
 
 
-document.getElementById('title').setAttribute('style', 'margin-left:38px');
-document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
-document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
-
-setAttributes(document.getElementById('refresher'), { style: 'opacity:0', disabled: true });
+multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd', '#refresher', '.button_nav'],
+    'style', 'pointer-events: none; opacity: 0');
 
 
 
@@ -80,7 +67,7 @@ newSearch.setAttribute('style', 'opacity:1; margin-top:-60px;');
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
 setAttributes(barProgress01, { color: 'light', style: 'height:8px' });
-barProgress.setAttribute('style', 'opacity:0');
+barProgress.style.opacity = "0";
 barProgress.appendChild(barProgress01);
 
 
@@ -95,61 +82,52 @@ const barLabel = document.createElement('ion-title');
 
 const barContent = document.createElement('ion-content');
 barMenuPrincipal.appendChild(barContent);
-barMenuPrincipal.setAttribute('disabled', true);
 barLabel.setAttribute('id', 'userName');
 barTitle.setAttribute('lines', 'none');
 
 const barIcon00 = document.createElement('ion-icon'); // ICON
-const barIcon01 = document.createElement('ion-icon'); // ICON
+const barIcon01 = document.createElement('ion-icon'); // ICONO VACÍO (borrar)
 setAttributes(barIcon00, { button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose' })
+
 
 //BLOCK 01
 barTitle.appendChild(barIcon00);
 barTitle.appendChild(barLabel);
-barTitle.appendChild(barIcon01);
+barTitle.appendChild(barIcon01); // ICONO VACÍO (borrar)
 barToolbar.appendChild(barTitle);
 barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
+
+
 
 item('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad')
 item('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
-ver.innerHTML = 'Versión 2.7.3-beta';
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-
-document.querySelector('#verLogin').innerHTML = ver.innerHTML;
+ver.innerHTML = 'Versión 2.7.3-beta_opm01';
+document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
 const lTheme = localStorage.getItem('theme');
 const checkbox = document.getElementById('checkbox');
 if (lTheme == null || lTheme == 'dark' || lTheme == 'light' || lTheme == '') localStorage.setItem('theme', ['light', '']);
 var activeTheme = localStorage.getItem('theme').split(',');
-if (activeTheme[1] == 'dark') {
-    document.body.classList.toggle(activeTheme[1]);
-    checkbox.checked = true;
-} else {
-    document.body.classList.toggle(activeTheme[0]);
-};
-
+if (activeTheme[1] == 'dark') { checkbox.checked = true; };
+document.body.classList.toggle(activeTheme[(activeTheme[1] == 'dark') ? 1 : 0]);
 
 //LOGIN (eye)
 if (eyePass) {
     eyePass.addEventListener('click', () => {
-        if (eyePass.name == 'eye-off') {
-            eyePass.name = 'eye';
-            passLog.setAttribute('type', 'text');
-        } else {
-            eyePass.name = 'eye-off';
-            passLog.setAttribute('type', 'password');
-        }
+        passLog.setAttribute('type', (eyePass.name == 'eye-off') ? 'password' : 'text');
+        eyePass.name = (eyePass.name == 'eye-off') ? 'eye' : 'eye-off';
     })
 }
 
 
 
-document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+// document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 
 
@@ -172,7 +150,14 @@ localStorage.removeItem('alrt');
 
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     showLogin.innerHTML = '';
-    disableItem(false);
+    // disableItem(false);
+
+    // INIT SET
+    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+    // document.querySelector('.button_nav').setAttribute('style', 'pointer-events: auto; opacity: 1')
+    // document.getElementById('title').style.margin = "0px";
+
     splitInit();
     aTotalTOnewTotal();
 
@@ -187,19 +172,31 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
     // PIN;
-    document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+    // document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
+
+
     // if (txt[4] != '') {
     // if (localStorage.getItem('tPin')) {
     if (txt[4] != '' && localStorage.getItem('tPin')) {
         if (Date.now() - localStorage.getItem('tPin') > timePin) {
-            document.getElementById('cardPin').setAttribute('style', 'opacity: 1');
-            disableItem(true);
-            document.getElementById('title').setAttribute('style', 'margin-left:38px');
-            document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('nameSetting').setAttribute('style', 'pointer-events: none; opacity: 1');
-            document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
-            document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
+
+            // barMenuPrincipal.setAttribute('style', 'pointer-events: none; opacity: 0');
+
+            // document.getElementById('nameSetting').setAttribute('style', 'pointer-events: auto; opacity: 1');
+            // disableItem(true);
+
+
+
+            // document.getElementById('title').setAttribute('style', 'margin-left:38px');
+
+            // multipleAttribute(['#cardPin', '#nameSetting'], 'style', 'pointer-events: auto; opacity: 1');
+            document.querySelector('#cardPin').setAttribute('style', 'opacity: 1');
+            multipleAttribute(['#buttonAdd', '#expandCard', '#showCard', '#buttonSearch', '#refresher', '.button_nav'], 'style', 'pointer-events: none; opacity: 0')
+
+            // document.getElementById('buttonAdd').setAttribute('style', 'pointer-events: none; opacity: 0');
+            // document.getElementById('expandCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+            // document.getElementById('showCard').setAttribute('style', 'pointer-events: none; opacity: 0');
+            // document.getElementById('buttonSearch').setAttribute('style', 'pointer-events: none; opacity: 0');
 
         }
         // }
@@ -208,7 +205,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             if (pin.value == deco(txt[4])) {
                 localStorage.setItem('tPin', Date.now());
                 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
-                disableItem(false);
+                multipleAttribute(['#buttonAdd', '#showCard', '#buttonSearch', '#refresher', '.button_nav'], 'style', 'pointer-events: auto; opacity: 1')
+                // disableItem(false);
             }
         });
     }
@@ -235,6 +233,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         // var newCompareData2 = localStorage.getItem('L1');
+
+        //INIT SET STATE
+
         compareChanges = localStorage.getItem('L1');
         // (docB1 == newCompareData2)localStorage.setItem('L1', if (docB1 == newCompareData2) ? compareChanges : newCompareData2);
 
@@ -265,7 +266,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         //POINT BACKUP
         // document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
-
+        ;
 
 
         if (docB1 != compareChanges && alertcompare && !offline) {

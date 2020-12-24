@@ -71,7 +71,11 @@ const item = (id, ico, text, color = '', show = true) => {
 
 //######################## FUNCIONES ########################
 
+function multipleAttribute(idElements, style, attribute) {
+    // for (let idElement of idElements) document.getElementById(idElement).setAttribute(style, attribute);
+    for (let idElement of idElements) document.querySelector(idElement).setAttribute(style, attribute);
 
+}
 
 function setAttributes(elem, obj) {
     for (var prop in obj) {
@@ -80,8 +84,7 @@ function setAttributes(elem, obj) {
 }
 
 function delete_spaces(v1) {
-    if (!v1) { v1 = ""; }
-    else {
+    if (v1) {
         v1 = v1.split("");
         for (let i = 0; i < v1.length; i++) {
             if (v1[i] == " ") { v1.shift(); i--; }
@@ -98,25 +101,30 @@ function delete_spaces(v1) {
                 break;
             }
         }
-    }
+    } else { v1 = ""; }
     return v1;
 };
 
-function disableItem(boolean) {
-    barMenuPrincipal.setAttribute('disabled', boolean);
-    document.getElementById('title').setAttribute('style', 'margin-left:0px');
-    document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
-    // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
-    setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
-    // expand
-    setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
-    setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
-    // space
-    setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
+// function disableItem(boolean) {
+//     // barMenuPrincipal.setAttribute('disabled', boolean);
 
-    content.setAttribute('style', '--background: #ffffff00');
-    if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
-}
+//     // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
+
+//     // document.getElementById('title').style.margin = "0px";
+    
+    
+//     document.getElementById('title').setAttribute('style', 'margin-left:0px');
+//     document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
+//     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
+
+//     // content.setAttribute('style', '--background: #ffffff00');
+//     // if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
+
+
+// }
 
 function barProgressF(color, state) {
     setAttributes(barProgress01, { color: color, type: state, value: '100' });
@@ -132,10 +140,11 @@ function barProgressF(color, state) {
 function refreshData(toast = true) {
     //funciones
 
+    // if (newSearch.value == '::id') newSearch.value = userID; 
+    // if (newSearch.value == '::password') {newSearch.value = deco(txt[2]); showSearch.innerHTML = '';}
+    
+    
     // if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha() ))}
-    if (newSearch.value == '::id') newSearch.value = userID;
-    if (newSearch.value == '::cs') newSearch.value = deco(txt[2]);
-
 
     // if (newSearch.value == '::a1') {
     //     newSearch.value = '';
@@ -198,6 +207,14 @@ function refreshData(toast = true) {
     if (newSearch.value != '' && toast) presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
     // if (showSearch.innerHTML != '') showIcon.setAttribute('name', 'eye-off-outline');
     if (showSearch.innerHTML != '') showIcon.setAttribute('name', icoHide);
+
+
+
+
+
+
+    if (newSearch.value == '::id') { newSearch.value = userID;}
+    if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = '';}
 }
 
 function alertMsg(msg1, msg2) {
@@ -299,11 +316,13 @@ function updateData(text, compareChanges) {
 
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
-    disableItem(false);
-    let mensaje = 'Datos actualizados.';
+    // disableItem(false);
+    // multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+    // let mensaje = 'Datos actualizados.';
 
     if (text == 'Rechazar') {
-        mensaje = 'Cancelando cambios.';
+        // mensaje = 'Cancelando cambios.';
 
         // console.log('////////////// Rechazar /////////////////');
         // console.log(deco(docB1));
@@ -317,7 +336,8 @@ function updateData(text, compareChanges) {
 
     newSearch.value = '';
     refreshData();
-    presentToast(mensaje, '1000', 'dark');
+    // presentToast(mensaje, '1000', 'dark');
+    presentToast( (text == 'Rechazar') ? 'Cancelando cambios.' : 'Datos actualizados.', '1000', 'dark');
     setTimeout(() => { window.location.reload() }, 1000);
 }
 
@@ -604,8 +624,7 @@ function buttons_modal(func) {
         // }
 
 
-        if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4]))
-        { 
+        if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4])) {
             //return;
         } else { presentAlertConfirmEdit(modalVal); }
         // const confPersonal = [usNData.userEditName, usNData.userEditUser, usNData.userEditPass, usNData.userPin];
