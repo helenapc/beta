@@ -121,7 +121,9 @@ font-size: 1.6rem; */
 
 
 /* ********* */
-.cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color); }
+/* .cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color);} */
+
+.cct{ margin: auto; color: var(--ion-text-color); font-size: 18px; padding: 5px 0px 2px 0px}
 
 .cce{
   position: fixed;
@@ -214,17 +216,12 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
 
 
 
-
-
-
-
 .modal_btns{
   float: right;
   color: var(--ion-color-primary);
   background-color: #ff000000;
   font-size: 15px;
   border: 0px;
-  /* margin: 1rem 0rem 1rem 1rem; */
   margin: 0rem 0rem 1rem 1rem;
   outline: none;
 }
@@ -234,6 +231,7 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   width: 100vw;
   height: 100vh;
   background: black;
+  /* z-index: 1; */
   opacity: 0;
   pointer-events: none;
 }
@@ -322,12 +320,21 @@ ion-title#userName.md.title-default.hydrated{ text-align: center; }
 /* #content{ --background:var(--val); } */
 /* .content {--background: #ffffff00 } */
 
+/* #cardPin{
+  z-index: 99999;
+} */
+
 .button_nav{
   opacity: 0;
   pointer-events: none;
   margin-right: -30px;
 }
 
+#refresher{
+  /* z-index: -1; */
+  opacity: 1;
+  pointer-events: none;
+}
 
 .bordeInf, .bordeSup{ --background: #ffffff50; }
 

@@ -3,13 +3,7 @@
 // NEW MODAL
 
 document.getElementById('bkmodal').addEventListener('click', () => {
-    // console.log('hola');
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-
-    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-
+    multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
     document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
@@ -45,8 +39,8 @@ buttonLogin.addEventListener('click', () => {
 
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     // disableItem(false);
-                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
-                    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch'], 'style', 'pointer-events: auto; opacity: 1');
+                    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
                     // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
                     window.location.reload();
                 }
@@ -234,7 +228,7 @@ showSearch.addEventListener('click', e => {  //editCard
 
             document.getElementById('modal').innerHTML =
                 `
-            <p id="op1" class="cct">${cuPath[0]}</p>
+            <p id="op1" class="cct" style="text-align: center">${cuPath[0]}</p>
             <hr style="height:1px; border-width:0; color:gray;background-color:gray">
             <p style="margin: 0px 0px 0px 0px;">
             <label class="cce_st" > Usuario: </label>
@@ -247,14 +241,11 @@ showSearch.addEventListener('click', e => {  //editCard
             `;
 
 
-            document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+
             document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-            document.getElementById('buttonEdit').setAttribute('style', 'opacity:1; pointer-events: auto');
-            document.getElementById('buttonDelete').setAttribute('style', 'opacity:1; pointer-events: auto');
+            multipleAttribute(['#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
 
 
-            // var matches = document.querySelectorAll('.ccse');
-            // console.log(matches);
             document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
             document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
             document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
@@ -298,8 +289,6 @@ barImport.addEventListener('click', () => {
                     aTotalTOnewTotal();
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     updateDB('L1', 'B1');
-                    // alertcompare = false;
-                    // setTimeout(() => { alertcompare = true; }, 1500);
                     refreshData();
                     setTimeout(() => {
                         presentToast('Copia de seguridad cargada.', 800, 'success');
@@ -346,90 +335,7 @@ barLogout.addEventListener('click', () => {
     window.location.reload();
 });
 
-barDelAcc.addEventListener('click', () => {
-    barMenuPrincipal.close();
-    function deleteData() {
-        barProgressF('danger', 'determinate');
-        const alert = document.createElement('ion-alert');
-        alert.header = '¡Advertencia!';
-        alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
-        alert.buttons = [
-            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
-            {
-                text: 'confirmar',
-                handler: () => {
-                    console.log(userID);
-                    Email.send({
-                        Host: "smtp.gmail.com",
-                        Username: "restore.pass.helena@gmail.com",
-                        Password: "restaurar1234",
-                        To: deco(txt[1]),
-                        From: "restore.pass.helena@gmail.com",
-                        Subject: "Eliminar cuenta.",
-                        Body:
-                            `
-                            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
-                            <h1>${userID}</h1>
-                        `,
-                    }).then(function () {
-                        console.log("correo enviado");
-                    }).catch(function (error) {
-                        console.error("Error removing document: ", error);
-                    });
-
-                    function confirmVoid() {
-                        const alert = document.createElement('ion-alert');
-                        alert.setAttribute('backdrop-dismiss', 'false');
-                        alert.subHeader = 'Complete los datos para terminar el proceso.'
-                        alert.message = '(Se envió por correo la clave para confirmar el proceso).'
-
-                        alert.inputs = [
-                            { name: 'avoid', placeholder: 'Usuario' },
-                            { name: 'bvoid', placeholder: 'Contraseña' },
-                            { name: 'cvoid', placeholder: 'Clave de confirmación' },
-                        ];
-                        alert.buttons = [
-                            {
-                                text: 'Ok',
-                                handler: (x) => {
-                                    if (txt[1] == code(x.avoid) && txt[2] == code(x.bvoid) && userID == x.cvoid) {
-                                        barProgressF('danger', 'indeterminate');
-                                        localStorage.setItem('L1', localStorage.getItem('L1') + 'aa');
-                                        updateDB('L1', 'B1');
-
-                                        setTimeout(() => {
-                                            db.collection(coll).doc(userID).delete()
-                                                .then(function () {
-                                                    console.log("Document successfully deleted!");
-                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
-                                                }).catch(function (error) {
-                                                    console.error("Error removing document: ", error);
-                                                });
-                                        }, 2000);
-                                    } else {
-                                        barProgressF('light', 'determinate');
-                                        presentToast('Incorrecto.', '800', 'warning');
-                                    }
-                                }
-                            },
-                            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
-
-                        ]
-                        document.body.appendChild(alert);
-                        return alert.present();
-
-
-                    };
-                    confirmVoid();
-
-                }
-            }
-        ];
-        document.body.appendChild(alert);
-        return alert.present();
-    }
-    deleteData();
-});
+barDelAcc.addEventListener('click', () => { });
 
 
 
@@ -463,13 +369,46 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
     <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
 `;
-    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#buttonEdit', '#buttonDelete'],'style', 'opacity:0; pointer-events: none');
     // alertcompare = false;
 });
 
 document.getElementById('buttonDelete').addEventListener('click', () => {
-    alertDel(cuPath, reemplace);
+    // alertDel(cuPath, reemplace); DELETE
+
+
+    // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+
+    multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+
+
+    const alert = document.createElement('ion-alert');
+    alert.message = `¿Eliminar "${cuPath[0]}"?`;
+    alert.buttons = [
+        { text: 'cancelar', role: 'cancel' },
+        {
+            text: 'ok',
+            handler: () => {
+                aTotal.splice(reemplace / 5, 1);
+                aTotalTOnewTotal();
+                refreshData();
+                save();
+                presentToast(`"${cuPath[0]}" eliminado.`, 800, 'danger');
+                updateDB('L1', 'B1');
+                // if (showSearch.value == '') newSearch.value = '';
+                closeAlert = false;
+                // alertcompare = false;
+                // setTimeout(() => { alertcompare = true; }, 1500)
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
 });
 
 document.getElementById('nameSetting').addEventListener('click', () => {
@@ -591,8 +530,9 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
     `;
 
 
-    document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
     // alertcompare = false;
 });
 
