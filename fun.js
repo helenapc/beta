@@ -105,116 +105,68 @@ function delete_spaces(v1) {
     return v1;
 };
 
-function disableItem(boolean) {
-    barMenuPrincipal.setAttribute('disabled', boolean);
+// function disableItem(boolean) {
+//     barMenuPrincipal.setAttribute('disabled', boolean);
 
-    // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
+//     // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
 
-    // document.getElementById('title').style.margin = "0px";
-
-
-    document.getElementById('title').setAttribute('style', 'margin-left:0px');
-    document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
-    setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
-    setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
-    setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
-    setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
-
-    // content.setAttribute('style', '--background: #ffffff00');
-    // if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
+//     // document.getElementById('title').style.margin = "0px";
 
 
-}
+//     document.getElementById('title').setAttribute('style', 'margin-left:0px');
+//     document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
+//     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
+//     setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
+
+//     // content.setAttribute('style', '--background: #ffffff00');
+//     // if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
+
+
+// }
 
 function barProgressF(color, state) {
     setAttributes(barProgress01, { color: color, type: state, value: '100' });
-    // if (color == 'light' && state == 'determinate') {
-    //     barProgress.setAttribute('style', 'opacity:0');
-    // } else {
-    //     barProgress.setAttribute('style', 'opacity:1');
-    // }
-
     barProgress.setAttribute('style', `opacity: ${(color == 'light' && state == 'determinate') ? 0 : 1}`);
 };
 
 function refreshData(toast = true) {
-    //funciones
-
-    // if (newSearch.value == '::id') newSearch.value = userID; 
-    // if (newSearch.value == '::password') {newSearch.value = deco(txt[2]); showSearch.innerHTML = '';}
-
-
-    // if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha() ))}
-
-    // if (newSearch.value == '::a1') {
-    //     newSearch.value = '';
-    //     document.body.style.transitionDuration = '2s';
-    // };
-
-    // if (newSearch.value == '::a0') {
-    //     newSearch.value = '';
-    //     document.body.style.transitionDuration = '0s';
-    // };
-
-    // if (newSearch.value == '::bk'){
-    //     newSearch.value = 'Hacer copia de seguridad';
-
-    // }
-
-
-
-
-
-
-
     aTotal.sort();
+
+
     if (newSearch.value) {
-        // setAttributes(document.getElementById('expandCard'), { style: 'opacity:1', disabled: false });
         document.querySelector('#expandCard').setAttribute('style', 'opacity:1; pointer-events: auto');
     } else {
-        // showIcon.setAttribute('name', 'eye-outline');
-        // expandIcon.setAttribute('name', 'expand-outline');
 
         showIcon.setAttribute('name', icoShow);
         expandIcon.setAttribute('name', icoExp);
-        // setAttributes(document.getElementById('expandCard'), { style: 'opacity:0', disabled: true });
         document.querySelector('#expandCard').setAttribute('style', 'opacity:0; pointer-events: none');
     }
 
     showSearch.innerHTML = '';
 
-    var contador = 0;
+    let contador = 0;
     for (i = 0; i < newTotal.length; i += 5) {
         if (newSearch.value === '*') {
-            showCardAll(
-                newTotal[i].toUpperCase(),
-                newTotal[i + 1],
-                newTotal[i + 2],
-                newTotal[i + 3]
-            );
+            showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
             contador++;
         } else if (newTotal[i].includes(newSearch.value.toLowerCase())) {
-            showCardAll(
-                newTotal[i].toUpperCase(),
-                newTotal[i + 1],
-                newTotal[i + 2],
-                newTotal[i + 3]
-            );
+            showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
             contador++;
         }
     }
-    newSearch.value === '' ? (showSearch.innerHTML = '') : contador == 1 ? (s = '') : (s = 's');
+
+
+    (newSearch.value === '') ? showSearch.innerHTML = '' : contador == 1 ? (s = '') : (s = 's');
     if (newSearch.value != '' && toast) presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
-    // if (showSearch.innerHTML != '') showIcon.setAttribute('name', 'eye-off-outline');
     if (showSearch.innerHTML != '') showIcon.setAttribute('name', icoHide);
-
-
-
 
 
 
     if (newSearch.value == '::id') { newSearch.value = userID; }
     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
+    if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha())) }
 }
 
 function alertMsg(msg1, msg2) {
@@ -262,8 +214,7 @@ function code(cod) {
 }
 
 function deco(dec) {
-    let hexDec = dec;
-    let str = '';
+    let hexDec = dec; str = '';
     for (let n = 0; n < hexDec.length; n += 2) {
         let tt = hexDec.substr(n, 2)
         if (tt == '0x') {
@@ -362,7 +313,75 @@ function save() {
 
 }
 
-function sendEmail() { return; }
+function sendEmail() {
+
+    coincidencia = false
+    restoreKey = Math.floor(Math.random() * 999999) + 10000;
+
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Recuperar contraseña';
+    alert.inputs = [
+        { type: 'text', name: 'restorePass', placeholder: 'Email' },
+    ];
+    alert.buttons = [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+            text: 'Ok',
+            handler: usData => {
+
+                if (usData.restorePass == '') {
+                    alertMsg('Error', 'Debe insertar datos.');
+                    return;
+                }
+
+                barProgressF('success', 'indeterminate');
+
+                db.collection(coll).onSnapshot(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        if (!coincidencia) {
+                            userID = doc.id;
+                            userEmail = doc.data().B1.split('GD');
+                            if (userEmail[1] == code(usData.restorePass)) {
+                                // if (doc.data().B1.split('GD')[1] == code(usData.restorePass)) {
+                                coincidencia = true;
+                                db.collection(coll).doc(userID).update({
+                                    B3: restoreKey,
+                                })
+                                    .then(function () {
+                                        presentToast('Mail enviado', 1000, 'success');
+                                        barProgressF('light', 'determinate');
+                                        setTimeout(() => { window.location.reload(); }, 1000);
+                                    });
+
+
+                                Email.send({
+                                    Host: "smtp.gmail.com",
+                                    Username: "restore.pass.helena@gmail.com",
+                                    Password: "8u53pyjmj45n5n",
+                                    To: usData.restorePass,
+                                    From: "restore.pass.helena@gmail.com",
+                                    Subject: "Restaurar contraseña",
+                                    Body:
+                                        `
+                                         <h2>Nueva contraseña temporal:</h2>
+                                         <h1>${restoreKey}</h1><h4>(Válida por única vez)</h1>
+                                     `,
+                                })
+
+                            };
+                        };
+                    });
+                    if (!coincidencia) {
+                        barProgressF('light', 'determinated');
+                        alertMsg('Error', 'Esta cuenta no está registrada');
+                    };
+                });
+            },
+        },
+    ];
+    document.body.appendChild(alert);
+    return alert.present();
+}
 
 
 // ALERTS / POPUP
@@ -409,7 +428,6 @@ function alertEdit2(modalVal, reemplace) {
     const toRemplace = reemplace / 5;
 
     if (modalVal[0] == '' || modalVal[1] == '' || modalVal[2] == '') {
-        // alertMsg('Error', 'Datos incorrectos o vacíos.');
         alertMsg('Error', 'Campos obligatorios vacíos.');
         return;
     }
@@ -495,23 +513,21 @@ function alertEdit2(modalVal, reemplace) {
 
 function buttons_modal(func) {
 
-    if (func === 'ok') {
+    if (func == 'ok') {
         let modalVal = [
             document.querySelectorAll('.modal_input')[0].value,
             document.querySelectorAll('.modal_input')[1].value,
             document.querySelectorAll('.modal_input')[2].value,
             document.querySelectorAll('.modal_input')[3].value,
         ];
-        if (document.getElementById('op1').innerHTML == 'Editar cuenta') {
-            alertEdit2(modalVal, reemplace);
-        }
-        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') {
-            alertAdd2(modalVal);
-        }
+        if (document.getElementById('op1').innerHTML == 'Editar cuenta') alertEdit2(modalVal, reemplace);
+        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') alertAdd2(modalVal);
 
-        document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
-        document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
-        document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
+
+        // TEST
+        // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
+        // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
+        // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
 
     if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
@@ -565,11 +581,13 @@ function buttons_modal(func) {
         <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
         `;
 
-        document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+        document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
         document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
     }
 
-    if (func == 'ok_user') {
+
+
+    if (func == 'ok_datosDeUsuario') {
         let modalVal = [
             document.querySelectorAll('.modal_input')[0].value,
             document.querySelectorAll('.modal_input')[1].value,
@@ -590,53 +608,21 @@ function buttons_modal(func) {
 
     }
 
-    if (func != 'verCambios') {
-        document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-        document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+    if (func != 'verCambios') { //CANCELAR
+        multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+        multipleAttribute(['#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+        if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     }
 
-    // alertcompare = false;
-    // setTimeout(() => { alertcompare = true; }, 15
 }
 
-
-
-
-// function listDrop2(arrayFinal) {
-//     if (arrayFinal.length != 1) {
-//         let el = '';
-//         for (let i = 1; i < arrayFinal.length; i++) {
-
-//             el += `<p class="list_text">- ${arrayFinal[i]}</p>`;
-//         };
-//         return el;
-//     };
-//     return '';
-// }
-
-
-// function listDetail2(arrLista, tituloLista) {
-//     if (arrLista.length != 1) {
-//         return `
-//         <div style="margin:5px 0px 2px 0px; padding: 5px 5px 5px 0px">
-//             <label class="ccse" >&#9679 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
-//         </div>
-//         `
-//     } else {
-//         return '';
-//     }
-// };
 
 
 function listDrop(arrLista, tituloLista) {
     if (arrLista.length != 1) {
 
         let el = '';
-
-        for (let i = 1; i < arrLista.length; i++) {
-            el += `<p class="list_text">- ${arrLista[i]}</p>`;
-        };
-
+        for (let i = 1; i < arrLista.length; i++) { el += `<p class="list_text">- ${arrLista[i]}</p>`; };
         return `
         <div style="margin:5px 0px 2px 0px; padding: 5px 5px 5px 0px">
             <label class="ccse" >&#9679 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
@@ -741,7 +727,6 @@ function listDrop(arrLista, tituloLista) {
 
 // }
 
-
 function presentAlertConfirmEdit(confPersonal) {
     const alert = document.createElement('ion-alert');
     alert.header = 'ADVERTENCIA!';
@@ -827,7 +812,7 @@ function mostrarCambios() {
     `;
 
 
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
     document.querySelector('.dropdown-content').setAttribute('style', 'display: none');
 

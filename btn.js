@@ -4,6 +4,7 @@
 
 document.getElementById('bkmodal').addEventListener('click', () => {
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
     document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
@@ -23,13 +24,17 @@ buttonLogin.addEventListener('click', () => {
             if (!coincidencia) {
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
+                docB3 = doc.data().B3;
+
                 userID = doc.id;
+
                 userRestoreAccount = doc.data().B1.split('GD');
+
                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
+                    coincidencia = true;
                     // 
                     localStorage.setItem('tPin', Date.now());
                     // 
-                    coincidencia = true;
                     updateDB('B1', 'L1');
                     splitInit();
                     aTotalTOnewTotal();
@@ -40,57 +45,79 @@ buttonLogin.addEventListener('click', () => {
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     // disableItem(false);
                     multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch'], 'style', 'pointer-events: auto; opacity: 1');
-                    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
-                    // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
                     window.location.reload();
                 }
 
-                // res
-                if (code(nameLog.value) == userRestoreAccount[1] && passLog.value == doc.data().B3) {
-                    console.log(doc.data().B3);
-                    function presentRestorePass() {
-                        const alert = document.createElement('ion-alert');
-                        alert.subHeader = 'Restablecer contraseña';
-                        alert.inputs = [
-                            { name: 'pass01', placeholder: 'Nueva contraseña...', value: '' },
-                            { name: 'pass02', placeholder: 'Confirmar contraseña...', value: '' }
-                        ];
-                        alert.buttons = [
-                            { text: 'Cancelar', role: 'cancel' },
-                            {
-                                text: 'Ok',
-                                handler: usRData => {
-                                    if (usRData.pass01 == '' || usRData.pass02 == '' || usRData.pass01 != usRData.pass02) {
-                                        alertMsg('Error', 'Datos incorrectos o vacíos.');
-                                        return;
-                                    }
+                // restore pass
 
-                                    localStorage.setItem('L1', userRestoreAccount[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD' + userRestoreAccount[3]);
-                                    // localStorage.setItem('accessTempData', userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD');
-                                    localStorage.setItem('accessTempData', userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD');
+                // console.log(docB1);
+                // console.log(docB2);
 
-                                    coincidencia = true;
-                                    updateDB('L1', 'B1');
-                                    updateDB('L1', 'B2');
-                                    splitInit();
-                                    aTotalTOnewTotal();
-                                    document.getElementById('userName').innerHTML = deco(txt[0]);
-                                    // disableItem(false);
-                                    multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
-                                    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+                if (code(nameLog.value) == userRestoreAccount[1] && passLog.value == docB3) {
+                    coincidencia = true;
+                    console.log(docB1);
+                    console.log(coll);
+                    console.log(userID);
+                    console.log(docB3);
 
-                                    db.collection(coll).doc(userID).update({
-                                        B3: firebase.firestore.FieldValue.delete()
-                                    }).then(function () { window.location.reload() });
+                    // function presentRestorePass() {
+                    const alert = document.createElement('ion-alert');
+                    alert.subHeader = 'Restablecer contraseña';
+                    alert.inputs = [
+                        { name: 'pass01', placeholder: 'Nueva contraseña...', value: '' },
+                        { name: 'pass02', placeholder: 'Confirmar contraseña...', value: '' }
+                    ];
+                    alert.buttons = [
+                        { text: 'Cancelar', handler: () => { window.location.reload(); } },
+                        {
+                            text: 'Ok',
+                            handler: usRData => {
+                                if (usRData.pass01 == '' || usRData.pass02 == '' || usRData.pass01 != usRData.pass02) {
+                                    alertMsg('Error', 'Datos incorrectos o vacíos.');
+                                    return;
+                                }
 
-                                },
+                                localStorage.setItem('L1', userRestoreAccount[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD' + userRestoreAccount[3]);
+                                // localStorage.setItem('accessTempData', userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD');
+                                // localStorage.setItem('accessTempData', txt[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(passLog.value) + 'GD'); //TEST
+
+                                // 
+                                // localStorage.setItem('tPin', Date.now());
+                                // 
+
+                                // coincidencia = true;
+                                updateDB('L1', 'B1');
+                                updateDB('L1', 'B2');
+
+                                // updateDB('B1', 'L1');
+
+                                localStorage.clear();
+
+
+                                // splitInit();
+                                // aTotalTOnewTotal();
+                                // document.getElementById('userName').innerHTML = deco(txt[0]);
+
+                                // multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
+                                // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+
+                                db.collection(coll).doc(userID).update({
+                                    B3: firebase.firestore.FieldValue.delete()
+                                }).then(function () { 
+                                    presentToast('Contraseña restablecida', '800', 'success')
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1000);
+                                });
+
                             },
-                        ];
-                        document.body.appendChild(alert);
-                        return alert.present();
-                    }
-                    presentRestorePass();
-                    // coincidencia = true;
+                        },
+                    ];
+                    document.body.appendChild(alert);
+                    return alert.present();
+                    // }
+                    // presentRestorePass();
+
                 }
             };
 
@@ -242,8 +269,9 @@ showSearch.addEventListener('click', e => {  //editCard
 
 
 
-            document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-            multipleAttribute(['#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
+            // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
+            multipleAttribute(['#bkmodal','#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
+            multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:0.5; pointer-events: none');
 
 
             document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
@@ -348,7 +376,8 @@ barDelAcc.addEventListener('click', () => { });
 //FAB
 
 document.getElementById('buttonEdit').addEventListener('click', () => {
-    // alertEdit(cuPath, reemplace); 
+
+    multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
 
     document.getElementById('modal').innerHTML =
         `
@@ -369,28 +398,21 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
     <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
 `;
-    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#buttonEdit', '#buttonDelete'],'style', 'opacity:0; pointer-events: none');
-    // alertcompare = false;
 });
 
 document.getElementById('buttonDelete').addEventListener('click', () => {
-    // alertDel(cuPath, reemplace); DELETE
-
-
-    // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
 
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-
 
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [
-        { text: 'cancelar', role: 'cancel' },
+        {
+            text: 'cancelar',
+            handler: () => {
+                multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+            }
+        },
         {
             text: 'ok',
             handler: () => {
@@ -398,12 +420,11 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                 aTotalTOnewTotal();
                 refreshData();
                 save();
-                presentToast(`"${cuPath[0]}" eliminado.`, 800, 'danger');
+                presentToast(`"${cuPath[0]}" eliminado.`, '800', 'danger');
                 updateDB('L1', 'B1');
-                // if (showSearch.value == '') newSearch.value = '';
                 closeAlert = false;
-                // alertcompare = false;
-                // setTimeout(() => { alertcompare = true; }, 1500)
+                multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+
             },
         },
     ];
@@ -412,8 +433,6 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
 });
 
 document.getElementById('nameSetting').addEventListener('click', () => {
-    // alertPass();
-    // function alertPass() {
     const alertPassItem = document.createElement('ion-alert');
     alertPassItem.header = 'Datos de usuario';
     alertPassItem.message = 'Inserte contraseña para continuar..';
@@ -426,10 +445,9 @@ document.getElementById('nameSetting').addEventListener('click', () => {
             handler: u => {
                 if (u.uEPass == deco(txt[2])) {
                     if (txt[0] == '25') txt[0] = '';
-                    // presentAlertEditUserData();
-                    // presentAlertEditUserData2(txt);
-                    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-                    document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                    // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+                    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
 
 
                     document.getElementById('modal').innerHTML =
@@ -447,12 +465,12 @@ document.getElementById('nameSetting').addEventListener('click', () => {
                         <label class="cce" > PIN: </label>
                         </p>
 
-                        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_user')">
+                        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_datosDeUsuario')">
                         <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
                     `;
 
                 } else {
-                    bar
+                    // barProgressF('warning', )
                     presentToast('Contraseña incorrecta.', '800', 'warning');
                 }
             },
@@ -464,47 +482,55 @@ document.getElementById('nameSetting').addEventListener('click', () => {
 });
 
 document.getElementById('expandCard').addEventListener('click', () => {
-    // helpFunction('0', false);
-    // if (document.getElementById('expandIcon').getAttribute('name') == icoExp) {
-    //     document.getElementById('expandIcon').setAttribute('name', icoCom);
-    // } else {
-    //     document.getElementById('expandIcon').setAttribute('name', icoExp);
-    // };
-
     let icon = document.getElementById('expandIcon');
     icon.setAttribute('name', (icon.getAttribute('name') == icoExp) ? icoCom : icoExp);
-    refreshData(false);
+
+    if (newSearch.value == '' && showSearch.innerHTML != '') {
+        newSearch.value = '*'
+        refreshData(false);
+        newSearch.value = ''
+    } else {
+        refreshData(false);
+    }
+
+
+
 });
 
 document.getElementById('showCard').addEventListener('click', () => {
-    // helpFunction('0', false);
+    var testExpand = false;
     if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
         document.getElementById('showIcon').setAttribute('name', icoHide);
         newSearch.value = '*';
         newSearch.setAttribute('style', 'margin-top:-60px');
+        statSearchBar = false;
+        testExpand = false;
     } else {
         document.getElementById('showIcon').setAttribute('name', icoShow);
+        newSearch.setAttribute('style', 'margin-top:0px');
+        newSearch.setFocus();
+        statSearchBar = true;
+        testExpand = true;
         newSearch.value = '';
     };
     refreshData();
 });
 
 document.getElementById('buttonSearch').addEventListener('click', () => {
-    if (!statSearchBar) {
+    if (statSearchBar) {
+        newSearch.setAttribute('style', 'margin-top:-60px');
+        statSearchBar = false;
+    } else {
         newSearch.value = '';
         newSearch.setAttribute('style', 'margin-top:0px');
         newSearch.setFocus();
         statSearchBar = true;
-    } else {
-        newSearch.setAttribute('style', 'margin-top:-60px');
-        statSearchBar = false;
     }
-
 })
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
 
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
 
 

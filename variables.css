@@ -230,7 +230,7 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: black;
+  background: #00000085;
   /* z-index: 1; */
   opacity: 0;
   pointer-events: none;

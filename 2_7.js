@@ -56,6 +56,8 @@ multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '
 var statSearchBar = false;
 newSearch.setAttribute('style', 'opacity:1; margin-top:-60px;');
 
+
+
 // PROGRESS BAR
 const barProgress = document.getElementById('barProgress');
 const barProgress01 = document.createElement('ion-progress-bar');
@@ -78,7 +80,7 @@ barMenuPrincipal.appendChild(barContent);
 barLabel.setAttribute('id', 'userName');
 barTitle.setAttribute('lines', 'none');
 
-const barIcon00 = document.createElement('ion-icon'); // ICON
+const barIcon00 = document.createElement('ion-icon'); 
 const barIcon01 = document.createElement('ion-icon'); // ICONO VACÍO (borrar)
 setAttributes(barIcon00, { button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose' })
 
@@ -99,7 +101,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm02';
+ver.innerHTML = 'Versión 2.7.3-beta_opm03';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -147,13 +149,15 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     // INIT SET   
     multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch'], 'style', 'pointer-events: auto; opacity: 1');
     document.querySelector('#refresher').setAttribute('disabled', 'false');
-    document.getElementById('content').setAttribute('style', '--background: #ffffff00');
+    document.querySelector('#content').setAttribute('style', '--background: #ffffff00');
+    statSearchBar = true;
+    newSearch.setAttribute('style', 'opacity:1; margin-top:0px;');
 
     splitInit();
     aTotalTOnewTotal();
 
-    document.getElementById('userName').innerHTML = deco(txt[0]);
-    document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
+    document.querySelector('#userName').innerHTML = deco(txt[0]);
+    document.querySelector('#nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
     compare = false;
     // alertcompare = true;
 
@@ -167,6 +171,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             document.getElementById('content').setAttribute('style', ' --background:#00000055');
             multipleAttribute(['#buttonAdd', '#showCard', '#buttonSearch', '.button_nav', '#modal'], 'style', 'pointer-events: none; opacity: 0');
             document.querySelectorAll('.point_backup')[0].setAttribute('style', 'z-index: 0');
+            newSearch.setAttribute('style', 'margin-top:-60px');
         }
         // }
 
@@ -178,6 +183,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 document.getElementById('content').setAttribute('style', ' --background:#00000000');
                 multipleAttribute(['#buttonAdd', '#showCard', '#buttonSearch', '.button_nav'], 'style', 'pointer-events: auto; opacity: 1');
                 if (document.getElementById('modal').innerHTML != '') document.getElementById('modal').setAttribute('style', 'pointer-events: auto; opacity: 1');
+                newSearch.setAttribute('style', 'margin-top:0px');
             }
         });
     }
@@ -226,7 +232,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
 
         //POINT BACKUP
-        document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
+        // document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         ;
 
@@ -243,7 +249,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
             // MODAL-CHANGES
             if (!hideCompare) {
-                document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: none');
+                document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
                 document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
             }
 
@@ -253,7 +259,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             <p class="cct" ;">Se detectaron cambios</p>
             <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aceptar y sincronizar datos?</p>
 
-            <input type="button" class="modal_btns" style="margin-left:100px" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
+            <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
             <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
             <input type="button" class="modal_btns" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
 

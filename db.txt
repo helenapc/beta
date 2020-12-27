@@ -1,0 +1,39 @@
+2.7.3-beta_opm03
+    new
+    - barrra de búsuqeda por defecto
+    - opacidad en FAB inactivos
+    - comandos en barra de búsqueda
+
+
+    bug
+    - no funciona enviar mail
+
+
+    fix
+    - expand cuando newSearch es vacío
+    - aparece "expandCard" al cancelar "modal"
+    - alinear botones "modal"
+    - no funciona acceder con contraseña temporal
+
+
+    REVISAR
+    - alfa de bkmodal
+
+
+
+
+    PROBAR
+    - línea 460 - 462
+        + Comentarios "user-select:all"
+    - línea 306
+        + guardar (corto)
+    - línea 108 - 127
+        + Comentarios function disableItem().
+
+2.8
+
+- elegir cambios en detalles (checkbox)
+- panel de configuraciones
+    + fondos
+
+
