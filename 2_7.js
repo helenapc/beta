@@ -19,7 +19,7 @@ const coll = '273';
 var alertcompare = true;
 var resetLogin = false;
 var offline = true;
-var acceptOffline = true;
+// var acceptOffline = true;
 var closeAlert = false;
 var helpActivate = false;
 var cuPath = [];
@@ -48,7 +48,7 @@ const newSearch = document.getElementById('new-s');
 
 //******************************************* */
 
-// localStorage.setItem('offline', 'offline');
+// localStorage.setItem('offline', true);
 document.getElementById('content').setAttribute('style', ' --background:var(--val)');
 document.querySelector('#refresher').setAttribute('disabled', 'true');
 multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd', '.button_nav'], 'style', 'pointer-events: none; opacity: 0');
@@ -104,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm06';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06c';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -216,6 +216,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
         });
 
+        if (offline) localStorage.setItem('offline', true);
+
         // reinicio cambio de datos personales
         if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
@@ -233,7 +235,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // hideCompare = false;
 
 
-        if (docB1 == localStorage.getItem('L1')){
+        if (docB1 == localStorage.getItem('L1')) {
             compareChanges = localStorage.getItem('L1');
         }
         updateDB('B1', 'L1');
@@ -249,16 +251,14 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
         // if (docB1 != compareChanges && alertcompare && !offline) {
-        if (docB1 != compareChanges && !offline) {
+
+        if (docB1 != compareChanges && !offline && localStorage.getItem('offline')) {
+
+        } else if (docB1 != compareChanges && !offline) {
 
             // 
             // localStorage.removeItem('offline'); // PROBAR
             // 
-            // if (!offline && acceptOffline) {
-                const aceptar = (!offline && acceptOffline) ? '(a)ACEPTAR' : '(a)RECHAZAR (offline)';
-                const rechazar = (!offline && acceptOffline) ? '(r)RECHAZAR' : '(r)ACEPTAR (offline)';
-            // }
-            // acceptOffline = false;
             showSearch.innerHTML = '';
 
             // MODAL-CHANGES
@@ -267,26 +267,43 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
             }
 
+            if (localStorage.getItem('offline')) {
+                localStorage.removeItem('offline');
 
-            document.getElementById('modal').innerHTML =
-                `
-            <p class="cct" ;">Se detectaron cambios</p>
-            <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aceptar y sincronizar datos?</p>
+                document.getElementById('modal').innerHTML =
+                    `
+                <p class="cct" ;">Se detectaron cambios</p>
+                <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aplicar cambios hechos sin internet?</p>
+    
+                <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('rechazar')">   
+                <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('aceptar')" >
+                `;
+                
 
-            <input type="button" class="modal_btns" style="margin-left:100%" value="${aceptar}" onClick="buttons_modal('aceptar')" >
-            <input type="button" class="modal_btns" style="margin-left:100%" value="${rechazar}" onClick="buttons_modal('rechazar')">
-            <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
+            } else {
 
-            `;
+                document.getElementById('modal').innerHTML =
+                    `
+                <p class="cct" ;">Se detectaron cambios</p>
+                <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aceptar y sincronizar datos?</p>
+    
+                <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
+                <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+                <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
+    
+                `;
+            }
+
 
         }
-        // <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
-        // <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+
+
+
         else {
             // initStateL1 = true;
             // document.getElementById('modal').innerHTML = '';
             // console.log('No comparación');
-            if (offline) acceptOffline = false;
+            // if (offline) acceptOffline = false;
 
             document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
             document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
