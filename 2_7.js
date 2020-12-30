@@ -102,7 +102,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm04';
+ver.innerHTML = 'Versión 2.7.3-beta_opm05';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -181,7 +181,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // }
 
         document.getElementById('pin').addEventListener('ionInput', () => {
-            // hideCompare = false;
+            hideCompare = false;
             if (pin.value == deco(txt[4])) {
                 localStorage.setItem('tPin', Date.now());
                 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
@@ -235,11 +235,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         }
         updateDB('B1', 'L1');
 
-        // console.log('POST');
-        // console.log(docB1);
-        // console.log(localStorage.getItem('L1'));
-
-
         splitInit();
 
         // reinicio cambio de datos personales
@@ -257,10 +252,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             // localStorage.removeItem('offline'); // PROBAR
             // 
             showSearch.innerHTML = '';
-            // console.log('Modal compadre');
-            // console.log(docB1);
-            // console.log(localStorage.getItem('L1'));
-
 
             // MODAL-CHANGES
             if (!hideCompare) {
@@ -275,8 +266,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aceptar y sincronizar datos?</p>
 
             <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
-            <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
-            <input type="button" class="modal_btns" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
+            <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+            <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
 
             `;
 

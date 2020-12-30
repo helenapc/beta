@@ -172,7 +172,7 @@ function refreshData(toast = true) {
     aTotal.sort();
     let contador = 0;
     showSearch.innerHTML = '';
-    
+
     for (i = 0; i < newTotal.length; i += 5) {
         if (newTotal[i].includes(newSearch.value.toLowerCase())) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
@@ -440,6 +440,11 @@ function alertAdd2(modalVal) {
         }
     }
 
+    //parche b5003
+    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    
     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
     aTotalTOnewTotal();
     save();
@@ -593,23 +598,27 @@ function buttons_modal(func) {
 
         };
 
-
-        document.getElementById('modal').innerHTML = `
-        <p id="op1" class="cct">Cambios</p>
-        <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-        <div class="div_list">
-
-        ${listDrop(arrCompareAdd, 'Nuevas')}
-        ${listDrop(arrCompareDel, 'Borradas')}
-        ${listDrop(arrCompareEdit, 'Editadas')}
-
-        </div>
-        <input type="button" class="modal_btns" value="CONFIRMAR" onClick="buttons_modal('aceptar')">
-        <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
-        `;
-
-        document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
-        document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+        //parche b5002
+        if (arrCompareAdd == '' && arrCompareEdit == '' && arrCompareDel == ''){
+            return
+        }else{
+            document.getElementById('modal').innerHTML = `
+            <p id="op1" class="cct">Cambios</p>
+            <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+            <div class="div_list">
+            
+            ${listDrop(arrCompareAdd, 'Nuevas')}
+            ${listDrop(arrCompareDel, 'Borradas')}
+            ${listDrop(arrCompareEdit, 'Editadas')}
+            
+            </div>
+            <input type="button" class="modal_btns" value="CONFIRMAR" onClick="buttons_modal('aceptar')">
+            <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+            `;
+            
+            document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
+            document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+        }
     }
 
 

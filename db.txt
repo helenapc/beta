@@ -48,7 +48,42 @@
     - probar offline en app
 
 
-    PROBAR
+
+2.7.3-beta_opm05
+
+    new
+
+    bug
+    b5001 - no funciona enviar mail
+    b5004 - opción para modo offline (aplicar cambios offline)
+
+    fix
+    - opacidad FAB en add
+    - margenes boton modal
+    b5002 - no mostrar modal_compare si no hay datos (add_edit_del) 
+        (error aparece en app al cambiar PIN dese PC)
+    b5003 - en offline, click en "ok" (modal_add) no desaparce modal.
+        + forzar opcity: 0;
+
+    REVISAR
+    - Mejorar reinicio al cambiar PIN
+
+
+2.7.3-beta_opm06
+
+    new
+
+    bug
+    b5001 - no funciona enviar mail
+    b5004 - opción para modo offline (aplicar cambios offline)
+
+    fix
+
+
+    REVISAR
+    - Mejorar reinicio al cambiar PIN
+
+PROBAR
     - línea 460 - 462
         + Comentarios "user-select:all"
     - línea 306
