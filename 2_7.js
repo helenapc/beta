@@ -255,8 +255,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             // localStorage.removeItem('offline'); // PROBAR
             // 
             // if (!offline && acceptOffline) {
-                const aceptar = (!offline && acceptOffline) ? '(a)ACEPTAR' : '(a)RECHAZAR';
-                const rechazar = (!offline && acceptOffline) ? '(r)RECHAZAR' : '(r)ACEPTAR';
+                const aceptar = (!offline && acceptOffline) ? '(a)ACEPTAR' : '(a)RECHAZAR (offline)';
+                const rechazar = (!offline && acceptOffline) ? '(r)RECHAZAR' : '(r)ACEPTAR (offline)';
             // }
             // acceptOffline = false;
             showSearch.innerHTML = '';
