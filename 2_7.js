@@ -273,8 +273,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 <p class="cct" ;">Se detectaron cambios</p>
                 <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aplicar cambios hechos sin internet?</p>
     
-                <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('rechazar')">   
-                <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('aceptar')" >
+                <input type="button" class="modal_btns" style="margin-left:100%" value="Usar datos de celular (Sin internet)" onClick="buttons_modal('rechazar')">   
+                <input type="button" class="modal_btns" style="margin-left:100%" value="Usar base de datos (internet)" onClick="buttons_modal('aceptar')" >
                 `;
 
 
