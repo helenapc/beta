@@ -104,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm06c';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06d';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -252,9 +252,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
         // if (docB1 != compareChanges && alertcompare && !offline) {
 
-        if (docB1 != compareChanges && !offline && localStorage.getItem('offline')) {
-
-        } else if (docB1 != compareChanges && !offline) {
+        if (docB1 != compareChanges && !offline) {
 
             // 
             // localStorage.removeItem('offline'); // PROBAR
@@ -278,7 +276,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('rechazar')">   
                 <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('aceptar')" >
                 `;
-                
+
 
             } else {
 
