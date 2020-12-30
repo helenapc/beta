@@ -3,7 +3,8 @@ var coincidencia = false;
 var txt = [];
 var aTotal = [];
 var newTotal = [];
-var compare = false;
+var comparePersonalData = false;
+// var reload = true; 
 var compareChanges = '';
 
 var newCompareData2 = localStorage.getItem('L1');
@@ -80,7 +81,7 @@ barMenuPrincipal.appendChild(barContent);
 barLabel.setAttribute('id', 'userName');
 barTitle.setAttribute('lines', 'none');
 
-const barIcon00 = document.createElement('ion-icon'); 
+const barIcon00 = document.createElement('ion-icon');
 const barIcon01 = document.createElement('ion-icon'); // ICONO VACÍO (borrar)
 setAttributes(barIcon00, { button: 'click-btn', name: 'arrow-back-outline', slot: 'start', id: 'barClose' })
 
@@ -101,7 +102,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm03';
+ver.innerHTML = 'Versión 2.7.3-beta_opm04';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -121,7 +122,6 @@ if (eyePass) {
 }
 
 
-
 // document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
 
@@ -139,6 +139,9 @@ firebase.initializeApp({
 var db = firebase.firestore();
 
 
+// var initStateL1 = '';
+// var initStateL1 = true;
+// var hideCompare = false;
 
 // ------------------ START ------------------ //
 localStorage.removeItem('alrt');
@@ -158,7 +161,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
     document.querySelector('#userName').innerHTML = deco(txt[0]);
     document.querySelector('#nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
-    compare = false;
+
+    comparePersonalData = false;
+
     // alertcompare = true;
 
 
@@ -176,6 +181,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // }
 
         document.getElementById('pin').addEventListener('ionInput', () => {
+            // hideCompare = false;
             if (pin.value == deco(txt[4])) {
                 localStorage.setItem('tPin', Date.now());
                 document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
@@ -196,40 +202,47 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         querySnapshot.forEach(doc => {
             offline = false;
-            if (!compare && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
+            if (!comparePersonalData && doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
+                // if (doc.data().B1.includes(localStorage.getItem('accessTempData'))) {
                 docB1 = doc.data().B1;
                 docB2 = doc.data().B2;
                 docBpin = doc.data().Bpin;
                 userID = doc.id;
-                compare = true;
+                comparePersonalData = true;
+                // reload = false;
                 return;
             }
         });
 
-        compareChanges = localStorage.getItem('L1');
-
-        updateDB('B1', 'L1');
-
-        splitInit();
-
-        // if (!compare && !offline && localStorage.getItem('bp') != txt[4]) {
-        if (!compare && !offline || localStorage.getItem('bp') != txt[4]) {
+        // reinicio cambio de datos personales
+        if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
             localStorage.removeItem('bp');
             localStorage.removeItem('accessTempData')
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
-        compare = false;
-
+        comparePersonalData = false;
 
         // 
-        if (offline) localStorage.setItem('offline', 'offlineee'); // PROBAR
+        // if (offline) localStorage.setItem('offline', 'offlineee'); // PROBAR
         // 
+        // hideCompare = false;
 
 
+        if (docB1 == localStorage.getItem('L1')){
+            compareChanges = localStorage.getItem('L1');
+        }
+        updateDB('B1', 'L1');
+
+        // console.log('POST');
+        // console.log(docB1);
+        // console.log(localStorage.getItem('L1'));
 
 
+        splitInit();
+
+        // reinicio cambio de datos personales
 
         //POINT BACKUP
         // document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
@@ -240,11 +253,13 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
         // if (docB1 != compareChanges && alertcompare && !offline) {
         if (docB1 != compareChanges && !offline) {
+            // 
+            // localStorage.removeItem('offline'); // PROBAR
+            // 
             showSearch.innerHTML = '';
-
-            // 
-            localStorage.removeItem('offline'); // PROBAR
-            // 
+            // console.log('Modal compadre');
+            // console.log(docB1);
+            // console.log(localStorage.getItem('L1'));
 
 
             // MODAL-CHANGES
@@ -265,7 +280,13 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
             `;
 
-
+        }
+        else {
+            // initStateL1 = true;
+            // document.getElementById('modal').innerHTML = '';
+            // console.log('No comparación');
+            document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+            document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
         }
     })
 

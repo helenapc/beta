@@ -4,7 +4,8 @@
 
 document.getElementById('bkmodal').addEventListener('click', () => {
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
@@ -103,7 +104,7 @@ buttonLogin.addEventListener('click', () => {
 
                                 db.collection(coll).doc(userID).update({
                                     B3: firebase.firestore.FieldValue.delete()
-                                }).then(function () { 
+                                }).then(function () {
                                     presentToast('Contraseña restablecida', '800', 'success')
                                     setTimeout(() => {
                                         window.location.reload();
@@ -226,7 +227,6 @@ newSearch.addEventListener('ionInput', () => { refreshData() });
 
 
 showSearch.addEventListener('click', e => {  //editCard
-    // helpFunction('0', false);
 
     e.preventDefault();
     var xPath = 3;
@@ -270,8 +270,8 @@ showSearch.addEventListener('click', e => {  //editCard
 
 
             // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
-            multipleAttribute(['#bkmodal','#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
-            multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:0.5; pointer-events: none');
+            multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
+            multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
 
 
             document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
@@ -408,10 +408,10 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
     alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [
         {
-            text: 'cancelar',
-            handler: () => {
-                multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-            }
+            text: 'cancelar', role: 'cancel'
+            // handler: () => {
+            // multipleAttribute(['#nameSetting','#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+            // }
         },
         {
             text: 'ok',
@@ -423,11 +423,25 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                 presentToast(`"${cuPath[0]}" eliminado.`, '800', 'danger');
                 updateDB('L1', 'B1');
                 closeAlert = false;
-                multipleAttribute(['#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+                // multipleAttribute(['#nameSetting','#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
 
             },
         },
     ];
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') {
+        multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+
+    } else {
+        document.getElementById('showIcon').setAttribute('name', icoShow);
+        newSearch.setAttribute('style', 'margin-top:0px');
+        // multipleAttribute(['#new-s'], 'style', 'opacity:1; margin-top:0px');
+        newSearch.setFocus();
+        statSearchBar = true;
+        testExpand = true;
+        newSearch.value = '';
+    }
+
     document.body.appendChild(alert);
     return alert.present();
 });
@@ -481,39 +495,90 @@ document.getElementById('nameSetting').addEventListener('click', () => {
     // }
 });
 
-document.getElementById('expandCard').addEventListener('click', () => {
-    let icon = document.getElementById('expandIcon');
-    icon.setAttribute('name', (icon.getAttribute('name') == icoExp) ? icoCom : icoExp);
+// document.getElementById('expandCard').addEventListener('click', () => {
+//     let icon = document.getElementById('expandIcon');
+//     icon.setAttribute('name', (icon.getAttribute('name') == icoExp) ? icoCom : icoExp);
 
-    if (newSearch.value == '' && showSearch.innerHTML != '') {
-        newSearch.value = '*'
-        refreshData(false);
-        newSearch.value = ''
-    } else {
+//     if (newSearch.value == '' && showSearch.innerHTML != '') {
+//         newSearch.value = '*'
+//         refreshData(false);
+//         newSearch.value = ''
+//     } else {
+//         refreshData(false);
+//     }
+// });
+
+
+
+// document.getElementById('showCard').addEventListener('click', () => {
+//     var testExpand = false;
+//     if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
+//         document.getElementById('showIcon').setAttribute('name', icoHide);
+//         newSearch.setAttribute('style', 'margin-top:-60px');
+//         // newSearch.setAttribute('style', 'opacity:0');
+//         // multipleAttribute(['#new-s'], 'style', 'opacity:0; margin-top:-60px');
+//         statSearchBar = false;
+//         testExpand = false;
+//         newSearch.value = '*';
+//         // newSearch.setAttribute('style', 'opacity:1');
+//         //newSearch.value.setAttribute('style', 'opacity:1');
+//         // newSearch.setAttribute('style', 'opacity:1');
+//     } else {
+//         document.getElementById('showIcon').setAttribute('name', icoShow);
+//         newSearch.setAttribute('style', 'margin-top:0px');
+//         // multipleAttribute(['#new-s'], 'style', 'opacity:1; margin-top:0px');
+//         newSearch.setFocus();
+//         statSearchBar = true;
+//         testExpand = true;
+//         newSearch.value = '';
+//         // showSearch.innerHTML = '';
+
+//     };
+//     refreshData();
+// });
+
+document.getElementById('expandCard').addEventListener('click', () => {
+    expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
+    if (newSearch.value == ''){
+        showSearch.innerHTML = '';
+        for (i = 0; i < newTotal.length; i += 5) {
+            showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
+        }
+    }else{
         refreshData(false);
     }
-
-
-
 });
 
 document.getElementById('showCard').addEventListener('click', () => {
+    newSearch.value = '';
     var testExpand = false;
-    if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
-        document.getElementById('showIcon').setAttribute('name', icoHide);
-        newSearch.value = '*';
+
+    if (showIcon.getAttribute('name') == icoShow) {
+        showIcon.setAttribute('name', icoHide);
+
+        expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
         newSearch.setAttribute('style', 'margin-top:-60px');
         statSearchBar = false;
         testExpand = false;
+
+        for (i = 0; i < newTotal.length; i += 5) {
+            showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
+        }
+        newTotal.length/5 == 1 ? (s = '') : (s = 's');
+        presentToast(`${newTotal.length/5} Cuenta${s} guardad${s}.`, '800', 'dark');
+
     } else {
-        document.getElementById('showIcon').setAttribute('name', icoShow);
+        showIcon.setAttribute('name', icoShow);
+        showSearch.innerHTML = '';
+
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
         newSearch.setAttribute('style', 'margin-top:0px');
         newSearch.setFocus();
         statSearchBar = true;
         testExpand = true;
-        newSearch.value = '';
     };
-    refreshData();
+    expandIcon.setAttribute('name', icoExp)
+    // refreshData();
 });
 
 document.getElementById('buttonSearch').addEventListener('click', () => {
@@ -530,9 +595,8 @@ document.getElementById('buttonSearch').addEventListener('click', () => {
 
 document.getElementById('buttonAdd').addEventListener('click', () => {
 
-    document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
+    document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
     document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-
 
     document.getElementById('modal').innerHTML =
         `
@@ -567,7 +631,6 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
 
 //CHECK/TOGGLE
 checkbox.addEventListener('click', () => {
-    // helpFunction('0', false);
     if (activeTheme[1] == 'dark') {
         document.body.classList.toggle('dark');
         document.body.classList.toggle(activeTheme[0]);

@@ -22,13 +22,50 @@
 
 
 
+2.7.3-beta_opm04
+
+    new
+    - nuevo modo de mostrar y ocultar tarjetas con FAB
+    - desaparece modal-compare cuando los datos vuelven a ser iguales
+    - nuevo método de showCard (icoShow - icoHide / icoCom - icoExp)
+
+
+    bug
+    - no funciona enviar mail
+
+
+    fix
+    - aparece expandCard FAB al tocar bkmodal_btn
+    - modal con cambios vacíos.
+    - no cierra sesión al cambiar datos personales
+    - agregar FAB setting a modo desactivado en modal
+    - alfa de bkmodal
+    - opacidad bk datos personales
+    - opacidad botones FAB inactivos
+
+
+    REVISAR
+    - probar offline en app
+
+
     PROBAR
     - línea 460 - 462
         + Comentarios "user-select:all"
     - línea 306
         + guardar (corto)
-    - línea 108 - 127
-        + Comentarios function disableItem().
+    - (fun.js) línea 108 - 127
+        + Comentarios función disableItem()
+    - (fun.js) línea 797 - 880
+        + Comentario función mostrarCambios() 
+
+    - (2-7.js) línea 230, 250
+        + comentar localStorage 'offline'
+    - (2_7.js) línea 6, 162, 201, 207, 221, 229
+        + comentar var compare (comentarios)
+
+    
+    MIS
+        + var 'compare' reemplazado por 'comparePersonalData' 
 
 2.8
 
