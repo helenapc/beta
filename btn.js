@@ -597,8 +597,8 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
 
 
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: auto');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: auto');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
     // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
     // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');

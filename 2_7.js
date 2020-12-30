@@ -19,6 +19,7 @@ const coll = '273';
 var alertcompare = true;
 var resetLogin = false;
 var offline = true;
+var acceptOffline = true;
 var closeAlert = false;
 var helpActivate = false;
 var cuPath = [];
@@ -47,6 +48,7 @@ const newSearch = document.getElementById('new-s');
 
 //******************************************* */
 
+// localStorage.setItem('offline', 'offline');
 document.getElementById('content').setAttribute('style', ' --background:var(--val)');
 document.querySelector('#refresher').setAttribute('disabled', 'true');
 multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd', '.button_nav'], 'style', 'pointer-events: none; opacity: 0');
@@ -102,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm05';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -225,8 +227,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         comparePersonalData = false;
 
         // 
-        // if (offline) localStorage.setItem('offline', 'offlineee'); // PROBAR
+        // if (offline) localStorage.setItem('offline', 'offline'); // PROBAR
         // 
+
         // hideCompare = false;
 
 
@@ -244,13 +247,18 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         ;
 
-
         // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
         // if (docB1 != compareChanges && alertcompare && !offline) {
         if (docB1 != compareChanges && !offline) {
+
             // 
             // localStorage.removeItem('offline'); // PROBAR
             // 
+            // if (!offline && acceptOffline) {
+                const aceptar = (!offline && acceptOffline) ? '(a)ACEPTAR' : '(a)RECHAZAR';
+                const rechazar = (!offline && acceptOffline) ? '(r)RECHAZAR' : '(r)ACEPTAR';
+            // }
+            // acceptOffline = false;
             showSearch.innerHTML = '';
 
             // MODAL-CHANGES
@@ -265,17 +273,21 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             <p class="cct" ;">Se detectaron cambios</p>
             <p class="ccse" style="margin: 10px 0px 10px 0px;">¿Aceptar y sincronizar datos?</p>
 
-            <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
-            <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
+            <input type="button" class="modal_btns" style="margin-left:100%" value="${aceptar}" onClick="buttons_modal('aceptar')" >
+            <input type="button" class="modal_btns" style="margin-left:100%" value="${rechazar}" onClick="buttons_modal('rechazar')">
             <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
 
             `;
 
         }
+        // <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
+        // <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
         else {
             // initStateL1 = true;
             // document.getElementById('modal').innerHTML = '';
             // console.log('No comparación');
+            if (offline) acceptOffline = false;
+
             document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
             document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
         }
