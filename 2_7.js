@@ -238,9 +238,12 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         if (docB1 == localStorage.getItem('L1')) {
             compareChanges = localStorage.getItem('L1');
         }
-
-
+    
+        alert(`LOCAL= ${localStorage.getItem('L1')}`);
+        alert(`DOCB!= ${docB1}`);
         updateDB('B1', 'L1');
+        alert(`LOCAL= ${localStorage.getItem('L1')}`);
+        alert(`DOCB!= ${docB1}`);
 
         splitInit();
 
