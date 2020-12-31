@@ -69,14 +69,14 @@
     - Mejorar reinicio al cambiar PIN
 
 
-2.7.3-beta_opm06g
+2.7.3-beta_opm06h
 
     new
     - (2_7.js) L290
         + if offline, cargar datos desde offline
 
     bug
-
+    b6002
     b5001 - no funciona enviar mail
     b5004 - opción para modo offline (aplicar cambios offline)
 
@@ -87,8 +87,8 @@
 
 
     REVISAR
-    //(2_/.js) L 258 - 259
-    //    + nombres botones modal_compare
+    (2_7) L 242
+        + Comentario updateDB('B1', 'L1');
     (fun_js) L 287
         + alert();
     - Mejorar reinicio al cambiar PIN

@@ -104,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm06g';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06h';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -238,6 +238,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         if (docB1 == localStorage.getItem('L1')) {
             compareChanges = localStorage.getItem('L1');
         }
+
+
         updateDB('B1', 'L1');
 
         splitInit();
@@ -251,7 +253,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
         // if (docB1 != compareChanges && alertcompare && !offline) {
-
+ 
         if (docB1 != compareChanges && !offline) {
 
             // 

@@ -284,6 +284,7 @@ function updateData(text, compareChanges) {
 
 
     if (text == 'Rechazar') {
+        alert(`TXT= ${txt}`);
         alert(`LOCAL= ${localStorage.getItem('L1')}`);
         alert(`DOCB!= ${docB1}`);
         alert(`NEWCOMPARE2= ${newCompareData2}`);
@@ -291,7 +292,9 @@ function updateData(text, compareChanges) {
         alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
         localStorage.removeItem('offline');
         alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
+        // b6002
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
+        // b6002
         updateDB('L1', 'B1');
     } else {
         updateDB('B1', 'L1');
