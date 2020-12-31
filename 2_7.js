@@ -104,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm06i';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06j';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -146,7 +146,7 @@ var db = firebase.firestore();
 // var hideCompare = false;
 
 // ------------------ START ------------------ //
-localStorage.removeItem('alrt');
+// localStorage.removeItem('alrt');
 
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     showLogin.innerHTML = '';
@@ -239,13 +239,14 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             compareChanges = localStorage.getItem('L1');
         }
     
-        alert(`LOCAL= ${localStorage.getItem('L1')}`);
-        alert(`DOCB!= ${docB1}`);
+        // alert(`LOCAL= ${localStorage.getItem('L1')}`);
+        // alert(`DOCB!= ${docB1}`);
         if (!localStorage.getItem('offline')){
-            updateDB('B1', 'L1');
+            // updateDB('B1', 'L1');
+            compareChanges = localStorage.getItem('L1');
         }
-        alert(`LOCAL= ${localStorage.getItem('L1')}`);
-        alert(`DOCB!= ${docB1}`);
+        // alert(`LOCAL= ${localStorage.getItem('L1')}`);
+        // alert(`DOCB!= ${docB1}`);
 
         splitInit();
 

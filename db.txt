@@ -69,7 +69,7 @@
     - Mejorar reinicio al cambiar PIN
 
 
-2.7.3-beta_opm06i
+2.7.3-beta_opm06j
 
     new
     - (2_7.js) L290
@@ -87,8 +87,8 @@
 
 
     REVISAR
-    (2_7) L 242
-        + Comentario updateDB('B1', 'L1');
+    (2_7) L 149
+        + Comentario localStorage.removeItem('alrt');
     (fun_js) L 287
         + alert();
     - Mejorar reinicio al cambiar PIN
