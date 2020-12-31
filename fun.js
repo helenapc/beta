@@ -289,6 +289,8 @@ function updateData(text, compareChanges) {
         alert(`NEWCOMPARE2= ${newCompareData2}`);
         alert(`COMPARECHANGES= ${compareChanges}`);
         alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
+        localStorage.removeItem('offline');
+        alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         updateDB('L1', 'B1');
     } else {
@@ -451,7 +453,7 @@ function alertAdd2(modalVal) {
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     // 
-    
+
     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
     aTotalTOnewTotal();
     save();
@@ -568,29 +570,29 @@ function buttons_modal(func) {
         if (document.getElementById('op1').innerHTML == 'Editar cuenta') alertEdit2(modalVal, reemplace);
         if (document.getElementById('op1').innerHTML == 'Agregar cuenta') alertAdd2(modalVal);
 
-        
+
         // TEST
         // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
         // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
         // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
 
-    
+
 
     if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
 
     if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
-    
-    if (func == 'aceptar_offline') {
-        updateData('Aceptar', compareChanges);
-        // localStorage.removeItem('offline');
-    };
 
-    if (func == 'rechazar_offline') {
-        updateData('Rechazar', compareChanges);
+    // if (func == 'aceptar_offline') {
+        // updateData('Aceptar', compareChanges);
         // localStorage.removeItem('offline');
-    };
-// 
+    // };
+
+    // if (func == 'rechazar_offline') {
+        // updateData('Rechazar', compareChanges);
+        // localStorage.removeItem('offline');
+    // };
+    // 
     if (func == 'verCambios') {
 
         let txtTemp = []; aTotalTemp = []; newa = [];
@@ -624,9 +626,9 @@ function buttons_modal(func) {
         };
 
         //parche b5002
-        if (arrCompareAdd == '' && arrCompareEdit == '' && arrCompareDel == ''){
+        if (arrCompareAdd == '' && arrCompareEdit == '' && arrCompareDel == '') {
             return
-        }else{
+        } else {
             document.getElementById('modal').innerHTML = `
             <p id="op1" class="cct">Cambios</p>
             <hr style="height:1px; border-width:0; color:gray;background-color:gray">
@@ -640,7 +642,7 @@ function buttons_modal(func) {
             <input type="button" class="modal_btns" value="CONFIRMAR" onClick="buttons_modal('aceptar')">
             <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
             `;
-            
+
             document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
             document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
         }
