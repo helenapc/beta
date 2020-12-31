@@ -69,13 +69,14 @@
     - Mejorar reinicio al cambiar PIN
 
 
-2.7.3-beta_opm06d
+2.7.3-beta_opm06f
 
     new
     - (2_7.js) L290
         + if offline, cargar datos desde offline
 
     bug
+
     b5001 - no funciona enviar mail
     b5004 - opción para modo offline (aplicar cambios offline)
 

@@ -104,7 +104,7 @@ item('barLogout', 'log-out-outline', 'Cerrar Sesión');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm06e';
+ver.innerHTML = 'Versión 2.7.3-beta_opm06f';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME

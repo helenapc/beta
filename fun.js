@@ -284,7 +284,11 @@ function updateData(text, compareChanges) {
 
 
     if (text == 'Rechazar') {
-        alert(`LOCAL= ${localStorage.getItem('L1')}<br>DOCB!= ${docB1}<br>NEWCOMPARE2= ${newCompareData2}<br>COMPARECHANGES= ${compareChanges}`);
+        alert(`LOCAL= ${localStorage.getItem('L1')}`);
+        alert(`DOCB!= ${docB1}`);
+        alert(`NEWCOMPARE2= ${newCompareData2}`);
+        alert(`COMPARECHANGES= ${compareChanges}`);
+        alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         updateDB('L1', 'B1');
     } else {
