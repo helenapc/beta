@@ -281,12 +281,14 @@ function updateData(text, compareChanges) {
 
     document.getElementById('userName').innerHTML = deco(txt[0]);
     showLogin.innerHTML = '';
+
+
     if (text == 'Rechazar') {
+        alert(`LOCAL= ${localStorage.getItem('L1')}<br>DOCB!= ${docB1}<br>NEWCOMPARE2= ${newCompareData2}<br>COMPARECHANGES= ${compareChanges}`);
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         updateDB('L1', 'B1');
     } else {
         updateDB('B1', 'L1');
-
     }
 
     newSearch.value = '';
@@ -444,6 +446,7 @@ function alertAdd2(modalVal) {
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // 
     
     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
     aTotalTOnewTotal();
@@ -489,6 +492,12 @@ function alertEdit2(modalVal, reemplace) {
             return;
         }
     }
+
+    //parche b6001
+    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // 
 
     aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
     aTotalTOnewTotal();
@@ -555,17 +564,29 @@ function buttons_modal(func) {
         if (document.getElementById('op1').innerHTML == 'Editar cuenta') alertEdit2(modalVal, reemplace);
         if (document.getElementById('op1').innerHTML == 'Agregar cuenta') alertAdd2(modalVal);
 
-
+        
         // TEST
         // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
         // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
         // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
     }
 
+    
+
     if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
 
     if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
+    
+    if (func == 'aceptar_offline') {
+        updateData('Aceptar', compareChanges);
+        // localStorage.removeItem('offline');
+    };
 
+    if (func == 'rechazar_offline') {
+        updateData('Rechazar', compareChanges);
+        // localStorage.removeItem('offline');
+    };
+// 
     if (func == 'verCambios') {
 
         let txtTemp = []; aTotalTemp = []; newa = [];
