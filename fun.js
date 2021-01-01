@@ -290,10 +290,14 @@ function updateData(text, compareChanges) {
         alert(`NEWCOMPARE2= ${newCompareData2}`);
         alert(`COMPARECHANGES= ${compareChanges}`);
         alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
-        localStorage.removeItem('offline');
-        alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
         // b6002
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
+        if (localStorage.getItem('offline')){
+            // updateDB('B1', 'L1');
+            localStorage.removeItem('offline');
+            compareChanges = localStorage.getItem('L1');
+        }
+        alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
         // b6002
         updateDB('L1', 'B1');
     } else {
