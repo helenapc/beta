@@ -418,7 +418,22 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
             handler: () => {
                 aTotal.splice(reemplace / 5, 1);
                 aTotalTOnewTotal();
-                refreshData();
+                if (newSearch.value == '') {
+                    
+                    // refreshData();
+                    showSearch.innerHTML = '';
+                    showIcon.setAttribute('name', icoHide);
+                    expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+                    for (i = 0; i < newTotal.length; i += 5) {
+                        showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
+                    }
+                    newTotal.length / 5 == 1 ? (s = '') : (s = 's');
+                    presentToast(`${newTotal.length / 5} Cuenta${s} guardad${s}.`, '800', 'dark');
+                    
+                }else{
+                    refreshData();
+
+                }
                 save();
                 presentToast(`"${cuPath[0]}" eliminado.`, '800', 'danger');
                 updateDB('L1', 'B1');
@@ -495,56 +510,15 @@ document.getElementById('nameSetting').addEventListener('click', () => {
     // }
 });
 
-// document.getElementById('expandCard').addEventListener('click', () => {
-//     let icon = document.getElementById('expandIcon');
-//     icon.setAttribute('name', (icon.getAttribute('name') == icoExp) ? icoCom : icoExp);
-
-//     if (newSearch.value == '' && showSearch.innerHTML != '') {
-//         newSearch.value = '*'
-//         refreshData(false);
-//         newSearch.value = ''
-//     } else {
-//         refreshData(false);
-//     }
-// });
-
-
-
-// document.getElementById('showCard').addEventListener('click', () => {
-//     var testExpand = false;
-//     if (document.getElementById('showIcon').getAttribute('name') == icoShow) {
-//         document.getElementById('showIcon').setAttribute('name', icoHide);
-//         newSearch.setAttribute('style', 'margin-top:-60px');
-//         // newSearch.setAttribute('style', 'opacity:0');
-//         // multipleAttribute(['#new-s'], 'style', 'opacity:0; margin-top:-60px');
-//         statSearchBar = false;
-//         testExpand = false;
-//         newSearch.value = '*';
-//         // newSearch.setAttribute('style', 'opacity:1');
-//         //newSearch.value.setAttribute('style', 'opacity:1');
-//         // newSearch.setAttribute('style', 'opacity:1');
-//     } else {
-//         document.getElementById('showIcon').setAttribute('name', icoShow);
-//         newSearch.setAttribute('style', 'margin-top:0px');
-//         // multipleAttribute(['#new-s'], 'style', 'opacity:1; margin-top:0px');
-//         newSearch.setFocus();
-//         statSearchBar = true;
-//         testExpand = true;
-//         newSearch.value = '';
-//         // showSearch.innerHTML = '';
-
-//     };
-//     refreshData();
-// });
 
 document.getElementById('expandCard').addEventListener('click', () => {
     expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
-    if (newSearch.value == ''){
+    if (newSearch.value == '') {
         showSearch.innerHTML = '';
         for (i = 0; i < newTotal.length; i += 5) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
         }
-    }else{
+    } else {
         refreshData(false);
     }
 });
@@ -564,8 +538,8 @@ document.getElementById('showCard').addEventListener('click', () => {
         for (i = 0; i < newTotal.length; i += 5) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
         }
-        newTotal.length/5 == 1 ? (s = '') : (s = 's');
-        presentToast(`${newTotal.length/5} Cuenta${s} guardad${s}.`, '800', 'dark');
+        newTotal.length / 5 == 1 ? (s = '') : (s = 's');
+        presentToast(`${newTotal.length / 5} Cuenta${s} guardad${s}.`, '800', 'dark');
 
     } else {
         showIcon.setAttribute('name', icoShow);

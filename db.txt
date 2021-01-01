@@ -69,30 +69,59 @@
     - Mejorar reinicio al cambiar PIN
 
 
-2.7.3-beta_opm06k
+2.7.3-beta_opm06
 
     new
-    - (2_7.js) L290
-        + if offline, cargar datos desde offline
 
     bug
-    b6002
     b5001 - no funciona enviar mail
-    b5004 - opción para modo offline (aplicar cambios offline)
+    b60XX - (pointer-events: none) en FAB inactivos (cuando add FAB)
 
-    fix
-    - (pointer-events: none) en FAB inactivos (cuando add FAB)
     b6001 - en offline, click en "ok" (modal_edit) no desaparce modal.
         + forzar opcity: 0;
+    b6002 - (fun - 288-291) errores offline
+    b6003 - (2_7 - 276-285) opción para modo offline (aplicar cambios offline)
+
+    fix
 
 
-    REVISAR
+    REVISAR para prox versión
+
+
+    MEJORAS para prox versión
+        - Mejorar reinicio al cambiar PIN
+        - Al borrar en (showSearch !='' y newSearch == '') mostrar restantes.
+
+
+2.7.3-beta_opm07
+
+    new
+    - Mejoras operaciones con barra de búsqueda vacía.
+        + Al borrar en (showSearch !='' y newSearch == '') mostrar restantes.
+
+
+    bug
+    b5001 - no funciona enviar mail
+
+
+    fix
+    b60XX - (pointer-events: none) en FAB inactivos (cuando add FAB)
+
+    b6001 - en offline, click en "ok" (modal_edit) no desaparce modal.
+        + forzar opcity: 0;
+    b6002 - (fun - 288-291) errores offline
+    b6003 - (2_7 - 276-285) opción para modo offline (aplicar cambios offline)
+
+
+    REVISAR para prox versión
     (2_7) L 149
         + Comentario localStorage.removeItem('alrt');
-    (fun_js) L 287
-        + alert();
-    - Mejorar reinicio al cambiar PIN
 
+
+    MEJORAS para prox versión
+        - Mejorar reinicio al cambiar PIN
+
+        
 
 PROBAR
     - línea 460 - 462

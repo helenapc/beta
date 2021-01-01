@@ -193,6 +193,7 @@ function refreshData(toast = true) {
     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
     if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha())) }
 }
+
 function alertMsg(msg1, msg2) {
     const alert = document.createElement('ion-alert');
     alert.subHeader = msg1;
@@ -284,21 +285,13 @@ function updateData(text, compareChanges) {
 
 
     if (text == 'Rechazar') {
-        alert(`TXT= ${txt}`);
-        alert(`LOCAL= ${localStorage.getItem('L1')}`);
-        alert(`DOCB!= ${docB1}`);
-        alert(`NEWCOMPARE2= ${newCompareData2}`);
-        alert(`COMPARECHANGES= ${compareChanges}`);
-        alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
         // b6002
         if (localStorage.getItem('offline')){
-            // updateDB('B1', 'L1');
             localStorage.removeItem('offline');
             compareChanges = localStorage.getItem('L1');
         }
+        // /b6002
         localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
-        alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
-        // b6002
         updateDB('L1', 'B1');
     } else {
         updateDB('B1', 'L1');
