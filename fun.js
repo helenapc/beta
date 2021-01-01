@@ -507,6 +507,9 @@ function alertEdit2(modalVal, reemplace) {
 
     aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
     aTotalTOnewTotal();
+    showSearch.innerHTML = '';
+    newSearch.value = modalVal[0];
+    document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
     presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
     save();
@@ -673,7 +676,7 @@ function buttons_modal(func) {
 
     if (func != 'verCambios') { //CANCELAR
         multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
-        multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+        multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
         if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     }
 

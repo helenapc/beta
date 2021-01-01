@@ -4,7 +4,7 @@
 
 document.getElementById('bkmodal').addEventListener('click', () => {
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
@@ -365,39 +365,39 @@ barLogout.addEventListener('click', () => {
 
 barDelAcc.addEventListener('click', () => { });
 
-barLOG.addEventListener('click', () =>{
+barLOG.addEventListener('click', () => {
     barMenuPrincipal.close();
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');    
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');   
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
     document.getElementById('modal').innerHTML =
-    `
-    <p id="op1" class="cct">Novedades<p style="font-size:13px">2.7.3-beta_opm07</p></p>
+        `
+    <p id="op1" class="cct">Novedades<p style="font-size:13px">${ver.innerHTML}</p></p>
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 0px 0px;">
 
         <div class="div_list";>
             <label class="ccse" >NUEVO!:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
             - Mejoras operaciones con barra de búsqueda vacía.<br/>
             </p></label>
             
-            <label class="ccse" >Errores:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            <label class="ccse" >ERRORES:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
             - No funciona enviar mail(b5001).<br/>
             - "Eliminar cuenta" desactivado(b5001).<br/>
             </p></label>
             
-            <label class="ccse" >Arreglos:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
-            - FAB inactivos(b60XX).<br/>
+            <label class="ccse" >ARREGLOS:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
+            - FAB activos/inactivos(b60XX).<br/>
             - No desaparce modal en modo offline(b6001).<br/>
             - Errores de carga offline(b6002).<br/>
             </p></label>
             
-            <label class="ccse" >En proceso..
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            <label class="ccse" >EN PROCESO..
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
             - Mantener cuentas B1 y B2 al restaurar contraseña.<br/>
             - Mejorar reinicio al cambiar PIN.<br/>
             - Texto para botones offline.<br/>
@@ -426,6 +426,11 @@ barLOG.addEventListener('click', () =>{
 document.getElementById('buttonEdit').addEventListener('click', () => {
 
     multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+    // multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0; pointer-events: none');
+
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
+
 
     document.getElementById('modal').innerHTML =
         `
@@ -451,15 +456,18 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
 document.getElementById('buttonDelete').addEventListener('click', () => {
 
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-
+   
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [
         {
-            text: 'cancelar', role: 'cancel'
-            // handler: () => {
-            // multipleAttribute(['#nameSetting','#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-            // }
+            text: 'cancelar',
+            handler: () => {
+                multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+                if (showSearch.innerHTML != '') {
+                    multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+                }
+            }
         },
         {
             text: 'ok',
@@ -467,7 +475,7 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                 aTotal.splice(reemplace / 5, 1);
                 aTotalTOnewTotal();
                 if (newSearch.value == '') {
-                    
+
                     // refreshData();
                     showSearch.innerHTML = '';
                     showIcon.setAttribute('name', icoHide);
@@ -477,8 +485,8 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                     }
                     newTotal.length / 5 == 1 ? (s = '') : (s = 's');
                     presentToast(`${newTotal.length / 5} Cuenta${s} guardad${s}.`, '800', 'dark');
-                    
-                }else{
+
+                } else {
                     refreshData();
 
                 }
@@ -486,14 +494,19 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                 presentToast(`"${cuPath[0]}" eliminado.`, '800', 'danger');
                 updateDB('L1', 'B1');
                 closeAlert = false;
+                multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+                if (showSearch.innerHTML != '') {
+                    multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+                }
                 // multipleAttribute(['#nameSetting','#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
 
             },
         },
     ];
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+    // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
     if (showSearch.innerHTML != '') {
-        multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+        // multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+
 
     } else {
         document.getElementById('showIcon').setAttribute('name', icoShow);
@@ -619,7 +632,7 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
 
 
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
     // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
