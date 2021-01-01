@@ -365,7 +365,55 @@ barLogout.addEventListener('click', () => {
 
 barDelAcc.addEventListener('click', () => { });
 
+barLOG.addEventListener('click', () =>{
+    barMenuPrincipal.close();
+    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');    
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');   
 
+    document.getElementById('modal').innerHTML =
+    `
+    <p id="op1" class="cct">Novedades<p style="font-size:13px">2.7.3-beta_opm07</p></p>
+    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+    <p style="margin: 0px 0px 0px 0px;">
+
+        <div class="div_list";>
+            <label class="ccse" >NUEVO!:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            - Mejoras operaciones con barra de búsqueda vacía.<br/>
+            </p></label>
+            
+            <label class="ccse" >Errores:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            - No funciona enviar mail(b5001).<br/>
+            - "Eliminar cuenta" desactivado(b5001).<br/>
+            </p></label>
+            
+            <label class="ccse" >Arreglos:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            - FAB inactivos(b60XX).<br/>
+            - No desaparce modal en modo offline(b6001).<br/>
+            - Errores de carga offline(b6002).<br/>
+            </p></label>
+            
+            <label class="ccse" >En proceso..
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6; white-space: nowrap;">
+            - Mantener cuentas B1 y B2 al restaurar contraseña.<br/>
+            - Mejorar reinicio al cambiar PIN.<br/>
+            - Texto para botones offline.<br/>
+            </p></label>
+        </div>
+    </p>
+
+    <input type="button" style="margin-top:10px" class="modal_btns" value="OK" onClick="buttons_modal('cancel')">
+
+    `;
+
+
+    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
+    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+});
 
 
 //FAB TEST
