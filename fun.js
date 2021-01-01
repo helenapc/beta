@@ -291,12 +291,12 @@ function updateData(text, compareChanges) {
         alert(`COMPARECHANGES= ${compareChanges}`);
         alert(`LOCAL-OFFLINE= ${localStorage.getItem('offline')}`)
         // b6002
-        localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         if (localStorage.getItem('offline')){
             // updateDB('B1', 'L1');
             localStorage.removeItem('offline');
             compareChanges = localStorage.getItem('L1');
         }
+        localStorage.setItem('L1', (docB1 == newCompareData2) ? compareChanges : newCompareData2);
         alert(`LOCAL-OFFLINE-post= ${localStorage.getItem('offline')}`)
         // b6002
         updateDB('L1', 'B1');
