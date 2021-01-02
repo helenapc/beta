@@ -385,23 +385,30 @@ function sendEmail() {
                                     .then(function () {
                                         presentToast('Mail enviado', 1000, 'success');
                                         barProgressF('light', 'determinate');
-                                        setTimeout(() => { window.location.reload(); }, 1000);
+                                        // setTimeout(() => { window.location.reload(); }, 1000);
                                     });
 
-
-                                Email.send({
-                                    Host: "smtp.gmail.com",
-                                    Username: "restore.pass.helena@gmail.com",
-                                    Password: "8u53pyjmj45n5n",
-                                    To: usData.restorePass,
-                                    From: "restore.pass.helena@gmail.com",
-                                    Subject: "Restaurar contraseña",
-                                    Body:
-                                        `
-                                         <h2>Nueva contraseña temporal:</h2>
-                                         <h1>${restoreKey}</h1><h4>(Válida por única vez)</h1>
-                                     `,
-                                })
+                                // Email.send({
+                                //     Host: "smtp.gmail.com",
+                                //     Username: "restore.pass.helena@gmail.com",
+                                //     Password: "8u53pyjmj45n5n",
+                                //     To: usData.restorePass,
+                                //     From: "restore.pass.helena@gmail.com",
+                                //     Subject: "Restaurar contraseña",
+                                //     Body:
+                                //         `
+                                        //  <h2>Nueva contraseña temporal:</h2>
+                                        //  <h1>${restoreKey}</h1><h4>(Válida por única vez)</h1>
+                                //      `,
+                                // })
+                                
+                                // b5001
+                                emailjs.send("service_60bgz48","template_jb9t50n",{
+                                    to_email: usData.restorePass,
+                                    restore_Key: restoreKey,
+                                    });
+                                // b5001
+                                
 
                             };
                         };

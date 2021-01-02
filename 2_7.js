@@ -105,7 +105,7 @@ item('barLOG', 'document-text-outline', 'Novedades');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm08';
+ver.innerHTML = 'Versión 2.7.3-beta_opm09';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -127,7 +127,7 @@ if (eyePass) {
 
 // document.getElementById('cardPin').setAttribute('style', 'pointer-events: none; opacity: 0');
 
-
+emailjs.init('user_EbX2uqx7kGIlimJTNppDy');
 
 firebase.initializeApp({
     apyKey: deco("464E7F66587E465F5C3A6B7A4B4B3D5D387F745A5C69696E466C374E554A74697953585D383868"),

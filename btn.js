@@ -33,18 +33,13 @@ buttonLogin.addEventListener('click', () => {
 
                 if (docB1.includes(localStorage.getItem('accessTempData'))) {
                     coincidencia = true;
-                    // 
                     localStorage.setItem('tPin', Date.now());
-                    // 
                     updateDB('B1', 'L1');
                     splitInit();
                     aTotalTOnewTotal();
                     localStorage.setItem('accessTempData', txt[0] + 'GD' + code(nameLog.value) + 'GD' + code(passLog.value) + 'GD'); //TEST
-
                     localStorage.setItem('bp', txt[4]); //FIX?
-
                     document.getElementById('userName').innerHTML = deco(txt[0]);
-                    // disableItem(false);
                     multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch'], 'style', 'pointer-events: auto; opacity: 1');
                     window.location.reload();
                 }
@@ -61,7 +56,6 @@ buttonLogin.addEventListener('click', () => {
                     console.log(userID);
                     console.log(docB3);
 
-                    // function presentRestorePass() {
                     const alert = document.createElement('ion-alert');
                     alert.subHeader = 'Restablecer contraseña';
                     alert.inputs = [
@@ -102,6 +96,10 @@ buttonLogin.addEventListener('click', () => {
                                 // multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
                                 // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
 
+
+
+
+
                                 db.collection(coll).doc(userID).update({
                                     B3: firebase.firestore.FieldValue.delete()
                                 }).then(function () {
@@ -116,8 +114,6 @@ buttonLogin.addEventListener('click', () => {
                     ];
                     document.body.appendChild(alert);
                     return alert.present();
-                    // }
-                    // presentRestorePass();
 
                 }
             };
@@ -363,7 +359,102 @@ barLogout.addEventListener('click', () => {
     window.location.reload();
 });
 
-barDelAcc.addEventListener('click', () => { });
+barDelAcc.addEventListener('click', () => {
+    barMenuPrincipal.close();
+    function deleteData() {
+        barProgressF('danger', 'determinate');
+        const alert = document.createElement('ion-alert');
+        alert.header = '¡Advertencia!';
+        alert.subHeader = '¿Desea eliminar la cuenta y todos sus datos permanentemente?';
+        alert.buttons = [
+            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
+            {
+                text: 'confirmar',
+                handler: () => {
+
+                    //    console.log(userID);
+
+                    //    Email.send({
+                    //        Host: "smtp.gmail.com",
+                    //        Username: "restore.pass.helena@gmail.com",
+                    //        Password: "restaurar1234",
+                    //        To: deco(txt[1]),
+                    //        From: "restore.pass.helena@gmail.com",
+                    //        Subject: "Eliminar cuenta.",
+                    //        Body:
+                    //            `
+                    //            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
+                    //            <h1>${userID}</h1>
+                    //        `,
+                    //    }).then(function () {
+                    //        console.log("correo enviado");
+                    //    }).catch(function (error) {
+                    //        console.error("Error removing document: ", error);
+                    //    });
+
+                    // b5001a
+                    emailjs.send("service_60bgz48", "template_vfonhil", {
+                        name: deco(txt[0]),
+                        to_email: deco(txt[1]),
+                        key: userID,
+                    });
+                    // b5001a
+
+                    presentToast('Clave enviada por mail', 1000, 'success');
+
+                    function confirmVoid() {
+                        const alert = document.createElement('ion-alert');
+                        alert.setAttribute('backdrop-dismiss', 'false');
+                        alert.subHeader = 'Complete los datos para terminar el proceso.'
+                        alert.message = '(Se envió por correo la clave para confirmar el proceso).'
+
+                        alert.inputs = [
+                            { name: 'avoid', placeholder: 'Usuario' },
+                            { name: 'bvoid', placeholder: 'Contraseña' },
+                            { name: 'cvoid', placeholder: 'Clave de confirmación' },
+                        ];
+                        alert.buttons = [
+                            {
+                                text: 'Ok',
+                                handler: (x) => {
+                                    if (txt[1] == code(x.avoid) && txt[2] == code(x.bvoid) && userID == x.cvoid) {
+                                        barProgressF('danger', 'indeterminate');
+                                        localStorage.setItem('L1', localStorage.getItem('L1') + 'aa');
+                                        updateDB('L1', 'B1');
+
+                                        setTimeout(() => {
+                                            db.collection(coll).doc(userID).delete()
+                                                .then(function () {
+                                                    console.log("Document successfully deleted!");
+                                                    setTimeout(() => { presentToast('Borrando.', '800', 'danger'); }, 2500); //probar
+                                                }).catch(function (error) {
+                                                    console.error("Error removing document: ", error);
+                                                });
+                                        }, 2000);
+                                    } else {
+                                        barProgressF('light', 'determinate');
+                                        presentToast('Incorrecto.', '800', 'warning');
+                                    }
+                                }
+                            },
+                            { text: 'cancelar', role: 'cancel', handler: () => { barProgressF('light', 'determinate') } },
+
+                        ]
+                        document.body.appendChild(alert);
+                        return alert.present();
+
+
+                    };
+                    confirmVoid();
+
+                }
+            }
+        ];
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+    deleteData();
+});
 
 barLOG.addEventListener('click', () => {
     barMenuPrincipal.close();
@@ -378,27 +469,21 @@ barLOG.addEventListener('click', () => {
     <p style="margin: 0px 0px 0px 0px;">
 
         <div class="div_list";>
-            <label class="ccse" >NUEVO!:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Mejoras operaciones con barra de búsqueda vacía.<br/>
-            </p></label>
             
             <label class="ccse" >ERRORES:
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - No funciona enviar mail(b5001).<br/>
-            - "Eliminar cuenta" desactivado(b5001).<br/>
+            - Fallas al iniciar con contraseña temporal(b0901).<br/>
+            - No reiniciar dispositivos al restaurar contraseña(b0902).<br/>
             </p></label>
             
             <label class="ccse" >ARREGLOS:
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - FAB activos/inactivos(b60XX).<br/>
-            - No desaparce modal en modo offline(b6001).<br/>
-            - Errores de carga offline(b6002).<br/>
+            - "Error al mandar mail(b5001).<br/>
+            - "Eliminar cuenta" reactivado(b5001a).<br/>
             </p></label>
             
             <label class="ccse" >EN PROCESO..
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Mantener cuentas B1 y B2 al restaurar contraseña.<br/>
             - Mejorar reinicio al cambiar PIN.<br/>
             - Texto para botones offline.<br/>
             </p></label>
@@ -456,7 +541,7 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
 document.getElementById('buttonDelete').addEventListener('click', () => {
 
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-   
+
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [

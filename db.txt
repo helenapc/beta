@@ -20,8 +20,6 @@
     - alfa de bkmodal
 
 
-
-
 2.7.3-beta_opm04
 
     new
@@ -46,7 +44,6 @@
 
     REVISAR
     - probar offline en app
-
 
 
 2.7.3-beta_opm05
@@ -124,6 +121,7 @@
         - Mantener cuentas B1 y B2 al restaurar contraseña
         - Nombres para modal_btns offline
 
+
 2.7.3-beta_opm08 (simil 07)
 
     new
@@ -156,6 +154,32 @@
         - Nombres para modal_btns offline
         
 
+2.7.3-beta_opm09    nota => b9001 -> b0901
+
+    new
+
+
+    bug
+    b9001 - fallas al iniciar con contraseña temporal
+    b9002 Reiniciar dispositivos al restaurar contraseña.
+
+    fix
+    b5001 - no funciona enviar mail
+    b5001a - "Eliminar cuenta" desactivado por falla de mail.
+
+
+    REVISAR para prox versión
+    (2_7 - 276-285) opción para modo offline (aplicar cambios offline)
+    (2_7) L 149
+        + Comentario localStorage.removeItem('alrt');
+
+
+    MEJORAS para prox versión
+        - Mejorar reinicio al cambiar PIN
+        - Mantener cuentas B1 y B2 al restaurar contraseña
+        - Nombres para modal_btns offline
+        
+
 PROBAR
     - línea 460 - 462
         + Comentarios "user-select:all"
@@ -174,6 +198,9 @@ PROBAR
     
     MIS
         + var 'compare' reemplazado por 'comparePersonalData' 
+
+
+
 
 2.8
 
