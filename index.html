@@ -39,9 +39,6 @@
     </ion-fab> -->
 
     <div class="ion-page" id="main-content">
-
-
-
       <ion-header>
         <ion-row id="barProgress"></ion-row>
         <ion-toolbar>
@@ -83,20 +80,21 @@
       </ion-row>
 
       <ion-content class="content" id='content'>
+
         <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
-          <!-- <ion-refresher-content pulling-icon="chevron-down-outline" refreshing-spinner="circular"> -->
           <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
 
+        
         <ion-row>
           <ion-col id="show-accounts1" size="9" offset="1.5" size-md="5" offset-md="3.5"></ion-col>
         </ion-row>
 
 
-
         <ion-row id="showLogin" style="margin-top: 50px;">
           
           <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
+
             <ion-item class="bordeSup">
               <ion-label position="floating">Email</ion-label>
               <ion-input id="nameLog"></ion-input>
@@ -107,16 +105,19 @@
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input type="password" id="passLog"></ion-input>
             </ion-item>
-
             
             <ion-button fill="outline" expand="block" id="buttonLogin" strong="true">Iniciar sesión </ion-button>
             <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
+
             <ion-button id="restorePass" style="text-transform: none" ; fill="clear" expand="block" button
               onclick="sendEmail()">
               <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
             </ion-button>
+
             <ion-label id="versionLogin" style="display: block; text-align: center;"></ion-label>
+
           </ion-col>
+
         </ion-row>
 
 

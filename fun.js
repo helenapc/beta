@@ -191,7 +191,7 @@ function refreshData(toast = true) {
 
     if (newSearch.value == '::id') { newSearch.value = userID; }
     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
-    if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha())) }
+    if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (deco(txt[0]) + '_' + fecha())) }
 }
 
 function alertMsg(msg1, msg2) {
@@ -387,20 +387,6 @@ function sendEmail() {
                                         barProgressF('light', 'determinate');
                                         // setTimeout(() => { window.location.reload(); }, 1000);
                                     });
-
-                                // Email.send({
-                                //     Host: "smtp.gmail.com",
-                                //     Username: "restore.pass.helena@gmail.com",
-                                //     Password: "8u53pyjmj45n5n",
-                                //     To: usData.restorePass,
-                                //     From: "restore.pass.helena@gmail.com",
-                                //     Subject: "Restaurar contraseña",
-                                //     Body:
-                                //         `
-                                        //  <h2>Nueva contraseña temporal:</h2>
-                                        //  <h1>${restoreKey}</h1><h4>(Válida por única vez)</h1>
-                                //      `,
-                                // })
                                 
                                 // b5001
                                 emailjs.send("service_60bgz48","template_jb9t50n",{
@@ -415,7 +401,7 @@ function sendEmail() {
                     });
                     if (!coincidencia) {
                         barProgressF('light', 'determinated');
-                        alertMsg('Error', 'Esta cuenta no está registrada');
+                        alertMsg('Error', 'Esa cuenta no está registrada');
                     };
                 });
             },
@@ -689,8 +675,6 @@ function buttons_modal(func) {
 
 }
 
-
-
 function listDrop(arrLista, tituloLista) {
     if (arrLista.length != 1) {
 
@@ -841,18 +825,16 @@ function presentAlertConfirmEdit(confPersonal) {
 
 //EXTRAS
 
-function fecha() { //var/let
+function fecha() {
     let today = new Date();
     let DD = String(today.getDate()).padStart(2, '0');
     let MM = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let YYYY = today.getFullYear();
-    let hh = today.getHours();
-    if (hh < 10) hh = '0' + hh;
-    let mm = today.getMinutes();
-    if (mm < 10) mm = '0' + mm;
-    today = DD + '-' + MM + '-' + (YYYY - 2000) + '-' + hh + mm;
-    return today;
+    let YY = today.getFullYear();
+    let hh = (today.getHours() < 10) ? '0' : '' + today.getHours();
+    let mm = (today.getMinutes() < 10) ? '0' : '' + today.getMinutes();
+    return today = `${DD}-${MM}-${YY}_${hh}${mm}`
 }
+
 
 function downloadFile(data, fileName, type = 'text/plain') {
     var data2 = new Blob([data], { type: 'text/plain' });

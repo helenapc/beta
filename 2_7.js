@@ -105,7 +105,7 @@ item('barLOG', 'document-text-outline', 'Novedades');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_opm09';
+ver.innerHTML = 'Versión 2.7.3-beta_r10';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -240,14 +240,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             compareChanges = localStorage.getItem('L1');
         }
     
-        // alert(`LOCAL= ${localStorage.getItem('L1')}`);
-        // alert(`DOCB!= ${docB1}`);
         if (!localStorage.getItem('offline')){
             updateDB('B1', 'L1');
             // compareChanges = localStorage.getItem('L1');
         }
-        // alert(`LOCAL= ${localStorage.getItem('L1')}`);
-        // alert(`DOCB!= ${docB1}`);
 
         splitInit();
 
@@ -275,7 +271,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
             // b6003
             if (localStorage.getItem('offline')) {
-                // localStorage.removeItem('offline');
+                // b1002
+                localStorage.removeItem('offline');
+                // /b1002
                 document.getElementById('modal').innerHTML =
                     `
                 <p class="cct" ;">Se detectaron cambios</p>

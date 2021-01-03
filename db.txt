@@ -178,7 +178,33 @@
         - Mejorar reinicio al cambiar PIN
         - Mantener cuentas B1 y B2 al restaurar contraseña
         - Nombres para modal_btns offline
-        
+
+
+2.7.3-beta_r10      nota -> opm10 -> r10
+
+    new
+
+
+    bug
+    *b1001 - opacidad fab al borrar (offline).
+    *b9001 - fallas al iniciar con contraseña temporal.
+
+    fix
+    + b9002 No cerrar sesión al restaurar contraseña.
+
+
+
+    REVISAR para prox versión
+    b1002F - Reaparece modal offline para cambios.
+    (2_7 - 276-285) Texto para modo offline (aplicar cambios offline).
+
+
+    MEJORAS para prox versión
+        - Actualizar datos a B1 por defecto (offline)
+            + No se todavía como hacerlo.
+        - Mejorar reinicio al cambiar PIN.
+        - Nombres para modal_btns offline.
+
 
 PROBAR
     - línea 460 - 462
@@ -197,12 +223,15 @@ PROBAR
 
     
     MIS
-        + var 'compare' reemplazado por 'comparePersonalData' 
+
 
 
 
 
 2.8
+- Opcion "deshacer" en "toast" al operar datos.
+    + setTimeout 1500/2000 antes de hacer cambios.
+    + variable tempL1 y boton deshacer reemplaza L1 por tempL1
 
 - elegir cambios en detalles (checkbox)
 - panel de configuraciones

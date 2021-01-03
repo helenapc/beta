@@ -19,6 +19,7 @@ buttonLogin.addEventListener('click', () => {
     barProgressF('success', 'indeterminate');
 
     localStorage.setItem('accessTempData', code(nameLog.value) + 'GD' + code(passLog.value) + 'GD');
+    // console.log(localStorage.getItem('accessTempData'));
 
     db.collection(coll).onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -38,6 +39,7 @@ buttonLogin.addEventListener('click', () => {
                     splitInit();
                     aTotalTOnewTotal();
                     localStorage.setItem('accessTempData', txt[0] + 'GD' + code(nameLog.value) + 'GD' + code(passLog.value) + 'GD'); //TEST
+                    // console.log(localStorage.getItem('accessTempData'));
                     localStorage.setItem('bp', txt[4]); //FIX?
                     document.getElementById('userName').innerHTML = deco(txt[0]);
                     multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch'], 'style', 'pointer-events: auto; opacity: 1');
@@ -49,12 +51,13 @@ buttonLogin.addEventListener('click', () => {
                 // console.log(docB1);
                 // console.log(docB2);
 
+
+
                 if (code(nameLog.value) == userRestoreAccount[1] && passLog.value == docB3) {
                     coincidencia = true;
-                    console.log(docB1);
-                    console.log(coll);
-                    console.log(userID);
-                    console.log(docB3);
+
+                    // console.log(docB1);
+                    // console.log(userID);
 
                     const alert = document.createElement('ion-alert');
                     alert.subHeader = 'Restablecer contraseña';
@@ -67,37 +70,45 @@ buttonLogin.addEventListener('click', () => {
                         {
                             text: 'Ok',
                             handler: usRData => {
+
+
                                 if (usRData.pass01 == '' || usRData.pass02 == '' || usRData.pass01 != usRData.pass02) {
                                     alertMsg('Error', 'Datos incorrectos o vacíos.');
+                                    window.location.reload();
                                     return;
                                 }
 
-                                localStorage.setItem('L1', userRestoreAccount[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD' + userRestoreAccount[3]);
-                                // localStorage.setItem('accessTempData', userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD');
+                                // localStorage.setItem('L1', userRestoreAccount[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(usRData.pass01) + 'GD' + userRestoreAccount[3]);
                                 // localStorage.setItem('accessTempData', txt[0] + 'GD' + userRestoreAccount[1] + 'GD' + code(passLog.value) + 'GD'); //TEST
 
-                                // 
-                                // localStorage.setItem('tPin', Date.now());
-                                // 
-
                                 // coincidencia = true;
+
+                                
+                                //b9002
+                                localStorage.setItem('tPin', Date.now());
+                                txt[0] = (userRestoreAccount[0] == '') ? '25' : userRestoreAccount[0]
+                                txt[1] = userRestoreAccount[1];
+                                txt[2] = code(usRData.pass01);
+                                txt[3] = userRestoreAccount[3];
+                                txt[4] = userRestoreAccount[4];
+
+                                document.getElementById('userName').innerHTML = deco(txt[0]);
+                                document.getElementById('nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
+                                localStorage.setItem('accessTempData', txt[0] + 'GD' + txt[1] + 'GD' + txt[2] + 'GD');
+                                localStorage.setItem('bp', txt[4]);
+                                localStorage.setItem('tPin', Date.now());
+    
+                                // save();
+                                localStorage.setItem('L1', `${txt[0]}GD${txt[1]}GD${txt[2]}GD${txt[3]}GD${txt[4]}`);
                                 updateDB('L1', 'B1');
                                 updateDB('L1', 'B2');
-
-                                // updateDB('B1', 'L1');
-
-                                localStorage.clear();
-
-
+                                comparePersonalData = false;
+                                // /b9002
+                                
+                                // alertcompare = false;
+                                // PROBAR
                                 // splitInit();
                                 // aTotalTOnewTotal();
-                                // document.getElementById('userName').innerHTML = deco(txt[0]);
-
-                                // multipleAttribute(['.button_nav', '#buttonAdd', '#nameSetting', '#showCard', '#buttonSearch', '#refresher'], 'style', 'pointer-events: auto; opacity: 1');
-                                // document.getElementById('content').setAttribute('style', '--background: #ffffff00');
-
-
-
 
 
                                 db.collection(coll).doc(userID).update({
@@ -108,7 +119,6 @@ buttonLogin.addEventListener('click', () => {
                                         window.location.reload();
                                     }, 1000);
                                 });
-
                             },
                         },
                     ];
@@ -372,26 +382,6 @@ barDelAcc.addEventListener('click', () => {
                 text: 'confirmar',
                 handler: () => {
 
-                    //    console.log(userID);
-
-                    //    Email.send({
-                    //        Host: "smtp.gmail.com",
-                    //        Username: "restore.pass.helena@gmail.com",
-                    //        Password: "restaurar1234",
-                    //        To: deco(txt[1]),
-                    //        From: "restore.pass.helena@gmail.com",
-                    //        Subject: "Eliminar cuenta.",
-                    //        Body:
-                    //            `
-                    //            <h2>Clave para confirmar la eliminación de la cuenta:</h2>
-                    //            <h1>${userID}</h1>
-                    //        `,
-                    //    }).then(function () {
-                    //        console.log("correo enviado");
-                    //    }).catch(function (error) {
-                    //        console.error("Error removing document: ", error);
-                    //    });
-
                     // b5001a
                     emailjs.send("service_60bgz48", "template_vfonhil", {
                         name: deco(txt[0]),
@@ -469,23 +459,17 @@ barLOG.addEventListener('click', () => {
     <p style="margin: 0px 0px 0px 0px;">
 
         <div class="div_list";>
-            
-            <label class="ccse" >ERRORES:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Fallas al iniciar con contraseña temporal(b0901).<br/>
-            - No reiniciar dispositivos al restaurar contraseña(b0902).<br/>
-            </p></label>
-            
+
             <label class="ccse" >ARREGLOS:
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - "Error al mandar mail(b5001).<br/>
-            - "Eliminar cuenta" reactivado(b5001a).<br/>
+            - No cerrar sesión al restaurar contraseña(b9002).<br/>
             </p></label>
             
             <label class="ccse" >EN PROCESO..
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
+            - Actualizar datos a B1 por defecto (offline).<br/>
             - Mejorar reinicio al cambiar PIN.<br/>
-            - Texto para botones offline.<br/>
+            .<br/>
             </p></label>
         </div>
     </p>
@@ -549,9 +533,6 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
             text: 'cancelar',
             handler: () => {
                 multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-                if (showSearch.innerHTML != '') {
-                    multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-                }
             }
         },
         {
@@ -559,6 +540,10 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
             handler: () => {
                 aTotal.splice(reemplace / 5, 1);
                 aTotalTOnewTotal();
+
+                multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+                if (showSearch.innerHTML != '') expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+
                 if (newSearch.value == '') {
 
                     // refreshData();
@@ -573,35 +558,34 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
 
                 } else {
                     refreshData();
-
                 }
                 save();
                 presentToast(`"${cuPath[0]}" eliminado.`, '800', 'danger');
                 updateDB('L1', 'B1');
+                // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+                // if (showSearch.innerHTML != '') expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
                 closeAlert = false;
-                multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-                if (showSearch.innerHTML != '') {
-                    multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-                }
+
                 // multipleAttribute(['#nameSetting','#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
 
             },
         },
     ];
+
     // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-    if (showSearch.innerHTML != '') {
-        // multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // if (showSearch.innerHTML != '') {
+    //     // multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
 
 
-    } else {
-        document.getElementById('showIcon').setAttribute('name', icoShow);
-        newSearch.setAttribute('style', 'margin-top:0px');
-        // multipleAttribute(['#new-s'], 'style', 'opacity:1; margin-top:0px');
-        newSearch.setFocus();
-        statSearchBar = true;
-        testExpand = true;
-        newSearch.value = '';
-    }
+    // } else {
+    //     document.getElementById('showIcon').setAttribute('name', icoShow);
+    //     newSearch.setAttribute('style', 'margin-top:0px');
+    //     // multipleAttribute(['#new-s'], 'style', 'opacity:1; margin-top:0px');
+    //     newSearch.setFocus();
+    //     statSearchBar = true;
+    //     testExpand = true;
+    //     newSearch.value = '';
+    // }
 
     document.body.appendChild(alert);
     return alert.present();
@@ -729,24 +713,30 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
     <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     <p style="margin: 0px 0px 15px 0px;">
 
-        <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Cuenta:</label>
-        <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Usuario:</label>
-        <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-        <label class="cce" > Contraseña:</label>
-        <input type="text" placeholder="Opcional" class="ccse modal_input" value="">
-        <label class="cce" > Notas:</label>
-        </p>
+    <input type="text" placeholder="cuenta" class="ccse modal_input" value="">
+    <label class="cce" > Cuenta:</label>
+    <input type="text" placeholder="usuario" class="ccse modal_input" value="">
+    <label class="cce" > Usuario:</label>
+    <input type="text" placeholder="contraseña" class="ccse modal_input" value="">
+    <label class="cce" > Contraseña:</label>
+    <input type="text" placeholder="notas" class="ccse modal_input" value="">
+    <label class="cce" > Notas:</label>
+    </p>
 
     <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok')">
     <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
     `;
 
+    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
+    // <label class="cce" > Cuenta:</label>
+    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
+    // <label class="cce" > Usuario:</label>
+    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
+    // <label class="cce" > Contraseña:</label>
+    // <input type="text" placeholder="Opcional" class="ccse modal_input" value="">
+    // <label class="cce" > Notas:</label>
 
-    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
     // alertcompare = false;
 });
