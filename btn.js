@@ -446,7 +446,7 @@ barDelAcc.addEventListener('click', () => {
     deleteData();
 });
 
-barLOG.addEventListener('click', () => {
+barLOG.addEventListener('click', () => { //LOG
     barMenuPrincipal.close();
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
@@ -460,16 +460,29 @@ barLOG.addEventListener('click', () => {
 
         <div class="div_list";>
 
+            <label class="ccse" >NUEVO!:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
+            - Mejoras en velocidad.<br>
+            </p></label>
+
+
+            <label class="ccse" >ERRORES:
+            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
+            - Textos desplazados (navegador de celular).<br>
+            </p></label>
+
             <label class="ccse" >ARREGLOS:
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - No cerrar sesión al restaurar contraseña(b9002).<br/>
+            - Fallas al iniciar con contraseña temporal.(b0901).<br>
+            - Iniciar sesión al restaurar contraseña (b9092).<br>
+            - Activar botones al borrar (offline) (b1001).<br>
             </p></label>
             
             <label class="ccse" >EN PROCESO..
             <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Actualizar datos a B1 por defecto (offline).<br/>
-            - Mejorar reinicio al cambiar PIN.<br/>
-            .<br/>
+            - Actualizar (offline -> internet) por defecto.<br>
+            - Mejorar reinicio al cambiar PIN.<br>
+            .<br>
             </p></label>
         </div>
     </p>
@@ -642,10 +655,12 @@ document.getElementById('nameSetting').addEventListener('click', () => {
 
 
 document.getElementById('expandCard').addEventListener('click', () => {
-    expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
+expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
+    
     if (newSearch.value == '') {
+        const newTotalLength = newTotal.length;
         showSearch.innerHTML = '';
-        for (i = 0; i < newTotal.length; i += 5) {
+        for (i = 0; i < newTotalLength; i += 5) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
         }
     } else {
@@ -654,34 +669,33 @@ document.getElementById('expandCard').addEventListener('click', () => {
 });
 
 document.getElementById('showCard').addEventListener('click', () => {
+
     newSearch.value = '';
-    var testExpand = false;
+    // var testExpand = false;
 
     if (showIcon.getAttribute('name') == icoShow) {
         showIcon.setAttribute('name', icoHide);
-
         expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
-        newSearch.setAttribute('style', 'margin-top:-60px');
-        statSearchBar = false;
-        testExpand = false;
 
-        for (i = 0; i < newTotal.length; i += 5) {
+        const newTotalLength = newTotal.length;
+        for (i = 0; i < newTotalLength; i += 5) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
         }
-        newTotal.length / 5 == 1 ? (s = '') : (s = 's');
-        presentToast(`${newTotal.length / 5} Cuenta${s} guardad${s}.`, '800', 'dark');
 
+        let s = (newTotalLength / 5 == 1) ? '' : 's';
+
+        presentToast(`${newTotalLength / 5} Cuenta${s} guardada${s}.`, '800', 'dark');
     } else {
         showIcon.setAttribute('name', icoShow);
         showSearch.innerHTML = '';
 
         expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
-        newSearch.setAttribute('style', 'margin-top:0px');
-        newSearch.setFocus();
-        statSearchBar = true;
-        testExpand = true;
+        // newSearch.setAttribute('style', 'margin-top:0px');
+        // newSearch.setFocus();
+        // statSearchBar = true;
+        // testExpand = true;
+        expandIcon.setAttribute('name', icoExp);
     };
-    expandIcon.setAttribute('name', icoExp)
     // refreshData();
 });
 

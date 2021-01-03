@@ -3,6 +3,8 @@ var coincidencia = false;
 var txt = [];
 var aTotal = [];
 var newTotal = [];
+
+var docB1, docB2, docBpin, userID;
 var comparePersonalData = false;
 // var reload = true; 
 var compareChanges = '';
@@ -105,7 +107,7 @@ item('barLOG', 'document-text-outline', 'Novedades');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_r10b';
+ver.innerHTML = 'Versión 2.7.3-beta_r11 - 2.7.3-1';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -221,8 +223,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // reinicio cambio de datos personales
         if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
-            localStorage.removeItem('bp');
-            localStorage.removeItem('accessTempData')
+            // localStorage.removeItem('bp');
+            // localStorage.removeItem('accessTempData')
+            // o1101
+            localStorage.clear();
+            // / o1101
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
@@ -234,7 +239,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // 
 
         // hideCompare = false;
-
 
         if (docB1 == localStorage.getItem('L1')) {
             compareChanges = localStorage.getItem('L1');
@@ -269,9 +273,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
             // b6003
             if (localStorage.getItem('offline')) {
-                // b1002
-                // localStorage.removeItem('offline');
-                // /b1002
                 document.getElementById('modal').innerHTML =
                     `
                 <p class="cct" ;">Se detectaron cambios</p>
@@ -306,8 +307,9 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             // console.log('No comparación');
             // if (offline) acceptOffline = false;
 
-            document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-            document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+            // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
+            // document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
+            multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none')
         }
     })
 

@@ -221,7 +221,7 @@
 
 
     REVISAR para prox versión
-    Comentario //b1002F - Reaparece modal offline para cambios.
+
     (2_7 - 276-285) Texto para modo offline (aplicar cambios offline).
 
 
@@ -231,25 +231,68 @@
         - Mejorar reinicio al cambiar PIN.
         - Nombres para modal_btns offline.
 
-PROBAR
-    - línea 460 - 462
-        + Comentarios "user-select:all"
-    - línea 306
-        + guardar (corto)
-    - (fun.js) línea 108 - 127
-        + Comentarios función disableItem()
-    - (fun.js) línea 797 - 880
-        + Comentario función mostrarCambios() 
+    PROBAR
+        - línea 460 - 462
+            + Comentarios "user-select:all"
+        - línea 306
+            + guardar (corto)
+        - (fun.js) línea 108 - 127
+            + Comentarios función disableItem()
+        - (fun.js) línea 797 - 880
+            + Comentario función mostrarCambios() 
 
-    - (2-7.js) línea 230, 250
-        + comentar localStorage 'offline'
-    - (2_7.js) línea 6, 162, 201, 207, 221, 229
-        + comentar var compare (comentarios)
+        - (2-7.js) línea 230, 250
+            + comentar localStorage 'offline'
+        - (2_7.js) línea 6, 162, 201, 207, 221, 229
+            + comentar var compare (comentarios)
 
-    
-    MIS
+        
+        MIS
 
 
+2.7.3-beta_r11 - 2.7.3-1      nota -> opm10 -> r10
+
+    new
+    - optimización de velocidad.
+
+
+    bug
+
+    fix
+    *b1001 - opacidad fab al borrar (offline).
+    *b9001 - fallas al iniciar con contraseña temporal.
+    + b9002 No cerrar sesión al restaurar contraseña.
+
+
+
+    REVISAR para prox versión
+
+    (2_7 - 276-285) Texto para modo offline (aplicar cambios offline).
+
+
+    MEJORAS para prox versión
+        - Actualizar datos a B1 por defecto (offline)
+            + No se todavía como hacerlo.
+        - Mejorar reinicio al cambiar PIN.
+        - Nombres para modal_btns offline.
+
+    PROBAR
+        - línea 460 - 462
+            + Comentarios "user-select:all"
+        - línea 306
+            + guardar (corto)
+        - (fun.js) línea 108 - 127
+            + Comentarios función disableItem()
+        - (fun.js) línea 797 - 880
+            + Comentario función mostrarCambios() 
+
+        - (2-7.js) línea 230, 250
+            + comentar localStorage 'offline'
+        - (2_7.js) línea 6, 162, 201, 207, 221, 229
+            + comentar var compare (comentarios)
+
+        
+        MIS
 
 
 

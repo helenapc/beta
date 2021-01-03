@@ -15,15 +15,11 @@ const showCardAll = (account, user, pass, notes) => {
     newSub3.textContent = 'Contraseña: ' + pass;
     newSub4.textContent = 'Notas: ' + notes;
 
-    // newSub2.setAttribute('id', 'newSub2');
-    // newSub3.setAttribute('id', 'newSub3');
-    // newSub4.setAttribute('id', 'newSub4');
 
     newSub2.setAttribute('class', 'hide');
     newSub3.setAttribute('class', 'hide');
     newSub4.setAttribute('class', 'hide');
 
-    // if (expandIcon.getAttribute('name') == 'expand-outline') {
     if (expandIcon.getAttribute('name') == icoExp) {
         newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
     } else {
@@ -133,29 +129,44 @@ function barProgressF(color, state) {
 
 
 function refreshData(toast = true) {
-    aTotal.sort();
+    aTotal.sort(); // borrar?
+
     let contador = 0;
+    const newTotalLength = newTotal.length;
+    // const newSearchValue = newSearch.value;
     showSearch.innerHTML = '';
 
-    for (i = 0; i < newTotal.length; i += 5) {
+    if (newSearch.value == '') {
+        showSearch.innerHTML = '';
+        showIcon.setAttribute('name',icoShow);
+        expandIcon.setAttribute('name', icoExp);
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
+        return
+    }
+
+    for (i = 0; i < newTotalLength; i += 5) {
         if (newTotal[i].includes(newSearch.value.toLowerCase())) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
             contador++;
         }
     }
-    if (newSearch.value == '') {
-        showSearch.innerHTML = '';
-        expandIcon.setAttribute('name', icoExp);
-    }
-    showIcon.setAttribute('name', (showSearch.innerHTML == '') ? icoShow : icoHide);
-    expandCard.setAttribute('style', (showSearch.innerHTML == '') ? 'opacity:0; pointer-events: none' : 'opacity:1; pointer-events: auto');
 
-    contador == 1 ? (s = '') : (s = 's');
+
+    if (showSearch.innerHTML == ''){
+        showIcon.setAttribute('name',icoShow);
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
+    }else{
+        showIcon.setAttribute('name',icoHide);
+        expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+    };
+
+    let s = (contador == 1) ? '' : 's';
     if (newSearch.value != '' && toast) presentToast(`${contador} Resultado${s} encontrado${s}.`, '800', 'dark');
-
+    
     if (newSearch.value == '::id') { newSearch.value = userID; }
     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
     if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (deco(txt[0]) + '_' + fecha())) }
+
 }
 
 function alertMsg(msg1, msg2) {
@@ -188,7 +199,7 @@ function presentToast(msg, time, color) {
 
 
 function code(cod) {
-    let hexCod = ''; hexF = '';
+    let hexCod = '', hexF = '';
     for (let i = 0; i < cod.length; i++) {
         hexCod = '' + cod.codePointAt(i).toString(16); //codifica
         if (hexCod.length == 2) {
@@ -202,9 +213,27 @@ function code(cod) {
     return hexF;
 }
 
+
 function deco(dec) {
-    let hexDec = dec; str = '';
-    for (let n = 0; n < hexDec.length; n += 2) {
+    let str = '', decLength = dec.length;
+    for (let n = 0; n < decLength; n += 2) {
+        let tt = dec.substr(n, 2)
+        if (tt == '0x') {
+            // n += 2
+            let strCut = dec.substr((n+2), 5).split('');
+            str += String.fromCodePoint(parseInt(dec.substr(n, (strCut[strCut.length - 1] == 'Z') ? 4 : 5), 16));
+            // n += 3
+            n += 5
+        } else {
+            str += String.fromCharCode(parseInt(dec.substr(n, 2), 16) - 5);
+        };
+    }
+    return str;
+}
+
+function deco2(dec) {
+    let hexDec = dec; str = '', hexDecLength = hexDec.length;
+    for (let n = 0; n < hexDecLength; n += 2) {
         let tt = hexDec.substr(n, 2)
         if (tt == '0x') {
             n += 2
@@ -230,7 +259,8 @@ function aTotalTOnewTotal() {
     newTotal = [];
     for (b = 0; b < aTotal.length; b++) {
         const final = aTotal[b].split('OG');
-        for (n = 0; n < final.length; n++) {
+        const finalLenght = final.length;
+        for (n = 0; n < finalLenght; n++) {
             (n % 4 == 0) ? newTotal.push(deco(final[n]).toLowerCase()) : newTotal.push(deco(final[n]));
             if (n == 3) newTotal.push('oo');
         }
@@ -250,7 +280,7 @@ function updateData(text, compareChanges) {
 
     if (text == 'Rechazar') {
         // b6002
-        if (localStorage.getItem('offline')){
+        if (localStorage.getItem('offline')) {
             localStorage.removeItem('offline');
             compareChanges = localStorage.getItem('L1');
         }
@@ -351,14 +381,14 @@ function sendEmail() {
                                         barProgressF('light', 'determinate');
                                         // setTimeout(() => { window.location.reload(); }, 1000);
                                     });
-                                
+
                                 // b5001
-                                emailjs.send("service_60bgz48","template_jb9t50n",{
+                                emailjs.send("service_60bgz48", "template_jb9t50n", {
                                     to_email: usData.restorePass,
                                     restore_Key: restoreKey,
-                                    });
+                                });
                                 // b5001
-                                
+
 
                             };
                         };
@@ -539,21 +569,21 @@ function buttons_modal(func) {
 
 
 
-    if (func == 'aceptar') { updateData('Aceptar', compareChanges) };
+    if (func === 'aceptar') { updateData('Aceptar', compareChanges) };
 
-    if (func == 'rechazar') { updateData('Rechazar', compareChanges) };
+    if (func === 'rechazar') { updateData('Rechazar', compareChanges) };
 
     // if (func == 'aceptar_offline') {
-        // updateData('Aceptar', compareChanges);
-        // localStorage.removeItem('offline');
+    // updateData('Aceptar', compareChanges);
+    // localStorage.removeItem('offline');
     // };
 
     // if (func == 'rechazar_offline') {
-        // updateData('Rechazar', compareChanges);
-        // localStorage.removeItem('offline');
+    // updateData('Rechazar', compareChanges);
+    // localStorage.removeItem('offline');
     // };
     // 
-    if (func == 'verCambios') {
+    if (func === 'verCambios') {
 
         let txtTemp = []; aTotalTemp = []; newa = [];
 
