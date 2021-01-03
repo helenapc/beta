@@ -131,42 +131,6 @@ function barProgressF(color, state) {
     barProgress.setAttribute('style', `opacity: ${(color == 'light' && state == 'determinate') ? 0 : 1}`);
 };
 
-// function refreshData(toast = true) {
-//     aTotal.sort();
-
-//     if (newSearch.value) {
-//         document.querySelector('#expandCard').setAttribute('style', 'opacity:1; pointer-events: auto');
-//     } else {
-
-//         showIcon.setAttribute('name', icoShow);
-//         expandIcon.setAttribute('name', icoExp);
-//         document.querySelector('#expandCard').setAttribute('style', 'opacity:0; pointer-events: none');
-//     }
-
-//     showSearch.innerHTML = '';
-
-//     let contador = 0;
-//     for (i = 0; i < newTotal.length; i += 5) {
-//         if (newSearch.value === '*') {
-//             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
-//             contador++;
-//         } else if (newTotal[i].includes(newSearch.value.toLowerCase())) {
-//             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
-//             contador++;
-//         }
-//     }
-
-
-//     (newSearch.value === '') ? showSearch.innerHTML = '' : contador == 1 ? (s = '') : (s = 's');
-//     if (newSearch.value != '' && toast) presentToast(`${contador} resultado${s} encontrado${s}`, '500', 'dark');
-//     if (showSearch.innerHTML != '') showIcon.setAttribute('name', icoHide);
-
-
-
-//     if (newSearch.value == '::id') { newSearch.value = userID; }
-//     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
-//     if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (txt[0] + '_' + fecha())) }
-// }
 
 function refreshData(toast = true) {
     aTotal.sort();

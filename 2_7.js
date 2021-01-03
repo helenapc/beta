@@ -105,7 +105,7 @@ item('barLOG', 'document-text-outline', 'Novedades');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_r10';
+ver.innerHTML = 'Versión 2.7.3-beta_r10b';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME
@@ -254,9 +254,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         ;
 
-        // if (docB1 != compareChanges && alertcompare && !offline && localStorage.getItem('bp') != txt[4]) {
-        // if (docB1 != compareChanges && alertcompare && !offline) {
- 
+
         if (docB1 != compareChanges && !offline) {
 
             // 
@@ -272,7 +270,7 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             // b6003
             if (localStorage.getItem('offline')) {
                 // b1002
-                localStorage.removeItem('offline');
+                // localStorage.removeItem('offline');
                 // /b1002
                 document.getElementById('modal').innerHTML =
                     `
