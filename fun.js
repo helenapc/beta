@@ -219,11 +219,10 @@ function deco(dec) {
     for (let n = 0; n < decLength; n += 2) {
         let tt = dec.substr(n, 2)
         if (tt == '0x') {
-            // n += 2
-            let strCut = dec.substr((n+2), 5).split('');
+            n += 2
+            let strCut = dec.substr((n), 5).split('');
             str += String.fromCodePoint(parseInt(dec.substr(n, (strCut[strCut.length - 1] == 'Z') ? 4 : 5), 16));
-            // n += 3
-            n += 5
+            n += 3
         } else {
             str += String.fromCharCode(parseInt(dec.substr(n, 2), 16) - 5);
         };
@@ -231,21 +230,6 @@ function deco(dec) {
     return str;
 }
 
-function deco2(dec) {
-    let hexDec = dec; str = '', hexDecLength = hexDec.length;
-    for (let n = 0; n < hexDecLength; n += 2) {
-        let tt = hexDec.substr(n, 2)
-        if (tt == '0x') {
-            n += 2
-            let strCut = hexDec.substr(n, 5).split('');
-            str += String.fromCodePoint(parseInt(hexDec.substr(n, (strCut[strCut.length - 1] == 'Z') ? 4 : 5), 16));
-            n += 3
-        } else {
-            str += String.fromCharCode(parseInt(hexDec.substr(n, 2), 16) - 5);
-        };
-    }
-    return str;
-}
 
 function splitInit() {
     txt = localStorage.getItem('L1').split('GD');
