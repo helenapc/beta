@@ -250,7 +250,7 @@
         MIS
 
 
-2.7.3-beta_r11 - 2.7.3-1      nota -> opm10 -> r10
+2.7.3-beta_r11 - 2.7.4      nota -> opm10 -> r10
 
     new
     - optimización de velocidad.

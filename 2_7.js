@@ -107,7 +107,7 @@ item('barLOG', 'document-text-outline', 'Novedades');
 const ver = document.createElement('ion-item-divider');
 barContent.appendChild(ver);
 item('barDelAcc', 'close-outline', 'Eliminar Cuenta', 'danger');
-ver.innerHTML = 'Versión 2.7.3-beta_r11 - 2.7.3-1';
+ver.innerHTML = 'Versión 2.7.3-beta_r11 - 2.7.4';
 document.querySelector('#versionLogin').innerHTML = ver.innerHTML;
 
 //DARK THEME

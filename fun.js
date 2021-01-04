@@ -1,4 +1,4 @@
-
+// Version 2.7.3 => 2.7.4
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
