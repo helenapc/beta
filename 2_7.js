@@ -4,7 +4,7 @@ var txt = [];
 var aTotal = [];
 var newTotal = [];
 
-var docB1, docB2, docBpin, userID;
+// var docB1, docB2, docBpin, userID;
 var comparePersonalData = false;
 // var reload = true; 
 var compareChanges = '';
@@ -223,10 +223,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // reinicio cambio de datos personales
         if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
-            // localStorage.removeItem('bp');
-            // localStorage.removeItem('accessTempData')
+            localStorage.removeItem('bp');
+            localStorage.removeItem('accessTempData')
             // o1101
-            localStorage.clear();
+            // localStorage.clear();
             // / o1101
             localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
