@@ -1,0 +1,29 @@
+#version{font-size: 13px;}
+
+
+
+
+
+
+
+/* CARD */
+
+ion-card-header{
+    height: 43px;
+    transition-duration: .8s;
+    transition-delay: .05s;
+}
+
+ion-card-header:hover{
+    height: 120px;
+    transition-duration: .4s;
+    transition-delay: .05s;
+    overflow: auto;
+}
+
+.nowrap{
+    font-weight: 600;
+    white-space: nowrap;
+    margin: -2px 0px 10px 0px;
+}
+

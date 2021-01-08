@@ -294,8 +294,23 @@
         
         MIS
 
+----------------------------------------------
+
+2.7.4-beta_r1
+
+new
+- Eliminar boton expandir (expandir auto)
 
 
+
+bug
+- revisar pin con configuración personal
+
+
+- Panel Configuración personal
+    + autoexpand ( )
+
+    
 2.8
 - Opcion "deshacer" en "toast" al operar datos.
     + setTimeout 1500/2000 antes de hacer cambios.

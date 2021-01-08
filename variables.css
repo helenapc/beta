@@ -85,15 +85,20 @@ font-size: 1.6rem; */
 } */
 
 
+
+/* CELULAR */
 @media screen and (min-width: 600px){
-  #buttonAdd, #buttonHelp {
+
+  /* #buttonAdd, #buttonHelp {
     padding-right: 20px;
-  }
+  } */
+
+  #buttonAdd { margin-right: 20px;}
 
   #nameSetting:hover ~ #help-config,
   #buttonEdit:hover ~ #help-edit,
   #buttonDelete:hover ~ #help-delete,
-  #expandCard:hover ~ #help-exp-com,
+  /* #expandCard:hover ~ #help-exp-com, */
   #showCard:hover ~ #help-show,
   #buttonSearch:hover ~ #help-search,
   #buttonAdd:hover > #help-add{
@@ -102,8 +107,7 @@ font-size: 1.6rem; */
   }
 }
 
-@media (pointer:none), (pointer:coarse) {
-  /* @media screen and (max-width: 599px) and (orientation: portrait){ */
+/* @media (pointer:none), (pointer:coarse) {
 
   #nameSetting:active ~ #help-config,
   #buttonEdit:active ~ #help-edit,
@@ -117,146 +121,26 @@ font-size: 1.6rem; */
     transition-timing-function: cubic-bezier(1,0,0,0);
   }
   
+} */
+
+/* AUTOEXPAND */
+@media (pointer:none), (pointer:coarse) {
+
+  #nameSetting:active ~ #help-config,
+  #buttonEdit:active ~ #help-edit,
+  #buttonDelete:active ~ #help-delete,
+  #showCard:active ~ #help-show,
+  #buttonSearch:active ~ #help-search,
+  #buttonAdd:active > #help-add{ 
+    opacity: 1;
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(1,0,0,0);
+  }
+  
 }
 
 
 /* ********* */
-/* .cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color);} */
-
-.cct{ margin: auto; color: var(--ion-text-color); font-size: 18px; padding: 5px 0px 2px 0px}
-
-.cce{
-  position: fixed;
-  left: 0px;
-  color: var(--ion-color-primary);
-  padding: 1px 20px 0px 20px;
-  font-size: 0.7rem;
-  transition-duration: 0.2s;
-  pointer-events: none;
-}
-
-.cce_st{ color: var(--ion-color-primary); font-size: 0.7rem; }
-
-.ccse{ color: var(--ion-color-step-550); margin: 2px 0px 8px 0px; }
-
-.div_list{
-  width: 200px;
-  max-height: 150px;
-  overflow: auto;
-  margin:10px 10px 15px 5px
-}
-
-.list_text{
-  user-select: none;
-  font-size: 14px;
-  color: var(--ion-color-step-550);
-  margin: 5px 0px 0px 5px;
-  padding: 6px 5px 4px 10px;
-  white-space: nowrap;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #00000000; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #bebebe; 
-  border-radius: 10px;
-}
-
-.modal_input{
-  /* margin-top: 20px; */
-  color: var(--ion-text-color);
-  padding-top: 20px;
-  margin-bottom: 4px;
-  background-color: #ffffff00;
-  border: 0;
-  border-bottom: 2px solid var(--ion-color-light);
-  transition-duration: 0.2s;
-}
-
-
-
-
-.modal_input:placeholder-shown + .cce{
-  position: fixed;
-  left: 0px;
-  color: var(--ion-color-step-550);
-  padding: 10px 20px 0px 20px;
-  font-size: 1rem;
-  transition-duration: 0.2s;
-}
-
-
-.modal_input:focus + .cce {
-  color: var(--ion-color-primary);
-  padding: 1px 20px 0px 20px;
-  font-size: 0.7rem;
-}
-
-
-p .modal_input::-webkit-input-placeholder{opacity: 0;}
-p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic;}
-
-.modal_input:focus {
-  outline: none; border-bottom:
-  2px solid var(--ion-color-primary);
-  transition-duration: 0.2s;
-}
-
-
-
-
-.modal_btns{
-  float: right;
-  color: var(--ion-color-primary);
-  background-color: #ff000000;
-  font-size: 15px;
-  border: 0px;
-  margin: 0rem 0rem 1rem 1rem;
-  outline: none;
-}
-
-.bkpopup{
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background: #00000044;
-  /* z-index: 1; */
-  opacity: 0;
-  pointer-events: none;
-}
-
-.popup_box{
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  width: 250px;
-  transform: translateX(-125px);
-  /* background: var(--ion-item-background); */
-  background: var(--ion-background-color);
-  
-  padding: 12px 20px 0px 20px;
-  
-  border-radius: 3px;
-  box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  transition-duration: 0.1s;
-
-  /*CAMBIAR*/
-  opacity: 0;
-  pointer-events: none;
-}
-
 
 /* **** ICONS ***** */
 
@@ -272,26 +156,31 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   position: absolute;
 }
 
+ion-fab ion-label{
+  white-space: nowrap;
+  position: absolute;
+}
 
 
-
-.help-configuracion{ left: 100%; top: 18%; opacity: 0; pointer-events: none;} 
+/* .help-configuracion{ left: 100%; top: 18%; opacity: 0; pointer-events: none;} 
 .help-editar{ left: 100%; top: 5%; opacity: 0; pointer-events: none; }
 .help-borrar{ left: 100%; top: 24%; opacity: 0; pointer-events: none; }
 .help-expandir-contraer{ left: 100%; top: 43%; opacity: 0; pointer-events: none; }
 .help-mostrar-ocultar{ left: 100%; top: 62%; opacity: 0; pointer-events: none;}
 .help-buscar{ left: 100%; top: 81%; opacity: 0; pointer-events: none; }
-.help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; }
+.help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; } */
 
-/* #nameSetting:hover ~ #help-config{ opacity: 1; }
-#buttonEdit:hover ~ #help-edit{ opacity: 1; }
-#buttonDelete:hover ~ #help-delete{ opacity: 1; }
-#expandCard:hover ~ #help-exp-com{ opacity: 1; }
-#showCard:hover ~ #help-show{ opacity: 1; }
-#buttonSearch:hover ~ #help-search{ opacity: 1; }
-#buttonAdd:hover > #help-add{ opacity: 1 ;} */
+/* AUTOEXPAND */
+/* 
+*/
 
 
+.help-editar{ left: 60px; top: 10px; opacity: 0; pointer-events: none; }
+.help-borrar{ left: 60px; top: 59px; opacity: 0; pointer-events: none; } 
+.help-configuracion{ left: 60px; top: 10px; opacity: 0; pointer-events: none;} 
+.help-mostrar-ocultar{ left: 60px; top: 105px; opacity: 0; pointer-events: none;}
+.help-buscar{ left: 60px; top: 155px; opacity: 0; pointer-events: none; }
+.help-agregar{ right: 60px; top: 16%; opacity: 0; pointer-events: none; }
 
 
 /* NAVBAR */
@@ -407,7 +296,7 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
 /*THEMES*/
 body.light {
   --val: #ffffff70;
-  background: url('bg1.jpg') no-repeat 52% center/cover;
+  background: url('src/img/bg1.jpg') no-repeat 52% center/cover;
   --ion-color-primary: #3880ff;
   --ion-color-secondary: #3dc2ff;
   --ion-color-tertiary: #5260ff;
@@ -438,7 +327,7 @@ body.light {
 
 body.dark {
   --val: #000000d5;
-  background: url('bg2.jpg') no-repeat 52% center/cover;
+  background: url('src/img/bg2.jpg') no-repeat 52% center/cover;
   --ion-color-primary: #428cff;
   --ion-color-secondary: #50c8ff;
   --ion-color-tertiary: #6a64ff;

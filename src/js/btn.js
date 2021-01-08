@@ -5,7 +5,8 @@
 document.getElementById('bkmodal').addEventListener('click', () => {
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // AUTOEXPAND
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:none;');
     document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:none;');
@@ -277,7 +278,9 @@ showSearch.addEventListener('click', e => {  //editCard
 
             // document.getElementById('bkmodal').setAttribute('style', 'opacity:0.3; pointer-events: auto');
             multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:1; pointer-events: auto');
-            multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
+            // AUTOEXPAND
+            // multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
+            multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:0.3; pointer-events: none');
 
 
             document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
@@ -446,57 +449,6 @@ barDelAcc.addEventListener('click', () => {
     deleteData();
 });
 
-barLOG.addEventListener('click', () => { //LOG
-    barMenuPrincipal.close();
-    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
-
-    document.getElementById('modal').innerHTML =
-        `
-    <p id="op1" class="cct">Novedades<p style="font-size:13px">${ver.innerHTML}</p></p>
-    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-    <p style="margin: 0px 0px 0px 0px;">
-
-        <div class="div_list";>
-
-            <label class="ccse" >NUEVO!:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Mejoras en velocidad.<br>
-            </p></label>
-
-
-            <label class="ccse" >ERRORES:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Textos desplazados (navegador de celular).<br>
-            </p></label>
-
-            <label class="ccse" >ARREGLOS:
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Fallas al iniciar con contraseña temporal.(b0901).<br>
-            - Iniciar sesión al restaurar contraseña (b9092).<br>
-            - Activar botones al borrar (offline) (b1001).<br>
-            </p></label>
-            
-            <label class="ccse" >EN PROCESO..
-            <p style="margin:0px 0px 10px 20px; line-height: 1.6;">
-            - Actualizar (offline -> internet) por defecto.<br>
-            - Mejorar reinicio al cambiar PIN.<br>
-            .<br>
-            </p></label>
-        </div>
-    </p>
-
-    <input type="button" style="margin-top:10px" class="modal_btns" value="OK" onClick="buttons_modal('cancel')">
-
-    `;
-
-
-    // document.getElementById('buttonEdit').setAttribute('style', 'opacity:0; pointer-events: none');
-    // document.getElementById('buttonDelete').setAttribute('style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-});
-
 
 //FAB TEST
 // document.getElementById('buttonTest').addEventListener('click', () => {
@@ -508,10 +460,10 @@ barLOG.addEventListener('click', () => { //LOG
 document.getElementById('buttonEdit').addEventListener('click', () => {
 
     multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-    // multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0; pointer-events: none');
-
+    
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
+    // AUTOEXPAND
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
 
     document.getElementById('modal').innerHTML =
@@ -545,7 +497,9 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
         {
             text: 'cancelar',
             handler: () => {
-                multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+                // AUTOEXPAND
+                // multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+                multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
             }
         },
         {
@@ -555,14 +509,16 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
                 aTotalTOnewTotal();
 
                 multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-                if (showSearch.innerHTML != '') expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+                // AUTOEXPAND
+                // if (showSearch.innerHTML != '') expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
 
                 if (newSearch.value == '') {
 
                     // refreshData();
                     showSearch.innerHTML = '';
                     showIcon.setAttribute('name', icoHide);
-                    expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+                    // AUTOEXPAND
+                    // expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
                     for (i = 0; i < newTotal.length; i += 5) {
                         showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
                     }
@@ -638,7 +594,7 @@ document.getElementById('nameSetting').addEventListener('click', () => {
                         </p>
 
                         <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_datosDeUsuario')">
-                        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
+                        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel_datosDeUsuario')">
                     `;
 
                 } else {
@@ -654,19 +610,24 @@ document.getElementById('nameSetting').addEventListener('click', () => {
 });
 
 
-document.getElementById('expandCard').addEventListener('click', () => {
-expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
+// document.getElementById('expandCard').addEventListener('click', () => {
+
+
+// expandIcon.setAttribute('name', (expandIcon.getAttribute('name') == icoExp) ? icoCom : icoExp);
     
-    if (newSearch.value == '') {
-        const newTotalLength = newTotal.length;
-        showSearch.innerHTML = '';
-        for (i = 0; i < newTotalLength; i += 5) {
-            showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
-        }
-    } else {
-        refreshData(false);
-    }
-});
+//     if (newSearch.value == '') {
+//         const newTotalLength = newTotal.length;
+//         showSearch.innerHTML = '';
+//         for (i = 0; i < newTotalLength; i += 5) {
+//             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
+//         }
+//     } else {
+//         refreshData(false);
+//     }
+//     console.log( document.querySelector('#card'));
+//     newSub1.classList.toggle('.nowrap');
+
+// });
 
 document.getElementById('showCard').addEventListener('click', () => {
 
@@ -675,26 +636,21 @@ document.getElementById('showCard').addEventListener('click', () => {
 
     if (showIcon.getAttribute('name') == icoShow) {
         showIcon.setAttribute('name', icoHide);
-        expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+        // AUTOEXPAND
+        // expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
 
         const newTotalLength = newTotal.length;
         for (i = 0; i < newTotalLength; i += 5) {
             showCardAll(newTotal[i].toUpperCase(), newTotal[i + 1], newTotal[i + 2], newTotal[i + 3]);
         }
-
         let s = (newTotalLength / 5 == 1) ? '' : 's';
-
         presentToast(`${newTotalLength / 5} Cuenta${s} guardada${s}.`, '800', 'dark');
     } else {
         showIcon.setAttribute('name', icoShow);
         showSearch.innerHTML = '';
-
-        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
-        // newSearch.setAttribute('style', 'margin-top:0px');
-        // newSearch.setFocus();
-        // statSearchBar = true;
-        // testExpand = true;
-        expandIcon.setAttribute('name', icoExp);
+        // AUTOEXPAND
+        // expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
+        // expandIcon.setAttribute('name', icoExp);
     };
     // refreshData();
 });
@@ -716,10 +672,9 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
 
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
+    // AUTOEXPAND
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
-    // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
-    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
 
     document.getElementById('modal').innerHTML =
         `

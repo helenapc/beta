@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor de Contraseñas</title>
-  <link rel="shortcut icon" href="icopass-beta.png" type="image/png">
+  <link rel="shortcut icon" href="src/img/icopass-beta.png" type="image/png">
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
 
@@ -19,6 +19,8 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="src/css/nav.css">
+  <link rel="stylesheet" href="src/css/modal.css">
 
 </head>
 
@@ -26,7 +28,7 @@
   <ion-app class="fondo">
     <label id="point_backup_nav" class="point_backup">&#9679</label>
 
-    <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal">
+    <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal" swipe-gesture="true">
       <!-- <label id="point_backup" class="point_backup_menu">&#9679</label> -->
       <!-- <label id="point_backup" class="point_backup_menu">·</label> -->
       <label class="point_backup">&#9679</label>
@@ -142,7 +144,7 @@
         <ion-fab-button id="nameSetting" color="light" size="small">
           <ion-label id="nameSettingText" style="font-size: 20px;"></ion-label>
         </ion-fab-button>
-        <ion-label id="help-config" class="help help-configuracion">Configuración</ion-label>
+        <ion-label id="help-config" class="help help-configuracion">Configuración personal</ion-label>
       </ion-fab>
 
       <!-- FAB TOP-RIGHT -->
@@ -170,15 +172,15 @@
         </ion-fab-button>
         <ion-label id="help-delete" class="help help-borrar">Borrar</ion-label>
 
-        <ion-fab-button id="expandCard" color="light" size="small">
+        <!-- <ion-fab-button id="expandCard" color="light" size="small">
           <ion-icon id="expandIcon" name="expand-outline"></ion-icon>
         </ion-fab-button>
-        <ion-label id="help-exp-com" class="help help-expandir-contraer">Expandir/Contraer</ion-label>
+        <ion-label id="help-exp-com" class="help help-expandir-contraer">Expandir/Contraer</ion-label> -->
 
         <ion-fab-button id="showCard" color="light" size="small">
           <ion-icon id="showIcon" name="eye-outline"></ion-icon>
         </ion-fab-button>
-        <ion-label id="help-show" class="help help-mostrar-ocultar">Mostrar/Ocultar</ion-label>
+        <ion-label id="help-show" class="help help-mostrar-ocultar">Mostrar todo/Ocultar</ion-label>
 
         <ion-fab-button id="buttonSearch" color="light" size="small">
           <ion-icon name="search"></ion-icon>
@@ -197,9 +199,9 @@
     </div>
 
   </ion-app>
-  <script src="fun.js"></script>
-  <script src="2_7.js"></script>
-  <script src="btn.js"></script>
+  <script src="src/js/fun.js"></script>
+  <script src="app.js"></script>
+  <script src="src/js/btn.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
 </body>
 

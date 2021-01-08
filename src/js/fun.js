@@ -2,13 +2,14 @@
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
+    // ionCard.setAttribute('id', 'card');
     const newHeader = document.createElement('ion-card-header');
     const newSub1 = document.createElement('ion-card-subtitle');
     // newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
     const newSub2 = document.createElement('ion-card-subtitle');
     const newSub3 = document.createElement('ion-card-subtitle');
     const newSub4 = document.createElement('ion-card-subtitle');
-    const sep = document.createElement('ion-item');
+    // const sep = document.createElement('ion-item');
 
     newSub1.textContent = account.toUpperCase();
     newSub2.textContent = 'Usuario: ' + user;
@@ -16,18 +17,24 @@ const showCardAll = (account, user, pass, notes) => {
     newSub4.textContent = 'Notas: ' + notes;
 
 
-    newSub2.setAttribute('class', 'hide');
-    newSub3.setAttribute('class', 'hide');
-    newSub4.setAttribute('class', 'hide');
+    newSub1.setAttribute('class', 'nowrap');
+    // newSub3.setAttribute('class', 'hide');
+    // newSub4.setAttribute('class', 'hide');
 
-    if (expandIcon.getAttribute('name') == icoExp) {
-        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
-    } else {
-        newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:12px;');
-        newSub2.classList.remove("hide");
-        newSub3.classList.remove("hide");
-        newSub4.classList.remove("hide");
-    };
+    // if (expandIcon.getAttribute('name') == icoExp) {
+    //     document.querySelector('ion-card').classList.add('.btnExpandCard')
+    // } else {
+    //     document.querySelector('ion-card').classList.remove('.btnExpandCard')
+    // };
+
+    // if (expandIcon.getAttribute('name') == icoExp) {
+    //     newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
+    // } else {
+    //     newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:12px;');
+    //     newSub2.classList.remove("hide");
+    //     newSub3.classList.remove("hide");
+    //     newSub4.classList.remove("hide");
+    // };
 
     newHeader.appendChild(newSub1);
     newHeader.appendChild(newSub2);
@@ -44,12 +51,41 @@ const item = (id, ico, text, color = '', show = true) => {
     ionItem.setAttribute('color', color);
     ionItem.setAttribute('button', 'click-btn');
     ionItem.setAttribute('id', id);
+
     const ionIco = document.createElement('ion-icon');
     ionIco.setAttribute('name', ico);
     ionIco.setAttribute('slot', 'start');
     ionIco.setAttribute('class', id);
     ionIco.setAttribute('style', 'margin-right:10px;');
     ionItem.appendChild(ionIco);
+
+    if (show) {
+        barContent.appendChild(ionItem);
+    } else {
+        if (localStorage.getItem('accessTempData') == '6669726E73GD6669726E73GD') {
+            barContent.appendChild(ionItem);
+        };
+    };
+    id = document.getElementById(id);
+
+}
+
+
+
+const itemPers = (id, ico, text, button = true, color = '', show = true) => {
+
+    const ionItem = document.createElement('ion-item');
+    ionItem.innerHTML = text;
+    setAttributes(ionItem, {'color': color, 'id': id, 'lines':'full'})
+    if (button) ionItem.setAttribute( 'button', 'click-btn');
+    
+    if (ico != ''){
+        const ionIco = document.createElement('ion-icon');
+        setAttributes(ionIco, {'name': ico,'slot': 'start', 'class' : 'id','style': 'margin-right:10px;'})
+        ionItem.appendChild(ionIco);
+    }
+
+
 
     if (show) {
         barContent.appendChild(ionItem);
@@ -139,8 +175,10 @@ function refreshData(toast = true) {
     if (newSearch.value == '') {
         showSearch.innerHTML = '';
         showIcon.setAttribute('name',icoShow);
-        expandIcon.setAttribute('name', icoExp);
-        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
+        // AUTOEXPAND 2
+        // expandIcon.setAttribute('name', icoExp);
+        // AUTOEXPAND
+        // expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
         return
     }
 
@@ -154,10 +192,12 @@ function refreshData(toast = true) {
 
     if (showSearch.innerHTML == ''){
         showIcon.setAttribute('name',icoShow);
-        expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
+        // AUTOEXPAND
+        // expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
     }else{
         showIcon.setAttribute('name',icoHide);
-        expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+        // AUTOEXPAND
+        // expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
     };
 
     let s = (contador == 1) ? '' : 's';
@@ -422,7 +462,8 @@ function alertAdd2(modalVal) {
     //parche b5003
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // AUTOEXPAND
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     // 
 
     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
@@ -430,7 +471,8 @@ function alertAdd2(modalVal) {
     save();
     showSearch.innerHTML = '';
     newSearch.value = modalVal[0];
-    document.getElementById('expandIcon').setAttribute('name', icoCom);
+    // AUTOEXPAND 2
+    // document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
     presentToast(`"${modalVal[0].toUpperCase()}" agregada`, 800, 'success');
     updateDB('L1', 'B1');
@@ -473,14 +515,16 @@ function alertEdit2(modalVal, reemplace) {
     //parche b6001
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // AUTOEXPAND
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     // 
 
     aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
     aTotalTOnewTotal();
     showSearch.innerHTML = '';
     newSearch.value = modalVal[0];
-    document.getElementById('expandIcon').setAttribute('name', icoCom);
+    // AUTOEXPAND 2
+    // document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
     presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
     save();
@@ -622,6 +666,13 @@ function buttons_modal(func) {
         }
     }
 
+    if (func != 'verCambios') { //CANCELAR
+        multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+        multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+        // AUTOEXPAND
+        // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    }
+
 
 
     if (func == 'ok_datosDeUsuario') {
@@ -641,15 +692,17 @@ function buttons_modal(func) {
 
         if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4])) {
             //return;
-        } else { presentAlertConfirmEdit(modalVal); }
-
+        } else {
+            presentAlertConfirmEdit(modalVal);
+        }
     }
 
-    if (func != 'verCambios') { //CANCELAR
-        multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
-        multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-        if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-    }
+    // if (func == 'cancel_datosDeUsuario') {
+
+    //     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0; pointer-events: auto');
+    // }
+
+
 
 }
 
