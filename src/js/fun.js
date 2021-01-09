@@ -4,12 +4,14 @@ const showCardAll = (account, user, pass, notes) => {
     ionCard.setAttribute('button', 'click-btn');
     // ionCard.setAttribute('id', 'card');
     const newHeader = document.createElement('ion-card-header');
+
+    newHeader.setAttribute('class', 'cardExpand');
+    if (!configData.autoExpand) newHeader.classList.remove("cardExpand");
+
     const newSub1 = document.createElement('ion-card-subtitle');
-    // newSub1.setAttribute('style','font-weight: bold; margin-bottom:0px');
     const newSub2 = document.createElement('ion-card-subtitle');
     const newSub3 = document.createElement('ion-card-subtitle');
     const newSub4 = document.createElement('ion-card-subtitle');
-    // const sep = document.createElement('ion-item');
 
     newSub1.textContent = account.toUpperCase();
     newSub2.textContent = 'Usuario: ' + user;
@@ -18,23 +20,7 @@ const showCardAll = (account, user, pass, notes) => {
 
 
     newSub1.setAttribute('class', 'nowrap');
-    // newSub3.setAttribute('class', 'hide');
-    // newSub4.setAttribute('class', 'hide');
 
-    // if (expandIcon.getAttribute('name') == icoExp) {
-    //     document.querySelector('ion-card').classList.add('.btnExpandCard')
-    // } else {
-    //     document.querySelector('ion-card').classList.remove('.btnExpandCard')
-    // };
-
-    // if (expandIcon.getAttribute('name') == icoExp) {
-    //     newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:0px');
-    // } else {
-    //     newSub1.setAttribute('style', 'font-weight: bold; margin-bottom:12px;');
-    //     newSub2.classList.remove("hide");
-    //     newSub3.classList.remove("hide");
-    //     newSub4.classList.remove("hide");
-    // };
 
     newHeader.appendChild(newSub1);
     newHeader.appendChild(newSub2);
@@ -43,7 +29,9 @@ const showCardAll = (account, user, pass, notes) => {
 
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
+
 };
+
 
 const item = (id, ico, text, color = '', show = true) => {
     const ionItem = document.createElement('ion-item');
@@ -76,12 +64,12 @@ const itemPers = (id, ico, text, button = true, color = '', show = true) => {
 
     const ionItem = document.createElement('ion-item');
     ionItem.innerHTML = text;
-    setAttributes(ionItem, {'color': color, 'id': id, 'lines':'full'})
-    if (button) ionItem.setAttribute( 'button', 'click-btn');
-    
-    if (ico != ''){
+    setAttributes(ionItem, { 'color': color, 'id': id, 'lines': 'full' })
+    if (button) ionItem.setAttribute('button', 'click-btn');
+
+    if (ico != '') {
         const ionIco = document.createElement('ion-icon');
-        setAttributes(ionIco, {'name': ico,'slot': 'start', 'class' : 'id','style': 'margin-right:10px;'})
+        setAttributes(ionIco, { 'name': ico, 'slot': 'start', 'class': 'id', 'style': 'margin-right:10px;' })
         ionItem.appendChild(ionIco);
     }
 
@@ -115,14 +103,16 @@ function setAttributes(elem, obj) {
     }
 }
 
+// kas kas 
 function delete_spaces(v1) {
     if (v1) {
         v1 = v1.split("");
-        for (let i = 0; i < v1.length; i++) {
+        const v1Length = v1.length;
+        for (let i = 0; i < v1Length; i++) {
             if (v1[i] == " ") { v1.shift(); i--; }
             else {
                 while (true) {
-                    if (v1[v1.length - 1] == " ") { v1.pop(); }
+                    if (v1[v1Length- 1] == " ") { v1.pop(); }
                     else { break; }
                 }
                 v1 = v1.join("");
@@ -174,11 +164,11 @@ function refreshData(toast = true) {
 
     if (newSearch.value == '') {
         showSearch.innerHTML = '';
-        showIcon.setAttribute('name',icoShow);
+        showIcon.setAttribute('name', icoShow);
         // AUTOEXPAND 2
-        // expandIcon.setAttribute('name', icoExp);
+        expandIcon.setAttribute('name', icoExp);
         // AUTOEXPAND
-        // expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
         return
     }
 
@@ -190,19 +180,19 @@ function refreshData(toast = true) {
     }
 
 
-    if (showSearch.innerHTML == ''){
-        showIcon.setAttribute('name',icoShow);
+    if (showSearch.innerHTML == '') {
+        showIcon.setAttribute('name', icoShow);
         // AUTOEXPAND
-        // expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
-    }else{
-        showIcon.setAttribute('name',icoHide);
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
+    } else {
+        showIcon.setAttribute('name', icoHide);
         // AUTOEXPAND
-        // expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
+        expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
     };
 
     let s = (contador == 1) ? '' : 's';
     if (newSearch.value != '' && toast) presentToast(`${contador} Resultado${s} encontrado${s}.`, '800', 'dark');
-    
+
     if (newSearch.value == '::id') { newSearch.value = userID; }
     if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
     if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (deco(txt[0]) + '_' + fecha())) }
@@ -463,7 +453,7 @@ function alertAdd2(modalVal) {
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
     // AUTOEXPAND
-    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     // 
 
     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
@@ -472,7 +462,7 @@ function alertAdd2(modalVal) {
     showSearch.innerHTML = '';
     newSearch.value = modalVal[0];
     // AUTOEXPAND 2
-    // document.getElementById('expandIcon').setAttribute('name', icoCom);
+    document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
     presentToast(`"${modalVal[0].toUpperCase()}" agregada`, 800, 'success');
     updateDB('L1', 'B1');
@@ -516,7 +506,7 @@ function alertEdit2(modalVal, reemplace) {
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
     // AUTOEXPAND
-    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     // 
 
     aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
@@ -524,7 +514,7 @@ function alertEdit2(modalVal, reemplace) {
     showSearch.innerHTML = '';
     newSearch.value = modalVal[0];
     // AUTOEXPAND 2
-    // document.getElementById('expandIcon').setAttribute('name', icoCom);
+    document.getElementById('expandIcon').setAttribute('name', icoCom);
     refreshData();
     presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
     save();
@@ -585,8 +575,8 @@ function buttons_modal(func) {
             document.querySelectorAll('.modal_input')[2].value,
             document.querySelectorAll('.modal_input')[3].value,
         ];
-        if (document.getElementById('op1').innerHTML == 'Editar cuenta') alertEdit2(modalVal, reemplace);
-        if (document.getElementById('op1').innerHTML == 'Agregar cuenta') alertAdd2(modalVal);
+        if (document.getElementById('op1').innerHTML == 'Editar cuenta') { alertEdit2(modalVal, reemplace); }
+        else if (document.getElementById('op1').innerHTML == 'Agregar cuenta') { alertAdd2(modalVal); }
 
 
         // TEST
@@ -597,9 +587,9 @@ function buttons_modal(func) {
 
 
 
-    if (func === 'aceptar') { updateData('Aceptar', compareChanges) };
+    else if (func === 'aceptar') { updateData('Aceptar', compareChanges); }
 
-    if (func === 'rechazar') { updateData('Rechazar', compareChanges) };
+    else if (func === 'rechazar') { updateData('Rechazar', compareChanges); }
 
     // if (func == 'aceptar_offline') {
     // updateData('Aceptar', compareChanges);
@@ -611,7 +601,7 @@ function buttons_modal(func) {
     // localStorage.removeItem('offline');
     // };
     // 
-    if (func === 'verCambios') {
+    else if (func === 'verCambios') {
 
         let txtTemp = []; aTotalTemp = []; newa = [];
 
@@ -670,7 +660,7 @@ function buttons_modal(func) {
         multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
         multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
         // AUTOEXPAND
-        // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+        if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
     }
 
 

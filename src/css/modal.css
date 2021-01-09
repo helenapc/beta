@@ -3,7 +3,7 @@
 
 .cct{ margin: auto; color: var(--ion-text-color); font-size: 18px; padding: 5px 0px 2px 0px}
 
-.cce{
+/* .cce{
   position: fixed;
   left: 0px;
   color: var(--ion-color-primary);
@@ -11,11 +11,77 @@
   font-size: 0.7rem;
   transition-duration: 0.2s;
   pointer-events: none;
+} */
+
+/* INPUT INACTIVO - CON DATOS*/
+/* .cce{
+  position: relative;
+  top: -48px;
+  left: -20px;
+  color: var(--ion-color-primary);
+  padding: 1px 20px 1px 20px;
+  font-size: 0.7rem;
+  transition-duration: 0.2s;
+  pointer-events: none;
+} */
+
+
+/* .modal_input:placeholder-shown + .cce{
+  position: fixed;
+  left: 0px;
+  color: var(--ion-color-step-550);
+  padding: 10px 20px 0px 20px;
+  font-size: 1rem;
+  transition-duration: 0.2s;
+} */
+
+
+
+/* INPUT INACTIVO SIN DATOS*/
+.modal_input:placeholder-shown + .cce{
+  position: relative;
+  top: -25px;
+  left: -20px;
+  color: var(--ion-color-step-550);
+  padding: 1px 20px px 20px;
+  font-size: 1rem;
+  transition-duration: 0.2s;
+  pointer-events: none;
 }
+
+/* INPUT ACTIVO / CON DATOS*/
+.cce, .modal_input:focus + .cce {
+  position: relative;
+  top: -42px;
+  left: -20px;
+  color: var(--ion-color-primary);
+  padding: 1px 20px 0px 20px;
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+
+.modal_input:placeholder-shown + .noteTextArea{
+  top: -50px;
+}
+.noteTextArea, .modal_input:focus + .noteTextArea{
+  top: -67px;
+}
+textarea {
+  resize: none;
+}
+/* .modal_input:focus + .cce {
+  color: var(--ion-color-primary);
+  padding: 1px 20px 0px 20px;
+  font-size: 0.7rem;
+} */
+
+
+
 
 .cce_st{ color: var(--ion-color-primary); font-size: 0.7rem; }
 
 .ccse{ color: var(--ion-color-step-550); margin: 2px 0px 8px 0px; }
+/* .ccse{ color: var(--ion-color-step-550) };  */
 
 .div_list{
   width: 200px;
@@ -54,8 +120,9 @@
 .modal_input{
   /* margin-top: 20px; */
   color: var(--ion-text-color);
-  padding-top: 20px;
-  margin-bottom: 4px;
+  /* padding-top: 1px; */
+  /* margin-bottom: 4px; */
+  margin: 1px 1px 1px 1px;
   background-color: #ffffff00;
   border: 0;
   border-bottom: 2px solid var(--ion-color-light);
@@ -65,21 +132,6 @@
 
 
 
-.modal_input:placeholder-shown + .cce{
-  position: fixed;
-  left: 0px;
-  color: var(--ion-color-step-550);
-  padding: 10px 20px 0px 20px;
-  font-size: 1rem;
-  transition-duration: 0.2s;
-}
-
-
-.modal_input:focus + .cce {
-  color: var(--ion-color-primary);
-  padding: 1px 20px 0px 20px;
-  font-size: 0.7rem;
-}
 
 
 p .modal_input::-webkit-input-placeholder{opacity: 0;}
@@ -112,13 +164,13 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   pointer-events: none;
 }
 
-.popup_box{
+.popup_box2{
   position: absolute;
   left: 50%;
-  top: 30%;
+  top: 20%;
   width: 250px;
+  max-height: 350px;
   transform: translateX(-125px);
-  /* background: var(--ion-item-background); */
   background: var(--ion-background-color);
   
   padding: 12px 20px 0px 20px;
@@ -127,6 +179,31 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.5);
   z-index: 1;
   transition-duration: 0.1s;
+  overflow: auto;
+
+  /*CAMBIAR*/
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup_box{
+  position: absolute;
+  /* left: 50%; */
+  top: 20%;
+  /* position: sticky; */
+  width: 250px;
+  align-self: center;
+  max-height: 350px;
+  /* transform: translateX(-125px); */
+  background: var(--ion-background-color);
+  
+  padding: 12px 20px 0px 20px;
+  
+  border-radius: 3px;
+  box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition-duration: 0.1s;
+  overflow: auto;
 
   /*CAMBIAR*/
   opacity: 0;

@@ -1,7 +1,12 @@
 #version{font-size: 13px;}
 
+.barLogout{ transform: scaleX(-1); padding-left: 2px; }
 
+ion-icon#barClose.md.hydrated{ margin-inline-end: 0px; }
 
+ion-title#userName.md.title-default.hydrated{ text-align: center; }
+
+.input-wrapper{ --padding-start: 2px; }
 
 
 
@@ -9,21 +14,34 @@
 /* CARD */
 
 ion-card-header{
-    height: 43px;
+    padding: 0px 16px 16px 16px;
+    height: 48px;
     transition-duration: .8s;
     transition-delay: .05s;
 }
 
-ion-card-header:hover{
-    height: 120px;
+.cardExpand:hover{
+    height: 130px;
     transition-duration: .4s;
     transition-delay: .05s;
     overflow: auto;
 }
 
+.btnExpandCard{
+    height: 130px;
+    transition-duration: .4s;
+    overflow: auto;
+}
+
+.cardExpand::-webkit-scrollbar-thumb {
+    background: var(--ion-color-primary);
+}
+
 .nowrap{
+    padding: 16px 0px 8px 0px;
+    font-size: 1em;
     font-weight: 600;
     white-space: nowrap;
-    margin: -2px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
 }
 

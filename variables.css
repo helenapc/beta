@@ -1,6 +1,4 @@
 
-/* *{  transition-duration: 0s; } */
-
 /* left: 29px;
 top: 56px;
 font-size: 1.6rem; */
@@ -171,10 +169,6 @@ ion-fab ion-label{
 .help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; } */
 
 /* AUTOEXPAND */
-/* 
-*/
-
-
 .help-editar{ left: 60px; top: 10px; opacity: 0; pointer-events: none; }
 .help-borrar{ left: 60px; top: 59px; opacity: 0; pointer-events: none; } 
 .help-configuracion{ left: 60px; top: 10px; opacity: 0; pointer-events: none;} 
@@ -184,14 +178,6 @@ ion-fab ion-label{
 
 
 /* NAVBAR */
-
-.barLogout{ transform: scaleX(-1); padding-left: 2px; }
-
-ion-icon#barClose.md.hydrated{ margin-inline-end: 0px; }
-
-ion-title#userName.md.title-default.hydrated{ text-align: center; }
-
-.input-wrapper{ --padding-start: 2px; }
 
 
 
@@ -216,7 +202,7 @@ ion-title#userName.md.title-default.hydrated{ text-align: center; }
 } */
 
 .button_nav{
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   margin-right: -30px;
 }
@@ -291,12 +277,11 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
 
 
 
-
-
 /*THEMES*/
-body.light {
+.light {
   --val: #ffffff70;
-  background: url('src/img/bg1.jpg') no-repeat 52% center/cover;
+  /* background: url('src/img/bg1.jpg') no-repeat 52% center/cover; */
+  /* background: url('https://i.blogs.es/594843/chrome/450_1000.jpg') no-repeat 52% center/cover; */
   --ion-color-primary: #3880ff;
   --ion-color-secondary: #3dc2ff;
   --ion-color-tertiary: #5260ff;
@@ -325,9 +310,16 @@ body.light {
   --color-toolbar-text: #00ffea;
 }
 
-body.dark {
+
+body.bgl{
+  /* background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover; */
+  opacity: 1;
+}
+
+
+.dark {
   --val: #000000d5;
-  background: url('src/img/bg2.jpg') no-repeat 52% center/cover;
+  /* background: url('src/img/bg2.jpg') no-repeat 52% center/cover; */
   --ion-color-primary: #428cff;
   --ion-color-secondary: #50c8ff;
   --ion-color-tertiary: #6a64ff;
@@ -354,4 +346,9 @@ body.dark {
   --ion-item-background-activated: #00ffea;
   --color-toolbar-background:#00ffea;
   --color-toolbar-text: #00ffea;
+}
+
+body.bgd{
+  /* background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover; */
+  opacity: 1;
 }

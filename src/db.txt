@@ -298,19 +298,60 @@
 
 2.7.4-beta_r1
 
-new
-- Eliminar boton expandir (expandir auto)
+    new
+    - Eliminar boton expandir (expandir auto)
+
+    bug
+    - revisar pin con configuración personal
 
 
 
-bug
-- revisar pin con configuración personal
+2.7.4-beta_r2
 
+    new
+    - Agregado boton expandir
 
-- Panel Configuración personal
-    + autoexpand ( )
+    bug
+    - margenes tarjeta comprimida
+
+    fix
+    - Posición label en modal_in
+
+    bug
+    - revisar pin con configuración personal
+
+    - Panel Configuración personal
+        + autoexpand (X)
+        + fondo claro ( )
+        + fondo oscuro ( )
 
     
+2.7.4-beta_r3
+
+    new
+    - Agregado boton expandir
+
+    bug
+    - margenes tarjeta comprimida
+
+    fix
+    - Posición label en modal_in
+
+    bug
+    - revisar pin con configuración personal
+
+    - Panel Configuración personal
+        + autoexpand (X)
+        + fondo claro (X)
+        + fondo oscuro (X)
+
+
+
+
+
+
+
+
 2.8
 - Opcion "deshacer" en "toast" al operar datos.
     + setTimeout 1500/2000 antes de hacer cambios.
