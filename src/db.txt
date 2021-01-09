@@ -350,8 +350,10 @@
     mejoras
     - configData en base de datos
 
-2.7.4-beta_r4 (mejoras r3)
+2.7.4-beta_r4-fix (mejoras r3)
 
+    bug
+    - faltaban comentar líneas 116 -117 (btn_nav.js)
     mejoras
     - configData en base de datos
 

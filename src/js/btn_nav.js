@@ -113,8 +113,8 @@ config.addEventListener('click', () => {
 
     let configValues = document.getElementsByClassName('configData');
     configValues[0].checked = configData.autoExpand;
-    console.log(configData.animacion);
-    configValues[3].value = configData.animacion;
+    // console.log(configData.animacion);
+    // configValues[3].value = configData.animacion;
 
     // fondo claro 
     configValues[0].addEventListener('keyup', () => {
