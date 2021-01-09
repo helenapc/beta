@@ -330,12 +330,14 @@
 
     new
     - Agregado boton expandir
+    - style - modal_config
 
     bug
     - margenes tarjeta comprimida
 
     fix
     - Posición label en modal_in
+    - oveflow-y
 
     bug
     - revisar pin con configuración personal
@@ -345,9 +347,13 @@
         + fondo claro (X)
         + fondo oscuro (X)
 
+    mejoras
+    - configData en base de datos
 
+2.7.4-beta_r4 (mejoras r3)
 
-
+    mejoras
+    - configData en base de datos
 
 
 

@@ -319,29 +319,36 @@ checkbox.addEventListener('click', () => {
     // console.log(cargarTema1);
     // console.log(cargarTema1[0].classList[0]);
 
-    if (cargarTema1[0]) {
-        if (cargarTema1[0].classList[0] == 'light') {
-            // backgroundBody.setAttribute()
-            // console.log('adentro');
-            if (configData.fondo01 == '') {
-               cargarTema1[0].setAttribute('style', `background: url('src/img/bg1.jpg') no-repeat 52% center/cover;`);
-            } else {
-               cargarTema1[0].setAttribute('style', `background: url('${configData.fondo01}') no-repeat 52% center/cover;`);
-            }
-        }
+    // if (cargarTema1[0]) {
+    //     if (cargarTema1[0].classList[0] == 'light') {
+    //         // backgroundBody.setAttribute()
+    //         // console.log('adentro');
+    //         if (configData.fondo01 == '') {
+    //            cargarTema1[0].setAttribute('style', `background: url('src/img/bg1.jpg') no-repeat 52% center/cover;`);
+    //         } else {
+    //            cargarTema1[0].setAttribute('style', `background: url('${configData.fondo01}') no-repeat 50% center/cover`);
+    //         }
+    //     }
+    // }
+    // else if (cargarTema2[0].classList[0] == 'dark') {
+    //     // backgroundBody.setAttribute()
+    //     // console.log('adentro');
+    //     if (configData.fondo02 == '') {
+    //         cargarTema2[0].setAttribute('style', `background: url('src/img/bg2.jpg') no-repeat 52% center/cover;`);
+    //     } else {
+    //         cargarTema2[0].setAttribute('style', `background: url('${configData.fondo02}')no-repeat 50% center/cover;`);
+    //     }
+    // }
+
+    // if (cargarTema1[0]) {
+    if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
+        cargarTema1[0].setAttribute('style', `background: url('${(configData.fondo01 == '') ? 'src/img/bg1.jpg' : configData.fondo01} ') no-repeat 50% center/cover`);
     }
-    else if (cargarTema2[0].classList[0] == 'dark') {
-        // backgroundBody.setAttribute()
-        // console.log('adentro');
-        if (configData.fondo02 == '') {
-            cargarTema2[0].setAttribute('style', `background: url('src/img/bg2.jpg') no-repeat 52% center/cover;`);
-        } else {
-            cargarTema2[0].setAttribute('style', `background: url('${configData.fondo02}') no-repeat 52% center/cover;`);
-        }
+    else if (cargarTema2[0] && cargarTema2[0].classList[0] == 'dark') {
+        cargarTema2[0].setAttribute('style', `background: url('${(configData.fondo02 == '') ? 'src/img/bg2.jpg' : configData.fondo02} ') no-repeat 50% center/cover`);
     }
 
 });
-
 
 
 

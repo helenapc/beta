@@ -5,7 +5,7 @@ const showCardAll = (account, user, pass, notes) => {
     // ionCard.setAttribute('id', 'card');
     const newHeader = document.createElement('ion-card-header');
 
-    newHeader.setAttribute('class', 'cardExpand');
+    newHeader.setAttribute('class', 'cardExpand ionCardHeader');
     if (!configData.autoExpand) newHeader.classList.remove("cardExpand");
 
     const newSub1 = document.createElement('ion-card-subtitle');

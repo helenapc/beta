@@ -1,4 +1,17 @@
 
+
+/* HIDE OVERFLOW */
+/* ion-content{
+  left: 0px;
+  width: calc(100vw + 30px);
+} */
+
+/* ion-content{
+  --overflow: hidden;
+} */
+
+
+
 /* left: 29px;
 top: 56px;
 font-size: 1.6rem; */
@@ -10,6 +23,17 @@ font-size: 1.6rem; */
   color: red;
   transition-duration: 0s;
 } */
+
+.divOverflow{
+  /* top: 30px; */
+  /* padding: 50px 0px 0px 0px; */
+  /* margin-top: 20px; */
+  height: 100%;
+  overflow: auto;
+}
+.divOverflow::-webkit-scrollbar{
+  width: 0px;
+}
 
 .point_backup{
   pointer-events: none;
@@ -91,12 +115,12 @@ font-size: 1.6rem; */
     padding-right: 20px;
   } */
 
-  #buttonAdd { margin-right: 20px;}
+  /* #buttonAdd { margin-right: 20px;} */
 
   #nameSetting:hover ~ #help-config,
   #buttonEdit:hover ~ #help-edit,
   #buttonDelete:hover ~ #help-delete,
-  /* #expandCard:hover ~ #help-exp-com, */
+  #expandCard:hover ~ #help-exp-com,
   #showCard:hover ~ #help-show,
   #buttonSearch:hover ~ #help-search,
   #buttonAdd:hover > #help-add{
@@ -105,28 +129,14 @@ font-size: 1.6rem; */
   }
 }
 
-/* @media (pointer:none), (pointer:coarse) {
 
+
+@media (pointer:none), (pointer:coarse) {
+  
   #nameSetting:active ~ #help-config,
   #buttonEdit:active ~ #help-edit,
   #buttonDelete:active ~ #help-delete,
   #expandCard:active ~ #help-exp-com,
-  #showCard:active ~ #help-show,
-  #buttonSearch:active ~ #help-search,
-  #buttonAdd:active > #help-add{ 
-    opacity: 1;
-    transition: 0.4s;
-    transition-timing-function: cubic-bezier(1,0,0,0);
-  }
-  
-} */
-
-/* AUTOEXPAND */
-@media (pointer:none), (pointer:coarse) {
-
-  #nameSetting:active ~ #help-config,
-  #buttonEdit:active ~ #help-edit,
-  #buttonDelete:active ~ #help-delete,
   #showCard:active ~ #help-show,
   #buttonSearch:active ~ #help-search,
   #buttonAdd:active > #help-add{ 
@@ -159,21 +169,12 @@ ion-fab ion-label{
   position: absolute;
 }
 
-
-/* .help-configuracion{ left: 100%; top: 18%; opacity: 0; pointer-events: none;} 
-.help-editar{ left: 100%; top: 5%; opacity: 0; pointer-events: none; }
-.help-borrar{ left: 100%; top: 24%; opacity: 0; pointer-events: none; }
-.help-expandir-contraer{ left: 100%; top: 43%; opacity: 0; pointer-events: none; }
-.help-mostrar-ocultar{ left: 100%; top: 62%; opacity: 0; pointer-events: none;}
-.help-buscar{ left: 100%; top: 81%; opacity: 0; pointer-events: none; }
-.help-agregar{ right: 100%; top: 16%; opacity: 0; pointer-events: none; } */
-
-/* AUTOEXPAND */
 .help-editar{ left: 60px; top: 10px; opacity: 0; pointer-events: none; }
 .help-borrar{ left: 60px; top: 59px; opacity: 0; pointer-events: none; } 
 .help-configuracion{ left: 60px; top: 10px; opacity: 0; pointer-events: none;} 
-.help-mostrar-ocultar{ left: 60px; top: 105px; opacity: 0; pointer-events: none;}
-.help-buscar{ left: 60px; top: 155px; opacity: 0; pointer-events: none; }
+.help-expandir-contraer{ left: 60px; top: 105px; opacity: 0; pointer-events: none; }
+.help-mostrar-ocultar{ left: 60px; top: 155px; opacity: 0; pointer-events: none;}
+.help-buscar{ left: 60px; top: 201px; opacity: 0; pointer-events: none; }
 .help-agregar{ right: 60px; top: 16%; opacity: 0; pointer-events: none; }
 
 
@@ -311,10 +312,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
 }
 
 
-body.bgl{
-  /* background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover; */
+/* body.bgl{
+  background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover;
   opacity: 1;
-}
+} */
 
 
 .dark {
@@ -348,7 +349,7 @@ body.bgl{
   --color-toolbar-text: #00ffea;
 }
 
-body.bgd{
-  /* background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover; */
+/* body.bgd{
+  background: url('https://i.pinimg.com/originals/67/54/78/675478c7dcc17f90ffa729387685615a.jpg') no-repeat 52% center/cover;
   opacity: 1;
-}
+} */

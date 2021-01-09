@@ -1,39 +1,5 @@
 
-/* .cct{ margin: auto; font-weight: bold; text-align: center; color: var(--ion-text-color);} */
-
 .cct{ margin: auto; color: var(--ion-text-color); font-size: 18px; padding: 5px 0px 2px 0px}
-
-/* .cce{
-  position: fixed;
-  left: 0px;
-  color: var(--ion-color-primary);
-  padding: 1px 20px 0px 20px;
-  font-size: 0.7rem;
-  transition-duration: 0.2s;
-  pointer-events: none;
-} */
-
-/* INPUT INACTIVO - CON DATOS*/
-/* .cce{
-  position: relative;
-  top: -48px;
-  left: -20px;
-  color: var(--ion-color-primary);
-  padding: 1px 20px 1px 20px;
-  font-size: 0.7rem;
-  transition-duration: 0.2s;
-  pointer-events: none;
-} */
-
-
-/* .modal_input:placeholder-shown + .cce{
-  position: fixed;
-  left: 0px;
-  color: var(--ion-color-step-550);
-  padding: 10px 20px 0px 20px;
-  font-size: 1rem;
-  transition-duration: 0.2s;
-} */
 
 
 
@@ -209,3 +175,19 @@ p .modal_input:focus::-webkit-input-placeholder{opacity: 0.4; font-style: italic
   opacity: 0;
   pointer-events: none;
 }
+
+
+
+.configData{
+  background:var(--ion-color-light);
+}
+
+/* style range */
+/* input[type='range'],
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  width: 25px;
+  height: 10px;
+  background: #4CAF50;
+  cursor: pointer;
+} */

@@ -67,12 +67,6 @@ barExport.addEventListener('click', () => {
 barLogout.addEventListener('click', () => {
     barMenuPrincipal.close();
     localStorage.clear();
-    // localStorage.removeItem('accesssTemData');
-    // localStorage.removeItem('theme');
-    // localStorage.removeItem('tPin');
-    // localStorage.removeItem('bp');
-    localStorage.setItem('data', JSON.stringify({autoExpand: true, fondo01: '', fondo02 : ''}));
-    // localStorage.setItem('L1', 'GDGDGDGD');
     window.location.reload();
 });
 
@@ -83,115 +77,92 @@ config.addEventListener('click', () => {
     // AUTOEXPAND
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
 
-    // const modal = document.getElementById('modal');
-    // modal.style.width = '80vw';
+    const modal = document.getElementById('modal');
     document.getElementById('modal').innerHTML =
         `
-    <p id="op1" class="cct">Configuración</p>
-    <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-
-    <label class="cce_st" style="font-size:0.9rem">Tarjetas</label>
-    <p style="margin: 15px 0px;"><label style="color: var(--ion-text-color)">
-    <input type="checkbox" class="ccse modal_input configData" style="margin-right: 10px"> Auto-expandir tarjetas
-    </label></p>
-     
-
-    <label class="cce_st" style="font-size:0.9rem">Fondos (internet)</label>
-    <p style="margin: 15px 0px; color: var(--ion-text-color)"> Tema claro:
-    <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo01}"style="width: 100%"> 
-    </p>
-    <p style="margin: 15px 0px; color: var(--ion-text-color)"> Tema oscuro:
-    <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo02}" style="width: 100%"> 
-    </p>
-
+        <p id="op1" class="cct">Configuración</p>
+        <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     
-    <input type="button" class="modal_btns" value="ok" onClick="buttons_modal('cancel')">
+        <div style="width: 210px; height: 230px; overflow-y:scroll; margin: 0px 0px 10px 0px; paddgin: 0px 0px 0px 0px">
+            
+        <label class="cce_st" style="font-size:0.9rem">Fondos (internet)</label>
+        <p style="margin: 15px 0px; background-color:var(--ion-color-light); color: var(--ion-text-color)"> Claro:
+        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo01}"style="width: 92%"> 
+        </p>
+        <p style="margin: 15px 0px; background-color:var(--ion-color-light); color: var(--ion-text-color)"> Oscuro:
+        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo02}" style="width: 92%"> 
+        </p>
+
+        <br>
+
+        <label class="cce_st" style="font-size:0.9rem">Tarjetas</label>
+        <p style="padding: 15px 0px; margin: 0; background-color:var(--ion-color-light)"><label style="color: var(--ion-text-color);">
+        <input type="checkbox" class="ccse modal_input configData"> Auto-expandir
+        </label></p>
+
+        <br>
+        </div>
+        <input type="button" class="modal_btns" value="ok" onClick="buttons_modal('cancel')">
     `;
 
-    // <input type="button" class="modal_btns" value="OK" onClick="buttons_modal_config('ok_config')">
-
-    // console.log(document.getElementsByClassName('modal_input'));
+    // <p style="padding: 15px 10px; margin: 0; background-color:var(--ion-color-light)"><label style="color: var(--ion-text-color);">
+    // Velocidad de animación
+    // <input type="range" min="0" max="4"  value="${configData.animacion}"class="ccse modal_input modal_input_range configData" style="width: 92%">
+    // </label></p>
 
 
     let configValues = document.getElementsByClassName('configData');
-    // console.log(configValues);
     configValues[0].checked = configData.autoExpand;
+    console.log(configData.animacion);
+    configValues[3].value = configData.animacion;
 
-    // let cargarTema1 = document.getElementsByClassName('light');
-    // let cargarTema2 = document.getElementsByClassName('dark');
-    // console.log(cargarTema1.body);
-    // console.log(cargarTema2.body);
+    // fondo claro 
+    configValues[0].addEventListener('keyup', () => {
+        configData.fondo01 = configValues[0].value;
+        localStorage.setItem('data', JSON.stringify(configData));
+        if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
+            cargarTema1[0].setAttribute('style', `background: url('${(configData.fondo01 == '') ? 'src/img/bg1.jpg' : configData.fondo01} ') no-repeat 50% center/cover`);
+        }
+    });
 
+    // fondo oscuro
+    configValues[1].addEventListener('keyup', () => {
+        configData.fondo02 = configValues[1].value;
+        localStorage.setItem('data', JSON.stringify(configData));
+        if (cargarTema2[0] && cargarTema2[0].classList[0] == 'dark') {
+            cargarTema2[0].setAttribute('style', `background: url('${(configData.fondo02 == '') ? 'src/img/bg2.jpg' : configData.fondo02} ') no-repeat 50% center/cover`);
+        }
+    });
 
     // auto expandir
-    configValues[0].addEventListener('click', () => {
-        configData.autoExpand = configValues[0].checked;
+    configValues[2].addEventListener('click', () => {
+        configData.autoExpand = configValues[2].checked;
         localStorage.setItem('data', JSON.stringify(configData));
         let cards = document.getElementsByTagName('ion-card-header');
         let vuelta = cards.length;
         for (let i = 0; i < vuelta; i++) { cards[i].classList.toggle('cardExpand'); }
     });
 
-    // fondo claro
-    // console.log(document.body.classList);
-    // var bgl = document.body.querySelector('.light');
-    // console.log(bgl);
+    // animacion
+    // configValues[3].addEventListener('change', () => {
+    //     configData.animacion = configValues[3].value;
+    //     localStorage.setItem('data', JSON.stringify(configData));
 
-    configValues[1].addEventListener('keyup', () => {
+    //     let ionCardHeader = document.getElementsByClassName('ionCardHeader');
+    //     let vuelta = ionCardHeader.length;
+    //     for (let i = 0; i < vuelta; i++) { ionCardHeader[i].setAttribute('style', `transition-duration: ${configData.animacion / 10}s;`) };
 
-        configData.fondo01 = configValues[1].value;
-        localStorage.setItem('data', JSON.stringify(configData));
-        // if (configData.fondo01 == '') {
-        //     if (cargarTema1) cargarTema1[0].setAttribute('style', `background: url('src/img/bg1.jpg') no-repeat 52% center/cover;`);
-        // } else {
-        //     if (cargarTema1) cargarTema1[0].setAttribute('style', `background: url('${configValues[1].value}') no-repeat 52% center/cover;`);
-        // }
+    //     let cardExpand = document.getElementsByClassName('cardExpand:hover');
+    //     let vuelta2 = cardExpand.length;
+    //     for (let i = 0; i < vuelta2; i++) { cardExpand[i].setAttribute('style', `transition-duration: ${configData.animacion / 5}s;`) };
 
-        // document.body.classList.toggle('dark');
-        // document.body.classList.toggle(activeTheme[0]);
-        // activeTheme[1] = '';
+    //     // .btnExpandCard{
 
-        if (cargarTema1[0]) {
-            if (cargarTema1[0].classList[0] == 'light') {
-                // backgroundBody.setAttribute()
-                console.log('adentro');
-                if (configData.fondo01 == '') {
-                    if (cargarTema1[0]) cargarTema1[0].setAttribute('style', `background: url('src/img/bg1.jpg') no-repeat 52% center/cover;`);
-                } else {
-                    if (cargarTema1[0]) cargarTema1[0].setAttribute('style', `background: url('${configValues[1].value}') no-repeat 52% center/cover;`);
-                }
-            }
-        }
-    });
-
-    configValues[2].addEventListener('keyup', () => {
-
-        // checkbox.checked = true;
-        configData.fondo02 = configValues[2].value;
-        localStorage.setItem('data', JSON.stringify(configData));
-        // if (configData.fondo01 == '') {
-        //     if (cargarTema1) cargarTema1[0].setAttribute('style', `background: url('src/img/bg2.jpg') no-repeat 52% center/cover;`);
-        // } else {
-        //     if (cargarTema1) cargarTema1[0].setAttribute('style', `background: url('${configValues[2].value}') no-repeat 52% center/cover;`);
-        // }
-
-        // document.body.classList.toggle(activeTheme[0]);
-        // document.body.classList.toggle('dark');
-        // activeTheme[1] = 'dark';
-        if (cargarTema2[0]) {
-            if (cargarTema2[0].classList[0] == 'dark') {
-                // backgroundBody.setAttribute()
-                console.log('adentro');
-                if (configData.fondo02 == '') {
-                    if (cargarTema2[0]) cargarTema2[0].setAttribute('style', `background: url('src/img/bg2.jpg') no-repeat 52% center/cover;`);
-                } else {
-                    if (cargarTema2[0]) cargarTema2[0].setAttribute('style', `background: url('${configValues[2].value}') no-repeat 52% center/cover;`);
-                }
-            }
-        }
+    // });
 
 
-    });
+
+
 
 
 
@@ -277,6 +248,7 @@ barDelAcc.addEventListener('click', () => {
     }
     deleteData();
 });
+
 
 
 
