@@ -128,7 +128,7 @@ config.addEventListener('click', () => {
     configValues[3].checked = configData.animacion;
 
     // fondo claro 
-    configValues[0].addEventListener('keyup', () => {
+    configValues[0].addEventListener('input', () => {
         configData.fondo01 = configValues[0].value;
         localStorage.setItem('data', JSON.stringify(configData));
         if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
@@ -138,7 +138,7 @@ config.addEventListener('click', () => {
     });
 
     // fondo oscuro
-    configValues[1].addEventListener('keyup', () => {
+    configValues[1].addEventListener('input', () => {
         configData.fondo02 = configValues[1].value;
         localStorage.setItem('data', JSON.stringify(configData));
         if (cargarTema2[0] && cargarTema2[0].classList[0] == 'dark') {
