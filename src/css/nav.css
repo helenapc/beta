@@ -34,14 +34,22 @@ ion-card-header{
 }
 
 .cardExpand:hover{
+<<<<<<< HEAD
     height: 133px;
+=======
+    height: 130px;
+>>>>>>> b799eca2db5d920f5b2487ba8aa1f1f641206ea4
     transition-duration: .4s;
     transition-delay: .05s;
     overflow: auto
 }
 
 .btnExpandCard{
+<<<<<<< HEAD
     height: 133px;
+=======
+    height: 130px;
+>>>>>>> b799eca2db5d920f5b2487ba8aa1f1f641206ea4
     transition-duration: .4s;
     overflow: auto;
 }
