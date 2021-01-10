@@ -2,11 +2,21 @@
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
-    // ionCard.setAttribute('id', 'card');
     const newHeader = document.createElement('ion-card-header');
 
-    newHeader.setAttribute('class', 'cardExpand ionCardHeader');
+    newHeader.setAttribute('id', 'ion-card-header');
+    newHeader.setAttribute('class', 'cardExpand animCardCero');
     if (!configData.autoExpand) newHeader.classList.remove("cardExpand");
+    if (configData.animacion) {
+        newHeader.classList.remove("animCardCero");
+        
+        let test = document.getElementsByTagName('ion-card-header');
+        let v = test.length;
+        for (let i = 0 ; i<v; i++){test[i].classList.toggle('ionCardHeader');}
+    }
+
+
+    
 
     const newSub1 = document.createElement('ion-card-subtitle');
     const newSub2 = document.createElement('ion-card-subtitle');
@@ -19,7 +29,7 @@ const showCardAll = (account, user, pass, notes) => {
     newSub4.textContent = 'Notas: ' + notes;
 
 
-    newSub1.setAttribute('class', 'nowrap');
+    newSub1.setAttribute('class', 'cardTitle');
 
 
     newHeader.appendChild(newSub1);
@@ -30,6 +40,13 @@ const showCardAll = (account, user, pass, notes) => {
     ionCard.appendChild(newHeader);
     showSearch.appendChild(ionCard);
 
+    // ScrollReveal().reveal('ion-card');
+    // ScrollReveal().reveal('ion-card', {
+    //     delay: 0,
+    //     duration: 0,
+    //     reset: false
+    // });
+    
 };
 
 

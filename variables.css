@@ -25,12 +25,11 @@ font-size: 1.6rem; */
 } */
 
 .divOverflow{
-  /* top: 30px; */
-  /* padding: 50px 0px 0px 0px; */
-  /* margin-top: 20px; */
+  z-index: 0;
   height: 100%;
   overflow: auto;
 }
+
 .divOverflow::-webkit-scrollbar{
   width: 0px;
 }
@@ -107,7 +106,7 @@ font-size: 1.6rem; */
 } */
 
 
-
+#buttonAdd { margin-right: -8px;}
 /* CELULAR */
 @media screen and (min-width: 600px){
 
@@ -115,7 +114,7 @@ font-size: 1.6rem; */
     padding-right: 20px;
   } */
 
-  /* #buttonAdd { margin-right: 20px;} */
+  #buttonAdd { margin-right: 10px;}
 
   #nameSetting:hover ~ #help-config,
   #buttonEdit:hover ~ #help-edit,
@@ -175,7 +174,7 @@ ion-fab ion-label{
 .help-expandir-contraer{ left: 60px; top: 105px; opacity: 0; pointer-events: none; }
 .help-mostrar-ocultar{ left: 60px; top: 155px; opacity: 0; pointer-events: none;}
 .help-buscar{ left: 60px; top: 201px; opacity: 0; pointer-events: none; }
-.help-agregar{ right: 60px; top: 16%; opacity: 0; pointer-events: none; }
+.help-agregar{ right: 60px; top: 10px; opacity: 0; pointer-events: none; }
 
 
 /* NAVBAR */
@@ -186,7 +185,7 @@ ion-fab ion-label{
 
 .card-sub-account{ margin-left: 20px; }
 
-.hide{ display: none; }
+/* .hide{ disdivOverflowy: none; } */
 
 
 /*ITEMS*/

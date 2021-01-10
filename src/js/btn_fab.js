@@ -176,9 +176,8 @@ document.getElementById('expandCard').addEventListener('click', () => {
     // }
 
     let cards = document.getElementsByTagName('ion-card-header');
+    // let cards = document.getElementsByClassName('ionCardHeader');
     let vuelta = cards.length;
-    // console.log(cards);
-    // console.log(vuelta);
     for (let i = 0; i < vuelta; i++) {
         cards[i].classList.toggle('btnExpandCard');
     }
@@ -193,8 +192,6 @@ document.getElementById('expandCard').addEventListener('click', () => {
 document.getElementById('showCard').addEventListener('click', () => {
 
     newSearch.value = '';
-    // var testExpand = false;
-
     if (showIcon.getAttribute('name') == icoShow) {
         showIcon.setAttribute('name', icoHide);
         // AUTOEXPAND
@@ -213,7 +210,6 @@ document.getElementById('showCard').addEventListener('click', () => {
         expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
         expandIcon.setAttribute('name', icoExp);
     };
-    // refreshData();
 });
 
 document.getElementById('buttonSearch').addEventListener('click', () => {
@@ -257,15 +253,6 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
     <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel')">
 
     `;
-
-    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-    // <label class="cce" > Cuenta:</label>
-    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-    // <label class="cce" > Usuario:</label>
-    // <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
-    // <label class="cce" > Contraseña:</label>
-    // <input type="text" placeholder="Opcional" class="ccse modal_input" value="">
-    // <label class="cce" > Notas:</label>
 
     multipleAttribute(['#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
     // alertcompare = false;

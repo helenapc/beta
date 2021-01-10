@@ -357,6 +357,24 @@
     mejoras
     - configData en base de datos
 
+2.7.4-beta_r5
+
+    nuevo
+        - intento de check auto-expand y animación
+    bug
+
+    fix
+        - tamaño, posición, color -> versión_nav
+
+    revisar 
+        - (app.js) 346
+            + posibe falla cerrar sesión
+        - margenes cardTitle
+
+    mejoras
+        - Eliminar oveflow main
+        - configData en base de datos
+
 
 
 

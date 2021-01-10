@@ -70,51 +70,62 @@ barLogout.addEventListener('click', () => {
     window.location.reload();
 });
 
+
 config.addEventListener('click', () => {
+
+
+
+
+
     barMenuPrincipal.close();
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
     // AUTOEXPAND
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
-
     const modal = document.getElementById('modal');
     document.getElementById('modal').innerHTML =
+        // width: 210px
         `
         <p id="op1" class="cct">Configuración</p>
         <hr style="height:1px; border-width:0; color:gray;background-color:gray">
     
-        <div style="width: 210px; height: 230px; overflow-y:scroll; margin: 0px 0px 10px 0px; paddgin: 0px 0px 0px 0px">
+        <div style="width: 100%; height: 250px; overflow-y:scroll; overflow-x: hidden; margin: 1px; paddgin: 1px">
             
         <label class="cce_st" style="font-size:0.9rem">Fondos (internet)</label>
-        <p style="margin: 15px 0px; background-color:var(--ion-color-light); color: var(--ion-text-color)"> Claro:
-        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo01}"style="width: 92%"> 
+        <p style="margin: 15px 0px; ; color: var(--ion-text-color)"> Tema Claro:
+        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo01}"style="width: 100%"> 
         </p>
-        <p style="margin: 15px 0px; background-color:var(--ion-color-light); color: var(--ion-text-color)"> Oscuro:
-        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo02}" style="width: 92%"> 
+        <p style="margin: 15px 0px; ; color: var(--ion-text-color)"> Tema Oscuro:
+        <input type="text" class="ccse modal_input configData" placeholder ="Pegar link aquí.." value="${configData.fondo02}" style="width: 100%"> 
         </p>
 
         <br>
 
         <label class="cce_st" style="font-size:0.9rem">Tarjetas</label>
-        <p style="padding: 15px 0px; margin: 0; background-color:var(--ion-color-light)"><label style="color: var(--ion-text-color);">
-        <input type="checkbox" class="ccse modal_input configData"> Auto-expandir
+        <p style="padding: 15px 0px; margin: 0; "><label style="color: var(--ion-text-color);">
+        <input type="checkbox" class="ccse modal_input configData">&nbsp;&nbsp;Auto-expandir
         </label></p>
+
+        <hr style=" margin: 0; height:1px; border-width:3;background-color:#eeeeee">
+        
+        <p style="padding: 15px 0px; margin: 0;"><label style="color: var(--ion-text-color);">
+        <input type="checkbox" class="ccse modal_input configData">&nbsp;&nbsp;Animación<br>
+        </p>
+        
+        <hr style=" margin: 0; height:1px; border-width:3;background-color:#eeeeee">
 
         <br>
         </div>
-        <input type="button" class="modal_btns" value="ok" onClick="buttons_modal('cancel')">
+        <input type="button" class="modal_btns" value="OK" style="margin: 10px 0px" onClick="buttons_modal('cancel')">
     `;
 
-    // <p style="padding: 15px 10px; margin: 0; background-color:var(--ion-color-light)"><label style="color: var(--ion-text-color);">
-    // Velocidad de animación
-    // <input type="range" min="0" max="4"  value="${configData.animacion}"class="ccse modal_input modal_input_range configData" style="width: 92%">
-    // </label></p>
 
-
+    // PROP
+    // console.log(configValues);
     let configValues = document.getElementsByClassName('configData');
-    configValues[0].checked = configData.autoExpand;
-    // console.log(configData.animacion);
-    // configValues[3].value = configData.animacion;
+
+    configValues[2].checked = configData.autoExpand;
+    configValues[3].checked = configData.animacion;
 
     // fondo claro 
     configValues[0].addEventListener('keyup', () => {
@@ -123,6 +134,7 @@ config.addEventListener('click', () => {
         if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
             cargarTema1[0].setAttribute('style', `background: url('${(configData.fondo01 == '') ? 'src/img/bg1.jpg' : configData.fondo01} ') no-repeat 50% center/cover`);
         }
+
     });
 
     // fondo oscuro
@@ -139,31 +151,23 @@ config.addEventListener('click', () => {
         configData.autoExpand = configValues[2].checked;
         localStorage.setItem('data', JSON.stringify(configData));
         let cards = document.getElementsByTagName('ion-card-header');
+        // let cards = document.getElementsByClassName('ionCardHeader');
         let vuelta = cards.length;
         for (let i = 0; i < vuelta; i++) { cards[i].classList.toggle('cardExpand'); }
     });
+    
+    
+    
+    // animación
+    configValues[3].addEventListener('click', () => {
+        configData.animacion = configValues[3].checked;
+        localStorage.setItem('data', JSON.stringify(configData));
+        // let cards = document.getElementsByClassName('ionCardHeader');
+        let cards = document.getElementsByTagName('ion-card-header');
+        let vuelta = cards.length;
+        for (let i = 0; i < vuelta; i++) { cards[i].classList.toggle('animCardCero'); }
 
-    // animacion
-    // configValues[3].addEventListener('change', () => {
-    //     configData.animacion = configValues[3].value;
-    //     localStorage.setItem('data', JSON.stringify(configData));
-
-    //     let ionCardHeader = document.getElementsByClassName('ionCardHeader');
-    //     let vuelta = ionCardHeader.length;
-    //     for (let i = 0; i < vuelta; i++) { ionCardHeader[i].setAttribute('style', `transition-duration: ${configData.animacion / 10}s;`) };
-
-    //     let cardExpand = document.getElementsByClassName('cardExpand:hover');
-    //     let vuelta2 = cardExpand.length;
-    //     for (let i = 0; i < vuelta2; i++) { cardExpand[i].setAttribute('style', `transition-duration: ${configData.animacion / 5}s;`) };
-
-    //     // .btnExpandCard{
-
-    // });
-
-
-
-
-
+    });
 
 
 
@@ -252,9 +256,9 @@ barDelAcc.addEventListener('click', () => {
 
 
 
-// CONFIG
-// const configAutoExpand = document.getElementsByClassName('modal_input');
-// console.log(configAutoExpand);
-// configAutoExpand.addEventListener('click', ()=>{
-//     console.log('hola');
+    // CONFIG
+    // const configAutoExpand = document.getElementsByClassName('modal_input');
+    // console.log(configAutoExpand);
+    // configAutoExpand.addEventListener('click', ()=>{
+    //     console.log('hola');
 // });

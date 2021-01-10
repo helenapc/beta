@@ -8,18 +8,11 @@ var cargarTema1 = document.getElementsByClassName('light');
 var cargarTema2 = document.getElementsByClassName('dark');
 
 var configData = JSON.parse(localStorage.getItem('data'));
-// console.log(configData);
 if (configData == null) {
-    localStorage.setItem('data', JSON.stringify({ 'autoExpand': 'false', 'fondo01': '', 'fondo02': '', 'animacion': '4' }));
+    localStorage.setItem('data', JSON.stringify({ 'autoExpand': false, 'fondo01': '', 'fondo02': '', 'animacion': false, 'animacionVelocidad': '2' }));
     configData = JSON.parse(localStorage.getItem('data'));
 }
-// console.log(configData);
-
-// var bgl = document.body.querySelector('.light');
-
-// var docB1, docB2, docBpin, userID;
 var comparePersonalData = false;
-// var reload = true; 
 var compareChanges = '';
 
 var newCompareData2 = localStorage.getItem('L1');
@@ -125,17 +118,12 @@ barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
 
-const version = 'Versión 2.7.4-beta_r4-fix';
+const version = 'Versión 2.7.4-beta_r5';
 itemPers('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad');
 itemPers('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
 itemPers('barLogout', 'log-out-outline', 'Cerrar sesión');
 itemPers('config', 'settings-outline', 'Configuración');
 itemPers('version', '', version, false);
-
-// const version = document.createElement('ion-item-divider');
-// barContent.appendChild(version);
-// version.innerHTML = 'Versión 2.7.3-beta_r11 - 2.7.4';
-
 itemPers('barDelAcc', 'close-outline', 'Eliminar Cuenta', true, 'danger');
 
 document.querySelector('#versionLogin').innerHTML = version;
@@ -153,26 +141,6 @@ if (activeTheme[1] == 'dark') { checkbox.checked = true; };
 document.body.classList.toggle(activeTheme[(activeTheme[1] == 'dark') ? 1 : 0]);
 
 
-
-
-// console.log(cargarTema1[0].classList[0]);
-
-// if (cargarTema1[0]){
-//     if (cargarTema1[0].classList[0] == 'light'){
-//         if (configData.fondo01 == '') {
-//             if (cargarTema1[0]) cargarTema1[0].setAttribute('style', `background: url('src/img/bg1.jpg') no-repeat 52% center/cover;`);
-//         } else {
-//             if (cargarTema1[0]) cargarTema1[0].setAttribute('style', `background: url('${configData.fondo01}') no-repeat 50% center/cover;`);
-//         }
-//     }
-// }
-// else if (cargarTema2[0].classList[0] == 'dark'){
-//     if (configData.fondo02 == '') {
-//         if (cargarTema2[0]) cargarTema2[0].setAttribute('style', `background: url('src/img/bg2.jpg') no-repeat 52% center/cover;`);
-//     } else {
-//         if (cargarTema2[0]) cargarTema2[0].setAttribute('style', `background: url('${configData.fondo02}') no-repeat 50% center/cover;`);
-//     }
-// }
 // INIT BACKGROUND
 if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
     cargarTema1[0].setAttribute('style', `background: url('${(configData.fondo01 == '') ? 'src/img/bg1.jpg' : configData.fondo01} ') no-repeat 50% center/cover`);
@@ -180,6 +148,7 @@ if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
 else if (cargarTema2[0] && cargarTema2[0].classList[0] == 'dark') {
     cargarTema2[0].setAttribute('style', `background: url('${(configData.fondo02 == '') ? 'src/img/bg2.jpg' : configData.fondo02} ') no-repeat 50% center/cover`);
 }
+
 // INIT ANIMACION
 
 
@@ -253,7 +222,6 @@ var db = firebase.firestore();
 // }
 
 if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
-    console.log('entra');
     showLogin.innerHTML = '';
 
     // INIT SET   
@@ -350,12 +318,13 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
 
         // reinicio cambio de datos personales
         if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
-            localStorage.removeItem('bp');
-            localStorage.removeItem('accessTempData')
             // o1101
-            // localStorage.clear();
+            localStorage.clear();
             // / o1101
-            localStorage.setItem('L1', 'GDGDGDGD');
+
+            // localStorage.removeItem('bp');
+            // localStorage.removeItem('accessTempData')
+            // localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
@@ -441,7 +410,6 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     })
 
 } else {
-    console.log('No entra');
     localStorage.setItem('L1', 'GDGDGDGD');
     // localStorage.setItem('data', JSON.stringify({ autoExpand: false, fondo01: '', fondo02: '', animacion: '0.4' }));
 };
