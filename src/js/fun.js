@@ -1,4 +1,4 @@
-// Version 2.7.3 => 2.7.4
+
 const showCardAll = (account, user, pass, notes) => {
     const ionCard = document.createElement('ion-card');
     ionCard.setAttribute('button', 'click-btn');
@@ -9,14 +9,11 @@ const showCardAll = (account, user, pass, notes) => {
     if (!configData.autoExpand) newHeader.classList.remove("cardExpand");
     if (configData.animacion) {
         newHeader.classList.remove("animCardCero");
-        
+
         let test = document.getElementsByTagName('ion-card-header');
         let v = test.length;
-        for (let i = 0 ; i<v; i++){test[i].classList.toggle('ionCardHeader');}
+        for (let i = 0; i < v; i++) { test[i].classList.toggle('ionCardHeader'); }
     }
-
-
-    
 
     const newSub1 = document.createElement('ion-card-subtitle');
     const newSub2 = document.createElement('ion-card-subtitle');
@@ -26,7 +23,7 @@ const showCardAll = (account, user, pass, notes) => {
     newSub1.textContent = account.toUpperCase();
     newSub2.textContent = 'Usuario: ' + user;
     newSub3.textContent = 'Contraseña: ' + pass;
-    newSub4.textContent = 'Notas: ' + notes;
+    newSub4.textContent = 'Notas: ' + `${notes}`;
 
 
     newSub1.setAttribute('class', 'cardTitle');
@@ -46,34 +43,34 @@ const showCardAll = (account, user, pass, notes) => {
     //     duration: 0,
     //     reset: false
     // });
-    
+
 };
 
 
-const item = (id, ico, text, color = '', show = true) => {
-    const ionItem = document.createElement('ion-item');
-    ionItem.textContent = text;
-    ionItem.setAttribute('color', color);
-    ionItem.setAttribute('button', 'click-btn');
-    ionItem.setAttribute('id', id);
+// const item = (id, ico, text, color = '', show = true) => {
+//     const ionItem = document.createElement('ion-item');
+//     ionItem.textContent = text;
+//     ionItem.setAttribute('color', color);
+//     ionItem.setAttribute('button', 'click-btn');
+//     ionItem.setAttribute('id', id);
 
-    const ionIco = document.createElement('ion-icon');
-    ionIco.setAttribute('name', ico);
-    ionIco.setAttribute('slot', 'start');
-    ionIco.setAttribute('class', id);
-    ionIco.setAttribute('style', 'margin-right:10px;');
-    ionItem.appendChild(ionIco);
+//     const ionIco = document.createElement('ion-icon');
+//     ionIco.setAttribute('name', ico);
+//     ionIco.setAttribute('slot', 'start');
+//     ionIco.setAttribute('class', id);
+//     ionIco.setAttribute('style', 'margin-right:10px;');
+//     ionItem.appendChild(ionIco);
 
-    if (show) {
-        barContent.appendChild(ionItem);
-    } else {
-        if (localStorage.getItem('accessTempData') == '6669726E73GD6669726E73GD') {
-            barContent.appendChild(ionItem);
-        };
-    };
-    id = document.getElementById(id);
+//     if (show) {
+//         barContent.appendChild(ionItem);
+//     } else {
+//         if (localStorage.getItem('accessTempData') == '6669726E73GD6669726E73GD') {
+//             barContent.appendChild(ionItem);
+//         };
+//     };
+//     id = document.getElementById(id);
 
-}
+// }
 
 
 
@@ -120,7 +117,7 @@ function setAttributes(elem, obj) {
     }
 }
 
-// kas kas 
+//
 function delete_spaces(v1) {
     if (v1) {
         v1 = v1.split("");
@@ -129,7 +126,7 @@ function delete_spaces(v1) {
             if (v1[i] == " ") { v1.shift(); i--; }
             else {
                 while (true) {
-                    if (v1[v1Length- 1] == " ") { v1.pop(); }
+                    if (v1[v1Length - 1] == " ") { v1.pop(); }
                     else { break; }
                 }
                 v1 = v1.join("");
@@ -142,6 +139,22 @@ function delete_spaces(v1) {
         }
     } else { v1 = ""; }
     return v1;
+};
+
+function delete_spaces2(texto, type = 'data') {
+    if (texto) {
+        texto = (texto) ? texto.split(" ").join("") : "";
+        if (type === 'nota') {
+            texto = texto.split("");
+            texto = texto.map(function (letra) {
+                return (letra === '.') ? letra + ' ' : letra;
+            })
+            texto = texto.join("");
+        }
+    } else {
+        texto = "";
+    }
+    return texto;
 };
 
 // function disableItem(boolean) {
@@ -182,12 +195,13 @@ function refreshData(toast = true) {
     if (newSearch.value == '') {
         showSearch.innerHTML = '';
         showIcon.setAttribute('name', icoShow);
-        // AUTOEXPAND 2
         expandIcon.setAttribute('name', icoExp);
-        // AUTOEXPAND
         expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
         return
-    }
+    } else if (newSearch.value == '::id') { newSearch.value = userID; return }
+    else if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; return }
+    else if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (deco(txt[0]) + '_' + fecha())); return }
+
 
     for (i = 0; i < newTotalLength; i += 5) {
         if (newTotal[i].includes(newSearch.value.toLowerCase())) {
@@ -196,24 +210,16 @@ function refreshData(toast = true) {
         }
     }
 
-
     if (showSearch.innerHTML == '') {
         showIcon.setAttribute('name', icoShow);
-        // AUTOEXPAND
-        expandCard.setAttribute('style', 'opacity:0; pointer-events: none' );
+        expandCard.setAttribute('style', 'opacity:0; pointer-events: none');
     } else {
         showIcon.setAttribute('name', icoHide);
-        // AUTOEXPAND
         expandCard.setAttribute('style', 'opacity:1; pointer-events: auto');
     };
 
     let s = (contador == 1) ? '' : 's';
     if (newSearch.value != '' && toast) presentToast(`${contador} Resultado${s} encontrado${s}.`, '800', 'dark');
-
-    if (newSearch.value == '::id') { newSearch.value = userID; }
-    if (newSearch.value == '::password') { newSearch.value = deco(txt[2]); showSearch.innerHTML = ''; }
-    if (newSearch.value == '::bk') { newSearch.value = ''; downloadFile(docB1, (deco(txt[0]) + '_' + fecha())) }
-
 }
 
 function alertMsg(msg1, msg2) {
@@ -497,6 +503,7 @@ function alertEdit2(modalVal, reemplace) {
     modalVal[1] = delete_spaces(modalVal[1]);
     modalVal[2] = delete_spaces(modalVal[2]);
     modalVal[3] = delete_spaces(modalVal[3]);
+
 
     if (
         modalVal[0] == cuPath[0].toLowerCase() &&

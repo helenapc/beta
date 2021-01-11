@@ -362,6 +362,9 @@
     nuevo
         - intento de check auto-expand y animación
     bug
+        - overflow-x modal 
+        - fallas en cerrar sesión al cambiar PIN
+        - Espacios después "Enter" en notas.
 
     fix
         - tamaño, posición, color -> versión_nav
@@ -374,6 +377,28 @@
     mejoras
         - Eliminar oveflow main
         - configData en base de datos
+
+
+2.7.4-beta_r6
+
+    nuevo
+        - importar fondo link o imagen
+        - usar datos offline por defecto (app.js b6003/br0501)
+
+    bug
+        - Espacios después "Enter" en notas.
+
+    fix
+        - fallas en cerrar sesión al cambiar PIN
+        - overflow-x modal 
+
+    revisar 
+        - (app.js) 346 (bo1101)
+            + posibe falla cerrar sesión
+        - margenes cardTitle
+
+    mejoras
+        - Eliminar oveflow main
 
 
 

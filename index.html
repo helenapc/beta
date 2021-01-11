@@ -27,15 +27,22 @@
 
 <body>
   <ion-app class="fondo">
-    <label id="point_backup_nav" class="point_backup">&#9679</label>
+    <!-- <label id="point_backup_nav" class="point_backup">&#9679</label> -->
 
     <ion-menu side="start" content-id="main-content" max-edge-start="0" id="barMenuPrincipal" swipe-gesture="true">
       <!-- <label id="point_backup" class="point_backup_menu">&#9679</label> -->
       <!-- <label id="point_backup" class="point_backup_menu">·</label> -->
       <label class="point_backup">&#9679</label>
-
     </ion-menu>
 
+
+
+    <div id ="imagenes" class="popup_box">
+      <input id="fondo1" type='file' onchange="readURL(this);"/>
+      <input id="fondo2" type='file' onchange="readURL2(this);"/>
+      <textarea id="dataUrl" rows="4" cols="100"></textarea>
+    </div>
+    
 
     <!-- <ion-fab id="offline" vertical="top" horizontal="end" style="opacity: 0;">
       <ion-icon name="cloud-offline-outline" size="large"></ion-icon>
@@ -66,8 +73,10 @@
           <div slot="end" style="margin-right:20px;">
             <input type="checkbox" class="checkbox" id="checkbox">
             <label for="checkbox" class="label">
-              <ion-icon class="fa-color" name="bulb"></ion-icon>
-              <ion-icon class="fa-moon" name="moon"></ion-icon>
+              <!-- <ion-icon class="fa-color" name="bulb"></ion-icon> -->
+              <!-- <ion-icon class="fa-moon" name="moon"></ion-icon> -->
+              <i class="fas fa-lightbulb"></i>
+              <i class="fas fa-moon"></i>
               <div class="ball"></div>
             </label>
           </div>
@@ -87,55 +96,58 @@
       <ion-content class="content" id='content'>
         <!-- <div class="divOverflow"> -->
 
-          <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
-            <ion-refresher-content></ion-refresher-content>
-          </ion-refresher>
+        <ion-refresher slot="fixed" id="refresher" pull-factor="0.5" pull-min="50" pull-max="200">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
 
+        <ion-row>
+          <ion-col id="show-accounts1" size="9" offset="1.5" size-md="5" offset-md="3.5"></ion-col>
+        </ion-row>
 
-          <ion-row>
-            <ion-col id="show-accounts1" size="9" offset="1.5" size-md="5" offset-md="3.5"></ion-col>
-          </ion-row>
+        <ion-row id="showLogin" style="margin-top: 50px;">
+          <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
+            <ion-item class="bordeSup">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input id="nameLog"></ion-input>
+            </ion-item>
 
-          <ion-row id="showLogin" style="margin-top: 50px;">
-            <ion-col size="8" offset="2" size-md="5" offset-md="3.5">
-              <ion-item class="bordeSup">
-                <ion-label position="floating">Email</ion-label>
-                <ion-input id="nameLog"></ion-input>
-              </ion-item>
+            <ion-item class="bordeInf">
+              <ion-icon id="eyePass" name="eye-outline" slot="end"></ion-icon>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" id="passLog"></ion-input>
+            </ion-item>
 
-              <ion-item class="bordeInf">
-                <ion-icon id="eyePass" name="eye-outline" slot="end"></ion-icon>
-                <ion-label position="floating">Contraseña</ion-label>
-                <ion-input type="password" id="passLog"></ion-input>
-              </ion-item>
+            <ion-button fill="outline" expand="block" id="buttonLogin" strong="true">Iniciar sesión </ion-button>
+            <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
 
-              <ion-button fill="outline" expand="block" id="buttonLogin" strong="true">Iniciar sesión </ion-button>
-              <ion-button expand="block" id="buttonCreate">Registrarse</ion-button>
+            <ion-button id="restorePass" style="text-transform: none" ; fill="clear" expand="block" button
+              onclick="sendEmail()">
+              <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
+            </ion-button>
 
-              <ion-button id="restorePass" style="text-transform: none" ; fill="clear" expand="block" button
-                onclick="sendEmail()">
-                <ion-label style="font-weight: bold" class="restoreText">Olvidaste tu contraseña?</ion-label>
-              </ion-button>
+            <ion-label id="versionLogin" style="display: block; text-align: center;"></ion-label>
+          </ion-col>
+        </ion-row>
 
-              <ion-label id="versionLogin" style="display: block; text-align: center;"></ion-label>
-            </ion-col>
-          </ion-row>
-
-          <ion-row id="cardPin">
-            <ion-col size="5" offset="3.5" size-md="2" offset-md="5">
-              <ion-card>
-                <ion-input type="password" style="text-align: center; --padding-start: 0px;" placeholder="PIN" id="pin">
-                </ion-input>
-              </ion-card>
-            </ion-col>
-          </ion-row>
+        <ion-row id="cardPin">
+          <ion-col size="5" offset="3.5" size-md="2" offset-md="5">
+            <ion-card>
+              <ion-input type="password" style="text-align: center; --padding-start: 0px;" placeholder="PIN" id="pin">
+              </ion-input>
+            </ion-card>
+          </ion-col>
+        </ion-row>
 
         <!-- </div> -->
-
-
       </ion-content>
 
+
+
       <!-- MODAL -->
+
+      
+      
+
       <div id="bkmodal" class="bkpopup"></div>
       <div id="modal" class="popup_box"></div>
 
@@ -144,7 +156,7 @@
         <ion-fab-button id="nameSetting" color="light" size="small">
           <ion-label id="nameSettingText" style="font-size: 20px;"></ion-label>
         </ion-fab-button>
-        <ion-label id="help-config" class="help help-configuracion">Configuración personal</ion-label>
+        <ion-label id="help-config" class="help help-configuracion"></ion-label>
       </ion-fab>
 
       <!-- FAB TOP-RIGHT -->
@@ -200,11 +212,13 @@
 
   </ion-app>
   <!-- <script src="https://unpkg.com/scrollreveal"></script> -->
+  <script src="src/js/imgLocal.js"></script>
   <script src="src/js/fun.js"></script>
   <script src="app.js"></script>
   <script src="src/js/btn_nav.js"></script>
   <script src="src/js/btn_fab.js"></script>
   <script src="src/js/btn.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
   <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@4.7.4/dist/ionicons/ionicons.js"></script>
 </body>
 

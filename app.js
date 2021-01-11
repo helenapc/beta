@@ -4,6 +4,7 @@ var txt = [];
 var aTotal = [];
 var newTotal = [];
 
+
 var cargarTema1 = document.getElementsByClassName('light');
 var cargarTema2 = document.getElementsByClassName('dark');
 
@@ -12,6 +13,8 @@ if (configData == null) {
     localStorage.setItem('data', JSON.stringify({ 'autoExpand': false, 'fondo01': '', 'fondo02': '', 'animacion': false, 'animacionVelocidad': '2' }));
     configData = JSON.parse(localStorage.getItem('data'));
 }
+
+var configValues = document.getElementsByClassName('configData');
 var comparePersonalData = false;
 var compareChanges = '';
 
@@ -56,30 +59,15 @@ const newSearch = document.getElementById('new-s');
 
 //******************************************* */
 
-
-// if (configData == null){
-//     localStorage.setItem('data', JSON.stringify({autoExpand: false, fondo01: '', fondo02 : ''}));
-// }
-
-
-
-
-
-
-
 document.getElementById('content').setAttribute('style', ' --background:var(--val)');
 document.querySelector('#refresher').setAttribute('disabled', 'true');
 
 // AUTOEXPAND
+// document.querySelector('#imagenes').setAttribute('style', 'opacity:1; pointer-events:auto; transform: translateY(300px)');
 multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '#expandCard', '#showCard', '#buttonSearch', '#buttonAdd', '.button_nav'], 'style', 'pointer-events: none; opacity: 0');
-// multipleAttribute(['#cardPin', '#nameSetting', '#buttonEdit', '#buttonDelete', '#showCard', '#buttonSearch', '#buttonAdd', '.button_nav'], 'style', 'pointer-events: none; opacity: 0');
-
-
-
 
 var statSearchBar = false;
 newSearch.setAttribute('style', 'opacity:1; margin-top:-60px;');
-
 
 
 // PROGRESS BAR
@@ -118,11 +106,12 @@ barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
 
-const version = 'Versión 2.7.4-beta_r5';
+const version = 'Versión 2.7.4-beta_r6';
+itemPers('account', 'person-circle-outline', 'Cuenta');
 itemPers('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad');
 itemPers('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
-itemPers('barLogout', 'log-out-outline', 'Cerrar sesión');
 itemPers('config', 'settings-outline', 'Configuración');
+itemPers('barLogout', 'log-out-outline', 'Cerrar sesión');
 itemPers('version', '', version, false);
 itemPers('barDelAcc', 'close-outline', 'Eliminar Cuenta', true, 'danger');
 
@@ -148,36 +137,6 @@ if (cargarTema1[0] && cargarTema1[0].classList[0] == 'light') {
 else if (cargarTema2[0] && cargarTema2[0].classList[0] == 'dark') {
     cargarTema2[0].setAttribute('style', `background: url('${(configData.fondo02 == '') ? 'src/img/bg2.jpg' : configData.fondo02} ') no-repeat 50% center/cover`);
 }
-
-// INIT ANIMACION
-
-
-// let ionCardHeader = document.getElementsByClassName('ionCardHeader');
-// let vuelta = ionCardHeader.length;
-// for (let i = 0; i < vuelta; i++) { ionCardHeader[i].setAttribute('style', `transition-duration: ${configData.animacion / 10}s;`) };
-
-// let cardExpand = document.getElementsByClassName('cardExpand:hover');
-// let vuelta2 = cardExpand.length;
-// for (let i = 0; i < vuelta2; i++) { cardExpand[i].setAttribute('style', `transition-duration: ${configData.animacion / 5}s;`) };
-
-
-
-
-// let cargarTema1 = document.getElementsByClassName('light');
-// let cargarTema2 = document.getElementsByClassName('dark');
-
-// if (document.body == 'body.dark') console.log('correcto');
-
-
-
-
-// console.log(document.body.classList)
-// document.body.classList.add('bg');
-
-
-
-// document.body.classList.toggle('bg');
-// document.body.setAttribute('class', 'bg')
 
 
 //LOGIN (eye)
@@ -231,34 +190,13 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
     statSearchBar = true;
     newSearch.setAttribute('style', 'opacity:1; margin-top:0px;');
 
-    // data
-    // var configData = JSON.parse(localStorage.getItem('data'));
-
-    // if (activeTheme[1] == 'light') {
-    //     checkbox.checked = false;
-    //     if (configData.fondo01 == ''){
-    //         document.body.style.background = `url('src/img/bg1.jpg') no-repeat 52% center/cover;`;
-    //     }else{
-    //         document.body.style.background = `url('${configValues[1].value}') no-repeat 52% center/cover;`;
-    //     }
-
-    // }else{
-    //     checkbox.checked = true;
-    //     if (configData.fondo02 == ''){
-    //         document.body.style.background = `url('src/img/bg2.jpg') no-repeat 52% center/cover;`;
-    //     }else{
-    //         document.body.style.background = `url('${configValues[2].value}') no-repeat 52% center/cover;`;
-    //     }
-    // };
-    // console.log(document.body.classList);
-    // if (configData.fondo != '') document.body.setAttribute('style', `background: url(${configData.fondo}) no-repeat 52% center/cover;`);
 
 
 
 
     splitInit();
     aTotalTOnewTotal();
-
+    document.querySelector('#help-config').innerHTML = deco(txt[0]);
     document.querySelector('#userName').innerHTML = deco(txt[0]);
     document.querySelector('#nameSettingText').innerHTML = deco(txt[0]).slice(0, 1).toUpperCase();
 
@@ -319,12 +257,11 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // reinicio cambio de datos personales
         if (!comparePersonalData && !offline || localStorage.getItem('bp') != txt[4]) {
             // o1101
-            localStorage.clear();
+            // localStorage.clear();
             // / o1101
-
-            // localStorage.removeItem('bp');
-            // localStorage.removeItem('accessTempData')
-            // localStorage.setItem('L1', 'GDGDGDGD');
+            localStorage.removeItem('bp');
+            localStorage.removeItem('accessTempData')
+            localStorage.setItem('L1', 'GDGDGDGD');
             window.location.reload();
         }
 
@@ -350,8 +287,8 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // reinicio cambio de datos personales
 
         //POINT BACKUP
-        // document.querySelectorAll('.point_backup')[0].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
-        document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
+        document.querySelector('.point_backup').setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
+        // document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         ;
 
 
@@ -367,17 +304,26 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
                 document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
                 document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
             }
-            // b6003
+
             if (localStorage.getItem('offline')) {
-                document.getElementById('modal').innerHTML =
-                    `
-                <p class="cct" ;">Se detectaron cambios</p>
-                <p class="ccse" style="margin: 10px 0px 20px 0px;">¿Aplicar cambios hechos sin internet?</p>
+
+                // br0501
+                updateData('Rechazar', compareChanges);
+                // br0501
+
+
+                // b6003
+                // document.getElementById('modal').innerHTML =
+                //     `
+                // <p class="cct" ;">Se detectaron cambios</p>
+                // <p class="ccse" style="margin: 10px 0px 20px 0px;">¿Aplicar cambios hechos sin internet?</p>
     
-                <input type="button" class="modal_btns" style="margin-left:100%" value="Usar datos de celular (Sin internet)" onClick="buttons_modal('rechazar')">   
-                <input type="button" class="modal_btns" style="margin-left:100%" value="Usar base de datos (internet)" onClick="buttons_modal('aceptar')" >
-                `;
-                // /b6003
+                // <input type="button" class="modal_btns" style="margin-left:100%" value="Usar datos de celular (Sin internet)" onClick="buttons_modal('rechazar')">   
+                // <input type="button" class="modal_btns" style="margin-left:100%" value="Usar base de datos (internet)" onClick="buttons_modal('aceptar')" >
+                // `;
+
+
+            // /b6003
 
             } else {
 

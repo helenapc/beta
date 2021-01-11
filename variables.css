@@ -38,14 +38,11 @@ font-size: 1.6rem; */
   pointer-events: none;
   position: fixed;
   left: 33px;
-  top: 60px;
+  top: 106px;
   color: #ff00007e;
 }
 
-#point_backup_nav{
-  left: 5px;
-  top: 10px;
-}
+
 
 /* #point_backup_nav{
   pointer-events: none;
@@ -89,13 +86,6 @@ font-size: 1.6rem; */
   text-decoration: none;
   display: block;
 }
-
-
-
-
-
-
-
 
 
 /* @keyframes op {
@@ -149,7 +139,7 @@ font-size: 1.6rem; */
 
 /* ********* */
 
-/* **** ICONS ***** */
+/* **** FAB ***** */
 
 .add{ color: #2f3136;}
 
@@ -177,15 +167,55 @@ ion-fab ion-label{
 .help-agregar{ right: 60px; top: 10px; opacity: 0; pointer-events: none; }
 
 
-/* NAVBAR */
-
-
-
 /* CARDS */
 
 .card-sub-account{ margin-left: 20px; }
 
-/* .hide{ disdivOverflowy: none; } */
+ion-card-header{
+  padding: 0px 16px 16px 16px;
+  height: 48px;
+  transition-duration: .8s;
+  transition-delay: .05s;
+  /* background: var(--ion-color-primary); */
+}
+
+
+.ionCardHeader{
+  padding: 0px 16px 16px 16px;
+  height: 48px;
+  transition-duration: .8s;
+  transition-delay: .05s;
+}
+
+.cardExpand:hover{
+  height: 133px;
+  transition-duration: .4s;
+  transition-delay: .05s;
+  overflow: auto
+}
+
+.btnExpandCard{
+  height: 133px;
+  transition-duration: .4s;
+  overflow: auto;
+}
+
+.animCardCero{
+  transition-duration: 0s;
+}
+
+
+ion-card-header::-webkit-scrollbar-thumb {
+  background: var(--ion-color-primary);
+}
+
+.cardTitle{
+  padding: 17px 0px 10px 0px;
+  font-size: 1em;
+  font-weight: 600;
+  white-space: nowrap;
+  margin: 0px 0px 0px 0px;
+}
 
 
 /*ITEMS*/
@@ -197,15 +227,8 @@ ion-fab ion-label{
 /* #content{ --background:var(--val); } */
 /* .content {--background: #ffffff00 } */
 
-/* #cardPin{
-  z-index: 99999;
-} */
 
-.button_nav{
-  opacity: 1;
-  pointer-events: none;
-  margin-right: -30px;
-}
+
 
 #refresher{
   /* z-index: -1; */
@@ -270,9 +293,10 @@ ion-icon, .item .sc-ion-label-md-h , .restoreText , #nameSettingText{ /*icon, in
 
 .checkbox + .label{ background-color:var(--ion-color-medium); margin-left: -10px; }
 
-.fa-moon{ color: #414141; }
 
-.fa-color{ color: #ffffff; }
+.fa-moon{ color: #414141; transform: translateX(-1px);}
+
+.fa-lightbulb{ color: #ffffff; transform: translateX(3px);}
 
 
 

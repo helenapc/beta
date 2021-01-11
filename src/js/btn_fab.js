@@ -26,7 +26,7 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
     <label class="cce" > Usuario: </label>
     <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="${cuPath[2]}">
     <label class="cce" > Contraseña: </label>
-    <textarea placeholder="Opcional" cols='25' class="ccse modal_input">${cuPath[3]}</textarea>
+    <textarea placeholder="Opcional" cols='23' class="ccse modal_input">${cuPath[3]}</textarea>
     <label class="cce noteTextArea"> Notas: </label>
     </p>
     
@@ -111,54 +111,55 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
     return alert.present();
 });
 
-document.getElementById('nameSetting').addEventListener('click', () => {
-    const alertPassItem = document.createElement('ion-alert');
-    alertPassItem.header = 'Datos de usuario';
-    alertPassItem.message = 'Inserte contraseña para continuar..';
-    alertPassItem.inputs = [
-        { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
-    ];
-    alertPassItem.buttons = [
-        {
-            text: 'Ok',
-            handler: u => {
-                if (u.uEPass == deco(txt[2])) {
-                    if (txt[0] == '25') txt[0] = '';
-                    // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                    // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-                    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
+
+// document.getElementById('nameSetting').addEventListener('click', () => {
+//     const alertPassItem = document.createElement('ion-alert');
+//     alertPassItem.header = 'Datos de usuario';
+//     alertPassItem.message = 'Inserte contraseña para continuar..';
+//     alertPassItem.inputs = [
+//         { name: 'uEPass', placeholder: 'Contraseña', type: 'password' },
+//     ];
+//     alertPassItem.buttons = [
+//         {
+//             text: 'Ok',
+//             handler: u => {
+//                 if (u.uEPass == deco(txt[2])) {
+//                     if (txt[0] == '25') txt[0] = '';
+//                     // document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: auto');
+//                     // document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
+//                     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
 
 
-                    document.getElementById('modal').innerHTML =
-                        `
-                        <p id="op1" class="cct">Datos de usuario</p>
-                        <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-                        <p style="margin: 0px 0px 15px 0px;">
-                        <input type="text" placeholder="Opcional" class="ccse modal_input" value="${deco(txt[0])}">
-                        <label class="cce" > Nombre: </label>
-                        <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="${deco(txt[1])}">
-                        <label class="cce" > Email: </label>
-                        <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="${deco(txt[2])}">
-                        <label class="cce" > Contraseña: </label>
-                        <input type="text" placeholder="Opcional" class="ccse modal_input" value="${deco(txt[4])}">
-                        <label class="cce" > PIN: </label>
-                        </p>
+//                     document.getElementById('modal').innerHTML =
+//                         `
+//                         <p id="op1" class="cct">Datos de usuario</p>
+//                         <hr style="height:1px; border-width:0; color:gray;background-color:gray">
+//                         <p style="margin: 25px 0px 0px 0px;">
+//                         <input type="text" placeholder="Opcional" class="ccse modal_input" value="${deco(txt[0])}">
+//                         <label class="cce" > Nombre: </label>
+//                         <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="${deco(txt[1])}">
+//                         <label class="cce" > Email: </label>
+//                         <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="${deco(txt[2])}">
+//                         <label class="cce" > Contraseña: </label>
+//                         <input type="text" placeholder="Opcional" class="ccse modal_input" value="${deco(txt[4])}">
+//                         <label class="cce" > PIN: </label>
+//                         </p>
 
-                        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_datosDeUsuario')">
-                        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel_datosDeUsuario')">
-                    `;
+//                         <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_datosDeUsuario')">
+//                         <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel_datosDeUsuario')">
+//                     `;
 
-                } else {
-                    // barProgressF('warning', )
-                    presentToast('Contraseña incorrecta.', '800', 'warning');
-                }
-            },
-        },
-    ];
-    document.body.appendChild(alertPassItem);
-    return alertPassItem.present();
-    // }
-});
+//                 } else {
+//                     // barProgressF('warning', )
+//                     presentToast('Contraseña incorrecta.', '800', 'warning');
+//                 }
+//             },
+//         },
+//     ];
+//     document.body.appendChild(alertPassItem);
+//     return alertPassItem.present();
+//     // }
+// });
 
 
 document.getElementById('expandCard').addEventListener('click', () => {
@@ -245,7 +246,7 @@ document.getElementById('buttonAdd').addEventListener('click', () => {
     <label class="cce" > Usuario:</label>
     <input type="text" placeholder="Obligatorio" class="ccse modal_input" value="">
     <label class="cce" > Contraseña:</label>
-    <textarea placeholder="Opcional" cols='25' class="ccse modal_input"></textarea>
+    <textarea placeholder="Opcional" cols='23' class="ccse modal_input"></textarea>
     <label class="cce noteTextArea" > Notas:</label>
     </p>
 
