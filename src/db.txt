@@ -387,10 +387,14 @@
 
     bug
         - Espacios después "Enter" en notas.
+        - No se restaura opacidad FAB al tocar afuera del modal borrar (btn_fab.js F1060_1)
+        - taost al cargar fatos offline. (fun.js F0601_1)
 
     fix
         - fallas en cerrar sesión al cambiar PIN
         - overflow-x modal 
+
+    (FIX)
 
     revisar 
         - (app.js) 346 (bo1101)
@@ -409,7 +413,3 @@
     + variable tempL1 y boton deshacer reemplaza L1 por tempL1
 
 - elegir cambios en detalles (checkbox)
-- panel de configuraciones
-    + fondos
-
-

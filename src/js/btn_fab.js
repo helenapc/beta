@@ -40,18 +40,26 @@ document.getElementById('buttonEdit').addEventListener('click', () => {
 
 document.getElementById('buttonDelete').addEventListener('click', () => {
 
+    // F0602
     multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+    if (showSearch.innerHTML != '') {
+        multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    }
+    // F0602
 
     const alert = document.createElement('ion-alert');
     alert.message = `¿Eliminar "${cuPath[0]}"?`;
     alert.buttons = [
         {
-            text: 'cancelar',
-            handler: () => {
+            // F0602
+            text: 'cancelar', role: 'cancel'
+            // handler: () => {
                 // AUTOEXPAND
-                multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+                // multipleAttribute(['#nameSetting', '#expandCard', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
                 // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-            }
+            // }
+            // F0602
         },
         {
             text: 'ok',
@@ -94,8 +102,8 @@ document.getElementById('buttonDelete').addEventListener('click', () => {
 
     // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
     // if (showSearch.innerHTML != '') {
-    //     // multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-
+    //     multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // }
 
     // } else {
     //     document.getElementById('showIcon').setAttribute('name', icoShow);

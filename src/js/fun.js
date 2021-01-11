@@ -304,7 +304,7 @@ function aTotalTOnewTotal() {
     }
 }
 
-function updateData(text, compareChanges) {
+function updateData(text, compareChanges, toast = true) {
 
     splitInit();
     aTotalTOnewTotal();
@@ -330,7 +330,10 @@ function updateData(text, compareChanges) {
 
     newSearch.value = '';
     refreshData();
-    presentToast((text == 'Rechazar') ? 'Cancelando cambios.' : 'Datos actualizados.', '1000', 'dark');
+    // F0601
+    if (toast) { presentToast((text == 'Rechazar') ? 'Cancelando cambios.' : 'Datos actualizados.', '1000', 'dark') }
+    else { presentToast('Datos offline actualizados', '1000', 'success') };
+    // F0601
     setTimeout(() => { window.location.reload() }, 1000);
 }
 
