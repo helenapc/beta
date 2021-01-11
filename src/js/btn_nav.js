@@ -205,7 +205,6 @@ config.addEventListener('click', () => {
     configValues[3].checked = configData.animacion;
 
     // fondo claro 
-    configValues[0].addEventListener('click', () => { configValues[0].setSelectionRange(0, configValues[0].value.length)});
     configValues[0].addEventListener('input', () => {
         if (configValues[0].value === '*Imagen Local*') {
             cargarTema1[0].setAttribute('style', `background: url('${configData.fondo01}`);
@@ -218,9 +217,7 @@ config.addEventListener('click', () => {
         }
     });
 
-    // configValues[1].setSelectionRange(0, configValues[1].value.length)
     // fondo oscuro
-    configValues[1].addEventListener('click', () => { configValues[1].setSelectionRange(0, configValues[1].value.length)});
     configValues[1].addEventListener('input', () => {
         // configValues[1].select();
         if (configValues[1].value === '*Imagen Local*') {
