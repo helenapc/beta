@@ -3,13 +3,12 @@
 // NEW MODAL
 
 document.getElementById('bkmodal').addEventListener('click', () => {
-    multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-    // AUTOEXPAND
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-    let ccse = document.querySelectorAll('.ccse');
-    for (let i = 0; i < ccse.length; i++) { ccse[i].setAttribute('style', 'user-select:none;'); }
-
+    // multipleAttribute(['#bkmodal', '#modal', '#buttonEdit', '#buttonDelete'], 'style', 'opacity:0; pointer-events: none');
+    // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
+    // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+    // let ccse = document.querySelectorAll('.ccse');
+    // for (let i = 0; i < ccse.length; i++) { ccse[i].setAttribute('style', 'user-select:none;'); }
+    buttonModalCancel();
 })
 
 

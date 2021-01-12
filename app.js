@@ -3,7 +3,7 @@ var coincidencia = false;
 var txt = [];
 var aTotal = [];
 var newTotal = [];
-
+var btnToast = true;
 
 var cargarTema1 = document.getElementsByClassName('light');
 var cargarTema2 = document.getElementsByClassName('dark');
@@ -106,7 +106,7 @@ barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
 
-const version = 'Versión 2.7.4-beta_r6.fix2';
+const version = 'Versión 2.7.4-beta_r7';
 itemPers('account', 'person-circle-outline', 'Cuenta');
 itemPers('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad');
 itemPers('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');
@@ -291,9 +291,10 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
         // document.querySelectorAll('.point_backup')[1].setAttribute('style', `z-index: ${(docB1 != docB2) ? '2' : '0'}`);
         ;
 
-
+        
+        
         if (docB1 != compareChanges && !offline) {
-
+            
             // 
             // localStorage.removeItem('offline'); // PROBAR
             // 
@@ -306,52 +307,24 @@ if (localStorage.getItem('L1') && localStorage.getItem('L1') != 'GDGDGDGD') {
             }
 
             if (localStorage.getItem('offline')) {
-
-                // br0501
                 updateData('Rechazar', compareChanges, false);
-                // br0501
-
-
-                // b6003
-                // document.getElementById('modal').innerHTML =
-                //     `
-                // <p class="cct" ;">Se detectaron cambios</p>
-                // <p class="ccse" style="margin: 10px 0px 20px 0px;">¿Aplicar cambios hechos sin internet?</p>
-    
-                // <input type="button" class="modal_btns" style="margin-left:100%" value="Usar datos de celular (Sin internet)" onClick="buttons_modal('rechazar')">   
-                // <input type="button" class="modal_btns" style="margin-left:100%" value="Usar base de datos (internet)" onClick="buttons_modal('aceptar')" >
-                // `;
-
-
-            // /b6003
-
             } else {
-
                 document.getElementById('modal').innerHTML =
                     `
                 <p class="cct" ;">Se detectaron cambios</p>
                 <p class="ccse" style="margin: 10px 0px 20px 0px;">¿Aceptar y sincronizar datos?</p>
     
-                <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttons_modal('aceptar')" >
-                <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttons_modal('rechazar')">
-                <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttons_modal('verCambios')">
+                <input type="button" class="modal_btns" style="margin-left:100%" value="ACEPTAR" onClick="buttonModalChanges('aceptar')" >
+                <input type="button" class="modal_btns" style="margin-left:100%" value="RECHAZAR" onClick="buttonModalChanges('rechazar')">
+                <input type="button" class="modal_btns" style="margin-left:100%" value="VER CAMBIOS" onClick="buttonModalSetChanges()">
     
                 `;
             }
 
-        }
-
-
-
-        else {
-            // initStateL1 = true;
-            // document.getElementById('modal').innerHTML = '';
-            // console.log('No comparación');
-            // if (offline) acceptOffline = false;
-
-            // document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
-            // document.getElementById('modal').setAttribute('style', 'opacity:0; pointer-events: none');
-            multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none')
+        } else {
+            if (document.querySelector('#modal').innerHTML.includes('Se detectaron cambios')){
+                multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+            }
         }
     })
 

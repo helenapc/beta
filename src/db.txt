@@ -405,11 +405,30 @@
         - Eliminar oveflow main
 
 
+2.7.4-beta_r7
+
+    new
+        - archivo (btn_modal.js) con funciones para botones de modal
+        - deshacer en toast.
+        - toast.css
+
+    bug
+
+
+    fix
+        - TODO es MODAL (popup)
+            + menos "contraseña para continuar" en settingAccount.
+        - transition-delay 0 en tarjetas
+        - Desaparecia el modal al usar FAB antes de 1 segundo de cargar la página.
+
+    revisar 
+        - (app.js) 346 (bo1101)
+            + posibe falla cerrar sesión
+
+    mejoras
+        - combinar "presentAlertConfirmEdit(modalVal)" a "buttonModalAccount()"
+        - Eliminar oveflow main
 
 
 2.8
-- Opcion "deshacer" en "toast" al operar datos.
-    + setTimeout 1500/2000 antes de hacer cambios.
-    + variable tempL1 y boton deshacer reemplaza L1 por tempL1
-
-- elegir cambios en detalles (checkbox)
+    - elegir cambios en detalles (checkbox)

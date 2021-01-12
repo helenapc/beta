@@ -36,8 +36,8 @@ account.addEventListener('click', () => {
                         <label class="cce" > PIN: </label>
                         </p>
 
-                        <input type="button" class="modal_btns" value="OK" onClick="buttons_modal('ok_datosDeUsuario')">
-                        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttons_modal('cancel_datosDeUsuario')">
+                        <input type="button" class="modal_btns" value="OK" onClick="buttonModalAccount()">
+                        <input type="button" class="modal_btns" value="CANCELAR" onClick="buttonModalCancel()">
                     `;
 
                 } else {
@@ -118,23 +118,6 @@ barLogout.addEventListener('click', () => {
 });
 
 
-// var configDataFondo01;
-// var configDataFondo02;
-
-// // console.log(configData.fondo02);
-
-// if (configData.fondo01.includes('data:image')) {
-//     configDataFondo01 = '*Imagen Local*';
-// } else {
-//     configDataFondo01 = configData.fondo01;
-// }
-
-// if (configData.fondo02.includes('data:image')) {
-//     configDataFondo02 = '*Imagen Local*';
-// } else {
-//     configDataFondo02 = configData.fondo02;
-// }
-
 var configDataFondo01 = (configData.fondo01.includes('data:image')) ? '*Imagen Local*' : configData.fondo01;
 var configDataFondo02 = (configData.fondo02.includes('data:image')) ? '*Imagen Local*' : configData.fondo02;
 
@@ -146,10 +129,11 @@ config.addEventListener('click', () => {
     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:1; pointer-events: auto');
     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0.3; pointer-events: none');
     // AUTOEXPAND
+
     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:0.3; pointer-events: none');
     const modal = document.getElementById('modal');
     document.getElementById('modal').innerHTML =
-        // width: 210px
+
         `
         <p id="op1" class="cct">Configuración</p>
         <hr style="height:1px; background-color:gray">
@@ -195,7 +179,7 @@ config.addEventListener('click', () => {
 
             <br>
         </div>
-        <input type="button" class="modal_btns" value="OK" style="margin: 15px 0px" onClick="buttons_modal('cancel')">
+        <input type="button" class="modal_btns" value="OK" style="margin: 15px 0px" onClick="buttonModalCancel();">
     `;
 
 

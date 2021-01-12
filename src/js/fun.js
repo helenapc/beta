@@ -46,34 +46,6 @@ const showCardAll = (account, user, pass, notes) => {
 
 };
 
-
-// const item = (id, ico, text, color = '', show = true) => {
-//     const ionItem = document.createElement('ion-item');
-//     ionItem.textContent = text;
-//     ionItem.setAttribute('color', color);
-//     ionItem.setAttribute('button', 'click-btn');
-//     ionItem.setAttribute('id', id);
-
-//     const ionIco = document.createElement('ion-icon');
-//     ionIco.setAttribute('name', ico);
-//     ionIco.setAttribute('slot', 'start');
-//     ionIco.setAttribute('class', id);
-//     ionIco.setAttribute('style', 'margin-right:10px;');
-//     ionItem.appendChild(ionIco);
-
-//     if (show) {
-//         barContent.appendChild(ionItem);
-//     } else {
-//         if (localStorage.getItem('accessTempData') == '6669726E73GD6669726E73GD') {
-//             barContent.appendChild(ionItem);
-//         };
-//     };
-//     id = document.getElementById(id);
-
-// }
-
-
-
 const itemPers = (id, ico, text, button = true, color = '', show = true) => {
 
     const ionItem = document.createElement('ion-item');
@@ -157,26 +129,6 @@ function delete_spaces2(texto, type = 'data') {
     return texto;
 };
 
-// function disableItem(boolean) {
-//     barMenuPrincipal.setAttribute('disabled', boolean);
-
-//     // setAttributes(document.getElementById('buttonHelp'), { style: 'opacity:1; margin-top:58px; margin-right:-8px', disabled: boolean });
-
-//     // document.getElementById('title').style.margin = "0px";
-
-
-//     document.getElementById('title').setAttribute('style', 'margin-left:0px');
-//     document.getElementById('buttonAdd').setAttribute('style', 'opacity:1; margin-bottom:0px; margin-right:-8px');
-//     setAttributes(document.getElementById('nameSetting'), { style: 'opacity:1', disabled: boolean });
-//     setAttributes(document.getElementById('showCard'), { style: 'opacity:1', disabled: boolean });
-//     setAttributes(document.getElementById('buttonSearch'), { style: 'opacity:1', disabled: boolean });
-//     setAttributes(document.getElementById('refresher'), { style: 'opacity:1', disabled: boolean });
-
-//     // content.setAttribute('style', '--background: #ffffff00');
-//     // if (!boolean) document.body.style.backgroundColor = "var(--ion-background-color)";
-
-
-// }
 
 function barProgressF(color, state) {
     setAttributes(barProgress01, { color: color, type: state, value: '100' });
@@ -184,13 +136,15 @@ function barProgressF(color, state) {
 };
 
 
-function refreshData(toast = true) {
+function refreshData(toast = true, refresh = true) {
     aTotal.sort(); // borrar?
 
     let contador = 0;
     const newTotalLength = newTotal.length;
     // const newSearchValue = newSearch.value;
-    showSearch.innerHTML = '';
+
+    // ACTIVAR
+    if (refresh)showSearch.innerHTML = '';
 
     if (newSearch.value == '') {
         showSearch.innerHTML = '';
@@ -219,7 +173,7 @@ function refreshData(toast = true) {
     };
 
     let s = (contador == 1) ? '' : 's';
-    if (newSearch.value != '' && toast) presentToast(`${contador} Resultado${s} encontrado${s}.`, '800', 'dark');
+    if (newSearch.value != '' && toast) presentToast(`${contador} Resultado${s} encontrado${s}.`, '800', 'black');
 }
 
 function alertMsg(msg1, msg2) {
@@ -240,13 +194,44 @@ function alertMsgReset(msg1, msg2) {
     return alert.present();
 }
 
-function presentToast(msg, time, color) {
+function presentToast2(msg, time, color) {
     const toast = document.createElement('ion-toast');
     toast.setAttribute('color', color);
     toast.message = msg;
     toast.duration = time;
     document.body.appendChild(toast);
     return toast.present();
+}
+
+function presentToast(msg, time, clase, btn = false) {
+    // let btnToast = false
+    const toast = document.createElement('ion-toast');
+    toast.cssClass = clase;
+    toast.message = msg;
+    toast.duration = time;
+    if (btn){
+        toast.buttons = [
+            {
+                side: 'end',
+                text: 'Deshacer',
+                handler: () => {
+                    btnToast = false;
+                    refreshData(false);
+                    presentToast(`Deshaciendo cambios`, 2000, 'black');
+                }
+            }
+        ];
+    }
+    // console.log(btnToast);
+    document.body.appendChild(toast);
+    return toast.present();
+}
+
+function arrayRemove(arr, value) { 
+    
+    return arr.filter(function(ele){ 
+        return ele != value; 
+    });
 }
 
 
@@ -331,7 +316,7 @@ function updateData(text, compareChanges, toast = true) {
     newSearch.value = '';
     refreshData();
     // F0601
-    if (toast) { presentToast((text == 'Rechazar') ? 'Cancelando cambios.' : 'Datos actualizados.', '1000', 'dark') }
+    if (toast) { presentToast((text == 'Rechazar') ? 'Cancelando cambios.' : 'Datos actualizados.', '1000', 'black') }
     else { presentToast('Datos offline actualizados', '1000', 'success') };
     // F0601
     setTimeout(() => { window.location.reload() }, 1000);
@@ -446,109 +431,108 @@ function sendEmail() {
 }
 
 
-// ALERTS / POPUP
-function alertAdd2(modalVal) {
-    if (
-        modalVal[0] == '' ||
-        modalVal[1] == '' ||
-        modalVal[2] == ''
-    ) {
-        barProgressF('warning', 'determinate');
-        alertMsg('Error', 'Campos obligatorios vacíos.');
-        setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-        return;
-    }
+// function alertAdd2(modalVal) {
+//     if (
+//         modalVal[0] == '' ||
+//         modalVal[1] == '' ||
+//         modalVal[2] == ''
+//     ) {
+//         barProgressF('warning', 'determinate');
+//         alertMsg('Error', 'Campos obligatorios vacíos.');
+//         setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
+//         return;
+//     }
 
-    modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
-    modalVal[1] = delete_spaces(modalVal[1]);
-    modalVal[2] = delete_spaces(modalVal[2]);
-    modalVal[3] = delete_spaces(modalVal[3]);
+//     modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
+//     modalVal[1] = delete_spaces(modalVal[1]);
+//     modalVal[2] = delete_spaces(modalVal[2]);
+//     modalVal[3] = delete_spaces(modalVal[3]);
 
-    for (let i = 0; i < newTotal.length; i += 5) {
-        if (
-            modalVal[0] == newTotal[i] &&
-            modalVal[1] == newTotal[i + 1] &&
-            modalVal[2] == newTotal[i + 2]
-        ) {
-            alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
-            return;
-        }
-    }
+//     for (let i = 0; i < newTotal.length; i += 5) {
+//         if (
+//             modalVal[0] == newTotal[i] &&
+//             modalVal[1] == newTotal[i + 1] &&
+//             modalVal[2] == newTotal[i + 2]
+//         ) {
+//             alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
+//             return;
+//         }
+//     }
 
-    //parche b5003
-    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-    // AUTOEXPAND
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-    // 
+//     //parche b5003
+//     // multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+//     // multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+//     // AUTOEXPAND
+//     // if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+//     // 
 
-    aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
-    aTotalTOnewTotal();
-    save();
-    showSearch.innerHTML = '';
-    newSearch.value = modalVal[0];
-    // AUTOEXPAND 2
-    document.getElementById('expandIcon').setAttribute('name', icoCom);
-    refreshData();
-    presentToast(`"${modalVal[0].toUpperCase()}" agregada`, 800, 'success');
-    updateDB('L1', 'B1');
-}
+//     aTotal.push(`${code(modalVal[0].toLowerCase())}OG${code(modalVal[1])}OG${code(modalVal[2])}OG${code(modalVal[3])}`)
+//     aTotalTOnewTotal();
+//     save();
+//     showSearch.innerHTML = '';
+//     newSearch.value = modalVal[0];
+//     // AUTOEXPAND 2
+//     document.getElementById('expandIcon').setAttribute('name', icoCom);
+//     refreshData();
+//     presentToast(`"${modalVal[0].toUpperCase()}" agregada`, 800, 'success');
+//     updateDB('L1', 'B1');
+// }
 
-function alertEdit2(modalVal, reemplace) {
-    const toRemplace = reemplace / 5;
+// function alertEdit2(modalVal, reemplace) {
+//     const toRemplace = reemplace / 5;
 
-    if (modalVal[0] == '' || modalVal[1] == '' || modalVal[2] == '') {
-        alertMsg('Error', 'Campos obligatorios vacíos.');
-        return;
-    }
+//     if (modalVal[0] == '' || modalVal[1] == '' || modalVal[2] == '') {
+//         alertMsg('Error', 'Campos obligatorios vacíos.');
+//         return;
+//     }
 
-    modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
-    modalVal[1] = delete_spaces(modalVal[1]);
-    modalVal[2] = delete_spaces(modalVal[2]);
-    modalVal[3] = delete_spaces(modalVal[3]);
+//     modalVal[0] = delete_spaces(modalVal[0].toLowerCase());
+//     modalVal[1] = delete_spaces(modalVal[1]);
+//     modalVal[2] = delete_spaces(modalVal[2]);
+//     modalVal[3] = delete_spaces(modalVal[3]);
 
 
-    if (
-        modalVal[0] == cuPath[0].toLowerCase() &&
-        modalVal[1] == cuPath[1] &&
-        modalVal[2] == cuPath[2] &&
-        modalVal[3] == cuPath[3]
-    ) {
-        return;
-    }
+//     if (
+//         modalVal[0] == cuPath[0].toLowerCase() &&
+//         modalVal[1] == cuPath[1] &&
+//         modalVal[2] == cuPath[2] &&
+//         modalVal[3] == cuPath[3]
+//     ) {
+//         return;
+//     }
 
-    for (i = 0; i < newTotal.length; i += 5) {
-        if (
-            modalVal[0] == newTotal[i] &&
-            modalVal[1] == newTotal[i + 1] &&
-            modalVal[2] == newTotal[i + 2] &&
-            modalVal[3] == newTotal[i + 3]
-        ) {
-            alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
-            return;
-        }
-    }
+//     for (i = 0; i < newTotal.length; i += 5) {
+//         if (
+//             modalVal[0] == newTotal[i] &&
+//             modalVal[1] == newTotal[i + 1] &&
+//             modalVal[2] == newTotal[i + 2] &&
+//             modalVal[3] == newTotal[i + 3]
+//         ) {
+//             alertMsg('Error', `La cuenta "${modalVal[0].toUpperCase()}" ya existe.`);
+//             return;
+//         }
+//     }
 
-    //parche b6001
-    multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
-    multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
-    // AUTOEXPAND
-    if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-    // 
+//     //parche b6001
+//     multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
+//     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch'], 'style', 'opacity:1; pointer-events: auto');
+//     // AUTOEXPAND
+//     if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
+//     // 
 
-    aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
-    aTotalTOnewTotal();
-    showSearch.innerHTML = '';
-    newSearch.value = modalVal[0];
-    // AUTOEXPAND 2
-    document.getElementById('expandIcon').setAttribute('name', icoCom);
-    refreshData();
-    presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
-    save();
-    updateDB('L1', 'B1');
-    closeAlert = false;
+//     aTotal.splice(toRemplace, 1, code(modalVal[0]) + 'OG' + code(modalVal[1]) + 'OG' + code(modalVal[2]) + 'OG' + code(modalVal[3]));
+//     aTotalTOnewTotal();
+//     showSearch.innerHTML = '';
+//     newSearch.value = modalVal[0];
+//     // AUTOEXPAND 2
+//     document.getElementById('expandIcon').setAttribute('name', icoCom);
+//     refreshData();
+//     presentToast(`"${modalVal[0].toUpperCase()}" editado.`, 800, 'success');
+//     save();
+//     updateDB('L1', 'B1');
+//     closeAlert = false;
 
-}
+// }
 
 // function alertDel_DELETE(cuPath, reemplace) {
 //     document.getElementById('bkmodal').setAttribute('style', 'opacity:0; pointer-events: none');
@@ -593,144 +577,16 @@ function alertEdit2(modalVal, reemplace) {
 //     return alert.present();
 // }
 
-function buttons_modal(func) {
 
-    if (func == 'ok') {
-        let modalVal = [
-            document.querySelectorAll('.modal_input')[0].value,
-            document.querySelectorAll('.modal_input')[1].value,
-            document.querySelectorAll('.modal_input')[2].value,
-            document.querySelectorAll('.modal_input')[3].value,
-        ];
-        if (document.getElementById('op1').innerHTML == 'Editar cuenta') { alertEdit2(modalVal, reemplace); }
-        else if (document.getElementById('op1').innerHTML == 'Agregar cuenta') { alertAdd2(modalVal); }
-
-
-        // TEST
-        // document.querySelectorAll('.ccse')[0].setAttribute('style', 'user-select:all;');
-        // document.querySelectorAll('.ccse')[1].setAttribute('style', 'user-select:all;');
-        // document.querySelectorAll('.ccse')[2].setAttribute('style', 'user-select:all;');
-    }
-
-
-
-    else if (func === 'aceptar') { updateData('Aceptar', compareChanges); }
-
-    else if (func === 'rechazar') { updateData('Rechazar', compareChanges); }
-
-    // if (func == 'aceptar_offline') {
-    // updateData('Aceptar', compareChanges);
-    // localStorage.removeItem('offline');
-    // };
-
-    // if (func == 'rechazar_offline') {
-    // updateData('Rechazar', compareChanges);
-    // localStorage.removeItem('offline');
-    // };
-    // 
-    else if (func === 'verCambios') {
-
-        let txtTemp = []; aTotalTemp = []; newa = [];
-
-        txtTemp = (docB1 == newCompareData2) ? compareChanges.split('GD') : newCompareData2.split('GD');;
-
-        aTotalTemp = txtTemp[3].split(txtTemp[3].includes('Q0') ? 'Q0' : 'BO');
-        aTotalTemp.splice(-1, 1);
-        aTotalTemp = aTotalTemp.concat(aTotal);
-        aTotalTemp.sort();
-        aTotalTemp.push('');
-
-        for (i = 0; i < aTotalTemp.length; i++) {
-            (aTotalTemp[i] == aTotalTemp[i + 1]) ? i++ : newa.push(aTotalTemp[i]);
-        };
-
-
-        for (i = 0; i < newa.length - 1; i++) {
-            const newaName = newa[i].split('OG');
-            const newaName2 = newa[i + 1].split('OG');
-
-            if (newaName[0] == newaName2[0]) {
-                arrCompareEdit.push(deco(newaName[0]).toUpperCase());
-                i++
-            } else {
-                (txtTemp[3].includes(newa[i])) ?
-                    arrCompareDel.push(deco(newaName[0]).toUpperCase()) :
-                    arrCompareAdd.push(deco(newaName[0]).toUpperCase());
-            };
-
-        };
-
-        //parche b5002
-        if (arrCompareAdd == '' && arrCompareEdit == '' && arrCompareDel == '') {
-            return
-        } else {
-            document.getElementById('modal').innerHTML = `
-            <p id="op1" class="cct">Cambios</p>
-            <hr style="height:1px; border-width:0; color:gray;background-color:gray">
-            <div class="div_list">
-            
-            ${listDrop(arrCompareAdd, 'Nuevas')}
-            ${listDrop(arrCompareDel, 'Borradas')}
-            ${listDrop(arrCompareEdit, 'Editadas')}
-            
-            </div>
-            <input type="button" class="modal_btns" value="CONFIRMAR" onClick="buttons_modal('aceptar')">
-            <input type="button" class="modal_btns" value="RECHAZAR" onClick="buttons_modal('rechazar')">
-            `;
-
-            document.getElementById('bkmodal').setAttribute('style', 'opacity:1; pointer-events: none');
-            document.getElementById('modal').setAttribute('style', 'opacity:1; pointer-events: auto');
-        }
-    }
-
-    if (func != 'verCambios') { //CANCELAR
-        multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
-        multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:1; pointer-events: auto');
-        // AUTOEXPAND
-        if (showSearch.innerHTML != '') multipleAttribute(['#expandCard'], 'style', 'opacity:1; pointer-events: auto');
-    }
-
-
-
-    if (func == 'ok_datosDeUsuario') {
-        let modalVal = [
-            document.querySelectorAll('.modal_input')[0].value,
-            document.querySelectorAll('.modal_input')[1].value,
-            document.querySelectorAll('.modal_input')[2].value,
-            document.querySelectorAll('.modal_input')[3].value,
-        ];
-
-        if (modalVal[1] == '' || modalVal[2] == '') {
-            barProgressF('danger', 'determinate');
-            alertMsg('Error', 'Datos vacíos.');
-            setTimeout(() => { barProgressF('light', 'determinate'); }, 1500);
-            return;
-        }
-
-        if (modalVal[0] == deco(txt[0]) && modalVal[1] == deco(txt[1]) && modalVal[2] == deco(txt[2]) && modalVal[3] == deco(txt[4])) {
-            //return;
-        } else {
-            presentAlertConfirmEdit(modalVal);
-        }
-    }
-
-    // if (func == 'cancel_datosDeUsuario') {
-
-    //     multipleAttribute(['#nameSetting', '#showCard', '#buttonSearch', '#buttonAdd'], 'style', 'opacity:0; pointer-events: auto');
-    // }
-
-
-
-}
 
 function listDrop(arrLista, tituloLista) {
-    if (arrLista.length != 1) {
-
+    let arrListaLength = arrLista.length
+    if (arrListaLength != 1) {
         let el = '';
-        for (let i = 1; i < arrLista.length; i++) { el += `<p class="list_text">- ${arrLista[i]}</p>`; };
+        for (let i = 1; i < arrListaLength; i++) { el += `<p class="list_text">- ${arrLista[i]}</p>`; };
         return `
         <div style="margin:5px 0px 2px 0px; padding: 5px 5px 5px 0px">
-            <label class="ccse" >&#9679 Cuentas ${tituloLista} (${arrLista.length - 1})</label>
+            <label class="ccse" >&#9679 Cuentas ${tituloLista} (${arrListaLength - 1})</label>
         </div>
         ${el}
         `
