@@ -144,7 +144,7 @@ function refreshData(toast = true, refresh = true) {
     // const newSearchValue = newSearch.value;
 
     // ACTIVAR
-    if (refresh)showSearch.innerHTML = '';
+    if (refresh) showSearch.innerHTML = '';
 
     if (newSearch.value == '') {
         showSearch.innerHTML = '';
@@ -203,13 +203,12 @@ function presentToast2(msg, time, color) {
     return toast.present();
 }
 
-function presentToast(msg, time, clase, btn = false) {
-    // let btnToast = false
+function presentToastB(msg, time, clase, btn = false) {
     const toast = document.createElement('ion-toast');
     toast.cssClass = clase;
     toast.message = msg;
     toast.duration = time;
-    if (btn){
+    if (btn) {
         toast.buttons = [
             {
                 side: 'end',
@@ -222,19 +221,39 @@ function presentToast(msg, time, clase, btn = false) {
             }
         ];
     }
-    // console.log(btnToast);
     document.body.appendChild(toast);
     return toast.present();
 }
 
-function arrayRemove(arr, value) { 
-    
-    return arr.filter(function(ele){ 
-        return ele != value; 
-    });
+function presentToast(msg, time, clase, btn = false,) {
+    const toast = document.createElement('ion-toast');
+    toast.cssClass = clase;
+    toast.message = msg;
+    toast.duration = time;
+    if (btn) {
+        toast.buttons = [
+            {
+                side: 'end',
+                text: 'deshacer',
+                handler: () => {
+                    btnToast = false;
+                    refreshData(false);
+                    presentToast(`Deshaciendo cambios`, 2000, 'black');
+                }
+            }
+        ];
+    }
+    document.body.appendChild(toast);
+    return toast.present();
 }
 
-
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
 
 function code(cod) {
     let hexCod = '', hexF = '';

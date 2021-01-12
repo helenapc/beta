@@ -106,7 +106,7 @@ barHeader.appendChild(barToolbar);
 barMenuPrincipal.appendChild(barHeader);
 
 
-const version = 'Versión 2.7.4-beta_r7';
+const version = 'Versión 2.8-beta';
 itemPers('account', 'person-circle-outline', 'Cuenta');
 itemPers('barExport', 'arrow-up-circle-outline', 'Crear copia de Seguridad');
 itemPers('barImport', 'arrow-down-circle-outline', 'Cargar copia de Seguridad');

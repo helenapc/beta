@@ -1,4 +1,5 @@
-const timeUndo = 2000;
+
+const timeUndo = 2500;
 
 function buttonModalCancel() {
     // multipleAttribute(['#bkmodal', '#modal'], 'style', 'opacity:0; pointer-events: none');
@@ -143,6 +144,7 @@ function buttonModalEdit() {
     // closeAlert = false;
 
 }
+
 
 function buttonModalDelete() {
     buttonModalCancel();

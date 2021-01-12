@@ -429,6 +429,4 @@
         - combinar "presentAlertConfirmEdit(modalVal)" a "buttonModalAccount()"
         - Eliminar oveflow main
 
-
-2.8
-    - elegir cambios en detalles (checkbox)
+2.7.4-beta -> 2.8-beta

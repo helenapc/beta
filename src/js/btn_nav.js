@@ -184,6 +184,8 @@ config.addEventListener('click', () => {
 
 
     // PROP
+    // tiempo de bloqueo
+    // tiempo para deshacer.
 
     configValues[2].checked = configData.autoExpand;
     configValues[3].checked = configData.animacion;
